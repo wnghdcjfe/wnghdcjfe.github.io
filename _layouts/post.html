@@ -4,7 +4,7 @@ layout: default
 
 <div id="navbar" class="container">
     <h5><a id="link-back" href="/">이전 포스팅</a></h5>
-    {% include share.html page=page %}
+    <!-- {% include share.html page=page %} -->
 </div>
 
 <div id="cover" class="container"
@@ -22,9 +22,9 @@ layout: default
 </div>
 
 <div id="content" class="container post" role="main">
-    <div id="asdf">
+    <!-- <div id="asdf">
         <h2>코드 복사/붙여넣기 하는 당신이 아름답습니다.</h2>
-    </div>
+    </div> -->
     <div id="post-content">{{ content }}</div>
     <div id="post-footer">
         {% assign author = site.authors | where: 'name', page.author | first %}

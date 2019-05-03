@@ -27,7 +27,7 @@ pre,
 code,
 tt,
 kbd { 
-    font-family: 'IBM Plex Mono', consolas, monospace;
+    font-family: 'D2 coding', consolas, monospace;
     font-size: medium;
     font-weight: 250;
 }
@@ -127,8 +127,13 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 .highlighter-rouge {
-    font-weight: 400;
-    background-color: #fff8e5;
+    border-radius: 2px;
+    color: #e96900;
+    font-size: .8rem;
+    margin: 0 2px;
+    padding: 3px 5px;
+    white-space: pre-wrap; 
+    background-color: #f8f8f8; 
 }
 
 /*
@@ -906,10 +911,11 @@ body.tag-template #navbar {
 }
 
 #post-content blockquote {
-    margin: 28px 0;
-    padding: 28px;
-    border-left: 3px solid #f3cf00;
-}
+    margin: 2em 0;
+    padding-left: 20px;
+    border-left: 4px solid #42b983; 
+    color : #858585;
+} 
 
 #post-content blockquote > *:first-child {
     margin: 0;
