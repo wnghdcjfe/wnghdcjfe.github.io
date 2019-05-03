@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div id="navbar" class="container">
-    <h5><a id="link-back" href="/">Back to Posts</a></h5>
+    <h5><a id="link-back" href="/">이전 포스팅</a></h5>
     {% include share.html page=page %}
 </div>
 
@@ -28,8 +28,8 @@ layout: default
     <div id="post-content">{{ content }}</div>
     <div id="post-footer">
         {% assign author = site.authors | where: 'name', page.author | first %}
-        <a id="post-author" href="{{ author.url }}">
-            <div id="author-image" style="background-image:url({{ author.image }})">
+        <a id="post-author" href="{{ author.url }}"> 
+            <div id="author-image" {% if author.image %}style="background-image:url({{ author.image }});"{% endif %}>
                 <span class="sr-only">{{ author.name }}'s profile image</span>
             </div>
             <p id="author-name">{{ author.name }}</p>

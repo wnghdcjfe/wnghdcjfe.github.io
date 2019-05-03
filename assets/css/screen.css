@@ -26,9 +26,8 @@ h6 {
 pre,
 code,
 tt,
-kbd {
-    /*font-family: monospace;*/
-    font-family: Menlo, Monaco, 'Source Code Pro', consolas, monospace;
+kbd { 
+    font-family: 'IBM Plex Mono', consolas, monospace;
     font-size: medium;
     font-weight: 250;
 }
