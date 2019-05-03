@@ -1,0 +1,64 @@
+title: 큰돌의 터전
+email: jhc9639@naver.com
+description: |
+  우밤바! 큰돌의 터전!
+
+
+baseurl: ''
+url: 'http://wnghdcjfe.github.io'
+timezone: Asia/Seoul 
+
+repository: wookje/wookje.github.io
+
+permalink: /:year/:month/:day/:title/
+
+excerpt_separator: <!--more-->
+
+markdown: kramdown
+
+krandown:
+  input: GFM
+  highlighter: rouge
+ 
+gems:
+  - jekyll-paginate
+  - jekyll-seo-tag
+
+paginate: 5
+paginate_path: '/page/:num/'
+
+collections:
+  authors:
+    output: true
+    permalink: /authors/:path/
+  tags:
+    output: true
+    permalink: /tags/:path/
+
+defaults:
+  - scope:
+      path: ''
+      type: authors
+    values:
+      layout: author
+  - scope:
+      path: ''
+      type: tags
+    values:
+      layout: tag
+
+exclude: [README.md, Gemfile, Gemfile.lock]
+
+keep_files: [assets, files]
+
+# iolo's custom
+author: jhc9639@naver.com
+image: '/assets/images/default_blog_cover.jpg'
+asset_url: /assets 
+google_analytics:
+  ua: 'UA-91755632-1'
+facebook:
+  app_id: '956026527861303'
+  username: kundol 
+github:
+  username: wnghdcjfee
