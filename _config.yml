@@ -8,7 +8,7 @@ baseurl: ''
 url: 'http://wnghdcjfe.github.io'
 timezone: Asia/Seoul 
 
-repository: wookje/wookje.github.io
+repository: wnghdcjfe/wnghdcjfe.github.io
 
 permalink: /:year/:month/:day/:title/
 

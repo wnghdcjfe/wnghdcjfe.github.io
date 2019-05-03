@@ -34,17 +34,7 @@
                 $('#menu').hide();
                 $('#search').show();
             }
-        });
-
-        /*
-        $('#search').submit(function (e) {
-            e.preventDefault();
-            var q = $('#searchQueryEdit').val();
-            var url = 'https://www.google.co.kr/search?q='
-                        + encodeURIComponent(q + ' site:wookje.dance');
-            window.open(url, '', '_blank');
-        });
-        */
+        }); 
 
         $(window).scroll(function () {
             var viewportTop = $(window).scrollTop();
