@@ -83,15 +83,15 @@
   font-weight: bold;
 }
 .highlight .kn {
-  color: #f92672;
+  color: #ff79c6;
   font-weight: bold;
 }
 .highlight .ow {
-  color: #f92672;
+  color: #ff79c6;
   font-weight: bold;
 }
 .highlight .o {
-  color: #f92672;
+  color: #ff79c6;
   font-weight: bold;
 }
 .highlight .mf {
@@ -156,7 +156,7 @@
   font-weight: bold;
 }
 .highlight .nd {
-  color: #f1fa8c;
+  color: #50fa7b;
   font-weight: bold;
 }
 .highlight .ne {
@@ -164,7 +164,7 @@
   font-weight: bold;
 }
 .highlight .nf {
-  color: #f1fa8c;
+  color: #50fa7b;
   font-weight: bold;
 }
 .highlight .no {
@@ -202,7 +202,7 @@
   font-weight: bold;
 }
 .highlight .nt {
-  color: #f92672;
+  color: #ff79c6;
 }
 .highlight {
   color: #f8f8f2;
