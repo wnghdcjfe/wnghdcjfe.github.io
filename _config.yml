@@ -27,13 +27,16 @@ gems:
 paginate: 5
 paginate_path: '/page/:num/'
 
-collections:
+collections: 
+  projects:
+    output: true
+    permalink: /projects/:path/
   authors:
     output: true
     permalink: /authors/:path/
   tags:
     output: true
-    permalink: /tags/:path/
+    permalink: /tags/:path/ 
 
 defaults:
   - scope:
@@ -51,14 +54,14 @@ exclude: [README.md, Gemfile, Gemfile.lock]
 
 keep_files: [assets, files]
 
-# iolo's custom
+github: [metadata]
 author: jhc9639@naver.com
 image: '/assets/images/default_blog_cover.jpg'
 asset_url: /assets 
-google_analytics:
-  ua: 'UA-91755632-1'
-facebook:
-  app_id: '956026527861303'
-  username: kundol 
-github:
-  username: wnghdcjfee
+# google_analytics:
+#   ua: 'UA-91755632-1'
+# facebook:
+#   app_id: '956026527861303'
+#   username: kundol 
+# github:
+#   username: wnghdcjfe  

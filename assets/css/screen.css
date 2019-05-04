@@ -126,7 +126,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     clear: both;
 }
 
-.highlighter-rouge {
+p > .highlighter-rouge {
     border-radius: 2px;
     color: #e96900;
     font-size: .8rem;
@@ -922,15 +922,13 @@ body.tag-template #navbar {
 }
 
 #post-content pre {
-    margin: 28px 0;
-    /*background: #f4f4f4;*/
+    margin: 28px 0; 
     border: 1px solid #d4d4d4;
     width: 100%;
     padding: 10px;
     font-size: 1.0em;
     white-space: pre;
-    overflow: auto;
-    border-radius: 3px
+    overflow: auto; 
 }
 
 #post-content hr {

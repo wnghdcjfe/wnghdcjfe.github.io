@@ -1,23 +1,23 @@
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight .c, .highlight .cd {
-  color: #75715e;
+  color: #6272a4;
   font-style: italic;
 }
 .highlight .cm {
-  color: #75715e;
+  color: #6272a4;
   font-style: italic;
 }
 .highlight .c1 {
-  color: #75715e;
+  color: #6272a4;
   font-style: italic;
 }
 .highlight .cp {
-  color: #75715e;
+  color: #6272a4;
   font-weight: bold;
 }
 .highlight .cs {
-  color: #75715e;
+  color: #6272a4;
   font-weight: bold;
   font-style: italic;
 }
@@ -59,27 +59,27 @@
   color: #aaaaaa;
 }
 .highlight .k, .highlight .kv {
-  color: #66d9ef;
+  color: #ff79c6;
   font-weight: bold;
 }
 .highlight .kc {
-  color: #66d9ef;
+  color: #8be9fd;
   font-weight: bold;
 }
 .highlight .kd {
-  color: #66d9ef;
+  color: #ff79c6;
   font-weight: bold;
 }
 .highlight .kp {
-  color: #66d9ef;
+  color: #8be9fd;
   font-weight: bold;
 }
 .highlight .kr {
-  color: #66d9ef;
+  color: #8be9fd;
   font-weight: bold;
 }
 .highlight .kt {
-  color: #66d9ef;
+  color: #8be9fd;
   font-weight: bold;
 }
 .highlight .kn {
@@ -149,26 +149,26 @@
   color: #e6db74;
 }
 .highlight .na {
-  color: #a6e22e;
+  color: #f1fa8c;
 }
 .highlight .nc {
-  color: #a6e22e;
+  color: #f1fa8c;
   font-weight: bold;
 }
 .highlight .nd {
-  color: #a6e22e;
+  color: #f1fa8c;
   font-weight: bold;
 }
 .highlight .ne {
-  color: #a6e22e;
+  color: #f1fa8c;
   font-weight: bold;
 }
 .highlight .nf {
-  color: #a6e22e;
+  color: #f1fa8c;
   font-weight: bold;
 }
 .highlight .no {
-  color: #66d9ef;
+  color: #8be9fd;
 }
 .highlight .bp {
   color: #f8f8f2;
@@ -206,5 +206,6 @@
 }
 .highlight {
   color: #f8f8f2;
-  background-color: #49483e;
+  background-color: #282a36;
+  border-radius: 5px;
 }
