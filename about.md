@@ -9,7 +9,7 @@ tags: [about]
 
 ## Kundol
 - Seoul. South Korea.
-- 3years **Front-End** Software Engineer  
+- **3-years** Software Developer  
 - Email : jhc9639@naver.com
 - [Github](https://github.com/wnghdcjfe) 
 - [BackJoon](https://www.acmicpc.net/user/zagabi/) 
@@ -81,10 +81,10 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
 ## Awards 
  - 2019 : 국방정보본부 표창장 ★★★
  - 2018 : 공군 기상단 표창장 ★  
- - 2017 : [국방 SW 캠프 개발대회 전체 2위 참모총장상](!https://github.com/wnghdcjfe/heartsaver)★★★★
+ - 2017 : [국방 SW 캠프 개발대회 참모총장상](!https://github.com/wnghdcjfe/heartsaver)★★★★
  - 2017 : 공군 기상단 보안 IT 공모전 최우수 ★ 
  - 2015 : 스타트업코리아 강원해커톤대회 1위
- - 2015 : 공주대학교 밀알두레대회 1위 
+ - 2015 : 국립공주대학교 밀알두레대회 1위 
  - 2015 : 대한민국 프레젠테이션대회 대학부 2위 
 
 ## Article
@@ -96,8 +96,8 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
  - 19.02.16 [피벗알고리즘강의](!https://www.slideshare.net/hongchulju/ss-132025864) / GDG대전
 
 -------
-## 6월부터 8월까지
- - **웹프로그래밍 과외**를 합니다. 과제 중심으로 코드리팩토링을 해줍니다.
- - **외주** 및 **블로그제작** 합니다. 새로운 개발 및 유지보수를 합니다.  
+## 6월부터 9월까지
+ - **웹프로그래밍 과외**를 합니다. 체계적인 과제 중심으로 코드리팩토링을 해줍니다.
+ - **외주** 및 **블로그제작** 합니다. 미니 프로젝트 제작 및 유지보수를 합니다.  
  - 문의 : jhc9639@naver.com
 
