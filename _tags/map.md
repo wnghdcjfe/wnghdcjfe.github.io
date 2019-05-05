@@ -1,4 +1,0 @@
----
-name: map
-title: 'map'
----

@@ -9,5 +9,5 @@ sitemap:
 ## 태그
 
 {% for tag in site.tags %}
-* [{{ tag.name }}]({{ site.baseurl }}/tags/{{ tag.name }})
+* [{{tag.title}} / {{ tag.name }}]({{ site.baseurl }}/tags/{{ tag.name }})
 {% endfor %}

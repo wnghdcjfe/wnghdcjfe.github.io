@@ -20,7 +20,7 @@ krandown:
   input: GFM
   highlighter: rouge
  
-gems:
+plugins:
   - jekyll-paginate
   - jekyll-seo-tag
 

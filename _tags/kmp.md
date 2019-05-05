@@ -1,4 +1,0 @@
----
-name: kmp
-title: 'KMP'
----

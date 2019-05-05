@@ -1,4 +1,4 @@
 ---
-name: binary-search
-title: '이분 탐색'
+name: brute-force
+title: '완전탐색'
 ---

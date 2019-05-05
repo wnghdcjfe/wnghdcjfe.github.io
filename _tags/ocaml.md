@@ -1,4 +1,0 @@
----
-name: ocaml
-title: 'OCaml'
----
