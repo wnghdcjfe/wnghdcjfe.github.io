@@ -11,7 +11,7 @@ tags: [about]
 - Seoul. South Korea.
 - **3-years** Software Developer  
 - Email : jhc9639@naver.com
-- [Github](https://github.com/wnghdcjfe) 
+- [Github](https://github.com/wnghdcjfe)
 - [BackJoon](https://www.acmicpc.net/user/zagabi/) 
 
 ## Skills
@@ -81,7 +81,7 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
 ## Awards 
  - 2019 : 국방정보본부 표창장 ★★★
  - 2018 : 공군 기상단 표창장 ★  
- - 2017 : [국방 SW 캠프 개발대회 참모총장상](!https://github.com/wnghdcjfe/heartsaver)★★★★
+ - 2017 : [국방 SW 캠프 개발대회 참모총장상](!https://github.com/wnghdcjfe/heartsaver) ★★★★
  - 2017 : 공군 기상단 보안 IT 공모전 최우수 ★ 
  - 2015 : 스타트업코리아 강원해커톤대회 1위
  - 2015 : 국립공주대학교 밀알두레대회 1위 
