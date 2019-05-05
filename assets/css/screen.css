@@ -38,6 +38,7 @@ b, strong, optgroup {
 strong{
     background-color: #fff8e5;
     padding: 1px 5px;
+    color: #505050;
 }
 
 a, a:link, a:visited, a:active, a:hover {

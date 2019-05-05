@@ -39,7 +39,8 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
 -------
 
 ## Project
-### 2017 ~ 2019 기상정보지원체계  
+### 2017 ~ 2019 기상정보지원체계 
+대한민국 공군 전 비행단 및 민간공항에 설치되어 전투기 및 항공기 이착륙 전 기상상황을 보기 위한 체계 
  - UI & 전반적인 아키텍처설계(모듈화 / SPA / REST API)
  - 바람장미, 차트, 지도, 테이블 컴포넌트제작
  - 코드리팩토링 / 함수형 프로그래밍화
@@ -51,8 +52,23 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
  - Webpack build 커스터마이징화
  - 실시간 센서연동 및 표출
  - [시연회기사](!https://bit.ly/2JPk9Jj)
- - 기술 : 고가용성(RedHat HA) / Vue.js / Vue-cli / Vuex / D3.js / Node.js / MongoDB / Mongoose / Nginx / Express / Socket.io / request / Axios
-### 2014 ~ 2016 공주대학교 커뮤니티, KNUE   
+ - 기술 : Vue.js / Vuex / D3.js / Node.js / MongoDB / Mongoose / Nginx / Express / Socket.io / request / Axios
+
+### 2018 포병기상제원 프로그램 기능개선 / 최적화
+대한민국 육군 포병작전시 활용되는 지도기반 기상데이터 표출 프로그램
+ - 함수형프로그래밍화 / 불필요한 로직 개선(30%성능향상)
+ - 자료증가(15배)에 따른 디렉토리구조 변경 및 관련 로직개선
+ - 기술 : VanillaJS / PHP 
+
+### 2017 원격통합표출 프로그램 
+강수예측 및 분석을 위해 137개 종류의 레이다 및 위성영상 시간동기화표출 
+ - UI / ProgressBar 및 이미지 바인딩
+ - 이미지 리스트 추출 REST API 구축 
+ - 피벗알고리즘 적용
+ - 기술 : Vue.js / JSP & Node.js(두가지 서비스용 제작)
+
+### 2014 ~ 2016 공주대학교 커뮤니티, KNUE 
+공주대학교 최초로 강의평가공유시스템을 구축하고 이어서 커뮤니티를 개발해 시간표제작, 게시 판 등 편의를 위한 페이지 구축  
  - UI / 전반적인 아키텍처 설계(모듈화)
  - 강의 검색 / 평가 / 랭킹 모듈 개발
  - 웹스크래핑 모듈 개발
@@ -80,3 +96,8 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
  - 19.02.16 [피벗알고리즘강의](!https://www.slideshare.net/hongchulju/ss-132025864) / GDG대전
 
 -------
+## 6월부터 8월까지
+ - **웹프로그래밍 과외**를 합니다. 과제 중심으로 코드리팩토링을 해줍니다.
+ - **외주** 및 **블로그제작** 합니다. 새로운 개발 및 유지보수를 합니다.  
+ - 문의 : jhc9639@naver.com
+
