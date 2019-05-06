@@ -2,7 +2,7 @@
 layout: page
 title: About
 permalink: /about/
-image: /files/authors/kundol.jpeg
+image: /files/authors/kundol_background.jpg
 sitemap: yes
 tags: [about]
 --- 
