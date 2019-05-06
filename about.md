@@ -51,7 +51,7 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
  - 관리자페이지 구축(업로드 / 입력 / 실시간자료, 로그조회)
  - Webpack build 커스터마이징화
  - 실시간 센서연동 및 표출
- - [시연회기사](!https://bit.ly/2JPk9Jj)
+ - [시연회기사](https://bit.ly/2JPk9Jj)
  - 기술 : Vue.js / Vuex / D3.js / Node.js / MongoDB / Mongoose / Nginx / Express / Socket.io / request / Axios
 
 ### 2018 포병기상제원 프로그램 기능개선 / 최적화
@@ -75,25 +75,25 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
  - 로그인 / 회원가입 모듈 개발
  - 갤러리 / 기본형 게시판 개발
  - 사용자별 시간표제작 모듈 개발
- - [홍보글링크](!https://bit.ly/2JPiR0V)
+ - [홍보글링크](https://bit.lybit.ly/2JPiR0V)
  - 기술 : jQuery / AngularJS v1 / Node.js / MySQL / summernote- Editor
 
 ## Awards 
  - 2019 : 국방정보본부 표창장 ★★★
  - 2018 : 공군 기상단 표창장 ★  
- - 2017 : [국방 SW 캠프 개발대회 참모총장상](!https://github.com/wnghdcjfe/heartsaver) ★★★★
+ - 2017 : [국방 SW 캠프 개발대회 참모총장상](https://bit.lygithub.com/wnghdcjfe/heartsaver) ★★★★
  - 2017 : 공군 기상단 보안 IT 공모전 최우수 ★ 
  - 2015 : 스타트업코리아 강원해커톤대회 1위
  - 2015 : 국립공주대학교 밀알두레대회 1위 
  - 2015 : 대한민국 프레젠테이션대회 대학부 2위 
 
 ## Article
- - [기상정보지원체계시연회 / 국방일보](!https://bit.ly/2JPk9Jj) 
- - [육군 포병기상제원 / 국방일보](!https://bit.ly/2uxHCnI) 
+ - [기상정보지원체계시연회 / 국방일보](https://bit.lybit.ly/2JPk9Jj) 
+ - [육군 포병기상제원 / 국방일보](https://bit.lybit.ly/2uxHCnI) 
 
 ## Lecture
  - 16.9 ~ 19.5 웹프로그래밍교육 (100회) / 공군기상단 기상체계개발실 
- - 19.02.16 [피벗알고리즘강의](!https://www.slideshare.net/hongchulju/ss-132025864) / GDG대전
+ - 19.02.16 [피벗알고리즘강의](https://bit.lywww.slideshare.net/hongchulju/ss-132025864) / GDG대전
 
 -------
 ## 6월부터 9월까지
