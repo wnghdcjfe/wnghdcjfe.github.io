@@ -11,7 +11,9 @@ body {
     color: #505050;
     background-color: #fff;
 }
-
+img{
+    max-width: 100%;
+}
 h1,
 h2,
 h3,
@@ -979,6 +981,7 @@ body.tag-template #navbar {
     border: 1px solid #d4d4d4;
     background: #e6e6e6;
     text-align: center;
+    padding: 10px;
 }
 
 #post-content td {
