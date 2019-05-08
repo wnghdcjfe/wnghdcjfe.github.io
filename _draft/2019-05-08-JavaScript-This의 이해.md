@@ -113,30 +113,15 @@ var print = obj.printThis;
 obj.printThis(); // -> {value: "hi", printThis: ƒ}
 print(); // -> Window {stop: ƒ, open: ƒ, alert: ƒ, ...}
 ```
-`print()`의 경우 window라는 전역객체를 가리키게 됩니다. `obj.printThis()`의 경
-
-우 올바르게 `obj`를 가리키는 것을 볼 수 있습니다. 즉 어떠한 함수를 어떻게 호출
-
-되는가에 따라서 this가 결정되게 됩니다. 
-객체의 메소드로 호출되게 된다면 그 this는 객체를 가리키게 되고 그저 변수로 할당
-
-되어서 호출이 된다면 호출될 때의 this는 그 실행맥락에서의 상위 스코프인 전역스
-
-코프를 가리키게 되고 브라우저에서는 window를 가리키게 됩니다. 
+`print()`의 경우 window라는 전역객체를 가리키게 됩니다. `obj.printThis()`의 경우 올바르게 `obj`를 가리키는 것을 볼 수 있습니다. 즉 어떠한 함수를 어떻게 호출되는가에 따라서 this가 결정되게 됩니다. 
+객체의 메소드로 호출되게 된다면 그 this는 객체를 가리키게 되고 그저 변수로 할당되어서 호출이 된다면 호출될 때의 this는 그 실행맥락에서의 상위 스코프인 전역스코프를 가리키게 되고 브라우저에서는 window를 가리키게 됩니다. 
 node.js에서는 global 객체를 가리킵니다. 또한 엄격 모드(`use strict`) 일 경우 
 
 `this`는 전역 객체 대신 `undefined`가 됩니다.
  
-
 ### 3. `call`과 `apply`, `bind`로 정해지는 this
 
-`.call`과 `.apply`는 모두 함수를 호출하는데 사용되며 첫 번째 매개 변수는 함수 
-
-내에서 `this`의 값으로 사용됩니다. 그러나 `.call`은 쉼표로 구분된 인수를 두 번
-
-째 인수로 취하고 `.apply`는 인수의 배열을 두 번째 인수로 취합니다. 즉, 이 함수
-
-에 첫번째 매개변수로 전해지는 값이 this로 할당되게 됩니다. 
+`.call`과 `.apply`는 모두 함수를 호출하는데 사용되며 첫 번째 매개 변수는 함수 내에서 `this`의 값으로 사용됩니다. 그러나 `.call`은 쉼표로 구분된 인수를 두 번째 인수로 취하고 `.apply`는 인수의 배열을 두 번째 인수로 취합니다. 즉, 이 함수에 첫번째 매개변수로 전해지는 값이 this로 할당되게 됩니다. 
 
 #### call
 ```javascript
@@ -152,13 +137,8 @@ var obj = {
 };
 greet.call(obj);  // cats typically sleep between 12 and 16 hours
 ```
-greet함수의 this는 obj를 가리키게 됩니다. 원하는 함수에 인자로 넘긴 this가 바인
-
-딩 된 새로운 함수를 리턴한다
-
-call과 apply의 차이점은 ,콤마 단위로 넘겨주느냐 배열로 넘겨주느냐에 따른 차이입
-
-니다.
+greet함수의 this는 obj를 가리키게 됩니다. 원하는 함수에 인자로 넘긴 this가 바인딩 된 새로운 함수를 리턴한다
+call과 apply의 차이점은 ,콤마 단위로 넘겨주느냐 배열로 넘겨주느냐에 따른 차이입니다.
 ```javascript
 function add(a, b) {
   return a + b;
@@ -168,8 +148,7 @@ console.log(add.call(null, 1, 2)); // 3
 console.log(add.apply(null, [1, 2])); // 3
 ```
 이외에도 `bind`를 통해 `this`를 정할 수 있습니다. 
- 
-그렇다면 이렇게 정해지는 this를 어떨 때 쓰는 걸까요? 
+ 그렇다면 이렇게 정해지는 this를 어떨 때 쓰는 걸까요? 
 
 #### 1. 클릭이벤트
 ``` 
