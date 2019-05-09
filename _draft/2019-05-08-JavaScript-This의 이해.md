@@ -1,22 +1,19 @@
 ---
 layout: post
-title: '자세히 설명하는 javascript this의 이해'
+title: '자세히 설명하는 JavaScript this의 이해'
 author: kundol
 comments: true
 date: 2019-05-08 06:00
 tags: [web, javascript, this]
 
 ---  
-# 자세히 설명하는 javascript this의 이해
+# JavaScript this의 이해
 많이 헷갈리는 javascript의 this에 대해서 알아봅시다. 
 자바스크립트에서의 this는 렉시컬 스코프 또는 함수호출패턴에 따라 정해집니다. 
-화살표함수를 쓴다면 렉시컬스코프로 정해지고 화살표함수를 사용하지 않을 때는 함
-
-수호출패턴으로 정해집니다. 
+화살표함수를 쓴다면 렉시컬스코프로 정해지고 화살표함수를 사용하지 않을 때는 함수호출패턴으로 정해집니다. 
 
 ## 화살표구문에서의 this
 화살표구문이라는 것은 ES6에서 나온 문법이며 `(param1, param2, .... paramN) => { statements }` 이런 것입니다. 
-
 화살표 구문 또는 함수 표현식은 구문이 짧기 때문에 코드를 아름답게 해줍니다. 그리고 `lexical this`를 가지기 때문에 **함수호출패턴을 신경을 쓰지 않아도** 됩니다. 
 
  > 하지만 이 좋은 화살표 구문도 할 수 없는 것이 있습니다. 바로 생성자 / 프로토타입을 이용한 함수 정의 / 객체 메소드에 쓰이지는 못합니다. 
@@ -53,11 +50,11 @@ var p = new Person();
 ``` 
 올바르게 this.age가 증가할 것같지만 NaN이 나오게 됩니다. 함수호출패턴, 즉, setInterval이라는 함수는 window객체에서 나온 메소드이고 window객체에는 age라는 값은 없기 때문이죠. 
 
-그렇다면 함수호출패턴이라는 것은 무엇일까요? 
+잠깐 함수호출패턴에 대해서 알아봤는데요. 그렇다면 함수호출패턴이라는 것은 무엇일까요? 
 
 ## 함수호출패턴에서의 this
-다른 객체지향언어에서의 this는  어디서 선언되었느냐에 따라 스코프가 결정되는 Lexical Scope에 의한 this를 사용합니다.  
-하지만 자바스크립트에서 this는 어디서 함수가 호출되었느냐(Dynamic Scope)에 따라 달라집니다. 
+다른 객체지향언어에서의 this는 어디서 선언되었느냐에 따라 스코프가 결정되는 Lexical Scope에 의해 this가 정해지게 됩니다.  
+하지만 자바스크립트에서 this는 어디서 **함수가 호출되었느냐(Dynamic Scope)**에 따라 달라집니다. 
 
  > 스코프란 변수를 접근할 수 있는 범위입니다. javascript에서는 **함수단위**의 scope를 가지며 const, let으로 선언된 문맥은 블록단위의 scope를 가집니다. 
 
@@ -76,7 +73,8 @@ kundol();
 ```
 ![함수단위의설명](/img/20190509_f.png)
 `kundol`라는 **함수단위의 scope**로 설정이 되서 맨마지막 x가 2를 가리키는 것을 볼 수 있습니다. 
-만약 블록단위 즉 `{}`로 된다면 x는 1을 가리키게 되겠죠? 
+만약 블록단위 즉 `{}`로 된다면 맨마지막 x는 1을 가리키게 되겠죠? 왜냐하면 `if{}`라는 블록단위로 x가 감싸져서 x를 접근할 수 없게 되고
+`function kundol`안에 있는 최상단의 x만 가리키게 됩니다. 
 
 자 그렇다면 this의 함수호출패턴은 아래의 3가지가 있습니다.
  1. 생성자 함수 내에서는 새롭게 생성하는 객체
@@ -151,7 +149,7 @@ console.log(add.apply(null, [1, 2])); // 3
  그렇다면 이렇게 정해지는 this를 어떨 때 쓰는 걸까요? 
 
 #### 1. 클릭이벤트
-``` 
+```js
 var el = document.getElementById('kundol'); 
 el.addEventListener('mouseenter', hintBrowser);
 el.addEventListener('animationEnd', removeHint); 
