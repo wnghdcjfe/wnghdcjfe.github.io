@@ -7,7 +7,7 @@ date: 2019-05-08 06:00
 tags: [web, javascript, this]
 
 ---  
-# JavaScript this의 이해
+ >  JavaScript this의 이해
 많이 헷갈리는 javascript의 this에 대해서 알아봅시다. 
 자바스크립트에서의 this는 렉시컬 스코프 또는 함수호출패턴에 따라 정해집니다. 
 화살표함수를 쓴다면 렉시컬스코프로 정해지고 화살표함수를 사용하지 않을 때는 함수호출패턴으로 정해집니다. 
