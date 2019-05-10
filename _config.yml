@@ -57,10 +57,10 @@ github: [metadata]
 author: jhc9639@naver.com
 image: '/assets/images/default_blog_cover.jpg'
 asset_url: /assets 
-# google_analytics:
-#   ua: 'UA-91755632-1'
+google_analytics:
+   ua: 'UA-139970023-1'
 # facebook:
 #   app_id: '956026527861303'
 #   username: kundol 
 # github:
-#   username: wnghdcjfe  
+#   username: wnghdcjfe   
