@@ -11,9 +11,7 @@ tags: [web, http, 브라우저렌더링]
 
 사용자가 url을 입력하면 네비게이션이 일어나고 네트워크 스레드가 안전한 요청이라고 판단 및 이동하기로 결정을 하게 된 후 서버로 부터 요청을 받으면 렌더러프로세스가 **브라우저렌더링**과정을 통해 클라이언트에게 화면을 제공하게 됩니다. 
 ## 과정
-![브라우저 렌더링요약](https://raw.githubusercontent.com/wnghdcjfe/happyKundol/master/prepare/img/1.png) 
-![브라우저 렌더링그림](https://d2.naver.com/content/images/2015/08/helloworld-201508------------------------.png)
-![브라우저 구조](https://yilpe93.github.io/images/browser/browser_02.png)
+![브라우저 렌더링 메인 과정](https://raw.githubusercontent.com/wnghdcjfe/happyKundol/master/prepare/img/1.png)   
 1. HTML파싱 : HTML의 DOM토큰화
 2. DOM트리 생성
 3. CSSOM(CSS의 파싱된 CSS토큰)에 따라 **Render트리생성**(display:none제거 / font-size 등 상속 스타일 부모에만 위치하게설계)
@@ -21,6 +19,15 @@ tags: [web, http, 브라우저렌더링]
 4. Layout설정(좌표 설정, 보통 부모를 기준으로 설정됨 / Global Layout이 변경될 때는 브라우저의 사이즈가 증가 하거나 폰트사이즈를 증가시키면 변경됨), 이 때 모든 상대적인 값이 절대적인 값으로 바뀐다.
 5. paint
 6. composite 
+
+
+![브라우저 레이어](https://d2.naver.com/content/images/2015/08/helloworld-201508------------------------.png)
+이런식으로 레이어가 분리된 후 색칠된 후 composite과정을 겹쳐서 화면에 보이게 된다.
+
+
+![브라우저 구조](https://yilpe93.github.io/images/browser/browser_02.png)
+브라우저는 이런 구조를 갖고 있고 렌더링엔진이 렌더링을 관리한다.
+
 
 ## vSync
 ![vSync](/img/20190515_vSync.png) 
@@ -51,7 +58,7 @@ bstyle.fontSize = "2em"; // reflow, repaint
 document.body.appendChild(document.createTextNode('dude!'));
 ```
 아래의 요소에 요청을 하기만 하는 스크립트를 작성해도 변경대기열큐에 쌓이게 됩니다. 그리고 변경하는 스크립트가 있다면 flush가 발생하면서 대기열큐에 있던 것이 사라지면서 리플로우/ 리페인트가 일어나게 됩니다. 
-1.offsetTop, offsetLeft, offsetWidth, offsetHeight
+1. offsetTop, offsetLeft, offsetWidth, offsetHeight
 2. scrollTop 
 3. clientTop 
 4. getComputedStyle
