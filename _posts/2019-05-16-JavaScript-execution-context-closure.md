@@ -7,7 +7,7 @@ date: 2019-05-16 06:00
 tags: [web, 실행컨텍스트, 클로저]
 
 ---   
-코드 실행에 필요한 정보들을 물리적인 객체로 관리하는 것이 **EC, 실행컨텍스트**(Execution Context) 입니다. 이 EC들이 Call Stack에 쌓여서 순차적으로 실행이 됩니다.  
+자바스크립트(JavaScript)는 코드 실행에 필요한 정보들을 물리적인 객체로 관리하는 데  **EC, 실행컨텍스트**(Execution Context) 를 통해서 관리합니다. 이 EC들이 Call Stack에 쌓여서 순차적으로 실행이 됩니다.  
 초기에는 Global Object인  빌트인 객체(Math, String, Array 등)와 BOM, DOM이 있지만 추후 EC들이 쌓여서 실행 됩니다. 
 EC는 스코프체인, Variable Object, this 로 구성되며 1. 스코프체인생성과 초기화 2.  Variable Object 형성 3. this value 결정이 순차적으로 결정됩니다. 
 
