@@ -33,7 +33,7 @@ function Person(){
 var p = new Person(); 
 ```
 
-화살표 함수를 쓰면 상위스코프인 Person이라는 객체를 올바르게 가리키게 되고 this.age는 증가하게 됩니다. 
+화살표 함수를 쓰면 상위스코프인 `Person`이라는 객체를 올바르게 가리키게 되고 `this.age`는 증가하게 됩니다. 
 그러나 화살표함수를 쓰지 않으면 **함수호출패턴**에 의해서 this를 가리키게 됩니다. 
 
 ```js
@@ -47,11 +47,10 @@ function Person(){
 }
 var p = new Person(); 
 ``` 
-올바르게 this.age가 증가할 것같지만 NaN이 나오게 됩니다. 함수호출패턴, 즉, setInterval이라는 함수는 window객체에서 나온 메소드이고 window객체에는 age라는 값은 없기 때문이죠. 
-
-잠깐 함수호출패턴에 대해서 알아봤는데요. 그렇다면 함수호출패턴이라는 것은 무엇일까요? 
+올바르게 `this.age`가 증가할 것같지만 `NaN`이 나오게 됩니다. 함수호출패턴, 즉, `setInterval`이라는 함수는 **window객체**에서 나온 메소드이고 **window객체**에는 `age`라는 값은 없기 때문이죠.  
 
 ## 함수호출패턴에서의 this
+잠깐 함수호출패턴에 대해서 알아봤는데요. 그렇다면 함수호출패턴이라는 것은 무엇일까요? 
 다른 객체지향언어에서의 this는 어디서 선언되었느냐에 따라 스코프가 결정되는 Lexical Scope에 의해 this가 정해지게 됩니다.  
 하지만 자바스크립트에서 this는 어디서 **함수가 호출되었느냐(Dynamic Scope)**에 따라 달라집니다. 
 
@@ -73,7 +72,7 @@ kundol();
 ![함수단위의설명](/img/20190509_f.png)
 `kundol`라는 **함수단위의 scope**로 설정이 되서 맨마지막 x가 2를 가리키는 것을 볼 수 있습니다. 
 만약 블록단위 즉 `{}`로 된다면 맨마지막 x는 1을 가리키게 되겠죠? 왜냐하면 `if{}`라는 블록단위로 x가 감싸져서 x를 접근할 수 없게 되고
-`function kundol`안에 있는 최상단의 x만 가리키게 됩니다. 
+`function kundol`안에 있는 최상단의 x만 가리키게 되니까요. 
 
 자 그렇다면 this의 함수호출패턴은 아래의 3가지가 있습니다.
  1. 생성자 함수 내에서는 새롭게 생성하는 객체
@@ -111,8 +110,9 @@ obj.printThis(); // -> {value: "hi", printThis: ƒ}
 print(); // -> Window {stop: ƒ, open: ƒ, alert: ƒ, ...}
 ```
 `print()`의 경우 window라는 전역객체를 가리키게 됩니다. `obj.printThis()`의 경우 올바르게 `obj`를 가리키는 것을 볼 수 있습니다. 즉 어떠한 함수를 어떻게 호출되는가에 따라서 this가 결정되게 됩니다. 
-객체의 메소드로 호출되게 된다면 그 this는 객체를 가리키게 되고 그저 변수로 할당되어서 호출이 된다면 호출될 때의 this는 그 실행맥락에서의 상위 스코프인 전역스코프를 가리키게 되고 브라우저에서는 window를 가리키게 됩니다. 
-node.js에서는 global 객체를 가리킵니다. 또한 엄격 모드(`use strict`) 일 경우 
+객체의 메소드로 호출되게 된다면 그 this는 객체를 가리키게 되고 그저 변수로 할당되어서 호출이 된다면 호출될 때의 this는 그 실행맥락에서의 상위 스코프인 전역스코프를 가리키게 됩니다(브라우저에서는 window를 가리키게 되겠죠?)
+
+ > node.js에서는 global 객체를 가리킵니다. 또한 엄격 모드(`use strict`) 일 경우 
 
 `this`는 전역 객체 대신 `undefined`가 됩니다.
  
@@ -134,8 +134,8 @@ var obj = {
 };
 greet.call(obj);  // cats typically sleep between 12 and 16 hours
 ```
-greet함수의 this는 obj를 가리키게 됩니다. 원하는 함수에 인자로 넘긴 this가 바인딩 된 새로운 함수를 리턴한다
-call과 apply의 차이점은 ,콤마 단위로 넘겨주느냐 배열로 넘겨주느냐에 따른 차이입니다.
+`greet`함수의 `this`는 `obj`를 가리키게 됩니다. 원하는 함수에 인자로 넘긴 `this`가 바인딩 된 새로운 함수를 리턴한다
+`call`과 `apply`의 차이점은 ,콤마 단위로 넘겨주느냐 배열로 넘겨주느냐에 따른 차이입니다.
 ```javascript
 function add(a, b) {
   return a + b;
@@ -144,8 +144,7 @@ function add(a, b) {
 console.log(add.call(null, 1, 2)); // 3
 console.log(add.apply(null, [1, 2])); // 3
 ```
-이외에도 `bind`를 통해 `this`를 정할 수 있습니다. 
- 그렇다면 이렇게 정해지는 this를 어떨 때 쓰는 걸까요? 
+이외에도 `bind`를 통해 `this`를 정할 수 있습니다. 그렇다면 이렇게 정해지는 this를 어떨 때 쓰는 걸까요? 
 
 #### 1. 클릭이벤트
 ```js
@@ -159,8 +158,7 @@ function removeHint() {
 	this.style.willChange = 'auto';
 }
 ```
-#### 2. 역시나 그렇듯이 생성자함수 또는 클래스
- 
+#### 2. 생성자함수 또는 클래스
 ```js
 // ES5 함수 생성자
 function Person(name) {
@@ -193,6 +191,5 @@ class Student extends Person {
   }
 }
 ``` 
-
-
+s
  > 태그 : JavaScript this의 이해
