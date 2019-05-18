@@ -11,9 +11,7 @@ tags: [web, http, 브라우저렌더링]
 
 사용자가 url을 입력하면 네비게이션이 일어나고 네트워크 스레드가 안전한 요청이라고 판단 및 이동하기로 결정을 하게 된 후 서버로 부터 요청을 받으면 렌더러프로세스가 **브라우저렌더링**과정을 통해 클라이언트에게 화면을 제공하게 됩니다. 
 ## 과정
-![브라우저 렌더링요약](https://raw.githubusercontent.com/wnghdcjfe/happyKundol/master/prepare/img/1.png) 
-![브라우저 렌더링그림](https://d2.naver.com/content/images/2015/08/helloworld-201508------------------------.png)
-![브라우저 구조](https://yilpe93.github.io/images/browser/browser_02.png)
+![브라우저 렌더링 메인 과정](https://raw.githubusercontent.com/wnghdcjfe/happyKundol/master/prepare/img/1.png)   
 1. HTML파싱 : HTML의 DOM토큰화
 2. DOM트리 생성
 3. CSSOM(CSS의 파싱된 CSS토큰)에 따라 **Render트리생성**(display:none제거 / font-size 등 상속 스타일 부모에만 위치하게설계)
@@ -22,10 +20,19 @@ tags: [web, http, 브라우저렌더링]
 5. paint
 6. composite 
 
+
+![브라우저 레이어](https://d2.naver.com/content/images/2015/08/helloworld-201508------------------------.png)
+이런식으로 레이어가 분리된 후 색칠된 후 composite과정을 겹쳐서 화면에 보이게 된다.
+
+
+![브라우저 구조](https://yilpe93.github.io/images/browser/browser_02.png)
+브라우저는 이런 구조를 갖고 있고 렌더링엔진이 렌더링을 관리한다.
+
+
 ## vSync
 ![vSync](/img/20190515_vSync.png) 
 앞서말한 과정을 vSync 안에서 즉, 16.6ms안에 끝내야 합니다. 
-vSync란 그래픽드라이버를 통해 모니터를 업데이트하는데 Appdata >> swap(back buffer >> front buffer) >> monitor를 통해 화면을 업데이트하는데 이게  1 / 60초  16.6ms마다 발생하기 때문에 그 안에 모든 과정을 다 끝내야 한다는 것을 의미합니다.
+vSync란 그래픽드라이버를 통해 모니터를 업데이트하는데 `Appdata >> swap(back buffer >> front buffer) >> monitor`를 통해 화면을 업데이트하는데 이게  1 / 60초  16.6ms마다 발생하기 때문에 그 안에 모든 과정을 다 끝내야 한다는 것을 의미합니다.
  
  - Compositor Thread : scrolling, animation, zoomIn/ out : 단독으로 호출 가능
  - Raster Thread : draw line을 직접 수행한다. 
@@ -51,12 +58,12 @@ bstyle.fontSize = "2em"; // reflow, repaint
 document.body.appendChild(document.createTextNode('dude!'));
 ```
 아래의 요소에 요청을 하기만 하는 스크립트를 작성해도 변경대기열큐에 쌓이게 됩니다. 그리고 변경하는 스크립트가 있다면 flush가 발생하면서 대기열큐에 있던 것이 사라지면서 리플로우/ 리페인트가 일어나게 됩니다. 
-1.offsetTop, offsetLeft, offsetWidth, offsetHeight
+1. offsetTop, offsetLeft, offsetWidth, offsetHeight
 2. scrollTop 
 3. clientTop 
 4. getComputedStyle
 
-이를 최적화하기 위해서는
+이를 최적화하기 위한 방법
 1. DOM노드에서 가장 끝단을 수정하는 것이 제일 좋으며 
 2. 각 단계에서는 이 점을 고려하면 최적화가 됩니다. 
  - Layout : width, height, font(1000개 이하의 DOM이 효율적)
