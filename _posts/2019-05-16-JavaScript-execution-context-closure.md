@@ -30,6 +30,64 @@ tags: [web, 실행컨텍스트, 클로저]
 클로저는 함수와 그 함수가 선언된 렉시컬 환경의 조합이며 외부 함수가 반환된 후에도 외부 함수의 변수 범위 체인에 접근할 수 있는 함수를 말합니다. 클로저는 1) 현재 상태를 기억하고 변경된 최신 상태를 유지하고, 2) 모듈화, 3) 은닉화에 쓰입니다.
 
  > 스코프 : 어떤 변수들이 접근할 수 있는지에 대한 정의 
+```js
+function makeFunc() {
+  var name = "Mozilla";
+  function displayName() {
+    alert(name);
+  }
+  return displayName;
+}
+
+var myFunc = makeFunc();
+myFunc();
+```
+`name`이란 변수는 외부함수의 변수를 참조하고 있습니다. 
+
+내부함수가 다시 함수를 리턴하는 식으로 클로저는 구현됩니다.
+```js
+function outter() {
+    var title = 0;
+    function inner() {
+        console.log(title);
+        title++;
+    }
+    inner();
+}
+outter();
+outter();
+outter();
+//0 0 0 이 반환된다. 
+
+function outter() {
+    var title = 0;
+    function inner() {
+        console.log(title);
+        title++;
+    } 
+    return inner;
+}
+var s = outter(); 
+s();
+s();
+s();  
+//0 1 2 가 반환된다. 
+``` 
+
+즉시실행함수로 private 변수를 흉내낼 수 있습니다. 
+```js
+var add = (function () {
+    var counter = 0;
+    return function () {
+        counter += 1; 
+        console.log(counter) 
+    }
+})();
+
+add();
+add();
+add(); //1 2 3
+```
 
 ## Variable Object
  - Activation Object : 함수선언(표현식은제외), Arguments, 변수를 포함합니다. 
