@@ -913,7 +913,16 @@ body.tag-template #navbar {
     margin: 28px 0 0 0;
     font-weight: 350;
 }
+h3+p{
+    margin: 0 auto; 
+}
 
+h2+p{
+    margin: 0 auto; 
+}
+h1+p{
+    margin: 0 auto; 
+}
 #post-content ul,
 #post-content ol {
     padding-left: 28px;
