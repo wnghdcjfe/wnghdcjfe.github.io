@@ -190,6 +190,5 @@ class Student extends Person {
     this.studentId = studentId;
   }
 }
-``` 
-s
- > 태그 : JavaScript this의 이해
+```  
+ > 태그 : JavaScript, this, 실행컨텍스트, 큰돌의 터전

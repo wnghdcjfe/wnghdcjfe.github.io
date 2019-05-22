@@ -35,10 +35,10 @@
 */
 
 @font-face {
-    font-family: 'Kakao';
+    font-family: 'Kakao'; 
+    font-display: auto;
     font-style: normal;
     font-weight: 400;
-    font-display: auto;
     src: local('Kakao'), local('KakaoOTF Regular'),
     url(KakaoOTF-bRg.eot) format('eot'),
     url(KakaoOTF-bRg.woff2) format('woff2'),
