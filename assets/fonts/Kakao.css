@@ -1,6 +1,5 @@
 /*
- * Kakao
- */
+ * Kakao 
 @font-face {
     font-family: 'Kakao';
     font-style: normal;
@@ -33,3 +32,16 @@
     url(KakaoOTF-cBd.woff) format('woff'),
     url(KakaoOTF-cBd.otf) format('opentype');
 }
+*/
+
+@font-face {
+    font-family: 'Kakao';
+    font-style: normal;
+    font-weight: 400;
+    font-display: auto;
+    src: local('Kakao'), local('KakaoOTF Regular'),
+    url(KakaoOTF-bRg.eot) format('eot'),
+    url(KakaoOTF-bRg.woff2) format('woff2'),
+    url(KakaoOTF-bRg.woff) format('woff'),
+    url(KakaoOTF-bRg.otf) format('opentype');
+} 
