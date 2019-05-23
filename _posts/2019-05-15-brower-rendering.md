@@ -64,12 +64,13 @@ document.body.appendChild(document.createTextNode('dude!'));
 4. getComputedStyle
 
 이를 최적화하기 위한 방법
-1. DOM노드에서 가장 끝단을 수정하는 것이 제일 좋으며 
-2. 각 단계에서는 이 점을 고려하면 최적화가 됩니다. 
- - Layout : width, height, font(1000개 이하의 DOM이 효율적)
- - Paint : color, background (GPU Rsterization를 이용하면 더 빠름. `view-port content="width=device-width"`를 사용하면 됨.)
+1. DOM노드에서 가장 끝단을 수정하는 것이 제일 좋으며  
+2. 스타일을 한꺼번에 바꾸는 것이 좋습니다. 
+
+각 단계에서의 최적화  
+ - Layout : `width`, `height`, `font`(1000개 이하의 DOM이 효율적)
+ - Paint : `color`, `background` (GPU Rsterization를 이용하면 더 빠름. `view-port content="width=device-width"`를 사용하면 됨.)
  - Composite : opacity, transform()(레이어는 30개 이하의 레이어가 효율적입니다.)  
-3. 스타일을 한꺼번에 바꾸는 것이 좋습니다. 
 
 ### 참고사항
 
