@@ -133,7 +133,8 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     clear: both;
 }
 
-p > .highlighter-rouge {
+p > .highlighter-rouge, 
+li > .highlighter-rouge {
     border-radius: 2px;
     color: #e96900;
     position: relative;
@@ -143,7 +144,7 @@ p > .highlighter-rouge {
     padding: 3px 5px;
     white-space: pre-wrap; 
     background-color: #f8f8f8; 
-}
+} 
 
 /*
 for large screen(>=720px):
