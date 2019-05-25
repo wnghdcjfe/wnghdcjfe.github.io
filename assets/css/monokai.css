@@ -209,3 +209,9 @@
   background-color: #282a36;
   border-radius: 5px;
 }
+.highlight .kd + .nx{
+  color :#50fa7b; 
+}
+.highlight .p + .nx{
+  color :#50fa7b; 
+}
