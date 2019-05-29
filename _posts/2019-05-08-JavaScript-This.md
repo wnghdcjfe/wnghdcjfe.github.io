@@ -54,7 +54,7 @@ var p = new Person();
 다른 객체지향언어에서의 this는 어디서 선언되었느냐에 따라 스코프가 결정되는 Lexical Scope에 의해 this가 정해지게 됩니다.  
 하지만 자바스크립트에서 this는 어디서 **함수가 호출되었느냐(Dynamic Scope)**에 따라 달라집니다. 
 
- > 스코프란 변수를 접근할 수 있는 범위입니다. javascript에서는 var로 선언된 변수는 **함수단위**의 scope를 가지며 const, let으로 선언된 문맥은 블록단위의 scope를 가집니다. 
+ > 스코프란 변수를 접근할 수 있는 유효범위입니다. javascript에서는 var로 선언된 변수는 **함수단위**의 scope를 가지며 const, let으로 선언된 문맥은 블록단위의 scope를 가집니다. 
 
 ```js 
 function kundol() { 
