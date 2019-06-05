@@ -22,9 +22,7 @@ layout: default
 </div>
 
 <div id="content" class="container post" role="main">
-    <div id="asdf">
-        <h2>쉽게 쓰여진 글입니다.</h2>
-    </div>
+    <h2 class="post-header">쉽게 읽혀지는 재밌는 글을 쓰고 싶습니다.</h2> 
     <div id="post-content">{{ content }}</div>
     <div id="post-footer">
         {% assign author = site.authors | where: 'name', page.author | first %}
