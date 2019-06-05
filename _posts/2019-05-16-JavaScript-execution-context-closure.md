@@ -93,6 +93,67 @@ add();
 add(); //1 2 3
 ```
 
+이것말고도 클로저 + this를 응용한 예는 다음과 같습니다. 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="test">흠냐</button>
+    <script>
+    var b = {
+        clicked : false, 
+        click : function(){
+            this.clicked = true; 
+            console.log(b.clicked)
+        }
+    }
+    document.getElementById("test").addEventListener("click", b.click, false)
+    </script>
+</body>
+</html>
+``` 
+이 때 b라는 객체를 참고 하지 않습니다. 그저 button을 참고할 뿐이죠. 왜냐하면 this는 기본적으로 함수호출패턴과 연관이 되어있기 때문입니다. 
+이 때 클로저와 apply를 이용하면 원하는 객체를 this로 참조할 수 있습니다.  
+
+```html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="test">흠냐</button>
+    <script>
+    function bind(context, name){
+        //이렇게 함수의 컨텍스트가 될 수 있다.
+        return function(){ 
+            //arguments는 버튼의 위치 등이 담긴다. 
+            return context[name].apply(context, arguments);
+        }
+    }
+    var b = {
+        clicked : false, 
+        click : function(){
+            this.clicked = true; 
+            alert(b.clicked) 
+        }
+    }
+    document.getElementById("test").addEventListener("click", bind(b, "click"), false) 
+    </script>
+</body>
+</html>
+```
+
+
 ## 2. Variable Object
 각각 AO, GO의 프로퍼티들에 대해 값이 채워집니다. 
  - Activation Object : 함수선언(표현식은제외), Arguments, 변수를 포함합니다. 

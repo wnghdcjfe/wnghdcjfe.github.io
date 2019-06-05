@@ -145,18 +145,23 @@ console.log(a, b)
 ```   
 ## 6. Point -free
 
-무인수 프로그래밍 이라고 합니다. 
-화살표함수조차 쓰면 안됩니다. 이렇게 함수안에 함수만을 넣어서 해결합니다. 이렇게 pipe를 써서 할 수 있습니다. 
+무인수 프로그래밍입니다. 인자를 신경쓰지 않고 구현하는 것을 뜻합니다. 
+
+ - 참고 :[yocee57의 함수형프로그래밍](https://medium.com/korbit-engineering/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4%EB%9E%80-e7f7b052411f)
 ```js
-const R = require("ramda") 
-const inc = a => a + 1;  
-const transform = R.pipe(R.map(inc), R.sum)
-//trasform 부분이 point-free입니다.
-console.log(transform(R.range(0, 100)))
-//위처럼 할 수도있지만요.
+const map = fn => list => list.map(fn); 
+const add = x => y => x + y; 
+const incrementAll = numbers => map(add(1))(numbers);
+/* function with point-free */
+const incrementAllWithPointFree = map(add(1));
+var a = incrementAll([1, 2, 3]); // [2, 3, 4]
+var b = incrementAllWithPointFree([1, 2, 3]); // [2, 3, 4]
+console.log(a, b)
 ```
 ## 7. 모나드
 어떠한 값의 결과가 불확실하게 2가지형태 이상으로 나타날 수 있습니다. 이럴 때 컨테이너로 래핑하여 안전하게 연산을 하는 것을 말합니다. 함수형프로그래밍에서는 참조투명성, 입력과 출력이 동일하게 1 : 1 매칭이 되어야 하기 때문에 `try catch`를 쓰게 되면 로직을 담고 있는 컨테이너의 벨트의 라인이 2개로 분리되어 투명성을 잃게 되기 때문입니다. `ramda-fantasy`의 `Either`라는 컨테이너박스에 담아서 1. Right메소드로 성공처리로직을 2. Left메소드로 애러처리로직을 구현해도 되고 Promise를 이용해도 됩니다. Promise 는 future Monad라고 합니다. 이런 형태의 값이라는 것을 설정해 놓고 비동기적인 상황에서 성공과 실패를 값으로 다루는 하나의 컨테이너 박스입니다. 콜백으로 넘기는 방식은 컨텍스트를 넘겨서 로직을 수행하고 Promise는 그것들을 하나의 "값"으로 받아서 로직을 수행합니다.
+
+ > 콜백 : 어떤 함수가 어떠한 시점에서 다시 호출 되는 것
 
 ### 7.1 Promise를 이용한 예
 ```js
