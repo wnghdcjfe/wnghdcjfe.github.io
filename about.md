@@ -9,7 +9,7 @@ tags: [about]
 
 ## Kundol
 - Seoul. South Korea.
-- **3-years** Software Developer  
+- Software Developer  
 - Email : jhc9639@naver.com
 - [Github](https://github.com/wnghdcjfe)
 - [BackJoon](https://www.acmicpc.net/user/zagabi/) 
@@ -91,13 +91,7 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
  - [기상정보지원체계시연회 / 국방일보](https://bit.lybit.ly/2JPk9Jj) 
  - [육군 포병기상제원 / 국방일보](https://bit.lybit.ly/2uxHCnI) 
 
-## Lecture
- - 16.9 ~ 19.5 웹프로그래밍교육 (100회) / 공군기상단 기상체계개발실 
+## Lecture 
  - 19.02.16 [피벗알고리즘강의](https://bit.lywww.slideshare.net/hongchulju/ss-132025864) / GDG대전
 
--------
-## 6월부터 9월까지
- - **웹프로그래밍 과외**를 합니다. 체계적인 과제 중심으로 코드리팩토링을 해줍니다.
- - **외주** 및 **블로그제작** 합니다. 미니 프로젝트 제작 및 유지보수를 합니다.  
- - 문의 : jhc9639@naver.com
-
+------- 
