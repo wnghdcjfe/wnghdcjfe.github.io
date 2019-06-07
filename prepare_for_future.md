@@ -7,9 +7,10 @@
 ## 2. MEVN이란? (MongoDB, Express, Vue.js, Node.js) 
 
 ### 2.1. Node.js
-- Node.js 의 구조  
+- Node.js설명
 - Node.js의 장단점
 - Pm2를 통한 성능향상
+- node forever 설명
 
 ### 2.2. Express
 - Express의 구조
@@ -30,18 +31,24 @@
 - aggregate와 mapReduce 성능비교
 - aggregate 예제, mapReduce 예제
 
-## 3. 코드최적화 
+## 3. 코드최적화와 패러다임
 - 함수형프로그래밍
+ - 참조투명성, 순수함수
+ - 모나드 등.. 
 - CSS최적화
 - 자바스크립트 최적화
   - 어떤 함수를 쓸 것인가 parsInt와 ~~의 성능비교
   - 어떤 함수를 쓸 것인가. deepCopy 성능비교
   - 어떤 함수를 쓸 것인가. includes, indexOf 성능비교
+  - 얼마나 많은 객체를 선언할 것인가. 
+  - 서버 요청개수에 따른 최적화 비교
 - 로직최적화
  - 시간복잡도와 공간복잡도
  - 서버요청최소화
-  - minify, 메모이제이션
- - 피벗알고리즘 
+  - minify
+  - 메모이제이션
+   - 다이나믹 프로그래밍
+ - 피벗알고리즘 - 이미지리시트를 찾는 실질적 예 설명
 - UX 향상
  - lazy load
  - 이미지 크기 줄이기 : panda png 사이트 소개
@@ -106,5 +113,10 @@
   - uncaughtException 처리방법
  - 메시지큐
   - AMQP(Advanced Message Queueing Protocol)를 활용한 메시지큐로 서버불안정화 대비
+  - 메시지큐 만들어보기
 ## 6. 프로젝트3. UX 테스트 자동화 프로그램
-- nightmare.js를 통한 테스트 프로그램 구축 
+- nightmare.js를 통한 테스트 프로그램 구축
+
+## 7. 크로스 브라우징
+ - css, js IE용 변환
+  - babel
