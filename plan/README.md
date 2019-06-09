@@ -1,19 +1,32 @@
-# 꾸준히 즐겁게
+# 꾸준히 즐겁게 카르페디엠
 
-## 원고작성 / 영어회화 / 알고리즘 / 오픈소스 / 운동
-[알고리즘문제수확인](https://www.acmicpc.net/user/zagabi)
+## 원고작성 / 영어회화 / 알고리즘 / 오픈소스 / 운동 : 7 / 16
 
+## 좋은 습관
+ - 꾸준한 알고리즘 공부
+ - 꾸준한 운동 
+ - 아침에 차
+
+## 나쁜 습관
+ - 오지도 않은 카톡읽기
+ - 오지도 않은 메일 읽기
+ - 쓸데 없는 유투브 보기
+ - 밥먹으면서 핸드폰 하기
+ - 쓸데없는 걱정하기
 
 ## 복습 알고리즘
+ - [알고리즘문제수확인](https://www.acmicpc.net/user/zagabi)
  - [센트로이드](http://wookje.dance/2019/02/04/boj-8217/)
  - [단절점](https://jason9319.tistory.com/119)
- - [SCON-C,E,F](https://www.acmicpc.net/contest/problem/417/2)
- - [크리콘문제](https://www.acmicpc.net/problem/13172)
+ - [SCON-C,E,F](https://www.acmicpc.net/contest/problem/417/2) 
  - [KOI지역예선](https://www.acmicpc.net/workbook/view/898)
  - [천하제일코딩대회2회](https://www.acmicpc.net/category/detail/1892)
  - [볼록껍질](https://www.acmicpc.net/source/11129753)
  - [문자열입력받기포스팅](https://www.acmicpc.net/problem/15924)
  - [반복적동적계획법으로](https://www.acmicpc.net/problem/15924)
+ - [질문1](https://www.crocus.co.kr/837)
+ - [질문2](https://jason9319.tistory.com/231)
+ - [트리DP풀기](https://www.acmicpc.net/problem/1949)
 
 ## 5.25 - 6.2 100%
  - [x] 알고리즘 15문제 462 > 477
@@ -29,8 +42,8 @@
  - [ ] vueD3제작
  - [x] 알고리즘 트레이딩 1/3읽기
  - [x] 출판 정리 및 제출 심통, 모알프 활성화, 유투브 강의 제작
- - [ ] 알고리즘 15문제 477 > 492
- - [ ] 유투브강의 : 현욱은 괄호왕이야 / 가운데를 말해요
+ - [x] 알고리즘 15문제 477 > 492
+ - [x] 유투브강의 : 가운데를 말해요
 
 ## 6.10 - 6.16
  - [ ] 알고리즘 트레이딩 2/3읽기
@@ -40,7 +53,8 @@
  - [ ] festa IO 분석 및 구현
  - [ ] 유투브강의 : 최대부분수열
  - [ ] 코드포스 DIV2 준비 및 대회참가
- - [ ] 알고리즘 15문제 492 > 507
+ - [ ] 알고리즘 9문제 492 > 499
+ - [ ] 알고리즘 복습
 
 
 ## 6.17 - 6.23
