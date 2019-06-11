@@ -4,7 +4,7 @@ description: 하늘과 바람과 별과 코드
 
 
 baseurl: ''
-url: 'http://wnghdcjfe.github.io'
+url: 'https://kundol.kr'
 timezone: Asia/Seoul 
 
 repository: wnghdcjfe/wnghdcjfe.github.io
@@ -58,9 +58,9 @@ author: jhc9639@naver.com
 image: '/assets/images/default_blog_cover.jpg'
 asset_url: /assets 
 google_analytics:
-   ua: 'UA-139970023-1'
+  ua: 'UA-139970023-1'
 # facebook:
 #   app_id: '956026527861303'
 #   username: kundol 
-# github:
-#   username: wnghdcjfe   
+github:
+  username: wnghdcjfe   

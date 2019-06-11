@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://wnghdcjfe.github.io/sitemap.xml
+Sitemap: https://kundol.kr/sitemap.xml
