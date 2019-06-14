@@ -1,5 +1,7 @@
 # 꾸준히 즐겁게 카르페디엠
 
+# 10년 후의 나
+ - 30세 : 출판 / 오픈소스 컨트리뷰터 / 코드포스 오렌지
 ## 원고작성 / 영어회화 / 알고리즘 / 오픈소스 / 운동 : 7 / 16
 
 ## 좋은 습관
@@ -16,17 +18,15 @@
  - 롤 하기
 
 ## 복습 알고리즘
- - [알고리즘문제수확인](https://www.acmicpc.net/user/zagabi)
- - [센트로이드](http://wookje.dance/2019/02/04/boj-8217/)
+ - [알고리즘문제수확인](https://www.acmicpc.net/user/zagabi) 
  - [단절점](https://jason9319.tistory.com/119)
+  - 왜 df를 비교하지.. 
  - [SCON-C,E,F](https://www.acmicpc.net/contest/problem/417/2) 
- - [KOI지역예선](https://www.acmicpc.net/workbook/view/898)
- - [천하제일코딩대회2회](https://www.acmicpc.net/category/detail/1892)
- - [볼록껍질](https://www.acmicpc.net/source/11129753)
- - [문자열입력받기포스팅](https://www.acmicpc.net/problem/15924)
+ - [SCON-해설](https://drive.google.com/file/d/1_DiA_dxzX3Ubya92KCMhC8Kqx40eYm_P/view)
+ - [KOI지역예선](https://www.acmicpc.net/workbook/view/898) 
+ - [볼록껍질](https://www.acmicpc.net/source/11129753) 
  - [반복적동적계획법으로](https://www.acmicpc.net/problem/15924)
- - [질문1](https://www.crocus.co.kr/837)
- - [질문2](https://jason9319.tistory.com/231)
+ - [질문1](https://www.crocus.co.kr/837) 
  - [트리DP풀기](https://www.acmicpc.net/problem/1949)
 
 ## 5.25 - 6.2 - 100%
@@ -47,12 +47,11 @@
 ## 6.10 - 6.16
  - [ ] 알고리즘 트레이딩 2/3읽기 
  - [x] 함수형 프로그래밍 ES6 인프런 강의
- - [ ] vueD3제작
- - [ ] 프리미어 프로 공부 및 적용 
+ - [ ] vuex - D3제작 
  - [ ] SEO 공부 및 블로그에 적용 
  - [ ] festa IO 분석 및 구현
- - [ ] 유투브강의 : 최대부분수열
- - [ ] 코드포스 DIV2 준비 및 대회참가
+ - [x] 유투브강의 : 최대부분수열
+ - [x] 코드포스 DIV2 준비 및 대회참가
  - [ ] 알고리즘 9문제 492 > 499
  - [ ] 알고리즘 복습
  - [ ] 포트폴리오제작
@@ -61,21 +60,33 @@
 ## 6.17 - 6.23
  - [ ] 알고리즘 트레이딩 3/3읽기 
  - [ ] 알고리즘 트레이딩 리뷰 6.19 
- - [ ] 자비스(할일앱, 차트, docsify, 날씨, 일정보고, TTS)
- - [ ] Project visBug 공부 
+ - [ ] TTS 예제 학습 
+ - [ ] lucid - codeForce 개발 
  - [ ] 빅데이터 공모전 
+ - [ ] deep dive firebase
+ - [ ] 출판 원고 - 25쪽까지
 
 ## 6.24 - 6.30
  - [ ] 포토샵 공부 및 책리뷰
  - [ ] 네이버 exit 참고 naverblogtoMarkdown 업그레이드
  - [ ] 자소서 PPT 제작 원격, 기상정보지원체계, 오픈소스, 하트세이버, 공주대학교강의평가홈페이지
+ - [ ] deep dive firebase
+ - [ ] 출판 원고 - 50쪽까지
+
 ## 7.1 - 7.7
  - [ ] 백준 알고리즘 강의 - 문제 1 / 3
+ - [ ] deep dive firebase
+ - [ ] 출판 원고 - 100쪽까지
+ 
 ## 7.8 - 7.14
  - [ ] 백준 알고리즘 강의 - 문제 2 / 3
+ - [ ] 출판 원고 - 150쪽까지
+ 
 ## 7.15 - 7.21
  - [ ] 백준 알고리즘 강의 - 문제 3 / 3
  - [ ] 모알푸 이벤트개최 8월초
+ - [ ] 출판 원고 - 200쪽까지
+
 ## 7.22 - 7.28 
  - [ ] 백준 알고리즘 강의 - 문제2 1 / 3
 ## 7.29 - 8.4
