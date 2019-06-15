@@ -19,13 +19,8 @@
 
 ## 복습 알고리즘
  - [알고리즘문제수확인](https://www.acmicpc.net/user/zagabi) 
- - [단절점](https://jason9319.tistory.com/119)
-  - 왜 df를 비교하지.. 
- - [SCON-C,E,F](https://www.acmicpc.net/contest/problem/417/2) 
- - [SCON-해설](https://drive.google.com/file/d/1_DiA_dxzX3Ubya92KCMhC8Kqx40eYm_P/view)
- - [KOI지역예선](https://www.acmicpc.net/workbook/view/898) 
- - [볼록껍질](https://www.acmicpc.net/source/11129753) 
- - [반복적동적계획법으로](https://www.acmicpc.net/problem/15924)
+ - [단절점](https://jason9319.tistory.com/119)    
+ - [볼록껍질](https://www.acmicpc.net/source/11129753)  
  - [질문1](https://www.crocus.co.kr/837) 
  - [트리DP풀기](https://www.acmicpc.net/problem/1949)
 
@@ -49,11 +44,11 @@
  - [x] 유투브강의 : 최대부분수열
  - [x] 코드포스 DIV2 준비 및 대회참가
  - [x] 알고리즘 트레이딩 2/3읽기 
+ - [x] 알고리즘 복습
  - [ ] vuex - D3제작 
  - [ ] SEO 공부 및 블로그에 적용 
  - [ ] festa IO 분석 및 구현 
- - [ ] 알고리즘 9문제 492 > 499
- - [ ] 알고리즘 복습
+ - [ ] 알고리즘 9문제 492 > 499 
  - [ ] 포트폴리오제작
 
 
