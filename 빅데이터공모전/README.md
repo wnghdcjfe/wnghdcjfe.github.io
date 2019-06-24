@@ -13,11 +13,10 @@
 # 링크 
  - 공유폴더 : https://drive.google.com/open?id=16Bhpv0im_Tb61V6R-w_ZFTUVjq_tZWuf
  - 형규드라이브 : https://1drv.ms/f/s!AgB_1W2QJPdokkSvcYm5vtdLKsc1 
- - 관측자료 : ttps://data.kma.go.kr/cmmn/main.do
+ - 관측자료 : https://data.kma.go.kr/cmmn/main.do
  - 산불통계 : http://www.forest.go.kr/newkfsweb/kfi/kfs/frfr/selectFrfrStats.do?searchCnd=2010&mn=KFS_02_02_01_05_01#1
 
 # 자료 
-
 
 ![전국월별산불피해면적](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/빅데이터공모전/img/전국월별산불피해면적.PNG)   
 
@@ -35,7 +34,7 @@ node.js와 pandas를 이용해 필요없는 자료를 필터링하고 매핑하�
 
 1. 모든 산불현황의 시간단위를 2019 06 04 14:00로 바꾼다. (분 반올림) 
 2. 산불, 관측값, 시간단위의 데이타를 모두 json으로 변환
-3. 결과적인 JSON 데이타 형식
+3. 결과적인 JSON 데이타 형식 (결과물은 CSV로 변환하여 pandas로 분석)
 ```js
         const obj = {
             "when" : a.when, 
@@ -53,7 +52,4 @@ node.js와 pandas를 이용해 필요없는 자료를 필터링하고 매핑하�
 ## 1. 회귀분석 
 독립변수 : 강수량, 최소 상대습도, 최고 기온, 최고 풍속
 
-종속변수 : 산불의 발생면적
-
-# 2019.06.24
-분석방법 구체화 
+종속변수 : 산불의 발생면적 
