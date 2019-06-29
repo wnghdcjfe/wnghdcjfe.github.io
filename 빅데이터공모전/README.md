@@ -56,6 +56,7 @@ node.js와 pandas를 이용해 필요없는 자료를 필터링하고 매핑하�
 
 
 ## 모델선정
+ - K fold Cross Validation : 홍철
  - 의사결정나무[필수](그룹별 상관관계분석)
  - 다중회귀분석[필수] : 홍철
  - 패널회귀분석
@@ -63,8 +64,7 @@ node.js와 pandas를 이용해 필요없는 자료를 필터링하고 매핑하�
  - Quantile Regression
  - Model Tree method 
  - 6 fold cross validation
- - 다층 신경망(Multi-layered neural network) 
- - K fold Cross Validation : 형규 
+ - 다층 신경망(Multi-layered neural network)  
  - KNN : 형규
  - LSTM : 형규
  - Contingency table : 형규
