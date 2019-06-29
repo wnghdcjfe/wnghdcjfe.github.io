@@ -11,8 +11,7 @@
 # 배경 및 산불지수 문제점
 중요도 부각, 시계열(산불이 증가하고 있어요..!), 피해규모
 
-# 자료 
-
+# 자료    
 ![전국월별산불피해면적](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/빅데이터공모전/img/전국월별산불피해면적.PNG)   
 2003 ~ 2019 산불발생건수량이 많은 2, 3, 4월(추후 확대 가능)의 봄철 산불에 영향을 미치는 기상 요소인
 강수량, 최소 상대습도, 최고 기온, 최고 풍속으로 분석
@@ -58,14 +57,14 @@ node.js와 pandas를 이용해 필요없는 자료를 필터링하고 매핑하�
 ## 모델선정
  - K fold Cross Validation : 홍철
  - 의사결정나무[필수](그룹별 상관관계분석)
- - 다중회귀분석[필수] : 홍철
+ - 다중회귀분석[필수] : 홍철, 여러개의 독립변수가 종속 변수에 영향을 주고 선형 관계를 갖는 경우이기 때문에 다중회귀분석을 사용한다. 
  - 패널회귀분석
  - Lasso Regression
  - Quantile Regression
  - Model Tree method 
  - 6 fold cross validation
  - 다층 신경망(Multi-layered neural network)  
- - KNN : 형규
+ - KNN : 형규, 면적을 중규모, 대규모 등으로 나눠서 0, 1 결과로 나타내어 하는 지도 학습
  - LSTM : 형규
  - Contingency table : 형규
  
@@ -73,9 +72,13 @@ node.js와 pandas를 이용해 필요없는 자료를 필터링하고 매핑하�
 # 분석결과
 
 ## 1. 다중회귀분석 
-독립변수 : 강수량, 최소 상대습도, 최고 기온, 최고 풍속
-종속변수 : 산불의 발생면적 
 
+![모형도](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/빅데이터공모전/img/모형도.png)  
+
+ - 독립변수 : 강수량, 최소 상대습도, 최고 기온, 최고 풍속
+ - 종속변수 : 산불의 발생면적 
+
+독립변수를 머신러닝 알고리즘을 통해 학습을 시킨 후 예측(종속) 변수를 예측한다.
 # 활용방안
  1. 강원지역 산불지수(FWI 지수생성)를 생성, 정확한 예측가능
  2. 지수 API 제작 쉽게 애플리케이션 제작 가능활용도 증대
