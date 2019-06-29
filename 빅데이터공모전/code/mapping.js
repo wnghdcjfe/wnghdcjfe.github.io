@@ -55,15 +55,25 @@ const mapping_observe_to_fire= (observe, fire) =>{
 }
 const main = async()=>{  
     
+<<<<<<< HEAD
     // await _csvtoJSON('../data/fire.csv', '../data/fire.json');
     // const fire = set_fire('../data/fire.json') 
 
     await _csvtoJSON('../data/merged_AWS_2003-2019.csv', '../data/observe.json');
     console.log(1)
+=======
+    await _csvtoJSON('../data/fire.csv', '../data/fire.json');
+    const fire = set_fire('../data/fire.json') 
+
+    await _csvtoJSON('../data/observe.csv', '../data/observe.json');
+>>>>>>> c68cf1ed85d7758a2cab90f782e3f1cfc4aa3abc
     const observe = _toJSON('../data/observe.json') 
  
     const ret = mapping_observe_to_fire(observe, fire) 
     await _JSONtocsv(ret, '../data/result.csv') 
+<<<<<<< HEAD
     console.log('변환이 완료 되었습니다. ')
+=======
+>>>>>>> c68cf1ed85d7758a2cab90f782e3f1cfc4aa3abc
 }
 main() 
