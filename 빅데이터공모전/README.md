@@ -1,45 +1,75 @@
-# 목표
-강원지역 산불지수생성 >  기존의 문제점보완 / 지수활용API > D3.js로 시각화 활용가능성
-강원잘되면 전국 산불지수로 생성
-Forest Fire Weather Index, FWI지수 제작
+# 링크 
+ - 공유폴더 : https://drive.google.com/open?id=16Bhpv0im_Tb61V6R-w_ZFTUVjq_tZWuf
+ - 형규드라이브 : https://1drv.ms/f/s!AgB_1W2QJPdokkSvcYm5vtdLKsc1 
+ - 관측자료 : https://data.kma.go.kr/cmmn/main.do
+ - 산불통계 : http://www.forest.go.kr/newkfsweb/kfi/kfs/frfr/selectFrfrStats.do?searchCnd=2010&mn=KFS_02_02_01_05_01#1
+ 
 
-# 자료
-자료가 없으면 웹크롤링 활용 
- - 핀란드의 기상 데이터와 실제 산불의 발생 자료[홍철]
- - 과거 산불발생 시계열자료[홍철]
- - 산림청이 제공하는 전국 산불발생 통계(발생일시, 진화종료시간, 발생장소, 발생원인, 피해면적(ha))[홍철]
- - 기상관측자료, 평균 강수량, 최소 상대습도, 최고 기온, 최고 풍속 [형규]
- - 식생지수[형규]
+# 산불의 특징
+논문참고
 
-# 분석방법
- - 정규화 로지스틱 회귀분석
+# 배경 및 산불지수 문제점
+중요도 부각, 시계열(산불이 증가하고 있어요..!), 피해규모
+
+# 자료 
+
+![전국월별산불피해면적](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/빅데이터공모전/img/전국월별산불피해면적.PNG)   
+2003 ~ 2019 산불발생건수량이 많은 2, 3, 4월(추후 확대 가능)의 봄철 산불에 영향을 미치는 기상 요소인
+강수량, 최소 상대습도, 최고 기온, 최고 풍속으로 분석
+ - 근거 : 강원 영동지역 봄철 산불대형화 영향 기상요소 분석 : 이시영, 김지은 저
+
+산림청(산불통계) : http://www.forest.go.kr/newkfsweb/kfi/kfs/frfr/selectFrfrStats.do?searchCnd=2010&mn=KFS_02_02_01_05_01#1
+ 
+관측자료 AWS : https://data.kma.go.kr/cmmn/main.do
+
+# 데이터 전처리
+node.js와 pandas를 이용해 필요없는 자료를 필터링하고 매핑하여 필요한 자료를 추출한다.  
+1. 산불현황 >> 2019	06	04	14:14 강원 정선 300
+2. 관측값 >> 2019 06 04 14:00 강원 정선 .. 
+ - 관측값은 AWS, ASOS를 합친 데이타임.
+
+관측값은 한시간단위, 산불현황은 자세한 시간단위로 되어있음
+
+1. 모든 산불현황의 시간단위를 2019 06 04 14:00로 바꾼다. (분 반올림) 
+2. 산불, 관측값, 시간단위의 데이타를 모두 json으로 변환
+3. 결과적인 JSON 데이타 형식 (결과물은 CSV로 변환하여 pandas로 분석)
+```js
+        const obj = {
+            "when" : a.when, 
+            "city" : a.city, 
+            "district" : a.district, 
+            "firearea" : a.firearea,  
+            "prec" : c.prec || 0,
+            "minhumi" : c.minhumi,
+            "maxtemp" : c.maxtemp,
+            "maxwindv" : c.maxwindv,
+        }
+```
+4. 결과물은 csv로 변환 and pandas 등으로 데이터 처리
+
+## 모델선정
+ - 의사결정나무[필수](그룹별 상관관계분석)
+ - 다중회귀분석[필수] : 홍철
+ - 패널회귀분석
+ - Lasso Regression
+ - Quantile Regression
+ - Model Tree method 
+ - 6 fold cross validation
  - 다층 신경망(Multi-layered neural network) 
- - KNN, 다층 신경망 모형인 딥 러닝(Deep-learning) 알고리즘
- - LSTM으로 미래의 산불지수까지 제공
+ - K fold Cross Validation : 형규 
+ - KNN : 형규
+ - LSTM : 형규
+ - Contingency table : 형규
+ 
 
-# 숙제
-정규화 로지스틱 회귀분석 등 어떻게 분석할지 자료를 활용해서 대강 만들어보기 - 7.23 19시
+# 분석결과
 
-공유폴더링크 - https://drive.google.com/open?id=16Bhpv0im_Tb61V6R-w_ZFTUVjq_tZWuf
+## 1. 다중회귀분석 
+독립변수 : 강수량, 최소 상대습도, 최고 기온, 최고 풍속
+종속변수 : 산불의 발생면적 
 
-# 2019.06.24
-분석방법 구체화
-
-## 인제
-AWS번호 : 211
-위경도 : 38.0599, 128.1671
-주소 : 강원도 인제군 인제읍 비봉로44번길 93 인제자동기상관측소
-산불자료 : http://www.forest.go.kr/newkfsweb/kfi/kfs/frfr/selectFrfrStats.do?searchCnd=2010&mn=KFS_02_02_01_05_01#1
-
-기상관측자료 : https://data.kma.go.kr/cmmn/main.do
-
-2018년 지상관측 자료 + 산불자료를 가지고 로지스틱 회귀분석 시도
-
-자료 x 일단은 다른 자료로
-
-독립변수 : 평균 강수량, 최소 상대습도, 최고 기온, 최고 풍속
-
-
-연구 대상 : 강원 영동지역으로 산림청 통계자료를 이용하여 2000년부터 2008년까지 3월, 4월, 5월(이하 봄철)에발생한 산불을 대상으로 하였으며, 산불규모는 피해면적을기준으로 5 ha미만 소형산불, 5 ha이상 30 ha미만 중형산불,30 ha이상을 대형산불로 구분하였다.
-
-## Q 풍향도 넣어볼까? 
+# 활용방안
+ 1. 강원지역 산불지수(FWI 지수생성)를 생성, 정확한 예측가능
+ 2. 지수 API 제작 쉽게 애플리케이션 제작 가능활용도 증대
+ 3. 웹애플리케이션 예제. D3.js로 시각화 활용가능성 부각
+ 4. 규모에 따른 조건 충족시 그 규모에 따른 인원 효율적 활용가능(중규모에는 1, 대규모에는 3충원 이런식)

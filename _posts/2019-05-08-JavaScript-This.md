@@ -1,10 +1,12 @@
 ---
 layout: post
-title: 'JavaScript this의 이해'
+title: JavaScript this의 이해
 author: kundol
 comments: true
-date: 2019-05-08 06:00
-tags: [web, javascript, this]
+date: 2019-05-08 06:00 
+tags: [web, javascript, this] 
+sitemap: yes
+excerpt: JavaScript this를 설명합니다.  
 
 ---   
 많이 헷갈리는 javascript의 this에 대해서 알아봅시다. 
