@@ -26,36 +26,7 @@ MEVN이란 MongoDB, Express.js, Vue.js, Node.js로 이루어진 프로젝트를 
  - [HTTP요청의이해](https://kundol.kr/2019/05/11/HTTP/)
 
 ### 2.1.1 실행환경구축 VS CODE
-웹 어플리케이션을 만들기 앞서 우리는 도구가 필요합니다. 그냥 불을 부싯돌을 이용해서 만들 수 있지만 우리에게는 라이터나 가스레인지가 필요합니다. 웹애플리케이션을 만들기 위한 첫번째 도구 **에디터**를 설치해야 합니다. 
-
-### 1.1 VS CODE 설치
-설치링크는 다음과 같습니다. 
- - https://code.visualstudio.com/
-
-이곳에 들어가 자신의 OS에 맞는 버전을 설치하면 됩니다. 
-
-### 1.2 VS thema, icon thema 폰트 설정
-깔았다면 그대로 이용할 수 있지만 우리는 커스터마이징해서도 사용할 수 있습니다. 
-마켓플레이스에서 사용하고 싶은 확장도구를 설치합시다. 
- - 코드를 아름답게 배치해주는 Beautify
- - 색깔을 쉽게 파악할 수 있는 Color Highlight
- - HTML 태그들을 쉽게 생성할 수 있는 HTML Snippets 
- - 테마로는 Dracula Official을 추천합니다.
-
-설치되어있는 확장프로그램입니다. 
-![그림1_1](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/plan/img/1_1.PNG)  
-
-하나 예를 들자면, beautify 적용은 이렇게 하면 됩니다. 
-![그림1_2](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/plan/img/1_2.PNG) 
- 1. F1을 누르고 
- 2. beautify를 칩니다(be만 쳐도 됩니다.)
- 3. 엔터를 누릅니다.
-
-![그림1_3](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/plan/img/1_3.PNG) 
-들여쓰기가 되어있지 않은 코드가 
-![그림1_4](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/plan/img/1_4.PNG) 
-이렇게 들여쓰기가 되는 것을 볼 수가 있습니다. 
-
+ 
 ### 1.3 단축키설명 꿀팁
 제가 자주 사용하는 단축키는 다음과 같습니다. 
  - Ctrl + F : 텍스트 찾기
