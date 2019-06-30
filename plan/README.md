@@ -18,6 +18,8 @@
  - 밥먹으면서 핸드폰 하기
  - 쓸데없는 걱정하기
  - 롤 하기
+## 프론트엔드 면접준비
+ - [김태곤](https://taegon.kim/archives/6804)
 
 ## 복습 알고리즘
  - [알고리즘문제수확인](https://www.acmicpc.net/user/zagabi) 
@@ -30,6 +32,8 @@
  - [0.5](https://www.acmicpc.net/problem/17296)
  - [n각형면적](https://www.acmicpc.net/problem/2166)
  - [포함배제](https://www.acmicpc.net/problem/14848)
+ - [codeForce](https://codeforces.com/problemset?tags=1300-1500)
+ - [바킹독](https://blog.encrypted.gg/category/%EA%B0%95%EC%A2%8C/%EC%8B%A4%EC%A0%84%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
 
 ## 5.25 - 6.2 - 100%
  - [x] 알고리즘 15문제 462 > 477
@@ -72,9 +76,10 @@
  - [x] 천하제일 코딩대회 예선 다시 풀기
  - [x] 알고리즘 16문제 : 511 > 527  
  - [x] 헷갈리는 글 책 읽고 리뷰  
- - [ ] 빅데이터 공모전 - 회귀분석구현  
- - [ ] 파이썬 머신러닝 / 판다스 데이터 분석 책 읽고 리뷰  
- - [ ] 출판 원고 - 50쪽까지  
+ - [x] 빅데이터 공모전 - 회귀분석구현  
+ - [x] 파이썬 머신러닝 / 판다스 데이터 분석 책 읽고 리뷰  
+ - [x] 책임은 어떻게 삶을 성장시키는가 읽고 리뷰 
+ - [ ] 출판 원고 - 50쪽까지   
  - [ ] 알고리즘 복습 
 
 ## 7.1 - 7.7
