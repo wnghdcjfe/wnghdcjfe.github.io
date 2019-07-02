@@ -1,3 +1,9 @@
+# 의존성
+```
+pip install graphviz 
+pip install pydotplus
+
+```
 # 링크 
  - 공유폴더 : https://drive.google.com/open?id=16Bhpv0im_Tb61V6R-w_ZFTUVjq_tZWuf
  - 형규드라이브 : https://1drv.ms/f/s!AgB_1W2QJPdokkSvcYm5vtdLKsc1 
@@ -55,9 +61,9 @@ node.js와 pandas를 이용해 필요없는 자료를 필터링하고 매핑하�
 
 
 ## 모델선정
- - K fold Cross Validation : 홍철
- - 의사결정나무[필수](그룹별 상관관계분석)
- - 다중회귀분석[필수] : 홍철, 여러개의 독립변수가 종속 변수에 영향을 주고 선형 관계를 갖는 경우이기 때문에 다중회귀분석을 사용한다. 
+ - K fold Cross Validation[완료] 
+ - 의사결정나무 (그룹별 상관관계분석)  [완료]
+ - 다중회귀분석 여러개의 독립변수가 종속 변수에 영향을 주고 선형 관계를 갖는 경우이기 때문에 다중회귀분석을 사용한다.  [완료]
  - 패널회귀분석
  - Lasso Regression
  - Quantile Regression

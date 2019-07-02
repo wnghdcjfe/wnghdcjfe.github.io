@@ -2,20 +2,21 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns 
-df = pd.read_csv('./result.csv', header=None)
+df = pd.read_csv('../data/result.csv')  
 df.columns = ['when','city','district','firearea','prec','minhumi','maxtemp','maxwindv'] 
 # IPython 디스플레이 설정 - 출력할 열의 개수 한도 늘리기
 pd.set_option('display.max_columns', 10)  
 
 # 독립변수 : 'prec','minhumi','maxtemp','maxwindv' 
-ndf = df[['prec','minhumi','maxtemp','maxwindv']]
-print(ndf.head())   
-print('\n')
- 
+  
+
 def show_linear_predict(_x):
+    ndf = df[['firearea', 'prec','minhumi','maxtemp','maxwindv']]
+    print(ndf.head())   
+    print('\n')
     # 훈련용, 검증용 데이타 구분 7 : 3 
-    X=ndf[[_x]]  # 독립 변수 X
-    y=ndf['firearea']     # 종속 변수 Y
+    X= ndf[[_x]]  # 독립 변수 X
+    y= ndf['firearea']     # 종속 변수 Y
 
     # train data 와 test data로 구분(7:3 비율)
     from sklearn.model_selection import train_test_split

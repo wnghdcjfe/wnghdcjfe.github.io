@@ -89,9 +89,9 @@ const mapping_observe_to_fire= (observe, fire) =>{
             "district" : a.district, 
             "firearea" : a.firearea,  
             "prec" : c.prec || 0,
-            "minhumi" : c.minhumi,
-            "maxtemp" : c.maxtemp,
-            "maxwindv" : c.maxwinddv,
+            "minhumi" : c.minhumi || 0,
+            "maxtemp" : c.maxtemp || 0,
+            "maxwindv" : c.maxwindv || 0,
         }
         return obj
     }).filter(a => a);
@@ -99,11 +99,9 @@ const mapping_observe_to_fire= (observe, fire) =>{
 const main = async()=>{  
     
     await _csvtoJSON('../data/fire.csv', '../data/fire.json');
-    const fire = set_fire('../data/fire.json')  
-    // await _csvtoJSON('../data/merged_AWS_2003-2019.csv', '../data/observe.json'); 
-    // const observe = _toJSON('../data/observe.json') 
+    const fire = set_fire('../data/fire.json')   
 
-    const _csv = path.join(__dirname + '../../../../merged_AWS_2003-2019.csv') 
+    const _csv = path.join(__dirname + '../../../../merged_KMA(ASOS+AWS)_2003-2019.csv') 
     //const _csv = path.join(__dirname + '../../../../test.csv')
     const observe = await readBigCSVtoJSON(_csv) 
     const ret = mapping_observe_to_fire(observe, fire) 
