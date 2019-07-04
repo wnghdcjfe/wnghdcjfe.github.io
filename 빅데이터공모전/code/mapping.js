@@ -1,7 +1,8 @@
 // time 변환 2019
 // Async / await usage 
 const csv = require('csvtojson') 
-const jsonToCSV = require('json-to-csv'); 
+const jsonToCSV = require('json-to-csv');  
+
 const fs = require('fs') 
 const path = require('path') 
  
@@ -63,7 +64,7 @@ const readBigCSVtoJSON = _csv =>{
 const spring = ["02", "03", "04"]
 const set_fire = file =>{  
     return _toJSON(file).map(e => { 
-        if(!spring.includes(e.month))return; 
+        if(!spring.includes(e.month))return;  
         const obj = {
             "when" : set_time(e.year, e.month, e.day, e.time), 
             "city" : e.city,
@@ -74,11 +75,9 @@ const set_fire = file =>{
     }).filter(a => a)
 }    
 const none_district = new Set(); 
-const mapping_observe_to_fire= (observe, fire) =>{
-    let cnt = 0; 
+const mapping_observe_to_fire= (observe, fire) =>{ 
     return fire.map(a =>{
-        const c = observe.find(b => (b.when === a.when) && (b.district === a.district)) 
-        cnt++; 
+        const c = observe.find(b => (b.when === a.when) && (b.district === a.district))  
         if(!c) {
             none_district.add(a.district)
             return;
