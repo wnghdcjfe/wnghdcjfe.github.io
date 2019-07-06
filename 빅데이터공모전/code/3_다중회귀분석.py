@@ -4,30 +4,26 @@ import matplotlib.pyplot as plt
 import seaborn as sns   
 from sklearn.preprocessing import MinMaxScaler 
 
-df = pd.read_csv('../data/ret_1.csv')
+df = pd.read_csv('../data/_result_y.csv')
 df.columns = ['when','city','district','firearea','prec','minhumi','maxtemp','maxwindv']  
 
 # IPython 디스플레이 설정 - 출력할 열의 개수 한도 늘리기
-pd.set_option('display.max_columns', 10)    
-print(df.dtypes)
-print(df.info())
-print(df['prec'])
+pd.set_option('display.max_columns', 10)     
 # 독립변수 : 'prec','minhumi','maxtemp','maxwindv' 
 ndf = df[['firearea', 'prec','minhumi','maxtemp','maxwindv']]
  
-X = ndf[['prec','minhumi','maxtemp','maxwindv']]
+X = ndf[['minhumi', 'prec','maxtemp','maxwindv']]
 y = ndf['firearea']
 
-# 이렇게 민맥스 하는데 왜 안되지? 
-scaler = MinMaxScaler(feature_range=(0, 1))
-X = scaler.fit_transform(X)
+# # 이렇게 민맥스 하는데 왜 안되지? 
+# scaler = MinMaxScaler(feature_range=(0, 1))
+# X = scaler.fit_transform(X)
 
 # train data 와 test data로 구분(7:3 비율)
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10) 
 
-
-print(X_train)
+ 
 print('훈련 데이터: ', X_train.shape)
 print('검증 데이터: ', X_test.shape)   
 print('\n') 
@@ -38,8 +34,7 @@ Step 5: 다중회귀분석 모형 - sklearn 사용
 '''
 
 # sklearn 라이브러리에서 선형회귀분석 모듈 가져오기
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
+from sklearn.linear_model import LinearRegression 
 
 # 단순회귀분석 모형 객체 생성 및 학습 
 lr = LinearRegression().fit(X_train, y_train)    
@@ -58,4 +53,4 @@ plt.figure(figsize=(10, 5))
 ax1 = sns.distplot(y_test, hist=False, label="real firearea")
 ax2 = sns.distplot(y_hat, hist=False, label="predict firearea", ax=ax1)
 plt.show()
-plt.close()
+plt.close() 

@@ -75,6 +75,24 @@ const set_fire = file =>{
     }).filter(a => a)
 }    
 const none_district = new Set(); 
+ 
+const _setFire = num=>{
+    num = Number(num);
+    if(num >= 0 && num < 0.1){
+        return 1
+    }else if(num >= 0.1 && num < 0.3){ 
+        return 2
+    }else if(num >= 0.3 && num < 0.7){
+        return 3
+    }else if(num >= 0.7 && num < 1){
+        return 4
+    }else if(num >= 1 && num < 2){
+        return 5
+    }else if(num >= 2 && num < 3){
+        return 6
+    } 
+    return 7; 
+}
 const mapping_observe_to_fire= (observe, fire) =>{ 
     return fire.map(a =>{
         const c = observe.find(b => (b.when === a.when) && (b.district === a.district))  
@@ -82,15 +100,17 @@ const mapping_observe_to_fire= (observe, fire) =>{
             none_district.add(a.district)
             return;
         }
+        const _fire = _setFire(a.firearea);
+        if(_fire > 4) return;
         const obj = {
             "when" : a.when, 
             "city" : a.city, 
             "district" : a.district, 
-            "firearea" : a.firearea,  
-            "prec" : c.prec || 0,
-            "minhumi" : c.minhumi || 0,
-            "maxtemp" : c.maxtemp || 0,
-            "maxwindv" : c.maxwindv || 0,
+            "firearea" : _fire,  
+            "prec" : Number(c.prec) || 0,
+            "minhumi" : Number(c.minhumi) * 0.01 || 0,
+            "maxtemp" : Number(c.maxtemp) || 0,
+            "maxwindv" : Number(c.maxwindv) || 0,
         }
         return obj
     }).filter(a => a);
@@ -104,7 +124,7 @@ const main = async()=>{
     //const _csv = path.join(__dirname + '../../../../test.csv')
     const observe = await readBigCSVtoJSON(_csv) 
     const ret = mapping_observe_to_fire(observe, fire) 
-    console.log('매핑이 완료 되었습니다. ', ret[0], ret[1])
+    console.log('매핑이 완료 되었습니다. ', ret[0])
     if(ret) await _JSONtocsv(ret, '../data/result.csv') 
     console.log('변환이 완료 되었습니다. ')
     console.log('없는 지역은 다음과 같습니다. ')
