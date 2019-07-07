@@ -11,6 +11,14 @@
  - 꾸준한 운동 
  - 아침에 차
 
+## IT 출판사
+ - [한빛출판네트워크](http://www.hanbit.co.kr/)
+ - [위키북스](https://wikibook.co.kr/)
+ - [영진닷컴](http://www.youngjin.com/)
+ - [이지스퍼블리싱](http://www.easyspub.co.kr/11_Menu/BrandInfo1/PUB)
+ - [정보문화사](http://www.infopub.co.kr/index.asp)
+ - [에이콘출판사](http://www.acornpub.co.kr/book/worldclass-it)
+
 ## 나쁜 습관
  - 오지도 않은 카톡읽기
  - 오지도 않은 메일 읽기
@@ -24,8 +32,9 @@
 ## 복습 알고리즘
  - [알고리즘문제수확인](https://www.acmicpc.net/user/zagabi) 
  - [단절점](https://jason9319.tistory.com/119)    
- - [볼록껍질](https://www.acmicpc.net/source/11129753)  
- - [질문1](https://www.crocus.co.kr/837) 
+ - [볼록껍질](https://www.acmicpc.net/source/11129753)   
+ - [트리DP풀기](https://www.acmicpc.net/problem/2213)  
+ - [오대식의고민](https://www.acmicpc.net/problem/1219)
  - [트리DP풀기](https://www.acmicpc.net/problem/1949)
  - [복제로봇](https://www.acmicpc.net/problem/1944)
  - [책페이지](https://www.acmicpc.net/problem/1019)
