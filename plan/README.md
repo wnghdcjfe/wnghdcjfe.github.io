@@ -11,6 +11,15 @@
  - 꾸준한 운동 
  - 아침에 차
 
+## 나쁜 습관
+ - 오지도 않은 카톡읽기
+ - 오지도 않은 메일 읽기
+ - 쓸데 없는 유투브 보기
+ - 밥먹으면서 핸드폰 하기
+ - 쓸데없는 걱정하기
+ - 롤 하기
+ - 슬랙 random 들어가기 qna 만 들어가자. 
+
 ## IT 출판사
  - [한빛출판네트워크](http://www.hanbit.co.kr/)
  - [위키북스](https://wikibook.co.kr/)
@@ -19,31 +28,34 @@
  - [정보문화사](http://www.infopub.co.kr/index.asp)
  - [에이콘출판사](http://www.acornpub.co.kr/book/worldclass-it)
 
-## 나쁜 습관
- - 오지도 않은 카톡읽기
- - 오지도 않은 메일 읽기
- - 쓸데 없는 유투브 보기
- - 밥먹으면서 핸드폰 하기
- - 쓸데없는 걱정하기
- - 롤 하기
+
 ## 프론트엔드 면접준비
  - [김태곤](https://taegon.kim/archives/6804)
 
-## 복습 알고리즘
- - [알고리즘문제수확인](https://www.acmicpc.net/user/zagabi) 
- - [단절점](https://jason9319.tistory.com/119)    
- - [볼록껍질](https://www.acmicpc.net/source/11129753)   
- - [트리DP풀기](https://www.acmicpc.net/problem/2213)  
- - [오대식의고민](https://www.acmicpc.net/problem/1219)
- - [트리DP풀기](https://www.acmicpc.net/problem/1949)
- - [복제로봇](https://www.acmicpc.net/problem/1944)
- - [책페이지](https://www.acmicpc.net/problem/1019)
- - [0.5](https://www.acmicpc.net/problem/17296)
+
+[알고리즘문제수확인](https://www.acmicpc.net/user/zagabi)
+## 복습 알고리즘  
+ - [단절점](https://jason9319.tistory.com/119)       
+ - [오대식의고민](https://www.acmicpc.net/problem/1219) 1  
+ - [책페이지](https://www.acmicpc.net/problem/1019) 1
+ - [0.5](https://www.acmicpc.net/problem/17296) 1
  - [n각형면적](https://www.acmicpc.net/problem/2166)
  - [포함배제](https://www.acmicpc.net/problem/14848)
+ - [크게만들기](https://www.acmicpc.net/problem/2812)
+ - [에디터](https://www.acmicpc.net/problem/1406)
+ - [수행시간](https://www.acmicpc.net/problem/16169)
+ - 중앙값 구하기? 
+
+## 참고사이트 및 7월 ~공부
  - [codeForce](https://codeforces.com/problemset?tags=1300-1500)
  - [바킹독](https://blog.encrypted.gg/category/%EA%B0%95%EC%A2%8C/%EC%8B%A4%EC%A0%84%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
+
+## 8월이후 공부
  - [SCON](https://www.acmicpc.net/contest/view/416)
+ - [쿠사가](https://www.acmicpc.net/problem/author/koosaga/1) 
+
+## CS 공부 
+ - [네트워크15강](http://www.kocw.or.kr/home/search/kemView.do?kemId=1260383)
 
 ## 5.25 - 6.2 - 100%
  - [x] 알고리즘 15문제 462 > 477
@@ -92,45 +104,48 @@
  - [x] 경청, 사람이 먼저다 리뷰  
  - [x] 출판 원고 - 2장 반까지 
 
-## 7.1 - 7.7  
+## 7.1 - 7.7  80%
  - [x] 블로그 포스팅 수정 
  - [x] 여행의 이유 읽고 책 리뷰 
  - [x] SCON 다시 풀기 
  - [x] 파이썬 라이브러리를 활용한 데이터 분석 읽고 리뷰     
  - [x] 빅데이터 공모전
- - [x] 알고리즘 15문제 : 527 > 542 플로이드 알고리즘 / 서브트리 / 트리DP / 트리의 지름 / 페르만 소정리 / 카탈란 수 
- - [x] 출판 원고 - 2장 마무리 1     
- - [ ] 알고리즘 복습 
- - [ ] CodeForce 1300-1500 5문제 풀기      
+ - [x] 알고리즘 15문제 : 527 > 542 
+ - [x] 출판 원고 - 2장 마무리 1          
 
-## 7.8 - 7.14 
- - [ ] 빅데이터 공모전 
+## 7.8 - 7.14  
+ - [x] 알고리즘 복습 + 바킹독 정독 - linked list까지
+ - [x] 알고리즘 15문제 : 542 > 561 플로이드 알고리즘 / 서브트리 / 트리의 지름 / 페르만 소정리 / 카탈란 수 
+ - [ ] CodeForce 1300-1500 5문제 풀기   
  - [ ] 출판 원고 - 2장 마무리 2
- - [ ] 글씨교정 바른 맞춤법 책 읽고 리뷰 
- - [ ] 오직 두사람 읽고 책 리뷰
- - [ ] 포토샵 공부 및 책리뷰   
+ - [ ] 글씨교정 바른 맞춤법 책 1 / 3
+ - [ ] 오직 두사람 읽고 책 리뷰  
  - [ ] 피아노 : 3줄까지  
+ - [ ] 유투브 : 연결리스트 구현 js, c++, python
  
 ## 7.15 - 7.21 
- - [ ] 출판 원고 - 3장 마무리 
- - [ ] 빅데이터 공모전
- - [ ] 네이버 exit 참고 naverblogtoMarkdown 업그레이드   
- - [ ] 출판 원고 - 200쪽까지
+ - [ ] 출판 원고 - 3장 마무리  
+ - [ ] 네이버 exit 참고 naverblogtoMarkdown 업그레이드  
+ - [ ] 글씨교정 바른 맞춤법 책 2 / 3 
  - [ ] 문제로 풀어보는 알고리즘 1 / 2 
+ - [ ] 네트워크 5강까지
 
 ## 7.22 - 7.28  
- - [ ] 출판 원고 - 4장 반까지 
+ - [ ] 출판 원고 - 4장 반까지   
+ - [ ] 글씨교정 바른 맞춤법 책 3 / 3
  - [ ] 19 연세대학교 문제 풀기
  - [ ] 큰돌의 터전 SEO 관리
  - [ ] 블록체인 공부
  - [ ] 문제로 풀어보는 알고리즘 마무리 및 책 리뷰 
+ - [ ] 네트워크 10강까지
  
 ## 7.29 - 8.4  
  - [ ] 출판 원고 - 4장 마무리
  - [ ] 19 SCCC 문제 풀기 
  - [ ] 블록체인 공부
  - [ ] 풀었던 문제 복습 50문제 
- - [ ] 파이썬 코딩의 기술 1 / 2  
+ - [ ] 파이썬 코딩의 기술 1 / 2 
+ - [ ] 네트워크 15강까지 
 
 ## 8.5 - 8.11 
  - [ ] IT 출판사에게 기획 및 제출
@@ -139,15 +154,18 @@
 
 ## 8.12 - 8.18  
  - [ ] 블록체인 공부
+ - [ ] 포토샵 공부 1 / 3
  - [ ] 면접준비 및 채용공고 확인    
  - [ ] 풀었던 문제 복습 100문제 
 
 ## 8.19 - 8.25
  - [ ] 블록체인 공부
+ - [ ] 포토샵 공부 2 / 3
  - [ ] 면접준비 및 채용공고 확인
  - [ ] 풀었던 문제 복습 100문제  
 
 ## 8.26 - 8.31
  - [ ] 블록체인 공부 
+ - [ ] 포토샵 공부 3 / 3
  - [ ] 면접준비 및 채용공고 확인
  - [ ] 풀었던 문제 복습 100문제  
