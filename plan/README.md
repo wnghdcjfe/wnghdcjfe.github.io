@@ -41,6 +41,7 @@
  - [오대식의고민](https://www.acmicpc.net/problem/1219) 1   
  - [포함배제](https://www.acmicpc.net/problem/14848) 
  - [칠공주](https://www.acmicpc.net/problem/1941) 
+ - [트럭](https://www.acmicpc.net/problem/13335) 
 
 ## 참고사이트 및 7월 ~공부
  - [codeForce](https://codeforces.com/problemset?tags=1300-1500)
@@ -134,8 +135,9 @@
 ## 7.29 - 8.4  
  - [x] 파이썬 코딩의 기술 마무리 및 책 리뷰
  - [x] 블로그 : 지역변수, 전역변수 & 질문사항.md 정리[면접준비]
- - [ ] 혼공C 리뷰 및 이벤트 참가
- - [ ] 백준 590 > 605 바킹독 문제집 & 19 SCCC 문제 & 연세대 
+ - [x] 혼공C 리뷰 및 이벤트 참가
+ - [x] CodeForces 1300-1500 5문제  
+ - [ ] 백준 590 > 605 바킹독 문제집 & 19 SCCC 문제 & 연세대  
  - [ ] 알고리즘 복습
  - [ ] 출판 원고 - 4장 마무리     
  - [ ] 유투브 - 연결리스트 / 원형연결리스트 / 큐 / 원형큐 구현  
