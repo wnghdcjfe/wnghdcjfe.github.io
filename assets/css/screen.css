@@ -689,6 +689,7 @@ a.tag:hover {
 
 #pagination > li.active, #pagination > li:hover {
     background-color: #e6e6e6;
+    padding-top:2px;
     border-radius: 4px;
 }
 
