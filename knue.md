@@ -1,7 +1,10 @@
  
 ![크뉴활동](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/portfolio/크뉴활동2.jpg)  
-# 공주대학교 커뮤니티 크뉴 14 ~ 16
-공주대학교의 모든 강의를 평가하고 공유하는 공주대학교 강의평가페이지로부터 발전되어 커뮤니티를 만들었습니다. 직접 전단지를 돌려가며 홍보를 했고 공주대학교 밀알두레 공모전에서 최우수상을 받아 지원금을 받기도 하였습니다. 지금은 개발이 중단된 애착이 가는 저의 첫번째 프로젝트입니다. 
+# 공주대학교 커뮤니티, 크뉴
+## 기간 : 14.07.10 - 17.09.09
+
+공주대학교의 모든 강의를 평가하고 공유하며 시간표제작 등을 할 수 있는 커뮤니티입니다.  직접 전단지를 돌려가며 홍보를 했고 공주대학교 밀알두레 공모전에서 최우수상을 받아 지원금을 받기도 하였습니다. 1000명의 회원을 보유하고 누적조회수도 3만이상을 경험했지만 에브리타임에게 밀려 지금은 개발이 중단된 애착이 가는 저의 첫번째 프로젝트입니다. 
+  
 
 ## 담당 
 - UI / 전반적인 아키텍처 설계(모듈화) 
@@ -26,6 +29,8 @@ AngularJS v1 / Node.js / MySQL
 
 ### 이모티콘
 이렇게 이모티콘을 자체제작하여 이지웍 편집기와 디자인에 쓰이도록 하였습니다. 
+
+
 ![이모티콘](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/portfolio/knue1.png)  
 ![이모티콘](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/portfolio/knue2.png) 
 ![이모티콘](https://raw.githubusercontent.com/wnghdcjfe/wnghdcjfe.github.io/master/portfolio/knue3.png) 
