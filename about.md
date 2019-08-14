@@ -12,29 +12,31 @@ tags: [about]
 - Software Developer  
 - Email : jhc9639@naver.com
 - [Github](https://github.com/wnghdcjfe)
-- [BackJoon](https://www.acmicpc.net/user/zagabi/) 
+- [BackJoon-알고리즘사이트](https://www.acmicpc.net/user/zagabi/) 
+- [유투브-알고리즘강의](https://www.youtube.com/channel/UCoN1XLeAX2OazuZdQ9b8U9Q)
 
 ## Skills
 ### Front-End
  > Strong
 
-JavaScript / HTML5 / CSS / Vue.js v2 / D3.js
+Vue.js / D3.js / React.js / Vanila.js / HTML5 / CSS 
 
  > Knowledgeable
 
-JQuery / Angular.js v1
+TypeScript / JQuery / Angular.js v1 & v2
 
 ### Back-End
  > Strong
 
-Node.js / MongoDB
+Node.js / MongoDB / GraphQL
 
  > Knowledgeable
  
-Nginx / PHP / JSP / MySQL / TiberoDB / FirebaseDB
+PHP / JSP / Spring / MySQL / Tibero / Firebase
 
 ### ETC
-C++ / Python / Tensorflow / Arduino / Electron / Git / Github 
+React-Native / C++(PS) / Python(ML) / FP / Kubernetes /
+IOT(Arduino / Raspberry PI) 
 
 -------
 
@@ -79,7 +81,7 @@ C++ / Python / Tensorflow / Arduino / Electron / Git / Github
  - 기술 : jQuery / AngularJS v1 / Node.js / MySQL / summernote- Editor
 
 ## Awards 
- - 2019 : 국방정보본부 표창장 ★★★
+ - 2019 : 국가유공자 표창장 ★★★
  - 2018 : 공군 기상단 표창장 ★  
  - 2017 : [국방 SW 캠프 개발대회 참모총장상](https://bit.lygithub.com/wnghdcjfe/heartsaver) ★★★★
  - 2017 : 공군 기상단 보안 IT 공모전 최우수 ★ 
