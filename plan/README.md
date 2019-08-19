@@ -23,10 +23,8 @@
 
 ## IT 출판사
  - [한빛출판네트워크](http://www.hanbit.co.kr/)
- - [위키북스](https://wikibook.co.kr/)
- - [영진닷컴](http://www.youngjin.com/)
- - [이지스퍼블리싱](http://www.easyspub.co.kr/11_Menu/BrandInfo1/PUB)
- - [정보문화사](http://www.infopub.co.kr/index.asp)
+ - [위키북스](https://wikibook.co.kr/) 
+ - [이지스퍼블리싱](http://www.easyspub.co.kr/11_Menu/BrandInfo1/PUB) 
  - [에이콘출판사](http://www.acornpub.co.kr/book/worldclass-it)
 
 
