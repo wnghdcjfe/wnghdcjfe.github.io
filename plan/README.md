@@ -180,9 +180,8 @@
  - [ ] React - 루시드어드벤처 개발시작 계획 / 초기 Redux 구축 / 스트럭쳐 설계 / https://brunch.co.kr/@seonyu10/26
 
 ## 9.2 ~ 9.8
- - [ ] 카카오 온라인 코딩 테스트 준비 1. [카카오기출문제](https://programmers.co.kr/learn/challenges?tab=all_challenges) 2페이지
- - [ ] 카카오 온라인 코딩 테스트 준비 2. 알고리즘 트레이닝 전체까지
- - [ ] 카카오 온라인 코딩 테스트 준비 3. 종만북 2권
+ - [ ] 카카오 온라인 코딩 테스트 준비 1. [카카오기출문제](https://programmers.co.kr/learn/challenges?tab=all_challenges) 1 ~ 2페이지
+ - [ ] 카카오 온라인 코딩 테스트 준비 2. 알고리즘 트레이닝 전체까지 
  - [ ] 출판 원고 - 9장 개발시작   
  - [ ] React - 루시드어드벤처 개발 마무리 
 
