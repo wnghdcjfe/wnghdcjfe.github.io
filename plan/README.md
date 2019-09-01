@@ -2,22 +2,17 @@
 시간은 한정적이다.
 베우고 싶은 것이 먼저가 아닌 만들고 싶은 것이 먼저가 되자. 
 
-운동 : 레그익스턴스 15 * 5 / 발목 15 * 3 / 수건 15 * 3 / 복근 30 * 3 / 팔 30 * 3
+# 30세의 나
+1. 대한민국에서 제일 좋은 IT기업에 들어간다. 
+2. 내가 쓴 책을 출판해서 나의 능력을 알린다. 
+3. 착하고 귀엽고 이쁘고 나를 이해해주고 바라봐주고 사랑해주는 여자친구를 사귄다. 
+4. 회원수 1000명의 사이트를 운영한다. 
+5. 코드포스 Orange가 된다. 
 
-아침 6시  : 기상 > 반신욕 후 명상
-아침 7시  : 밥 및 운동 시작
-아침 8시  : 원고 집필
-점심 12시 : 밥 및 운동 시작
-오후 1시  : 낮잠 및 명상
-오후 2시  : Lucid Adventure 개발 - React, Redux, GraphQL 
-오후 5시  : 저녁 및 운동 시작
-오후 6시  : 반신욕 후 명상
-오후 7시  : 롤 그리고 독서
-오후 10시 : 취침
-
-# 10년 후의 나
- - 30세 : MEVN 교과서 출판 / 오픈소스 컨트리뷰터 / 코드포스 오렌지 / 카카오 Developer
- - 33세 : "블록체인" 웹사이트 활성화 / 블록체인 강사 / 번역가 / 프리랜서 / 주말마다 제주도 
+# 33세의 나
+1. 연봉 7000의 사나이가 된다. 
+회사 - 5000 + 번역(4달에 1권) 1500 + 강의 250 + 사이트 250
+2. 결혼
 
 ## 좋은 습관
  - 꾸준한 알고리즘 공부
@@ -34,31 +29,17 @@
  - 슬랙 random 들어가기   
  - 페북하기
 
-## IT 출판사
- - [한빛출판네트워크](http://www.hanbit.co.kr/)
- - [위키북스](https://wikibook.co.kr/) 
- - [이지스퍼블리싱](http://www.easyspub.co.kr/11_Menu/BrandInfo1/PUB) 
- - [에이콘출판사](http://www.acornpub.co.kr/book/worldclass-it)
-
-
 ## 프론트엔드 면접준비
  - [김태곤](https://taegon.kim/archives/6804)
 
-
-[알고리즘문제수확인](https://www.acmicpc.net/user/zagabi)
-
-## 복습 알고리즘  
+## 알고리즘 공부  
  - [단절점](https://jason9319.tistory.com/119)       
- - [오대식의고민](https://www.acmicpc.net/problem/1219) 1   
+ - [오대식의고민](https://www.acmicpc.net/problem/1219)  
  - [포함배제](https://www.acmicpc.net/problem/14848) 
  - [칠공주](https://www.acmicpc.net/problem/1941) 
- - [트럭](https://www.acmicpc.net/problem/13335) 
-
-## 참고사이트 및 7월 ~공부
+ - [트럭](https://www.acmicpc.net/problem/13335)  
  - [codeForce](https://codeforces.com/problemset?tags=1300-1500)
- - [바킹독](https://blog.encrypted.gg/category/%EA%B0%95%EC%A2%8C/%EC%8B%A4%EC%A0%84%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
-
-## 8월이후 공부
+ - [바킹독](https://blog.encrypted.gg/category/%EA%B0%95%EC%A2%8C/%EC%8B%A4%EC%A0%84%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98) 
  - [SCON](https://www.acmicpc.net/contest/view/416)
  - [쿠사가](https://www.acmicpc.net/problem/author/koosaga/1) 
 
