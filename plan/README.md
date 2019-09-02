@@ -164,6 +164,15 @@
   - 4. 실시간 서버 구축과 차트 컴포넌트 - 코드 툴팁 추가
  - [ ] 루시드 어드벤처 : Redux / localStorage
 
+scoped를 쓸 때 안 쓸 때, D3로 정확한 class를 집어낼 때 
+route경로 체크 exact 모드
+bind는 :로 
+v-on:click은 @click로 
+shortcut 모드 
+position relative 부분 설명
+img express static으로 폴더 조지기
+원래는 axios 등으로 http요청을 통해 서버로부터 리스트도 가져와야 되는 형식임 많지만 되지만 생략
+
 ## 9.9 ~ 9.15
  - [ ] 카카오 오프라인 코딩 테스트 준비 : 함수형 프로그래밍 인강 복습 및 구현 외우기  
  - [ ] 출판 원고 - 9장 개발시작  
