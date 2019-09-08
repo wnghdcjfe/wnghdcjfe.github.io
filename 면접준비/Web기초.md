@@ -1512,7 +1512,7 @@ HTTP/1.x의 경우 두개의 요청 Header에 중복값이 존재해도 그냥 �
  - 과정
  - vSync
  - 리플로우 / 리페인트 최소화 
-
+https://d2.naver.com/helloworld/2061385
 #### 과정
 <p align="center">
   <img src="https://raw.githubusercontent.com/wnghdcjfe/happyKundol/master/prepare/img/1.png" width="700">
