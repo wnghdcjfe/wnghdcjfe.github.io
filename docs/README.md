@@ -1,5 +1,3 @@
-# 면접준비
-뭐 어찌되었건 최선을 다해보자.  
 # 디자인패턴
 디자인 패턴이란 프로그램이나 어떤 특정한 것을 개발하는 중에 발생했던 문제점들을 정리해서 상황에 따라 간편하게 적용해서 쓸 수 있는 것을 정리하여 특정한 "규약"을 통해 쉽게 쓸 수 있는 형태로 만든 것을 말합니다.
 ## 싱글톤 패턴
@@ -262,8 +260,6 @@ HTTP 는 원래 캐싱이 됩니다. 새로고침을 하면 304가 뜨면서 원
 #### 5. Layered System
 계층구조로 아키텍처를 만들 수 있다는 것을 뜻합니다.  
 
--------
-
 ### URI 규칙
 이렇게 규칙을 지켰으면 이제 자원을 표기하는 URI에 아래의 6가지 규칙을 지켜야 합니다.  
  1. 동작은 HTTP 메소드로 해야 합니다. 수정 = put, 삭제 = DELETE, 추가 = post, 조회 = get을 이용해야 합니다. 
@@ -412,7 +408,7 @@ const copy = o =>{
 ### 쿠키
  - 클라이언트(브라우저) 로컬에 저장되는 키와 값이 들어있는 작은 데이터 파일
  - 사용자 인증이 유효한 시간을 명시할 수 있으며, 유효 시간이 정해지면 브라우저가 종료되어도 인증이 유지
- - 300개까지 쿠키저장 가능, 하나의 도메인당 20개의 값만 가질 수 있음, 하나의 쿠키값은 4KB까지 저장
+ - 한 클라이언트당 300개까지 쿠키저장 가능, 하나의 도메인당 20개의 값만 가질 수 있음, 하나의 쿠키값은 4KB까지 저장
  - 사용자가 따로 요청하지 않아도 브라우저가 Request시에 Request Header를 넣어서 서버에 자동전송
  - 세션보다 더 빠르다. 보안면에서는 세션보다 좋지 않다. 
 
@@ -473,9 +469,9 @@ http1.1의 단점 : HTTP/1.1는 기본적으로 Connection당 하나의 요청�
 
 ### HTTP1의 단점 : RTT( Round Trip Time ) 증가 
 앞서 말한것처럼 http/1.1의 경우 일반적으로 하나의 connection에 하나의 요청을 처리 한다.  이렇다 보니 매 요청별로 connection을 만들게 되고 TCP상에서 동작하는 HTTP의 특성상 3-way Handshake 가 반복적으로 일어나고 또한 불필요한 RTT증가와 네트워크 지연을 초래하여 성능을 저하 시키게 된다.
-
  - RTT란  패킷망(인터넷) 상에서 상대측 호스트까지 패킷이 왕복하는데 걸리는 시간
  - RTO란, 전송된 한 세그먼트에 대한 확인응답을 기다려야 하는 시간 
+
 ### HTTP1의 단점 : 무거운 Header 구조 (특히 Cookie) 
 http/1.1의 헤더에는 많은 메타정보들이 저장되어져 있다.  사용자가 방문한 웹페이지는 다수의 http요청이 발생하게 되는데 이 경우 매 요청시 마다 중복된 헤더값을 전송하게 되며(별도의 domain sharding을 하지 않았을 경우) 또한 해당 domain에 설정된 cookie정보도 매 요청시 마다 헤더에 포함되어 전송되며 어쩔땐 요청을 통해서 전송하려는 값보다 헤더 값이 더 큰경우도 비일비재 하다.
 
@@ -486,85 +482,62 @@ http/1.1의 헤더에는 많은 메타정보들이 저장되어져 있다.  사�
  - Data URI Scheme: HTML문서내 이미지 리소스를 Base64로 인코딩된 이미지 데이터로 직접 기술하는 방식이고 이를 통해 요청 수를 줄이기도 한다.
  - Load Faster : 스타일시트를 HTML 문서 상위에 배치 / 스크립트를 HTML문서 하단에 배치 
  
-### HTTP/2 구조 : TLS 
-TLS는 SSL, Secure Sockets Layer의 새로운 이름, 이 프로토콜이 그저 인터넷 소켓이 아닌 양방향의 바이트 스트림에서 작동하는 것을 위함입니다. 
-HTTPS는 SSL을 의미하는 S를 가진 HTTP이다. 
-TLS(Transport Layer Security)는 인터넷 상에서 통신할 때 주고받는 데이터를 보호하기 위한 표준화된 암호화 프로토콜입니다.
-TLS는 넷스케이프사에 의해 개발된 SSL(Secure Socket Layer) 3.0 버전을 기반으로 하며, 현재는 TLS버전 1.3이 최종 버전입니다.
-TLS는 전송계층(Transport Layer)의 암호화 방식이기 때문에 HTTP뿐만 아니라 FTP, XMPP등 응용 계층(Application Layer)프로토콜의 종류에 상관없이 사용할 수 있다는 장점이 있으며 기본적 으로 인증(Authentication), 암호화(Encryption), 무결성(Integrity)을 지원합니다.
+### HTTP/2 구조 : TLS  
+TLS는 전송계층(Transport Layer)의 암호화 방식이기 때문에 HTTP뿐만 아니라 FTP, XMPP등 응용 계층(Application Layer)프로토콜의 종류에 상관없이 사용할 수 있다는 장점이 있으며 기본적 으로 인증(Authentication), 암호화(Encryption), 무결성(Integrity)을 지원합니다.중간자 공격 방지
 
 <p align="center">
 <img src="https://camo.githubusercontent.com/e63638a9bb23457323253fb94e3b56198ae979d4/68747470733a2f2f7777772e6c6573737469662e636f6d2f646f776e6c6f61642f6174746163686d656e74732f31383231393438362f696d616765323031342d372d33302532303233253341323925334131382e706e673f76657273696f6e3d31266d6f64696669636174696f6e446174653d31343036373330333739303030266170693d7632" width="700px">
-</p>  
- 
-SSL에서 TLS로 이름이 변경된 지 오래됐지만 아직도 사람들은 TLS대신 SSL이라는 표현을 더 많이 사용하고 있으며 실제로 SSL/TLS의 오픈소스 구현체 프로젝트의 명칭은 아직도 OpenSSL이기도 합니다.
-또한 SSL/TLS의 가장 주된 적용 대상이 HTTPS다 보니 SSL/TLS를 HTTPS와 혼용하는 경우도 많습니다.
-이 문서에서는 SSL 이라고 할 경우 SSL 프로토콜, TLS 는 TLS 프로토콜을 의미하며, 보안이 적용된 HTTP는 HTTPS로 지칭하겠습니다.
-
-SSL/TLS 를 사용하면 중간자 공격과 Packet Spoofing 을 통한 도감청을 막을 수 있으며 통신하는 상대방이 맞는지 인증할 수 있습니다. 
-
+</p>   
 
 #### TLS의 작동 방식
-인터넷을 통해 안전하게 통신하려면 암호화가 필요하다. 만일 데이터가 암호화되지 않으면 누구나 패킷을 들여다 보고 기밀 정보를 읽을 수 있다. 가장 안전한 암호화 방법은 ‘비대칭 암호화’다. 제대로 작동하려면 2개의 암호 키(대개 엄청나게 큰 숫자로 이루어졌다)가 필요하다. 하나는 공용 키이고 다른 하나는 개인 키다.
+통신 세션이 맨 처음 시작할 때만 비대칭 암호화를 사용
+ - 비대칭 암호화(공용키, 개인키)
+ - 비유하자면 공용 키는 전면에 넣을 수 있는 구멍이 있는 잠겨진 우편함에 대한 정보이고 개인 키는 그 우편함을 열 수 있는 키라고 생각하면 된다.  
+ - 그 이후부터는 패킷 암호화에 서버와 클라이언트가 사용할 하나의 ‘세션 키’에 합의하기 위해 양쪽이 나누는 대화를 암호화하는 것이다. 서버와 클라이언트 공유된 키를 사용하는 암호화를 ‘대칭 암호화’라고 한다.(대칭키를 교환, 디피-헬만키 교환 또는 RSA알고리즘 사용) 그 이후 핸드쉐이크 종료 및 대칭키 서로 보유  
 
-여기에 관련된 수학 개념은 복잡한데 간단히 말하면 공용 키는 데이터 ‘암호화’에 사용되고 ‘복호화’하에는 개인 키가 필요하다. 2개의 키는 무작위 시도로는 역엔지니어링하기 어려운 복잡한 수학 공식에 의해 서로 연결돼 있다. 비유하자면 공용 키는 전면에 넣을 수 있는 구멍이 있는 잠겨진 우편함에 대한 정보이고 개인 키는 그 우편함을 열 수 있는 키라고 생각하면 된다. 우편함의 장소를 아는 사람이라면 누구나 메시지를 안에 넣을 수 있지만 누군가 그 메시지를 읽으려면 개인 키가 필요하다.
+### HTTP2 특징
+ - Multiplexed Streams, 한 커넥션으로 동시에 여러개의 메세지
+ - Stream Prioritization : 리소스간 의존관계(우선순위)를 설정
+ - 서버는 클라이언트의 요청에 대해 요청하지도 않은 리소스 푸시
+ - Header Compression : HTTP/1.x의 경우 두개의 요청 Header에 중복값이 존재해도 그냥 중복 전송한다. 하지만 HTTP/2에선 Header에 중복값이 존재하는 경우 Static/Dynamic Header Table 개념을 사용하여 **중복 Header를 검출**하고 중복된 Header는 index값만 전송하고 중복되지 않은 Header정보의 값은  Huffman Encoding 기법으로 인코딩 처리 하여 전송한다. 
 
-비대칭 암호화에는 이와 같은 어려운 문제가 수반되기 때문에 컴퓨팅 자원이 많이 소요된다. 통신 세션에서 모든 정보를 암호화하면 감당이 안돼 컴퓨터와 연결이 서서히 중단될 정도이다. TLS는 이 문제를 해결하기 위해 통신 세션이 맨 처음 시작할 때만 비대칭 암호화를 사용한다. 그 이후부터는 패킷 암호화에 서버와 클라이언트가 사용할 하나의 ‘세션 키’에 합의하기 위해 양쪽이 나누는 대화를 암호화하는 것이다. 공유된 키를 사용하는 암호화를 ‘대칭 암호화’라고 한다. 비대칭 암호화에 비해 컴퓨터 자원 소모가 덜하다. 해당 세션 키는 비대칭 암호 작성 방식을 이용해 설정되었기 때문에 그렇지 않은 경우에 비해 통신 세션 전체가 훨씬 더 안전하다.
- 
-#### TLS HandShake
-
-SSL/TLS 세션은 다음 핸드셰이크 과정을 거친 후에 구축됩니다.
-<p align="center">
-<img src="https://camo.githubusercontent.com/0c60b798452644d35652d4874fb501f6b798c558/68747470733a2f2f7777772e6c6573737469662e636f6d2f646f776e6c6f61642f6174746163686d656e74732f31383231393438362f696d616765323031342d31302d323425323031332533413925334131362e706e673f76657273696f6e3d31266d6f64696669636174696f6e446174653d31343134313233343336303030266170693d7632" width="700px">
-</p>  
-
- - 클라이언트와 서버는 헬로 메시지로 기본적인 정보를 송수신 (1, 2)
- - 서버는 서버가 사용하는 SSL/TLS 인증서를 전달 (3, 4)
- - 클라이언트는 암호화 통신에 사용할 대칭키를 생성하고 사이를 서버에 전달(5). 이 과정을 키 교환(Key Exchange) 라고 하며 디피-헬만 키 교환(Diffie–Hellman key exchange) 또는 RSA 를 많이 사용.
- - 클라이언트는 암호화 통신에 사용 가능한 암호 알고리즘과 해시 알고리즘 목록을 서버에 전달. (6, 7)
- - 서버도 알고리즘 목록을 교환후 핸드셰이크가 종료되며 이제 클라이언트와 서버는 암호화 통신에 필요한 대칭키를 서로 보유.(8, 9)
-
-위 과정이 끝나면 SSL 세션이 구축되며 실제 암호화 통신을 시작할 수 있습니다. 
- 
-
-### HTTP2 특징 : Multiplexed Streams
-한출처당 하나의 연결, 즉, 한 커넥션으로 동시에 여러개의 메세지를 주고 받을 있으며, 응답은 순서에 상관없이 stream으로 주고 받는다. HTTP/1.1의 Connection Keep-Alive, Pipelining의 개선이라 보면 된다. 
-연결 수가 적으면 값비싼 TLS 핸드셰이크가 줄어들고, 세션 재사용이 더 향상되며, 필요한 클라이언트 및 서버 리소스가 감소합니다.
-
-### HTTP2 특징 : Stream Prioritization
-예를 들면 클라이언트가 요청한 HTML문서안에 CSS파일 1개와 Image파일 2개가 존재하고 이를 클라이언트가 각각 요청하고 난 후 Image파일보다 CSS파일의 수신이 늦어지는 경우 브라우저의 렌더링이 늦어지는 문제가 발생하는데 HTTP/2의 경우 리소스간 의존관계(우선순위)를 설정하여 이런 문제를 해결하고 있다.
-
-### HTTP2 특징 : Server Push
-서버는 클라이언트의 요청에 대해 요청하지도 않은 리소스를 마음대로 보내줄 수 도 있다.  
-모든 서버 푸시 스트림은 PUSH_PROMISE 프레임을 통해 시작되며, 이 프레임은 설명된 리소스를 클라이언트에 푸시하라는 신호를 서버 인텐트에 보냅니다. 이 프레임은 푸시된 리소스를 요청하는 응답 데이터보다 먼저 전달되어야 합니다. 이러한 전달 순서는 매우 중요합니다. 리소스에 대해 중복 요청이 생성되는 것을 막기 위해 클라이언트는 서버가 어떤 리소스를 푸시할지를 알아야 합니다. 이러한 요구사항을 충족시키는 가장 단순한 전략은 약속했던 리소스의 HTTP 헤더만 포함된 모든 PUSH_PROMISE 프레임을 상위 요소의 응답(즉, DATA 프레임)보다 먼저 전송하는 것입니다.
-
-클라이언트가 PUSH_PROMISE 프레임을 수신한 후에 (RST_STREAM 프레임을 통해) 해당 스트림을 거부할 수 있는 옵션이 있습니다. (예를 들어, 리소스가 이미 캐시에 있기 때문에 이러한 상황이 발생할 수 있습니다) 이것은 HTTP/1.x에 비해 개선된 중요한 기능입니다. 반대로 리소스 인라인 처리 사용은 HTTP/1.x에서 인기 있는 '최적화' 방법으로, '강제 푸시'와 동일합니다. 클라이언트는 인라인 처리된 리소스를 개별적으로 옵트아웃하거나 취소하거나 처리할 수 없습니다.
-
-> 옵트아웃(Opt-out)은 당사자가 자신의 데이터 수집을 허용하지 않는다고 명시할 때 정보수집이 금지되는 제도이다.
-
-HTTP/2에서는 클라이언트가 서버 푸시의 사용 방식을 완벽하게 제어합니다. 클라이언트는 동시에 푸시되는 스트림의 수를 제한할 수 있고, 스트림이 최초로 열릴 때 푸시되는 데이터의 크기를 제어하는 초기 흐름 제어 창을 조정할 수 있으며, 서버 푸시를 완전히 비활성화할 수도 있습니다. 이러한 기본은 HTTP/2 연결 시작 시에 SETTINGS 프레임을 통해 전달되며 언제든지 업데이트될 수 있습니다.
-
-### Header Compression
-HTTP/2는 Header 정보를 압축하기 위해 Header Table과 Huffman Encoding 기법을 사용하여 처리하는데 이를 HPACK 압축방식이라 부르며 별도의 명세서(RFC 7531)로 관리하고 있다.
-HTTP/1.x의 경우 두개의 요청 Header에 중복값이 존재해도 그냥 중복 전송한다. 하지만 HTTP/2에선 Header에 중복값이 존재하는 경우 Static/Dynamic Header Table 개념을 사용하여 **중복 Header를 검출**하고 중복된 Header는 index값만 전송하고 중복되지 않은 Header정보의 값은  Huffman Encoding 기법으로 인코딩 처리 하여 전송한다.
+#### 허프만 인코딩 기법(허프만코드)
+트리들의 집합을 유지하면서 매 단계에서 가장 frequency가 작은 두 트리를 찾아 두 트리를 하나로 합치기 때문에 적합한 자료구조는 최소힙(min-heap)이 됩니다. 즉, 힙에 저장된 각각의 원소들은 하나의 트리인 특직이 있습니다. 
+문자의 빈도 또는 확률정보를 이용해 통계적 압축하는 방법
+1. 주어진 텍스트에서 각 문자의 출현 빈도수를 계산합니다.
+2. 각 문자의 빈도수를 이용하여 허프만트리를 생성하여 각 문자에 이진코드를 부여 
+![허프만인코딩](https://t1.daumcdn.net/cfile/tistory/99839F435BD6F62603)
 
 ## DIP(Dependency Inversion Principle) 의존 역전 원칙 
 자신보다 변하기 쉬운 것에 의존하던 것을 추상화된 **인터페이스나 상위 클래스**를 두어 변하기 쉬운 것의 변화에 영향받지 않게 하는 것이 의존 역전 원칙, 타이어를 갈아끼울 수 있는 틀을 만들어 놓는 것. 
 상위 계층이 하위 계층의 구현으로부터 독립, 및 세부사항에 의존하지 않음. 
 ```js
 export default class Mailer { 
-
 }
 import Mailer from './services/Mailer'
-
-container
-  .register('service.mailer', Mailer)
+container.register('service.mailer', Mailer)
 ```
 
-## 웹렌더링과 최적화, 하드웨어 가속 
-브라우저 주소 창에 `www.naver.com`을 입력했을 때 어떤 과정을 거쳐 네이버메인 페이지가 보여지게 되는 것일까요? 
-브라우저는 아래와 같은 요소로 이루어져 있습니다.
+## 웹리소스와 DNS / 렌더링, 하드웨어 가속  
 
+### 웹리소스 과정 
+리디렉션 > 앱캐시확인 > DNS > TCP > request > response > TTFB
+1. Queuing : 우선순위, 하나의 브라우저는 6개까지 연결가능(HTTP), 캐시를 만드는데 시간
+2. Stalled/Blocking
+3. Proxy Negotiation
+4. DNS Lookup
+5. TCP
+6. TTFB(Time To First Byte)
+
+### DNS
+ - 도메인 : IP주소를 문자열로 매핑한것으로 이를 찾아주는 서버
+ - 많은 Name Server가 계층구조로 되어있다.  
+ - UDP, 캐싱기능, TTL(Time to Live, IP 패킷 내에 있는 값으로 그 패킷이 네트워크 내에 어느정도 있어야 하는가. ) 설정하고 시간이 지나면 data 삭제함
+ - DNS쿼리 > Root DNS > .com DNS > .com 을 거쳐 완벽한 주소 쿼리 > Request Router가 요청한 주소에 대한 캐싱여부 확인 > DNS서버의 IP주소 기반의 위치정보를 기반으로 서버를 찾아 제공한다.(DNS 기반 Request Routing) 이 때 DNS 서버의 IP주소가 아니라 유저의 IP주소를 기반으로 하는 것을 Service-based Request Routing이라 하며 실제 IP를 위해 한번 더 요청을 해서 받는게 특징이다.  
+ 
+### 브라우저구조
+브라우저는 아래와 같은 요소로 이루어져 있습니다.
+![브라우저의구조](https://d2.naver.com/content/images/2015/06/helloworld-59361-1.png)
 1. 사용자인터페이스는 URI로 받은 요청을 처리하고 
 2. 브라우저엔진은 사용자인테페이스와 렌더링 엔진을 이어주는 다리 역할을 하며 자료저장소와도 데이터를 공유합니다. 
 3. 자료저장소는 `localStroage, cache` 등의 자료를 저장하는 것을 담당합니다. 
@@ -575,6 +548,7 @@ container
 
 크롬의 경우 위와 같이 HTML과 CSS가 다 따로 따로 일어나다 DOM트리를 구축하고 렌더트리를 구축하는 것을 볼 수 있습니다. 이 과정을 좀 더 자세히 보겠습니다.  
 
+### 브라우저 렌더링 과정
 1.	DOM 트리 구축 : 하나의 html페이지는 div, span 등 각각의 요소들을 가지고 있습니다. 그러한 요소들이 토큰화과정을 거쳐 하나하나 Node객체로 설정되고 이것들이 트리형태로 저장이 됩니다. 이를 DOM트리라고 합니다. 예를 들어 div > span, span 이라는 요소가 있다면 div라는 부모노드 밑에 span이라는 자식노드가 2개 생기는 것입니다.
 2.	`Recalculate Style` : 각각의 Node는 CSS파서에 의해 정해진 스타일 규칙의 결과인 `CSSOM`이 있습니다. 이 `span.color = “red”`라고 하면 이 노드의 색깔은 빨간색이다 등을 말하는 것이죠. 이 규칙에 따라 DOM트리내에 있는 노드와 함께 Render Object가 생성되며 이를 모아 병렬적인 렌더트리(Render Tree)가 생성 됩니다. 이 때 `display:none`이 포함된 노드는 지워지고 font-size 등 상속 스타일 부모에만 위치하게설계하는 등의 최적화를 거쳐서 렌더트리를 통해 렌더레이어가 완성됩니다. 참고로 그렇기 때문에 렌더레이어와 렌더오브젝트는 1:1대응이 아니게 됩니다. `display:none` 으로 사라질 수도 있기 때문입니다. 참고로 `visibility:hidden`은 `display:none`과 다르게 보이지는 않지만 비어있는 영역으로 자리를 차지하는게 다릅니다.하지만 DOM트리와 노드는 1:1 대응이 됩니다.  이렇게 렌더트리가 생성된 후 그 후 렌더레이어에 올려지게 됩니다. 
 하지만 이 때 GPU에서 처리되는 부분(`CSS3D / video & canvas / filter / animation / transform : transelateZ(0)` 등)이 있으면 이 요소들은 강제적으로 Graphic Layer로 분리됩니다. (이를 하드웨어 가속 대상을 적용했다고 한다고 일컫는다.)
@@ -616,11 +590,52 @@ repaint의 경우 `backgroundColor, color` 등 색깔에 관한 요소들을 수
 웹의 장점과 앱의 장접을 결합한 환경, 앱 아이콘을 추가 / 푸시 / 오프라인에서도 가능 
 서비스 워커, 브라우저가 백그라운드에서 실행하는 스크립트
 
-## ACID 
+## DB - ACID 
+하나의 논리적 기능을 수행하기 위한 작업의 단위로, DB의 일관된 상태를 또 다른 일관된 상태로 변환시키는 기능을 수행, 병행으로 처리할 때 어떤 트랜잭션이 특정 DB의 데이터를 사용할 때 DB의 일정부분을 Lock시키고 트랜잭션이 완료될때 해당부분을 Unlock시키는 방법으로 트랜잭션의 오류 방지
  - 원자성(Atomicity)은 트래잭션과 관련 된 일들이 모두 수행되었거나 안되었거나
  - 일관성(Consistency), 시스템이 가지고 있는 고정요소는 언제나 동일하다. 
  - 독립성(Isolation)은 트랜잭션 수행시 끼어들지 못한다.  
  - 지속성(Durability)은 성공적으로 수행된 트랜잭션은 영원히 반영 
+
+## DB - 무결성
+무결성이란 데이터의 정확성, 일관성, 유효성을 유지하는 것을 말하며 무결성이 유지가 되어야 DB에 저장된 데이터 값과 거기에 해당하는 현실 세계의 실제값이 일치하는지 신뢰할 수 있습니다. 데이터의 무결성을 유지하기 위해 DBMS에서는 크게 4가지 종류로 구분한다.
+ - 개체 무결성 : 기본키로 선택된 필드는 빈 값을 허용하지 않는다.
+ - 참조 무결성 : 서로 참조 관계에잇는 두 테이블의 데이터는 항상 일관된 값을 유지한다.
+ - 도메인 무결성 : 테이블에 존재하는 필드의 무결성을 보장하기 위한 것으로 올바른 데이터가 입력됬는지를 체크하는 것이다.
+ - 고유 무결성 : 특정 속성에 대해 고유한 값을 가지도록 조건이 주어진 경우 그 속성값은 모두 고유한 값을 가진다. 같으면 안된는 것
+ - NULL 무결성 : 특정 속성값에 NULL이 올 수 없다는 조건이 주어진 경우 그 속성값은 NULL이 될 수 없다는 제약조건
+ - 키 무결성 : 한 릴레이션에는 최소한 하나의 키가 존재해야하는 제약조건
+
+## DB - 데드락
+ - T1 : write(A) read(B)
+ - T2 : read(B) read(A)
+
+위와 같은 트랜잭션이 있다고 하면 T1은 A를 로킹해두고 B의 로킹해제를 기다려야하고 T2는 B를 로킹해두고 A를 기다려야한다. 이 때 두 트랜잭션이 무한정 대기해야하는 상황이 발생하는데 이것을 데드락이라고 한다. (해결방법 : 이 경우 T1, T2중 하나를 ROLLBACK하고 나머지 하나를 완료시킨 후 ROLLBACK한 트랜잭션을 다시 실행시킨다.)
+ - 로킹 : 하나의 트랜잭션이 데이터를 엑세스 하는 동안 다른 트렌잭션이 그 데이타 항목을 액세스 할 수 없도록 하는 병행 제어 기법
+
+[DB-master,slave](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FceKJsj%2FbtqwhVhCOBZ%2FuPK5tKNtwc1VJcLp5TBN81%2Fimg.png)
+데드락을 없애기 위해 탐지나 회피를 사용하는데 탐지인 경우 알고리즘을 통해 매번 데드락인지 아닌지 검사를 해야하므로 코스트가 크며 facebook처럼 write보다 read가 월등히 많은 경우 Read용 DB를 slave로 두고 로드를 모두 몰아주고 write를 Master로 보내고 DB를 동기화 할 수도 있습니다. 
+ - 마스터, slave :  DB 서버를 여러대 둬서, replication을 통해 DB서버의 부하를 줄이는 방법, slave는 read용도로 두면 된다.  replication이 마스터, 받는 녀석이 slave이다. 이외에도 백업용으로도 쓰인다. 
+
+## DB - PK, FK, ER 모델
+ - Primary Key : 테이블에서 각 Row(행)을 유일하게 구분하는 Column-Key
+ - Foreign Key : 테이블과의 링크를 다는 것. `FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)`
+ - ER(Entity-Relation) 모델 : 개체-관계 모델, 데이터베이스를 설계할 때 사용하는 모델 중 하나
+
+## DB - union과 union all
+- 공통제약조건 : select절의 칼럼 수와 데이터타입이 호환 가능해야함
+- union : 여러 SQL문의 합집합. 중복된 행은 제거하여 하나의 행만 표시된다.
+- union all : 여러 SQL문의 합집합. 단순히 합쳤기에 중복된 행도 모두 표시된다.
+
+## DB - JOIN
+ - inner : 두테이블 모두 존재하는 것. 
+ - outer : 두테이블 모두 존재하는 것만 뺀 것. `while a.key is null or b.key is null`
+ - right, left : 오른쪽, 왼쪽 테이블 기준 
+
+## DB - 용어
+ - DDL (Data Definition Language) : 테이블 및 객체의 구조 생성 그리고 삭제, 변경과 관련된 명령어.create, drop, alter
+ - DML : 데이터 조작 및 검색에 관한 명령어. select, update, insert
+ - DCL : 권한과 관련된 명령어, commit, revoke, grant
 
 ## JWT
  - 웹표준 (RFC 7519)
@@ -663,11 +678,10 @@ EC는 스코프체인, Variable Object, this로 구성이 되며 1. 스코프체
 
 ### 2. Variable Object
 각각 AO, GO의 프로퍼티들에 대해 값이 채워집니다.
-
  - Activation Object : 함수선언(표현식은제외), Arguments, 변수를 포함합니다.
  - Global Object : 전역변수들을 포함합니다.
 
-#### 이러한 Variable Object가 형성되는 과정
+이러한 Variable Object가 형성되는 과정
 1. 함수인 경우 매개변수가 property로 그 값인 argument가 값으로 설정됩니다.
 2. 대상 코드 내의 함수 선언(함수 표현식 제외)을 대상으로 함수명이 Variable Object의 프로퍼티로, 생성된 함수 객체가 값으로 설정됩니다. 그리고 이 함수는 실행할 수 있습니다.(함수 호이스팅)
 3. 대상 코드 내의 var로 이루어진 변수 선언을 대상으로 변수명이 Variable Object의 프로퍼티로, undefined가 값으로 초기화됩니다. (변수 호이스팅)
@@ -720,17 +734,21 @@ let user = {
 ## 마크업이미지 
  - GIF(지원색상 : 8비트) : 다양한 색상의 이미지에는 적절x 
  - JPEG(지원색상 : 24비트) : 대중적으로 사용 
- - PNG : GIF와 JPEG의 장점을 합친 파일 형식 PNG-8rhk PNG-24로 나눠짐 
+ - PNG : GIF와 JPEG의 장점을 합친 파일 형식 PNG-8과 PNG-24로 나눠짐 
  - 파일용량 : PNG-8 / GIF / JPEG / PNG-24
  - 이미지품질 : GIF / PNG-8 / JPEG / PNG-24(반투명이미지 Best)
-   
-## 자료구조 
-효율적인 접근 및 수정을 가능케 하는 자료의 조직, 관리, 저장을 의미하며 데이터를 어떤 구조로 저장하고, 탐색하고, 삭제해야 가장 효율적일까에 대한 질문의 닶 
+ 
 
-### 리스트  
+# 자료구조 
+효율적인 접근 및 수정을 가능케 하는 자료의 조직, 관리, 저장을 의미하며 데이터를 어떤 구조로 저장하고, 탐색하고, 삭제해야 가장 효율적일까에 대한 질문의 답
+
+## 리스트    
 리스트란 같은 값이 한번 이상 존재할 수 있고 순서가 있는 일련의 값이 모여있는 추상적 자료형, ADT
-#### 1. 연결리스트
-삽입과 삭제, O(1) 그러나 랜덤액세스가 되며 탐색: K번째 값을 찾기 위해서는 O(K)가 걸린다.
+
+### 1. 연결리스트
+배열은 순차적인 형태의 데이타를 그 자체로 메모리에 올려서 접근하고 처리할 수 있는 목적으로 사용, 연결리스트의 경우 각각의 데이터를 포인터로 연결해서 공간적인 효율성을 극대화 시킬 수 있는 방법이라고 할 수 있습니다.  
+삽입과 삭제, O(1) 그러나 랜덤액세스가 되지 않으며 탐색: K번째 값을 찾기 위해서는 O(K)가 걸린다.
+prev가 있는 것을 이중연결리스트, 마지막 노드의 next가 다시 첫번째 노드를 가리키는 형태를 원형 연결 리스트
 ```js
 // Construct Single Node
 class Node {
@@ -832,12 +850,12 @@ class LinkedList {
   }
 }
 ``` 
-#### 2. 배열
+### 2. 배열
 랜덤 엑세스가 가능합니다. 인덱스 값을 알고 있다면 탐색의 경우 O(1),삽입과 삭제, O(K)가 걸립니다.  
 
 데이터 추가와 삭제를 많이 하는 것은 연결리스트, 탐색을 많이 하는 것은 배열로 하는것이 좋습니다.  
 
-### 해시테이블
+## 해시테이블
  - 장점 :  예컨대 해시함수로 하드디스크나 클라우드에 존재하는 무한에 가까운 데이터(키)들을 유한한 개수의 해시값으로 매핑함으로써 작은 크기의 캐쉬 메모리로도 프로세스를 관리할 수 있게 됩니다.
  - 매핑 전 원래 데이터의 값을 키(key), 매핑 후 데이터의 값을 해시값(hash value), 매핑하는 과정 자체를 해싱(hashing)라고 합니다.
  - 해시함수(hash function)란 데이터의 효율적 관리를 목적으로 임의의 길이의 데이터를 고정된 길이의 데이터로 매핑하는 함수입니다. 
@@ -882,7 +900,7 @@ class HashTable {
 } 
 ```
 
-### 그래프
+## 그래프
 단순히 노드(N, node)와 그 노드를 연결하는 간선(E, edge)을 하나로 모아 놓은 자료 구조
 ![그래프와 트리차이](https://gmlwjd9405.github.io/images/data-structure-graph/graph-vs-tree.png)
 - 정점(vertex): 위치라는 개념. (node 라고도 부름)
@@ -896,28 +914,27 @@ class HashTable {
 - 가중치 그래프는 네트워크라고도 한다. 
 - 완전 그래프(Complete Graph), 모든 정점이 서로 연결되어 있는 그래프, 정점 수: n이면 간선의 수: n * (n-1) / 2 
 
-### 트리
+## 트리
  - 리프노드 : 포레스트는 서로 독립인 트리들의 모임, 트리에서 루트를 지우면 완성 
  - 잎새노드(leaf node)란 자식노드가 없는 노드입니다. 
  - internal node란 잎새노드를 제외한 노드를 나타냅니다. 
  - 루트노드(root node)란 부모노드가 없는 노드를 가리킵니다.
  - 다수의 데이터를 빠르고 효율적으로 처리하기 위해 사용됩니다. 
 부모 노드 밑에 여러 자식 노드가 연결되고, 자식 노드 각각에 다시 자식 노드가 연결되는 재귀적 형태의 자료구조다. 단, 자식 노드의 자식이 부모로 연결되는 경우는 보통 트리로 인정하지 않는다. 
-#### 트리의 높이
+
+### 트리의 높이
 ```c++
-void dfs(int now, int level){ 
-    dfs(left, level + 1);
+int dfs(int here){
+    int h = 1;
+    for(int there : adj[now]){
+        if(visited[there]) continue; 
+        h = max(h, dfs(there) + 1);
+    }  
+    return h;
 }
-``` 
-#### 구현 : 인접리스트
-그래프 내에 적은 숫자의 간선만을 가지는 희소 그래프(Sparse Graph) 의 경우 강하다. 그래프에 존재하는 모든 간선의 수 는 O(N+E) 안에 알 수 있다.  
-
-#### 구현 : 인접행렬
-그래프에 간선이 많이 존재하는 밀집 그래프(Dense Graph) 의 경우 강하다. 두 정점을 연결하는 간선의 존재 여부 (M[i][j])를 O(1) 안에 즉시 알 수 있다. 공간복잡도가 더 많이 든다. 
-
-### BST
-이진 트리의 일종으로, 노드의 왼쪽 가지에는 노드의 값보다 작은 값들만 있고, 오른쪽 가지에는 큰 값들만 있도록 구성되었다. 자식 노드들도 동일한 방법으로 정렬되어 노드의 왼쪽 자식의 왼쪽 가지에는 왼쪽 자식이 가진 값보다 작은 값만 있고, 왼쪽 자식의 오른쪽 가지에는 왼쪽 자식의 값보다 큰 값들만 있으며 어느 노드를 잡아도 동일한 규칙으로 정렬이 되어 있다.
-활용으로는 B-tree가 있습니다.  
+```  
+## BST
+B-tree활용  
 ```js
 class Node {
     constructor(data, left = null, right = null) {
@@ -1130,22 +1147,37 @@ class Node {
   } 
 ``` 
 ### AVL 트리(log N)
-가장 처음으로 나온 자가 균형 이진 탐색 트리로, 이진 탐색 트리가 운이 안 좋을 경우 O(N)의 시간이 걸리는 것을 보완한 트리이다.이상적인 상황에서나 최악의 상황에서 탐색/삽입/삭제 모두 시간 복잡도가 O(log N)이다. 만족해야 하는 조건은 모든 노드에서 오른쪽 트리와 왼쪽 트리의 높이(height)의 차이가 1이하로만 나는것. 삽입/삭제를 할 때마다 균형이 안맞는 것을 맞추기 위해 트리의 일부를 왼쪽 혹은 오른쪽으로 회전시켜야 한다. 
-균형은 아래에 나온 Red-black tree보다 훨씬 잘 잡히지만, 그렇기 때문에 Red-black tree보다 삽입과 제거가 느리고 탐색 자체는 빠르다. 그래서 보통 자가 균형 이진 탐색 트리가 필요한 경우 Red-black tree를 쓰는 경우가 많다.
+ - BST가 선형적인 트리형태를 가질 때 O(N)걸리는 것을 보완
+ - 탐색/삽입/삭제 모두 시간 복잡도가 O(log N)
+ - 삽입/삭제를 할 때마다 균형이 안맞는 것을 맞추기 위해 트리의 일부를 왼쪽 혹은 오른쪽으로 회전시켜야 한다. 균형은 아래에 나온 Red-black tree보다 훨씬 잘 잡히지만, 그렇기 때문에 Red-black tree보다 삽입과 제거가 느리고 탐색 자체는 빠르다. 
+ 
+
 ### 레드블랙트리(log N)
-자가 균형 이진 탐색 트리의 일종으로, 노드에 색깔 속성이 붙은 트리이다. 이상적인 상황에서나 최악의 상황에서 탐색/삽입/삭제 모두 시간 복잡도가 O(log N) 이며 C++ STL의 set, multiset, map, and multimap이 이 레드블랙 트리를 이용하여 구현되었다.  
+자가 균형 이진 탐색 트리의 일종으로, 노드에 색깔 속성이 붙은 트리이다. 이상적인 상황에서나 최악의 상황에서 탐색/삽입/삭제 모두 시간 복잡도가 O(log N) 이며 C++ STL의 set, multiset, map, and multimap이 이 레드블랙 트리를 이용하여 구현되었다. 균형이 맞지 않을경우 회전을 한다. 
+ - 루트는 블랙이다.
+ - 모든 리프노드는 블랙이다.
+ - 노드가 레드이면 그 노드의 자식은 반드시 블랙이다.
+ - 로트 노드에서 임의의 리프 노드에 이르는 경로에서 만나는 블랙 노드의 수는 모두 같다.
+ 
 ### B-tree (log N)
 이진 트리를 확장한 개념, 균형잡힌 트리, 하나의 노드가 여러 데이타를 가질 수 있다. root 노드가 자식이 있다면 적어도 2개 이상의 자식을 가져야 한다. 한 노드에 M개의 자료가 배치되면 M차 B-Tree라고 한다. 
 Root 노드를 제외한 모든 노드는 적어도 M/2개의 자료를 가지고 있어야 한다.
 탐색은 BST처럼..!
 ![이진탐색트리](https://hyungjoon6876.github.io/jlog/assets/img/20180720/btree_3.png)
 
-모든 데이타 베이스 시스템과 동일하게 MongoDB의 인덱스 또한 B-Tree로 구현되어있다. 노드에 한 개의 데이타가 아닌 여러개의 데이타를 저장하는 버켓이라는 데이터 저장소를 사용한다
-MongoDB에서 버켓이라는 메모리 블록을 사용하는 이유를 살펴보면 해쉬기법의 메모리 구성을 응용한 것과 같다. 근접한 키 값을 가지는 데이타를 한 버켓에 배치, B-TREE를 구성하기 위해 들어가는 링크 주소 영역을 줄일 수 있고 검색을 위한 깊이를 줄일 수 있다는 장점이 있다. 
-인덱스 버켓에 키 값(데이터)를 저장하기 때문에, 도큐멘트에 저장된 데이터와 중복 저장된다는 점과 함께, 빠른 인덱스 검색을 위한 입출력 기술이 별도로 구현된 것이 아니라, 운영체제가 제공하고 있는 PageFault방식을 같이 사용하기 떄문에 메모리가 부족한 시스템에서는 오히려 검색 속도를 저하시키는 단점이 되기도 한다. 최악의 경우는 인덱스와 도큐먼트가 모두 메모리에 로드 되지 않았을 경우, 한개의 도큐먼트를 찾기 위해 2번의 page fault가 발생할 수 있다. 
+데이타 베이스 시스템의 대부분 인덱스가 이 B-tree로 구성되어있는데요. 해시인덱스도 있지만요. (해시함수의 결과값을 저장하므로 키 컬럼 값이 길어도 4 ~ 8바이트 수준으로 줄어드는 장점)
 
-#### page fault
-윈도우 운영체제의 가상 메모리(Virtual Memory)는 RAM을 관리하는 방법 중 하나로, 각 프로그램에 실제 메모리 주소가 아닌 가상의 메모리 주소를 할당하는 방식을 말한다. RAM의 부족한 용량을 보완하는 데 주로 쓰인다.윈도우 운영체제는 가동되고 있는 프로세스들의 내용(페이지) 중, 덜 중요한 것들을 하드 디스크의 공간에 옮겨 놓는다. (당연히 어디에 저장했는지도 기록해 놓는다.) 그리고 프로세스가 동작하는 도중, 메모리에 필요한 데이터(페이지)가 없으면 하드디스크를 찾아 해당 데이터를 가져온다. (이 과정에서 속도 저하가 발생. ROM이 RAM보다 느리기 때문.) 가상메모리의 동작 프로세스를 설명하기에 앞서, 프레임과 페이지에 대해 간략히 정리하려고 한다. 프레임과 페이지의 정의는 아래와 같다.
+MongoDB의 인덱스 또한 B-Tree로 구현되어있다. 노드에 한 개의 데이타가 아닌 여러개의 데이타를 저장하는 버켓이라는 데이터 저장소를 사용한다
+MongoDB에서 버켓이라는 메모리 블록을 사용하는 이유를 살펴보면 해쉬기법의 메모리 구성을 응용한 것과 같다. 근접한 키 값을 가지는 데이타를 한 버켓에 배치, B-TREE를 구성하기 위해 들어가는 링크 주소 영역을 줄일 수 있고 검색을 위한 깊이를 줄일 수 있다는 장점이 있다. 
+
+인덱스 버켓에 키 값(데이터)를 저장하기 때문에, 도큐멘트에 저장된 데이터와 중복 저장된다는 점과 함께, 빠른 인덱스 검색을 위한 입출력 기술이 별도로 구현된 것이 아니라, 운영체제가 제공하고 있는 PageFault방식을 같이 사용하기 때문에 메모리가 부족한 시스템에서는 오히려 검색 속도를 저하시키는 단점이 되기도 한다. 
+
+최악의 경우는 인덱스와 도큐먼트가 모두 메모리에 로드 되지 않았을 경우, 한개의 도큐먼트를 찾기 위해 2번의 page fault가 발생할 수 있다. 
+
+#### 가상 메모리와 page fault
+윈도우 운영체제의 가상 메모리(Virtual Memory)는 RAM을 관리하는 방법 중 하나로, 각 프로그램에 실제 메모리 주소가 아닌 가상의 메모리 주소를 할당하는 방식을 말한다. 
+
+RAM의 부족한 용량을 보완하는 데 주로 쓰인다.윈도우 운영체제는 가동되고 있는 프로세스들의 내용(페이지) 중, 덜 중요한 것들을 하드 디스크의 공간에 옮겨 놓는다. 그리고 프로세스가 동작하는 도중, 메모리에 필요한 데이터(페이지)가 없으면 하드디스크를 찾아 해당 데이터를 가져온다. (이 과정에서 속도 저하가 발생. ROM이 RAM보다 느리기 때문.) 가상메모리의 동작 프로세스를 설명하기에 앞서, 프레임과 페이지에 대해 간략히 정리하려고 한다. 프레임과 페이지의 정의는 아래와 같다.
 
  - 프레임(Frame): 물리 메모리를 사용하는 최소 크기 단위.
  - 페이지(Page): 가상 메모리를 사용하는 최소 크기 단위.
@@ -1154,21 +1186,18 @@ MongoDB에서 버켓이라는 메모리 블록을 사용하는 이유를 살펴�
 
 1. CPU는 물리 메모리을 확인하여 페이지가 없으면 trap을 발생하여 운영체제에 알린다.
 2. 운영체제는 CPU의 동작을 잠시 멈춘다.
-3. 운영체제는 페이지 테이블을 확인하여 가상 메모리에 페이지가 존재하는지 확인하고, 없으면 프로세스를 중단한다.
+3. 운영체제는 페이지 테이블을 확인하여 가상 메모리에 페이지가 존재하는지 확인하고, 없으면 즉, valid bit이 없는 상태라면  프로세스를 중단한다.
 4. 페이지 폴트(page fault)이면, 현재 물리 메모리에 비어있는 프레임(Free Frame)이 있는지 찾는다.
-5. 비어있는 프레임에 해당 페이지를 로드하고, 페이지 테이블을 최신화 한다.
+5. 비어있는 프레임에 해당 페이지를 로드하고, 페이지 테이블을 최신화한다. 
 6. 중단되었던 CPU를 다시 시작한다.  
 
 ### 스택, Last In First Out 
-재귀적으로 함수를 호출해야 하는 경우에 임시 데이터를 스택에 넣어준다.
-재귀함수를 빠져 나와 퇴각 검색(backtrack)을 할 때는 스택에 넣어 두었던 임시 데이터를 빼 줘야 한다.스택은 이런 일련의 행위를 직관적으로 가능하게 해 준다.또한 스택은 재귀 알고리즘을 반복적 형태(iterative)를 통해서 구현할 수 있게 해준다. 웹 브라우저 방문기록 (뒤로가기), 실행취소(undo)라는 로직에 쓰인다.  
-
+재귀적인 함수, 알고리즘에 사용되며 웹 브라우저 방문기록 (뒤로가기), 실행취소(undo)라는 로직에 쓰인다.  
+삽입 및 삭제O(1), 탐색 및 참조O(n)
 ### 큐, FIFO(First-In-First-Out) 
+삽입 및 삭제O(1), 탐색 및 참조O(n)
  - 데이터가 입력된 시간 순서대로 처리해야 할 필요가 있는 상황에 이용한다.
- - 너비 우선 탐색(BFS, Breadth-First Search) 구현
- - 처리해야 할 노드의 리스트를 저장하는 용도로 큐(Queue)를 사용한다.
- - 노드를 하나 처리할 때마다 해당 노드와 인접한 노드들을 큐에 다시 저장한다.
- - 노드를 접근한 순서대로 처리할 수 있다.
+ - 너비 우선 탐색(BFS, Breadth-First Search) 구현 
  - 캐시(Cache) 구현, 우선순위가 같은 작업 예약 (인쇄 대기열), 선입선출이 필요한 대기열 (티켓 카운터), 프로세스 관리 
 
 ### 힙
@@ -1185,14 +1214,11 @@ MongoDB에서 버켓이라는 메모리 블록을 사용하는 이유를 살펴�
  - 부모의 인덱스 = (자식의 인덱스) / 2 
 
 #### 힙(heap)의 삽입
-힙에 새로운 요소가 들어오면, 일단 새로운 노드를 힙의 마지막 노드에 이어서 삽입한다.
-새로운 노드를 부모 노드들과 교환해서 힙의 성질을 만족시킨다. 
+힙에 새로운 요소가 들어오면, 일단 새로운 노드를 힙의 마지막 노드에 이어서 삽입한다. 이 새로운 노드를 부모 노드들과의 크기를 비교하며 교환해서 힙의 성질을 만족시킨다. 
 
 #### 힙(heap)의 삭제
 최대 힙에서 최댓값은 루트 노드이므로 루트 노드가 삭제된다.
-최대 힙(max heap)에서 삭제 연산은 최댓값을 가진 요소를 삭제하는 것이다.
-삭제된 루트 노드에는 힙의 마지막 노드를 가져온다.
-힙을 재구성한다. 
+그 이후 마지막 노드와 루트노드를 swap 이후 힙을 재구성한다.  
 ```js
 class minHeap{
     constructor(capacity){
@@ -1249,89 +1275,9 @@ mh.insert(3)
 mh.insert(6) 
 ```
 
-## 알고리즘 
-### BFS, DFS
+# 알고리즘 
 
-### MST
-### 다익스트라
-### 십진수를 팔진수로 바꾸는 프로그램
-```c++
-#include <iostream>
-#include <cmath>
-using namespace std;
-int decimalToOctal(int decimalNumber);
-int main()
-{
-   int decimalNumber;
-   cout << "Enter a decimal number: ";
-   cin >> decimalNumber;
-   cout << decimalNumber << " in decimal = " << decimalToOctal(decimalNumber) << " in octal";
-   
-   return 0;
-}
-// Function to convert decimal number to octal
-int decimalToOctal(int decimalNumber)
-{
-    int rem, i = 1, octalNumber = 0;
-    while (decimalNumber != 0)
-    {
-        rem = decimalNumber % 8;
-        decimalNumber /= 8;
-        octalNumber += rem * i;
-        i *= 10;
-    }
-    return octalNumber;
-}
-```
-### 매트릭스에서 k번째 값 추출
-```js 
-const a = [
-	[1, 2, 3], 
-	[1, 2, 3], 
-	[1, 2, 3]
-]
-const k = 3; 
-const kthSmallest = (matrix, k) => [].concat(...matrix).sort((a, b) => a - b)[k - 1];
-``` 
-### Largest Number(string)
-```js
-const a =[10, 2]
-const largestNumber = function(nums) {
-    return nums
-            .sort((a, b) => `${b}${a}` - `${a}${b}`)
-            .reduce((a, b) => a + b, '') 
-};  
-console.log(largestNumber(a))
-```
-### LIS
-```js
-const lengthOfLIS = function(nums) {
-    let lowerList = [];
-    
-    for(let i = 0; i < nums.length; i++) {
-        let l = 0;
-        let r = lowerList.length - 1;
-        const cur = nums[i];
-        
-        if(r < 0 || lowerList[r] < cur) {
-            lowerList.push(cur);
-            continue;
-        }
-        
-        while(l <= r) {
-            let mid = (l + r) >> 1;
-            if(lowerList[mid] >= cur) r = mid - 1;
-            else l = mid + 1;
-        }
-        
-        lowerList[l] = cur;
-    }
-    
-    return lowerList.length;
-};
-```
-
-### 힙정렬 (logN)
+## 힙정렬 (logN)
 완전 이진 트리의 일종인 힙을 이용한 정렬, 삽입, 마지막 노드에 삽입 이후 부모노드들과 교환하면서 스왑하면서 올라간다. 
 삭제는 root를 삭제한 후 가장 아래 노드를 root로 swap한다 이후 그 노드를 왼쪽부터 시작해서 교환한다. 
 ```c++
@@ -1470,8 +1416,7 @@ void MinHeap::MinHeapify(int i)
 } 
 ```
 ### 합병정렬 (logN)
-병합 정렬은 폰 노이만이 제안한, 평균 시간 복잡도와 최악 시간 복잡도가 모두 O(NlogN)인 정렬 알고리즘입니다. 분할 정복 알고리즘의 대표적인 예시입니다.
-Worst Case에 대해서는 잘 알고 있습니다. 병합 정렬을 수행할 때 특정 범위의 원소가 정확히 반씩 쪼개지기 때문에 연산의 깊이는 O(logN)이므로, 전체 정렬 과정에서 O(NlogN)이 됩니다. 병합 정렬은 어떤 방식으로 입력이 들어와도 반씩 쪼개면서 정렬을 해야 합니다. 따라서 입력 상태와 상관 없이 Best Case 또한 O(NlogN)입니다.  
+병합 정렬은 폰 노이만이 제안한, 평균 시간 복잡도와 최악 시간 복잡도가 모두 O(NlogN)인 정렬 알고리즘입니다. 분할 정복 알고리즘의 대표적인 예시입니다.병합 정렬은 어떤 방식으로 입력이 들어와도 반씩 쪼개면서 정렬을 해야 하므로 어떠한 경우에도 O(NlogN)입니다.  
 ```python
 def merge(left, right):
 
@@ -1504,7 +1449,10 @@ def merge_sort(list):
     return merge(leftList, rightList) 
 ```
 ### 퀵정렬 (logN)
-최악의 경우, n^2, 평균적으로 nlogn의 시간복잡도를 가진다. pivot을 기준으로 i와 j가 만날 때까지 swap을 하며 바꿔가다가 다시 pivot을 j 다음에 넣으면 되며 그 다음 왼쪽, 오른쪽 재귀함수로 돌려버린다.
+최악의 경우,pivot이 올바르게 선택되지 않을경우( 한쪽은 0개, 다른 쪽은 n-1개로 분할되는 경우) O(n^2), 평균적으로 O(nlogn)의 시간복잡도를 가진다. pivot을 기준으로 i와 j가 만날 때까지 swap을 하며 바꿔가다가 다시 pivot을 j 다음에 넣으면 되며 그 다음 왼쪽, 오른쪽 재귀함수로 돌려버리면 됩니다. 
+
+많이 쓰이는데 이는 퀵 정렬의 내부 루프는 대부분의 컴퓨터 아키텍처에서 효율적으로 작동하도록 설계되어 있고(그 이유는 메모리 참조가 지역화되어 있기 때문에 CPU 캐시의 히트율이 높아지기 때문이다.), 
+![슈도코드](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile1.uf.tistory.com%2Fimage%2F26563A4A535729E0101F39)
 
 ```c++
 #include <cstdio>
@@ -1675,6 +1623,227 @@ int main()
 } 
 
 ```
+
+### BFS, DFS
+
+### 벨만포드
+존재하는 모든 간선을 돌아보면서 이 간선을 통할 수도 있는 최단경로들의 거리를 갱신하는 것. 음의 사이클이 있을 경우 v-1이 아닌 v-1번째에 했을 때 갱신이 된다는 뜻. 
+```c++
+#include <cstdio>
+#include <vector>
+#include <utility>
+#include <algorithm>
+using namespace std;
+typedef pair<int, int> P;
+const int INF = 1000000000; // 절대 나올 수 없는 경로값
+int main(){
+    int N, M, dist[500];
+    scanf("%d %d", &N, &M);
+    vector<P> adj[500];
+    for(int i=0; i<M; i++){
+        int A, B, C;
+        scanf("%d %d %d", &A, &B, &C);
+        adj[A-1].push_back(P(B-1, C));
+    }
+    bool minusCycle = false;
+    fill(dist, dist+N, INF);
+    dist[0] = 0;
+    for(int i=0; i<N; i++){ // (N-1) + 1번의 루프. 마지막은 음의 싸이클 존재 여부 확인용
+        for(int j=0; j<N; j++){
+            // N-1번의 루프에 걸쳐 각 정점이 i+1개 정점을 거쳐오는 최단경로 갱신
+            for(auto &p: adj[j]){
+                int next = p.first, d = p.second;
+                if(dist[j] != INF && dist[next] > dist[j] + d){
+                    dist[next] = dist[j] + d;
+                    // N번째 루프에 값이 갱신되면 음의 싸이클이 존재한다.
+                    if(i == N-1) minusCycle = true;
+                }
+            }
+        }
+    }
+    if(minusCycle) puts("-1");
+    else{
+        for(int i=1; i<N; i++)
+            printf("%d\n", dist[i]!=INF ? dist[i] : -1);
+    }
+} 
+```
+### MST와 크루스칼
+최소 스패닝 트리(MST, minimum spanning tree)는 트리의 간선마다 가중치(cost)가 있을 때, 간선의 가중치 합이 최소인 스패닝 트리입니다. 방법 중 크루스칼 알고리즘이 있다.  
+ - ① 간선들을 가중치 순으로 오름차순 정렬하고 정점들을 각 컴포넌트로 초기화한다.
+ - ② 간선들을 훑으면서 양쪽 정점을 포함한 컴포넌트가 연결되어 있지 않으면 간선을 뽑고 연결한다.
+ - ③ 간선 V-1개가 뽑혔을 때, 그 간선들과 정점들이 이루는 그래프가 MST다. 
+```c++
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+ 
+int uf[1000]; // union-find 배열
+ 
+// union-find의 find 연산
+int find(int a){
+    if(uf[a] < 0) return a;
+    return uf[a] = find(uf[a]);
+}
+ 
+// union-find의 union 연산
+bool merge(int a, int b){
+    a = find(a);
+    b = find(b);
+    if(a == b) return false;
+    uf[b] = a;
+    return true;
+}
+ 
+// 간선 구조체. w 기준으로 정렬됨
+struct Edge{
+    int u, v, w;
+    Edge(): Edge(-1, -1, 0){}
+    Edge(int u1, int v1, int w1): u(u1), v(v1), w(w1){}
+    bool operator <(const Edge& O)const{ return w < O.w; }
+};
+ 
+int main(){
+    int N, M;
+    scanf("%d %d", &N, &M);
+    Edge e[100000];
+    for(int i=0; i<M; i++){
+        int a, b, c;
+        scanf("%d %d %d", &a, &b, &c);
+        e[i] = Edge(a-1, b-1, c);
+    }
+    // 간선을 가중치 기준으로 오름차순 정렬
+    sort(e, e+M);
+ 
+    // result: 가중치합, cnt: 뽑은 간선 수
+    int result = 0, cnt = 0;
+    fill(uf, uf+N, -1);
+    for(int i=0; ; i++){
+        if(merge(e[i].u, e[i].v)){
+            result += e[i].w;
+            if(++cnt == N-1) break; // N-1개 간선을 뽑으면 나감
+        }
+    }
+    printf("%d\n", result);
+}
+```
+
+### 다익스트라 
+정점 개수가 V, 간선 개수가 E일 때 기본적인 최적화를 거치면 O(ElogV)의 시간복잡도 
+
+① 아직 방문하지 않은 정점들 중 거리가 가장 짧은 정점을 하나 선택해 방문한다.
+
+② 해당 정점에서 인접하고 아직 방문하지 않은 정점들의 거리를 갱신한다.
+
+가장 dist 값이 작은 정점이 u고, 사실 dist[u]는 최단거리보다는 아직 크다고 해 봅시다. 이때 u를 방문하면 dist[u] 값은 최단거리가 아니게 되겠죠.
+
+또한 dist[u]가 아직 최단거리가 아니라는 말은, 다른 임의의 정점 v를 거치는 경로를 통해 최단거리로 갱신될 수 있다는 말입니다. 즉 dist[u] > dist[v] + d[v][u]인 어떤 정점 v가 존재할 겁니다.
+그런데 아직 방문하지 않은 정점 중에서 dist 값이 제일 작은 게 u라고 했으니까 v는 방문한 상태일 겁니다.
+그런데 v를 방문했을 때 dist[u]는 이미 dist[v] + d[v][u]로 갱신되고 말았을 겁니다.
+따라서 저렇게 될 수 있는 경우는... 없습니다. 
+위 증명에서 중요하게 작용하는 성질이 바로 d 값이 항상 0 이상이라는 사실, 음수라면 벨만포드를 써야 한다.  
+
+```c++
+while(pq.size()){ 
+    int herey = pq.top().second / 1000;
+    int herex = pq.top().second % 1000; 
+    int here_dist = pq.top().first;
+    pq.pop();
+    if(dist[herey][herex] != here_dist) continue;
+    for(int i = 0; i < 4; i++){
+        int ny = herey + dy[i]; 
+        int nx = herex + dx[i];  
+        if(ny < 0 || ny >= N || nx < 0 || nx >= N) continue; 
+        int _dist = a[ny][nx]; 
+        if(dist[ny][nx] > dist[herey][herex] + _dist){
+            dist[ny][nx] = dist[herey][herex] + _dist; 
+            pq.push(make_pair(dist[ny][nx], ny * 1000 + nx));    
+        }   
+    } 
+} 
+```
+
+### 다이나믹 프로그래밍
+Dynamic Programming은 앞서 설명했던, 병합 정렬과 같은 분할 정복 알고리즘에서 출발합니다. Optimal Substructure와 Overlapping Subproblems라는 특징이 있습니다. 작은 문제와 큰 문제가 중복되기 때문에 메모이제이션을 통해서 배열에 이미 해결된 데이터를 담아서 한 번만 문제를 해결하면 되도록 할 수 있습니다.
+상대적으로 어려운 Dynamic Programming  문제로는 Shortest Path Algorithm을 이야기할 수 있습니다.
+DP의 특성으로 optimal substructure와 overlapping subproblem이 있습니다. optimal substructure는 부분 문제들의 최적해들을 전체 문제의 최적해가 포함하고 있는 것을 말합니다. overlapping subproblem은 divide-and-conquer와 차이나는 부분으로 중복되는 부분이 있다는 것을 말합니다. 
+
+### 플로이드 와샬
+플로이드-워셜 알고리즘은 각각의 꼭짓점 쌍을 지나는 그래프의 모든 경로를 비교한다. shortestPath(i, j, k) = min(shortestPath(i, j, k - 1), shortestPath(i, k, k - 1) + shortestPath(k,j, k - 1))이는 i번 정점에서 j번 정점까지, 1~k번 정점만 사용할 때의 최단 거리를 구하라는 의미입니다.
+
+```shell
+let dist be a |V| × |V| array of minimum distances initialized to ∞ (infinity)
+for each edge (u,v)
+   dist[u][v] ← w(u,v)  // 변 (u,v)의 가중치
+for each vertex v
+   dist[v][v] ← 0
+for k from 1 to |V|
+   for i from 1 to |V|
+      for j from 1 to |V|
+         if dist[i][j] > dist[i][k] + dist[k][j]
+             dist[i][j] ← dist[i][k] + dist[k][j]
+         end if
+```
+### Greedy 알고리즘
+매순간 최적이라고 생각되는 것을 선택해 나가는 방식으로 진행하여 최종적인 최적해에 도달하는 기법을 가리킵니다. 탐욕 알고리즘이 잘 작동하는 문제는 greedy choice property와 optimal substructure 두 가지 속성을 만족합니다. 전자의 경우 앞의 선택이 이후 선택에 영향을 주지 않는다는 걸 의미하고, 후자는 문제 전체에 대한 최적해(global optimum)가 부분문제에 대해서도 역시 최적해가 된다는 걸 뜻합니다. 다익스트라와 MST(크루스칼)가 있습니다.
+
+다익스트라 : 우선순위 큐에 있는 u가 먼저 꺼내졌다는 말은 dist[u] < dist[q]임을 알려줍니다. 이는 q를 지나서 u로 오는 경로가 dist[u]보다 짧다는 가정에 모순이 됩니다.경로보다 짧은 경로는 존재할 수 없으므로 다익스트라 알고리즘이 찾아내는 경로가 항상 최단 경로라는 결론을 얻을 수 있습니다.
+### 크루스칼 알고리즘 
+크루스칼 알고리즘에서는, 단순히 각 간선을 정렬한 이후에 비용이 작은 간선부터 연결하면 문제를 해결할 수 있습니다. 그렇기 때문에 '항상 작은 것을 선택'한다는 점에서 Greedy 알고리즘에 해당합니다. 처음 공집합에서부터 시작해서 간선을 추가하는데 최소가 아닌 간선을 추가했을 때 최적해 T보다 더 커지므로 모순임을 통해 증명이 가능합니다.  
+
+# 알고리즘문제
+## 십진수를 팔진수로 바꾸는 프로그램
+```c++
+#include <iostream>
+#include <cmath>
+using namespace std;
+int decimalToOctal(int decimalNumber);
+int main()
+{
+   int decimalNumber;
+   cout << "Enter a decimal number: ";
+   cin >> decimalNumber;
+   cout << decimalNumber << " in decimal = " << decimalToOctal(decimalNumber) << " in octal";
+   
+   return 0;
+}
+// Function to convert decimal number to octal
+int decimalToOctal(int decimalNumber)
+{
+    int rem, i = 1, octalNumber = 0;
+    while (decimalNumber != 0)
+    {
+        rem = decimalNumber % 8;
+        decimalNumber /= 8;
+        octalNumber += rem * i;
+        i *= 10;
+    }
+    return octalNumber;
+}
+```
+## 매트릭스에서 k번째 값 추출
+```js 
+const a = [
+	[1, 2, 3], 
+	[1, 2, 3], 
+	[1, 2, 3]
+]
+function flatDeep(arr) {
+   return arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val) : val), []);
+};
+const k = 3; 
+const kthSmallest = (matrix, k) => [].concat(...matrix).sort((a, b) => a - b)[k - 1];
+``` 
+### Largest Number(string)
+```js
+const a =[10, 2]
+const largestNumber = function(nums) {
+    return nums
+            .sort((a, b) => `${b}${a}` - `${a}${b}`)
+            .reduce((a, b) => a + b, '') 
+};  
+console.log(largestNumber(a))
+```
 ### 트리의 지름
 ```c++
 #include<cstdio>
@@ -1712,7 +1881,6 @@ int main(){
     printf("%d\n", ret);
 }
 ```
-
 ### 위상정렬
 ```c++
 #include <cstdio>
@@ -1831,7 +1999,33 @@ int main() {
 	return 0;
 }
 ```
-
+### LIS
+```js
+const lengthOfLIS = function(nums) {
+    let lowerList = [];
+    
+    for(let i = 0; i < nums.length; i++) {
+        let l = 0;
+        let r = lowerList.length - 1;
+        const cur = nums[i];
+        
+        if(r < 0 || lowerList[r] < cur) {
+            lowerList.push(cur);
+            continue;
+        }
+        
+        while(l <= r) {
+            let mid = (l + r) >> 1;
+            if(lowerList[mid] >= cur) r = mid - 1;
+            else l = mid + 1;
+        }
+        
+        lowerList[l] = cur;
+    }
+    
+    return lowerList.length;
+};
+```
 ### 이분탐색
 ```c++
 #include<cstdio>
@@ -1879,60 +2073,11 @@ while(left <= right){
 }
 console.log(idx)
 ```
-### 다익스트라
-```c++
-while(pq.size()){ 
-    int herey = pq.top().second / 1000;
-    int herex = pq.top().second % 1000; 
-    int here_dist = pq.top().first;
-    pq.pop();
-    if(dist[herey][herex] != here_dist) continue;
-    for(int i = 0; i < 4; i++){
-        int ny = herey + dy[i]; 
-        int nx = herex + dx[i];  
-        if(ny < 0 || ny >= N || nx < 0 || nx >= N) continue; 
-        int _dist = a[ny][nx]; 
-        if(dist[ny][nx] > dist[herey][herex] + _dist){
-            dist[ny][nx] = dist[herey][herex] + _dist; 
-            pq.push(make_pair(dist[ny][nx], ny * 1000 + nx));    
-        }   
-    } 
-} 
-```
-
-### Q. 다이나믹 프로그래밍
-Dynamic Programming은 앞서 설명했던, 병합 정렬과 같은 분할 정복 알고리즘에서 출발합니다. Optimal Substructure와 Overlapping Subproblems라는 특징이 있습니다. 작은 문제와 큰 문제가 중복되기 때문에 메모이제이션을 통해서 배열에 이미 해결된 데이터를 담아서 한 번만 문제를 해결하면 되도록 할 수 있습니다.
-상대적으로 어려운 Dynamic Programming  문제로는 Shortest Path Algorithm을 이야기할 수 있습니다.
-DP의 특성으로 optimal substructure와 overlapping subproblem이 있습니다. optimal substructure는 부분 문제들의 최적해들을 전체 문제의 최적해가 포함하고 있는 것을 말합니다. overlapping subproblem은 divide-and-conquer와 차이나는 부분으로 중복되는 부분이 있다는 것을 말합니다. 
 
 
-### Q. 플로이드 와샬
-플로이드-워셜 알고리즘은 각각의 꼭짓점 쌍을 지나는 그래프의 모든 경로를 비교한다. shortestPath(i, j, k) = min(shortestPath(i, j, k - 1), shortestPath(i, k, k - 1) + shortestPath(k,j, k - 1))이는 i번 정점에서 j번 정점까지, 1~k번 정점만 사용할 때의 최단 거리를 구하라는 의미입니다.
-
-```shell
-let dist be a |V| × |V| array of minimum distances initialized to ∞ (infinity)
-for each edge (u,v)
-   dist[u][v] ← w(u,v)  // 변 (u,v)의 가중치
-for each vertex v
-   dist[v][v] ← 0
-for k from 1 to |V|
-   for i from 1 to |V|
-      for j from 1 to |V|
-         if dist[i][j] > dist[i][k] + dist[k][j]
-             dist[i][j] ← dist[i][k] + dist[k][j]
-         end if
-```
-### Greedy 알고리즘
-매순간 최적이라고 생각되는 것을 선택해 나가는 방식으로 진행하여 최종적인 최적해에 도달하는 기법을 가리킵니다. 탐욕 알고리즘이 잘 작동하는 문제는 greedy choice property와 optimal substructure 두 가지 속성을 만족합니다. 전자의 경우 앞의 선택이 이후 선택에 영향을 주지 않는다는 걸 의미하고, 후자는 문제 전체에 대한 최적해(global optimum)가 부분문제에 대해서도 역시 최적해가 된다는 걸 뜻합니다. 다익스트라와 MST(크루스칼)가 있습니다.
-
-다익스트라 : 우선순위 큐에 있는 u가 먼저 꺼내졌다는 말은 dist[u] < dist[q]임을 알려줍니다. 이는 q를 지나서 u로 오는 경로가 dist[u]보다 짧다는 가정에 모순이 됩니다.경로보다 짧은 경로는 존재할 수 없으므로 다익스트라 알고리즘이 찾아내는 경로가 항상 최단 경로라는 결론을 얻을 수 있습니다.
  
-
-### 크루스칼 알고리즘 
-크루스칼 알고리즘에서는, 단순히 각 간선을 정렬한 이후에 비용이 작은 간선부터 연결하면 문제를 해결할 수 있습니다. 그렇기 때문에 '항상 작은 것을 선택'한다는 점에서 Greedy 알고리즘에 해당합니다. 처음 공집합에서부터 시작해서 간선을 추가하는데 최소가 아닌 간선을 추가했을 때 최적해 T보다 더 커지므로 모순임을 통해 증명이 가능합니다.  
-
-## 운영체제 
-### 운영체제 의미
+# 운영체제 
+## 운영체제 의미
  - 운영 체제는 사용자가 컴퓨터를 쉽게 다루게 해주는 인터페이스
  - 컴퓨터 자원을 효율적으로 관리하기 위한 시스템, 한정된 메모리 공간을 효율적으로 분배하는 참된 일꾼
  - 운영체제는 하드웨어와 소프트웨어를 관리하는 소프트웨어 전체
