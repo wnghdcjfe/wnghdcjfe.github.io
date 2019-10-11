@@ -1,80 +1,39 @@
-/* Queues */
-
-function Queue () { 
-    collection = [];
-    this.print = function() {
-        console.log(collection);
-    };
-    this.enqueue = function(element) {
-        collection.push(element);
-    };
-    this.dequeue = function() {
-        return collection.shift(); 
-    };
-    this.front = function() {
-        return collection[0];
-    };
-    this.size = function() {
-        return collection.length; 
-    };
-    this.isEmpty = function() {
-        return (collection.length === 0); 
-    };
-}
-
-var q = new Queue(); 
-q.enqueue('a'); 
-q.enqueue('b');
-q.enqueue('c');
-q.print();
-q.dequeue();
-console.log(q.front());
-q.print();
-
-
-function PriorityQueue () {
-    var collection = [];
-    this.printCollection = function() {
-      (console.log(collection));
-    };
-    this.enqueue = function(element){
-        if (this.isEmpty()){ 
-            collection.push(element);
-        } else {
-            var added = false;
-            for (var i=0; i<collection.length; i++){
-                 if (element[1] < collection[i][1]){ //checking priorities
-                    collection.splice(i,0,element);
-                    added = true;
-                    break;
-                }
-            }
-            if (!added){
-                collection.push(element);
-            }
+class Queue{
+    constructor(){
+        this.s1 = []
+        this.s2 = []
+    }
+    front(){
+        if(this.s1.length === 0){
+            console.log("큐가 비었습니다. ")
+            return
+        }else return this.s1[this.s1.length - 1];
+    }
+    enqueue(value){
+        while(this.s1.length){
+            this.s2.push(this.s1[this.s1.length - 1]); 
+            this.s1.pop(); //앞에서 빼는 것은 shift
         }
-    };
-    this.dequeue = function() {
-        var value = collection.shift();
-        return value[0];
-    };
-    this.front = function() {
-        return collection[0];
-    };
-    this.size = function() {
-        return collection.length; 
-    };
-    this.isEmpty = function() {
-        return (collection.length === 0); 
-    };
+        this.s1.push(value)
+        while(this.s2.length){
+            this.s1.push(this.s2[this.s2.length - 1])
+            this.s2.pop()
+        }
+    }
+    dequeue(){
+        if(this.s1.length === 0){
+            console.log("큐가 비었습니다. ")
+            return
+        }
+        let front_value = this.s1[this.s1.length - 1];
+        this.s1.pop();  
+        return front_value
+    }
 }
-
-var pq = new PriorityQueue(); 
-pq.enqueue(['Beau Carnes', 2]); 
-pq.enqueue(['Quincy Larson', 3]);
-pq.enqueue(['Ewa Mitulska-Wójcik', 1])
-pq.enqueue(['Briana Swift', 2])
-pq.printCollection();
-pq.dequeue();
-console.log(pq.front());
-pq.printCollection();
+const a = new Queue()
+a.enqueue(1); 
+a.enqueue(2); 
+a.enqueue(3); 
+a.enqueue(4); 
+a.enqueue(5); 
+console.log(a.front()) 
