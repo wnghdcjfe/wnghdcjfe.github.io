@@ -211,14 +211,14 @@ View 는 Presenter 를 참조하고, Presenter 는 View 의 존재를 알고 있
 ### 아키텍처 규칙
 그럼 어떠한 아키텍처 스타일의 집합일까요? 일단 아래의 6가지 규칙은 지켜야 합니다. 
 
-#### 1. Uniform-Interface : Self-descriptive messages
-독립적으로 자원들이 각각 인터페이스를 가져야 한다는 것입니다. 
+#### 1. Uniform-Interface 
+독립적으로 자원들이 각각 인터페이스를 가져야 한다는 것입니다. REST는 기본적으로 독립적인 인터페이스를 갖습니다. 그래서 C++, java 등 여러 언어애 쓰입니다. 
  - 웹 페이지를 변경했다고 웹 브라우저를 업데이트할 필요는 없다.
  - 웹 브라우저를 업데이트했다고 웹 페이지를 변경할 필요도 없다.
  - HTTP 명세가 변경되어도 웹은 잘 동작한다.
- - HTML 명세가 변경되어도 웹은 잘 동작한다.
+ - HTML 명세가 변경되어도 웹은 잘 동작한다. 
 
-즉, 시간이 지나서 클라이언트와 서버가 변경되더라도 언제나 해석 가능하게끔 하는 것입니다. 
+#### 2. Self-descriptive messages
 Self-descriptive messages이란 각 자원들의 타입에 대하여 **media 타입**을 이용하고 그 타입에 대해서 IANA에 등록해야 합니다.(하지만 힘듭니다.) 또한 HTTP Header에 타입을 명시해주어야 합니다. 
 
 각 메시지(자원)들은 **MIME types**에 맞춰 표현되며 스스로를 표현해야 합니다. 또한 이 데이타가 무엇을 나타내는지 path를 통해 나타내주어야 합니다. 
@@ -229,7 +229,7 @@ Self-descriptive messages이란 각 자원들의 타입에 대하여 **media 타
 ```
 `font/ttf`, `text/plain`, `text/csv`을 정의 해주는 것을 말합니다.  
 
-#### 1. Uniform-Interface : HATEOAS 구조 
+#### 3. HATEOAS 구조 
 하이퍼링크에 따라 다른 페이지를 보여줘야 하며 데이타 마다 어떤 URL에서 원했는지 명시해 주어야 합니다.  
 ```js
 // send person object with HATEOAS links added
@@ -246,18 +246,18 @@ res.json(personObject, [
 }
 ```
 
-#### 2. Stateless
+#### 4. Stateless
 이건 HTTP 자체가 Stateless이기 때문에 HTTP를 이용하는 것만으로도 충족이 됩니다. API를 제공해주는 서버는 세션(session)을 그 서버 쪽에 유지하지 않는다는 의미입니다. 
 
-#### 3. Cacheable 
+#### 5. Cacheable 
 HTTP 는 원래 캐싱이 됩니다. 새로고침을 하면 304가 뜨면서 원래 있던 js와 css 이미지등을 불러오는 것을 볼 수 있습니다.
 이러한 캐싱은 네트워크 요청을 줄여주며 이는 UX향상에 도움이 됩니다. 네트워크 요청시 해당되는 자원들을 복사해서 메모리에 저장해두었다가 또 같은 요청시 네트워크요청을 하지 않고 브라우저메모리에 있던 자원을 다시 반환합니다. HTTP 메서드 중 GET에 한정되어있으며 `Cache-Control:max-age=100`이런식으로 한정된 시간을 정할 수가 있으며 이 캐싱된 데이타가 유효한지를 판단하기 위해 `Last-modifed` 그리고 `Etag`를 씁니다.   
 `Etag`는 전달되는 값에 태그를 붙여서 캐싱되는 자원인지를 확인해주는 것입니다. 예를 들어 `Cache-Control:max-age=100`으로 형성된 자료는 100초가 지나면 응답이 완료 되었기 때문에 다시 똑같은 자료를 가져올 수 있습니다. 이 때 Etag, 디지털 지문을 사용한다면 똑같은 자원은 캐싱되서 요청을 줄일 수 있습니다   
 
-#### 4. Client-Server 구조  
+#### 6. Client-Server 구조  
 클라이언트와 서버가 서로 독립적인 구조를 가져야 합니다. 물론 이는 HTTP 를 통해 가능한 구조입니다. 서버에서 HTTP 표준만 지킨다면 웹에서는 그에 따른 화면이 잘 나타나게 됩니다. 서버는 그저 API를 제공하고 그 API에 맞는 비즈니스 로직을 처리하면 됩니다. 마찬가지로 클라이언트에서는 HTTP 로 받는 로직만 잘 처리하면 되는 것입니다.
   
-#### 5. Layered System
+#### 7. Layered System
 계층구조로 아키텍처를 만들 수 있다는 것을 뜻합니다.  
 
 ### URI 규칙
@@ -603,7 +603,7 @@ repaint의 경우 `backgroundColor, color` 등 색깔에 관한 요소들을 수
  - 개체 무결성 : 기본키로 선택된 필드는 빈 값을 허용하지 않는다.
  - 참조 무결성 : 서로 참조 관계에잇는 두 테이블의 데이터는 항상 일관된 값을 유지한다.
  - 도메인 무결성 : 테이블에 존재하는 필드의 무결성을 보장하기 위한 것으로 올바른 데이터가 입력됬는지를 체크하는 것이다.
- - 고유 무결성 : 특정 속성에 대해 고유한 값을 가지도록 조건이 주어진 경우 그 속성값은 모두 고유한 값을 가진다. 같으면 안된는 것
+ - 고유 무결성 : 특정 속성에 대해 고유한 값을 가지도록 조건이 주어진 경우 그 속성값은 모두 고유한 값을 가진다. 같으면 안되는 것
  - NULL 무결성 : 특정 속성값에 NULL이 올 수 없다는 조건이 주어진 경우 그 속성값은 NULL이 될 수 없다는 제약조건
  - 키 무결성 : 한 릴레이션에는 최소한 하나의 키가 존재해야하는 제약조건
 
@@ -614,7 +614,8 @@ repaint의 경우 `backgroundColor, color` 등 색깔에 관한 요소들을 수
 위와 같은 트랜잭션이 있다고 하면 T1은 A를 로킹해두고 B의 로킹해제를 기다려야하고 T2는 B를 로킹해두고 A를 기다려야한다. 이 때 두 트랜잭션이 무한정 대기해야하는 상황이 발생하는데 이것을 데드락이라고 한다. (해결방법 : 이 경우 T1, T2중 하나를 ROLLBACK하고 나머지 하나를 완료시킨 후 ROLLBACK한 트랜잭션을 다시 실행시킨다.)
  - 로킹 : 하나의 트랜잭션이 데이터를 엑세스 하는 동안 다른 트렌잭션이 그 데이타 항목을 액세스 할 수 없도록 하는 병행 제어 기법
 
-[DB-master,slave](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FceKJsj%2FbtqwhVhCOBZ%2FuPK5tKNtwc1VJcLp5TBN81%2Fimg.png)
+![DB-master,slave](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FceKJsj%2FbtqwhVhCOBZ%2FuPK5tKNtwc1VJcLp5TBN81%2Fimg.png)
+
 데드락을 없애기 위해 탐지나 회피를 사용하는데 탐지인 경우 알고리즘을 통해 매번 데드락인지 아닌지 검사를 해야하므로 코스트가 크며 facebook처럼 write보다 read가 월등히 많은 경우 Read용 DB를 slave로 두고 로드를 모두 몰아주고 write를 Master로 보내고 DB를 동기화 할 수도 있습니다. 
  - 마스터, slave :  DB 서버를 여러대 둬서, replication(리플리케이션)을 통해 DB서버의 부하를 줄이는 방법, slave는 read용도로 두면 된다.  replication이 마스터, 받는 녀석이 slave이다. 이외에도 백업용으로도 쓰인다. 또한 DB 클러스터링이라는 것은 고가용성, 병렬처리를 위해 하나의 DB를 여러개의 서버가 나눠서 처리하는 것을 말한다. 
 
@@ -623,14 +624,17 @@ repaint의 경우 `backgroundColor, color` 등 색깔에 관한 요소들을 수
  - Foreign Key : 테이블과의 링크를 다는 것. `FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)`
  - ER(Entity-Relation) 모델 : 개체-관계 모델, 데이터베이스를 설계할 때 사용하는 모델 중 하나
 
+![ERD](https://d2slcw3kip6qmk.cloudfront.net/marketing/pages/chart/examples/erdiagramexample.png)
+![표기법](https://t1.daumcdn.net/cfile/tistory/254BA95057ECA9942E)
 ## DB - union과 union all
 - 공통제약조건 : select절의 칼럼 수와 데이터타입이 호환 가능해야함
 - union : 여러 SQL문의 합집합. 중복된 행은 제거하여 하나의 행만 표시된다.
 - union all : 여러 SQL문의 합집합. 단순히 합쳤기에 중복된 행도 모두 표시된다.
 
 ## DB - JOIN
- - inner : 두테이블 모두 존재하는 것. 
- - outer : 두테이블 모두 존재하는 것만 뺀 것. `while a.key is null or b.key is null`
+![흠냐](https://i.stack.imgur.com/VQ5XP.png)
+ - inner : 두테이블의 교집합을 중심으로 
+ - outer : 두테이블의 합집합을 중심으로.`while a.key is null or b.key is null`
  - right, left : 오른쪽, 왼쪽 테이블 기준 
 
 ## DB - 용어
@@ -645,6 +649,23 @@ repaint의 경우 `backgroundColor, color` 등 색깔에 관한 요소들을 수
  - 세션유지 필요x, 토큰만 확인하면 회원인증가능
  - 정보교류에 사용가능 
  
+## 제너레이터와 코루틴(세미)
+1. yeild문이 발동하면 스택프레임에 복사를 하고 콜스택에서는 제거를 합니다.
+2. 그리고 next()문이 발동하면 스택프레임을 복원하여 실행해서 진입점을 개발자가 원하는 데로 실행이 가능하게 설계할 수 있습니다. 
+ 
+ > 코루틴 : 진입점을 개발자가 원하는 데로 실행이 가능하게 설계하는 것 
+
+이 코루틴 덕에 이터레이러를 이용해서 **지연평가**라는 것이 가능합니다.
+
+ > 지연평가를 하면 range함수를 만드는데서 성능에서의 장점 로직구현이 좀 더 효율적이게 됩니다. 왜냐하면 파이프라인에서 제너레이터로 연결된 함수들이 합쳐지는 듯한 효과를 내기 때문입니다. 
+ 
+### 이터러블/이터레이터 프로토콜
+ - 이터러블: 이터레이터를 리턴하는 `[Symbol.iterator]()`라는  키를 가진 값이자 반복할 수 있는 순차적인 객체
+ - 이터레이터: `{ value, done }` 객체를 리턴하는 `next()` 를 가진 값
+ - 이터러블/이터레이터 프로토콜: 이터러블을 `for...of`, `전개 연산자` 등과 함께 동작하도록한 규약
+
+ > ... 전개연산자는 적용되는 공간에서의 인수들(배열, key-value)에 따라 그 공간에 맞는 인수 또는 요소로 확장할 수 있게 합니다. 전개연산자는 이렇게 활용할 수도 있습니다. const [head, ...tail] = f();
+
 ## 클로저
 클로저는 독특한 함수체제를 멋지게 활용할 수 있습니다. 
  - 프라이빗 변수를 모방 
@@ -664,6 +685,23 @@ const add = (function () {
 })();
 console.log([add(), add(), add()]) //[1, 2, 3]
 add = null 
+```
+
+아래는 가상의 블록 스코프를 얘기함. 
+```js
+var funcs = [];
+
+// 함수의 배열을 생성하는 for 루프의 i는 전역 변수다.
+for (var i = 0; i < 3; i++) {
+  (function (index) { // index는 자유변수다.
+    funcs.push(function () { console.log(index); });
+  }(i));
+}
+
+// 배열에서 함수를 꺼내어 호출한다
+for (var j = 0; j < 3; j++) {
+  funcs[j]();
+}
 ```
 
 ## 실행컨텍스트
@@ -901,6 +939,11 @@ class HashTable {
 } 
 ```
 
+### 유니코드
+아스키코드의 경우, 128개의 코드가 정리되어 있는 코드표가 있다.
+EUC-KR/CP949의 경우, 2바이트로 표현할 수 있는 코드표가 있는 것이다.
+UTF-8/UTF-16등의 인코딩은 U+로 시작되는 코드표가 존재하고, 이를 유니코드라고 말한다. UTF같은 인코딩은 같은 유니코드표를 가지고 다르게 표현하는 방법인 것이다.
+
 ## 그래프
 단순히 노드(N, node)와 그 노드를 연결하는 간선(E, edge)을 하나로 모아 놓은 자료 구조
 ![그래프와 트리차이](https://gmlwjd9405.github.io/images/data-structure-graph/graph-vs-tree.png)
@@ -938,214 +981,181 @@ int dfs(int here){
 B-tree활용  
 ```js
 class Node {
-    constructor(data, left = null, right = null) {
-      this.data = data;
-      this.left = left;
-      this.right = right;
-    }
+  constructor(data, left = null, right = null) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
   }
-  
-  class BST {
-    constructor() {
-      this.root = null;
+}
+
+class BST {
+  constructor() {
+    this.root = null;
+  }
+  insert(data, node = this.root) {
+    if (!this.root) {
+      this.root = new Node(data);
+      return;
     }
-    add(data) {
-      const node = this.root;
-      if (node === null) {
-        this.root = new Node(data);
-        return;
-      } else {
-        const searchTree = function(node) {
-          if (data < node.data) {
-            if (node.left === null) {
-              node.left = new Node(data);
-              return;
-            } else if (node.left !== null) {
-              return searchTree(node.left);
-            }
-          } else if (data > node.data) {
-            if (node.right === null) {
-              node.right = new Node(data);
-              return;
-            } else if (node.right !== null) {
-              return searchTree(node.right);
-            }
-          } else {
-            return null;
-          }
-        };
-        return searchTree(node);
+    if (node === null) return new Node(data);
+    if (data < node.data) node.left = this.insert(data, node.left);
+    else if (data > node.data) node.right = this.insert(data, node.right);
+    return node;
+  }
+  findMin(node = this.root) {
+    let current = node;
+    while (current.left !== null) {
+      current = current.left;
+    }
+    return current.data;
+  }
+  findMax(node = this.root) {
+    let current = node;
+    while (current.right !== null) {
+      current = current.right;
+    }
+    return current.data;
+  }
+  find(data, node = this.root) {
+    if (node === null) return null;
+    else if (data < node.data) return this.find(data, node.left);
+    else if (data > node.data) return this.find(data, node.right);
+    else return node;
+  }
+  isPresent(data) {
+    let current = this.root;
+    while (current) {
+      if (data === current.data) {
+        return true;
       }
-    }
-    findMin() {
-      let current = this.root;
-      while (current.left !== null) {
+      if (data < current.data) {
         current = current.left;
-      }
-      return current.data;
-    }
-    findMax() {
-      let current = this.root;
-      while (current.right !== null) {
+      } else {
         current = current.right;
       }
-      return current.data;
     }
-    find(data) {
-      let current = this.root;
-      while (current.data !== data) {
-        if (data < current.data) {
-          current = current.left;
-        } else {
-          current = current.right;
-        }
-        if (current === null) {
-          return null;
-        }
-      }
-      return current;
+    return false;
+  }
+  remove(data, node = this.root) {
+    if (node == null) {
+      return null;
     }
-    isPresent(data) {
-      let current = this.root;
-      while (current) {
-        if (data === current.data) {
-          return true;
-        }
-        if (data < current.data) {
-          current = current.left;
-        } else {
-          current = current.right;
-        }
-      }
-      return false;
-    }
-    remove(data) {
-      const removeNode = function(node, data) {
-        if (node == null) {
-          return null;
-        }
-        if (data == node.data) {
-          // node has no children 
-          if (node.left == null && node.right == null) {
-            return null;
-          }
-          // node has no left child 
-          if (node.left == null) {
-            return node.right;
-          }
-          // node has no right child 
-          if (node.right == null) {
-            return node.left;
-          }
-          // node has two children 
-          var tempNode = node.right;
-          while (tempNode.left !== null) {
-            tempNode = tempNode.left;
-          }
-          node.data = tempNode.data;
-          node.right = removeNode(node.right, tempNode.data);
-          return node;
-        } else if (data < node.data) {
-          node.left = removeNode(node.left, data);
-          return node;
-        } else {
-          node.right = removeNode(node.right, data);
-          return node;
-        }
-      }
-      this.root = removeNode(this.root, data);
-    }
-    isBalanced() {
-      return (this.findMinHeight() >= this.findMaxHeight() - 1)
-    }
-    findMinHeight(node = this.root) {
-        if (node == null) {
-            return -1;
-        };
-        let left = this.findMinHeight(node.left);
-        let right = this.findMinHeight(node.right);
-        if (left < right) {
-            return left + 1;
-        } else {
-            return right + 1;
-        };
-    }
-    findMaxHeight(node = this.root) {
-        if (node == null) {
-            return -1;
-        };
-        let left = this.findMaxHeight(node.left);
-        let right = this.findMaxHeight(node.right);
-        if (left > right) {
-            return left + 1;
-        } else {
-            return right + 1;
-        };
-    }
-    inOrder() {
-      if (this.root == null) {
+    if (data == node.data) {
+      // node has no children
+      if (node.left == null && node.right == null) {
         return null;
-      } else {
-        var result = new Array();
-        function traverseInOrder(node) {       
-          node.left && traverseInOrder(node.left);
-          result.push(node.data);
-          node.right && traverseInOrder(node.right);
-        }
-        traverseInOrder(this.root);
-        return result;
-      };
-    }
-    preOrder() {
-      if (this.root == null) {
-        return null;
-      } else {
-        var result = new Array();
-        function traversePreOrder(node) {
-          result.push(node.data);
-          node.left && traversePreOrder(node.left);
-          node.right && traversePreOrder(node.right);
-        };
-        traversePreOrder(this.root);
-        return result;
-      };
-    }
-    postOrder() {
-      if (this.root == null) {
-        return null;
-      } else {
-        var result = new Array();
-        function traversePostOrder(node) {
-          node.left && traversePostOrder(node.left);
-          node.right && traversePostOrder(node.right);
-          result.push(node.data);
-        };
-        traversePostOrder(this.root);
-        return result;
       }
+      // node has no left child
+      if (node.left == null) {
+        return node.right;
+      }
+      // node has no right child
+      if (node.right == null) {
+        return node.left;
+      }
+      // node has two children - 오른쪽 트리중 가장 낮은 것을 뽑는다.
+      node.data = this.findMin(node.right);
+      node.right = this.remove(node.data, node.right);
+      return node;
+    } else if (data < node.data) {
+      node.left = this.remove(data, node.left);
+      return node;
+    } else {
+      node.right = this.remove(data, node.right);
+      return node;
     }
-    
-    levelOrder() {
-        let result = [];
-        let Q = []; 
-        if (this.root != null) {
-            Q.push(this.root);
-            while(Q.length > 0) {
-                let node = Q.shift();
-                result.push(node.data);
-                if (node.left != null) {
-                    Q.push(node.left);
-                };
-                if (node.right != null) {
-                    Q.push(node.right);
-                };
-            };
-            return result;
-        } else {
-            return null;
-        };
-    };
-  } 
+  }
+  isBalanced() {
+    return this.findMinHeight() >= this.findMaxHeight() - 1;
+  }
+  findMinHeight(node = this.root) {
+    if (node == null) {
+      return -1;
+    }
+    let left = this.findMinHeight(node.left);
+    let right = this.findMinHeight(node.right);
+    if (left < right) {
+      return left + 1;
+    } else {
+      return right + 1;
+    }
+  }
+  findMaxHeight(node = this.root) {
+    if (node == null) {
+      return -1;
+    }
+    let left = this.findMaxHeight(node.left);
+    let right = this.findMaxHeight(node.right);
+    if (left > right) {
+      return left + 1;
+    } else {
+      return right + 1;
+    }
+  }
+  inOrder() {
+    if (this.root == null) {
+      return null;
+    } else {
+      var result = new Array();
+      function traverseInOrder(node) {
+        node.left && traverseInOrder(node.left);
+        result.push(node.data);
+        node.right && traverseInOrder(node.right);
+      }
+      traverseInOrder(this.root);
+      return result;
+    }
+  }
+  preOrder() {
+    if (this.root == null) {
+      return null;
+    } else {
+      var result = new Array();
+      function traversePreOrder(node) {
+        result.push(node.data);
+        node.left && traversePreOrder(node.left);
+        node.right && traversePreOrder(node.right);
+      }
+      traversePreOrder(this.root);
+      return result;
+    }
+  }
+  postOrder() {
+    if (this.root == null) {
+      return null;
+    } else {
+      var result = new Array();
+      function traversePostOrder(node) {
+        node.left && traversePostOrder(node.left);
+        node.right && traversePostOrder(node.right);
+        result.push(node.data);
+      }
+      traversePostOrder(this.root);
+      return result;
+    }
+  }
+
+  levelOrder() {
+    let result = [];
+    let Q = [];
+    if (this.root != null) {
+      Q.push(this.root);
+      while (Q.length > 0) {
+        let node = Q.shift();
+        result.push(node.data);
+        if (node.left != null) {
+          Q.push(node.left);
+        }
+        if (node.right != null) {
+          Q.push(node.right);
+        }
+      }
+      return result;
+    } else {
+      return null;
+    }
+  }
+}
 ``` 
 ### AVL 트리(log N)
  - BST가 선형적인 트리형태를 가질 때 O(N)걸리는 것을 보완
@@ -1451,49 +1461,21 @@ def merge_sort(list):
     return merge(leftList, rightList) 
 ```
 ### 퀵정렬 (logN)
-최악의 경우,pivot이 올바르게 선택되지 않을경우( 한쪽은 0개, 다른 쪽은 n-1개로 분할되는 경우) O(n^2), 평균적으로 O(nlogn)의 시간복잡도를 가진다. pivot을 기준으로 i와 j가 만날 때까지 swap을 하며 바꿔가다가 다시 pivot을 j 다음에 넣으면 되며 그 다음 왼쪽, 오른쪽 재귀함수로 돌려버리면 됩니다. 
+최악의 경우,pivot이 올바르게 선택되지 않을경우( 한쪽은 0개, 다른 쪽은 n-1개로 분할되는 경우) O(n^2), 평균적으로 O(nlogn)의 시간복잡도를 가진다. pivot을 기준으로 i와 j가 만날 때까지 swap을 하며 바꿔가다가 다시 pivot을 j 다음에 넣으면 되며 그 다음 왼쪽, 오른쪽 재귀함수로 돌려버리면 됩니다. 다른 정렬알고리즘보다 평균적으로 가장 빠르며 대부분의 컴퓨터 아키텍처에서도 쓰입니다.  
+ - 시간복잡도 : 알고리즘이 실행되는 동안 수행하는 기본적인 연산의 수를 말하며 문제를 해결하는데 걸리는 시간과 입력의 함수관계를 말합니다. 시간복잡도가 높다는 말은 입력의 크기가 증가할 때 알고리즘의 수행시간이 더 빠르게 증가함을 의미합니다. 
 
-많이 쓰이는데 이는 퀵 정렬의 내부 루프는 대부분의 컴퓨터 아키텍처에서 효율적으로 작동하도록 설계되어 있고(그 이유는 메모리 참조가 지역화되어 있기 때문에 CPU 캐시의 히트율이 높아지기 때문이다.), 
 ![슈도코드](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile1.uf.tistory.com%2Fimage%2F26563A4A535729E0101F39)
 
-```c++
-#include <cstdio>
-#include <iostream>
-#include <algorithm>
-using namespace std;
-void quickSort(int arr[], int left, int right){
-    int &pivot = arr[left];
-    int i = left + 1;
-    int j = right;
-
-    while(i <= j){
-        //find larger than pivot
-        while(i <= right && arr[i] < pivot)i++;
-        while(j >= left && arr[j] > pivot)j--;
-        //finded! and swap the values.
-        if(i <= j){
-            swap(arr[i], arr[j]);
-            i++;
-            j--;
-        }
-    }
-    //j that smaller than pivot swap the pivot.
-    swap(pivot, arr[j]);
-    if(left < j) quickSort(arr, left, j);
-    if(i < right) quickSort(arr, i, right);
-}
-int print (int arr[], int n){
-    for(int i = 0; i < n; i++){
-        cout << arr[i] << ",";
-    }
-}
-int main(){
-    int arr[9] = {1,12, 5, 26, 7,14,3,7,2};
-    int n = sizeof(arr)/sizeof(arr[0]);
-    quickSort(arr, 0, n);
-    print(arr, n);
-}
-
+```js
+const quicksort = array => {
+    if (array.length === 0) return [];
+    let [x, ...xs] = array;    
+    return [
+        ...quicksort(xs.filter(y => y < x)),
+        x,
+        ...quicksort(xs.filter(y => y >= x))
+    ];
+};
 ```
 ### 버블정렬, 선택정렬, 삽입정렬(n^2)
  - 버블정렬 : 인접한 두요소중에서 큰값은 오른쪽, 작은 값은 왼쪽으로(오름차순기준) 그 후 마지막값을 빼고 다시 처음부터 반복한다. 
@@ -1549,81 +1531,22 @@ function insert(){
 bubble();
 ``` 
 ### 기수정렬, radix sort
-```c++
-// C++ implementation of Radix Sort 
-#include<iostream> 
-using namespace std; 
-
-// A utility function to get maximum value in arr[] 
-int getMax(int arr[], int n) 
-{ 
-	int mx = arr[0]; 
-	for (int i = 1; i < n; i++) 
-		if (arr[i] > mx) 
-			mx = arr[i]; 
-	return mx; 
-} 
-
-// A function to do counting sort of arr[] according to 
-// the digit represented by exp. 
-void countSort(int arr[], int n, int exp) 
-{ 
-	int output[n]; // output array 
-	int i, count[10] = {0}; 
-
-	// Store count of occurrences in count[] 
-	for (i = 0; i < n; i++) 
-		count[ (arr[i]/exp)%10 ]++; 
-
-	// Change count[i] so that count[i] now contains actual 
-	// position of this digit in output[] 
-	for (i = 1; i < 10; i++) 
-		count[i] += count[i - 1]; 
-
-	// Build the output array 
-	for (i = n - 1; i >= 0; i--) 
-	{ 
-		output[count[ (arr[i]/exp)%10 ] - 1] = arr[i]; 
-		count[ (arr[i]/exp)%10 ]--; 
-	} 
-
-	// Copy the output array to arr[], so that arr[] now 
-	// contains sorted numbers according to current digit 
-	for (i = 0; i < n; i++) 
-		arr[i] = output[i]; 
-} 
-
-// The main function to that sorts arr[] of size n using 
-// Radix Sort 
-void radixsort(int arr[], int n) 
-{ 
-	// Find the maximum number to know number of digits 
-	int m = getMax(arr, n); 
-
-	// Do counting sort for every digit. Note that instead 
-	// of passing digit number, exp is passed. exp is 10^i 
-	// where i is current digit number 
-	for (int exp = 1; m/exp > 0; exp *= 10) 
-		countSort(arr, n, exp); 
-} 
-
-// A utility function to print an array 
-void print(int arr[], int n) 
-{ 
-	for (int i = 0; i < n; i++) 
-		cout << arr[i] << " "; 
-} 
-
-// Driver program to test above functions 
-int main() 
-{ 
-	int arr[] = {170, 45, 75, 90, 802, 24, 2, 66}; 
-	int n = sizeof(arr)/sizeof(arr[0]); 
-	radixsort(arr, n); 
-	print(arr, n); 
-	return 0; 
-} 
-
+```js   
+const radixSort = arr => {
+    const maxNum = Math.max(...arr) * 10;
+    let divisor = 10;
+  
+    while (divisor < maxNum) {
+      let buckets = [...Array(10)].map(() => []);
+      for (let num of arr) {
+        buckets[Math.floor((num % divisor) / (divisor / 10))].push(num);
+      }
+      arr = [].concat(...buckets);
+      divisor *= 10;
+    }
+    return arr;
+  };
+console.log(radixSort([3, 4, 22, 1, 5]))
 ```
 
 ### BFS, DFS
@@ -1675,6 +1598,7 @@ int main(){
  - ① 간선들을 가중치 순으로 오름차순 정렬하고 정점들을 각 컴포넌트로 초기화한다.
  - ② 간선들을 훑으면서 양쪽 정점을 포함한 컴포넌트가 연결되어 있지 않으면 간선을 뽑고 연결한다.
  - ③ 간선 V-1개가 뽑혔을 때, 그 간선들과 정점들이 이루는 그래프가 MST다. 
+
 ```c++
 #include <cstdio>
 #include <algorithm>
@@ -1765,9 +1689,7 @@ while(pq.size()){
 } 
 ```
 
-### 다이나믹 프로그래밍
-Dynamic Programming은 앞서 설명했던, 병합 정렬과 같은 분할 정복 알고리즘에서 출발합니다. Optimal Substructure와 Overlapping Subproblems라는 특징이 있습니다. 작은 문제와 큰 문제가 중복되기 때문에 메모이제이션을 통해서 배열에 이미 해결된 데이터를 담아서 한 번만 문제를 해결하면 되도록 할 수 있습니다.
-상대적으로 어려운 Dynamic Programming  문제로는 Shortest Path Algorithm을 이야기할 수 있습니다.
+### 다이나믹 프로그래밍 
 DP의 특성으로 optimal substructure와 overlapping subproblem이 있습니다. optimal substructure는 부분 문제들의 최적해들을 전체 문제의 최적해가 포함하고 있는 것을 말합니다. overlapping subproblem은 divide-and-conquer와 차이나는 부분으로 중복되는 부분이 있다는 것을 말합니다. 
 
 ### 플로이드 와샬
@@ -1789,8 +1711,7 @@ for k from 1 to |V|
 ### Greedy 알고리즘
 매순간 최적이라고 생각되는 것을 선택해 나가는 방식으로 진행하여 최종적인 최적해에 도달하는 기법을 가리킵니다. 탐욕 알고리즘이 잘 작동하는 문제는 greedy choice property와 optimal substructure 두 가지 속성을 만족합니다. 전자의 경우 앞의 선택이 이후 선택에 영향을 주지 않는다는 걸 의미하고, 후자는 문제 전체에 대한 최적해(global optimum)가 부분문제에 대해서도 역시 최적해가 된다는 걸 뜻합니다. 다익스트라와 MST(크루스칼)가 있습니다.
 
-다익스트라 : 우선순위 큐에 있는 u가 먼저 꺼내졌다는 말은 dist[u] < dist[q]임을 알려줍니다. 이는 q를 지나서 u로 오는 경로가 dist[u]보다 짧다는 가정에 모순이 됩니다.경로보다 짧은 경로는 존재할 수 없으므로 다익스트라 알고리즘이 찾아내는 경로가 항상 최단 경로라는 결론을 얻을 수 있습니다.
-### 크루스칼 알고리즘 
+다익스트라 : 우선순위 큐에 있는 u가 먼저 꺼내졌다는 말은 dist[u] < dist[q]임을 알려줍니다. 이는 q를 지나서 u로 오는 경로가 dist[u]보다 짧다는 가정에 모순이 됩니다.경로보다 짧은 경로는 존재할 수 없으므로 다익스트라 알고리즘이 찾아내는 경로가 항상 최단 경로라는 결론을 얻을 수 있습니다. 
 크루스칼 알고리즘에서는, 단순히 각 간선을 정렬한 이후에 비용이 작은 간선부터 연결하면 문제를 해결할 수 있습니다. 그렇기 때문에 '항상 작은 것을 선택'한다는 점에서 Greedy 알고리즘에 해당합니다. 처음 공집합에서부터 시작해서 간선을 추가하는데 최소가 아닌 간선을 추가했을 때 최적해 T보다 더 커지므로 모순임을 통해 증명이 가능합니다.  
 
 # 알고리즘문제
@@ -2125,7 +2046,7 @@ fs.readFile >>
 - 커널 : 운영체제의 핵심부분이자 보안, 자원관리, 추상화를 담당합니다.  
 
 
-사용자 프로그램은 직접 I/O 장치에 접근 할 수 없다. I/O 장치에 접근하는 모든 인스트럭션은 운영체제를 통해서만 할 수 있도록 막아놓았다. 사용자 프로그램이 I/O를 해야하는 상황에 오면 스스로 CPU를 운영체제에게 넘겨주고 운영체제가 해당 작업을 device controller에게 시킨다. 시키고 나서는 I/O 작업이 오래 걸리기 때문에 운영체제는 지금 요청한 프로그램에게 CPU를 넘기는 것이 아니라 다른 프로그램에게 CPU 를 넘겨준다. 그러면 키보드에서 뭘 읽어오라고 요청한 프로그램은 언제 다시 CPU를 얻게 되느냐? 키보드에서 사용자 입력이 들어와야 다음 처리를 할 수 있는 상태인데 언제까지 그것을 기다리느냐면 IO 컨트롤러가 요청한 작업이 끝나서 사용자가 키보드로 입력한 것이 버퍼에 들어오면 키보드 컨트롤러가 CPU에게 인터럽트를 건다. 그러면 다른 프로그램이 CPU를 사용하고 있었겠지만 인터럽트가 들어왔기 때문에 CPU의 제어권이 운영체제에게 자동으로 넘어간다. 그러면 운영체제는 인터럽트가 들어온 이유를 조사했더니 아까 어떤 프로그램에서 요청했던 키보드 입력이 들어온 것을 알았다. 그러면 입력된 키보드 값을 아까 요청한 프로그램의 메모리 공간에 그 값을 카피해주고 그 후에 아까 CPU를 쓰다 인터럽트를 당한 프로그램에게 CPU를 다시 준다.(일반적으로) (해당 프로그램의 CPU 사용 time이 남았다면) 그리고 나머지 실행준인 프로그램들을 라운드로빈 돌리면서 CPU 사용권을 제공한다.
+사용자 프로그램은 직접 I/O 장치에 접근 할 수 없다. I/O 장치에 접근하는 모든 인스트럭션은 운영체제를 통해서만 할 수 있도록 막아놓았습니다. 사용자 프로그램이 I/O를 해야하는 상황이오면 다른 프로그램에 가있던 제어권이 운영체제로 넘어와서 실행되게 되며 해당 작업을 device controller에 시킨 후 I/O의 경우 시간이 오래걸리기 때문에 다시 다른 프로그램에 CPU 제어권을 넘겨주고 이 후에 완료가 되면 다시 인터럽트를 거는 식을 진행이 되며 다른 프로그램에게 제어권을 넘겨줄 때는 라운드로빈알고리즘에 의해 제어권을 넘겨주게 됩니다. 
 
 #### DMA 컨트롤러, Direct Memory Access
 메모리는 CPU만이 접근이 가능하고 하는 일도 많습니다. 
@@ -2177,7 +2098,7 @@ CPU와 하드디스크, 그리고 램 사이의 상관 관계
 #### 프로세스의 문맥
 프로세스의 모든 상태를 나타내는 것을 프로세스의 문맥이라 합니다. 
 1. 하드웨어 문맥
-2. 주소 공간, code, data, stack, heap
+2. 주소 공간, code, data(지역변수, 매개변수), stack(전역변수, 정적변수), heap(동적 메모리 할당)
 3. 프로세스 커널관련 자료구조, **PCB**(주소공간위치정보, Process Control Block) 
 
 #### 프로세스 상태의 종류
@@ -2199,31 +2120,26 @@ CPU를 한 프로세스에서 다른 프로세스로 넘겨주는 과정에서 C
   4) 파일 관련  
 
 #### 쓰레드
-프로세스 내에서 실행되는 여러 흐름의 단위이며 운영체제에서 프로세스가 만들어지면 [code, data, stack, heap]이 만들어지고 이를 관리하기 위해 **PCB**를 둡니다. 
+공통적으로 프로세스 내에서 실행되는 여러 흐름의 단위
+
+운영체제에서 프로세스가 만들어지면 [code, data, stack, heap]이 만들어지고 이를 관리하기 위해 **PCB**를 둡니다. 
 이 **PCB**에는 쓰레드가 여러개 들어가 있습니다.  
-[code, data, stack, heap]를 **각각** 생성하는 프로세스와는 달리 쓰레드는 stack을 제외한 정보를 **모두 공유**합니다. 
-좀 더 자세히 말하면 쓰레드는 Program Counter(코드 어느부분을 가리키면서 실행하는 것에 대한 정보), registers(CPU레지스터값), stack space는 별도로 유지하지만 data, code, heap을 공유합니다.   
-
-프로세스 메모리공간
- - 코드영역(실행코드, 함수)
- - 스택영역(지역변수, 매겨변수)
- - 데이터영역(전역변수, 정적변수)
- - 힙영역(동적메모리 할당)
-
+[code, data, stack, heap]를 **각각** 생성하는 프로세스와는 달리 쓰레드는 stack을 제외한 정보를 **모두 공유**합니다. 좀 더 자세히 말하면 쓰레드는 Program Counter(코드 어느부분을 가리키면서 실행하는 것에 대한 정보), registers(CPU레지스터값), stack space는 별도로 유지하지만 data, code, heap을 공유합니다.   
+ 
 동일한 일을 하는 프로세스는 독립적으로 있기 때문에 별도의 메모리 주소공간이 낭비되지만 쓰레드는 그렇지 않습니다. 
 쓰레드는 프로세스 하나당 공유할 수 있는 것은 최대한 공유합니다. 
  - 메모리 주소공간 공유
  - 프로세스 상태 공유 
  - 쓰레드끼리도 공유, 이 때 동료 쓰레드와 공유하는 부분을 task라고 합니다.  
 
-쓰레드는 lightweight process라 부르고 하나의 쓰레드만 가지고 있는 것을 heavyweight process라 합니다. 
+쓰레드는 lightweight process라 부르고 하나의 쓰레드만 가지고 있는 프로세스를 heavyweight process라 합니다. 
 
 쓰레드의 장점 
  1. 하나가 blocked하는 상태여도 다른 쓰레드는 running상태여서 빠른 처리를 할 수 있습니다. ex) WebSite Request시
  2. 동일한 일을 하는 도중 협력해서 처리를 하면 성능 향상을 얻을 수 있습니다. 
  3. CPU가 여러개 달린 컴퓨터에는 병렬성을 높일 수 있습니다. (계산시 하나당 맡아가지고 가능)
  
-웹에서는 탭의 보이는 부분은 렌더러 프로세스가 관리를 하는데 이 프로세스에는 메인 스레드, 레스터 스레드, 워커 스레드, 컵포지터 스레드가 존재합니다.  
+웹에서는 탭의 보이는 부분은 렌더러 프로세스가 관리를 하는데 이 프로세스에는 메인 스레드, 레스터 스레드, 워커 스레드, 컴포지터 스레드가 존재합니다.  
 
 웹의 프로세스
  - 브라우저 프로세스 : 주소 표시줄, 북마크 막대, 뒤로 가기 버튼, 앞으로 가기 버튼 등 애플리케이션의 "chrome" 부분을 제어한다.네트워크 요청이나 파일 접근과 같이 눈에 보이지는 않지만 권한이 필요한 부분도 처리한다.
@@ -2249,15 +2165,15 @@ CPU를 한 프로세스에서 다른 프로세스로 넘겨주는 과정에서 C
  - 부모가 종료할 경우 제거 된다. 
  - 키보드로 kill, break를 친경우 
 
-#### 프로레스 대기, wait
+#### 프로세스 대기, wait
  자식프로세스의 일이 끝날 때까지 부모프로세스가 기다리는 과정
 
 #### 프로세스 간 협력
 IPC, Inter Process Comunication
- 1. 메시지패싱, 커널을 이용해 메시지 전달
-메일박스 또는 포트를 통한 간접방식과 전달프로세스이름표기 직접방식
- 2. 메모리 공유
-쓰레드끼리는 메모리가 공유되기 때문에 완전한 협력이 가능 
+ 1. 메시지패싱, 커널을 이용해 메시지 전달 : 메일박스 또는 포트를 통한 간접방식과 전달프로세스이름표기 직접방식
+ 2. 메모리 공유(다수의 프로세스)
+
+하지만 쓰레드끼리는 메모리가 공유되기 때문에 완전한 협력이 가능 
  
 ### CPU Scheduling  
 프로그램이 실행될 때 IO burst, CPU burst가 반복되서 일어나는데 이 때 누구에게 CPU를 줄 것인가를 결정하는 과정입니다. 어느 시점에서 실행되고 있는 프로세스는 단 한개이며 CPU는 여러개의 프로세스를 아주 빠른 속도로 번갈아 가며 실행하는데 누구에게 먼저 이 일꾼녀석을 줘야 할지를 결정하는 것입니다. 
@@ -2309,11 +2225,12 @@ Priority Scheduling의 일종으로 각 프로세스는 동일한 할당시간�
 
 ### Deadlock, 교착상태 
 ![교착상태](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile9.uf.tistory.com%2Fimage%2F997664425C5935A0236E81)
+
  일련의 프로세스들이 서로가 가진 자원을 기다리며 block된 상태를 말합니다. 프로세스들이 서로 자원을 점유한 채 서로의 자원을 요청하기 때문입니다. 대표적으로 환형 대기가 있습니다. 프로세스 A가 어떤 자원을 점유한 채 다른 자원을 요청하고 있습니다. 근데 프로세스 B가 그 자원을 점유하고 있고 프로세스 B도 프로세스 A가 점유하고 있는 프로세스를 요청하여 대기 상태에 빠지게 됩니다.
 
 발생조건
 1. 상호배제(Mutual Exclusion) : 한 자원에 대한 여러 프로세스의 동시 접근 불가
-2. 점유오마 대기(Hold and Wait) : 자원을 가지고 있는 상태에서 다른 프로세스가 다른 프로세스가 사용하고 있는 자원의 반납을 기다리는 것. 
+2. 점유와 대기(Hold and Wait) : 자원을 가지고 있는 상태에서 다른 프로세스가 다른 프로세스가 사용하고 있는 자원의 반납을 기다리는 것. 
 3. 비선점(Non Preemptive) : 다른 프로세스의 자원을 강제로 가져올 수 없음. 
 4. 환형대기(Circle wait) : 각 프로세스가 다음 프로세스가 요구하는 자원을 가지고 있는 것. 
 
@@ -2365,22 +2282,20 @@ Priority Scheduling의 일종으로 각 프로세스는 동일한 할당시간�
  1. 논리적메모리를 동일한 크기의 page로 자릅니다. 보통 4kb 
  2. 매칭되는 페이지 테이블을 통해 주소변환이 되고 물리적메모리에 매핑됩니다. 페이지테이블은 메인 메모리에 위치합니다. 때문에 프로그램에 대한 메모리에 접근하기 위해서 2번접근하게 됩니다. (그래도 빠릅니다.)
 
-이 때 속도 향상을 위해 **TLB**가 사용됩니다. 
-
-하나만 있는 테이블의 기법을  hased table이라고 합니다.
-1) 가상 주소 공간으로부터 페이지 번호가 오면 그것을 해싱 한다. 
-2) 해시형 페이지 테이블에서 연결 리스트를 따라가며 첫 번째 원소와 가상 페이지 번호를 비교한다. 
-3) 일치하면 그에 대응하는 페이지 프레임 번호(두번째 필드)를 가져와 물리적 주소를 얻는다. 
-4) 일치하지 않으면 연결 리스트의 그 다음 포인터로 3의 순서를 반복한다. 
+이 때 속도 향상을 위해 **TLB**가 사용됩니다.  
 
 #### TLB
 TLB는 별도의 하드웨어이며 메인메모리와 CPU사이에 있는 메모리 주소변환모듈입니다. 
 메인메모리에서 캐싱메모리를 통해 빠르게 접근이 가능한 것처럼 메모리를 빠르게 전환하도록 사용되는 캐싱계층입니다. 
-페이지테이블에 가기전에 TLB에 그 메모리가 있는지를 파악해서 빠르게 전달합니다. 이 페이지 테이블은 각각의 프로세스마다 페이지테이블이 존재하기 때문에 프로세스가 context switch를 하게 되면 원래 있던 것은 비워지게 됩니다.  
+페이지테이블에 가기전에 TLB에 그 메모리가 있는지를 파악해서 빠르게 전달합니다. 
+
+이 페이지 테이블은 각각의 프로세스마다 페이지테이블이 존재하기 때문에 프로세스가 context switch를 하게 되면 원래 있던 것은 비워지게 됩니다.  
 
 #### 이단계 페이지 테이블, Two-level Page table 
 Hierarchical Paging의 하나의 예시입니다. 
+
 ![이단계페이지테이블](https://t1.daumcdn.net/cfile/tistory/99CD0B3359C4A82D36)
+
 페이지테이블을 4kb에 할당하면 32비트 기준, 총 100만개의 주소공간만이 할당이 되는데 
  - 32비트 기준 2^32B, 4GB의 주소공간을 가집니다. 
 그러나 대부분의 프로그램은 4G의 주소공간 중 지극히 일부분만 사용되므로 page table 공간이 심하게 낭비됩니다. 이를 다시 계층적인 page table 로 구성하여 바깥쪽 테이블과 안쪽 테이블을 활용한다면 공간 낭비를 줄일 수 있습니다. 
@@ -2422,51 +2337,24 @@ segment number, offset 로 이루어져있으며 번호만큼 떨어진 위치�
 #### segmentation & paging
 공유나 보안은 세그먼트로 의미단위로 하고 물리적 메모리는 페이지로 하는 것을 말합니다.  
  
-### 가상메모리의 Demanding Paging
-요구 페이징은 필요한 프로그램만 메모리에 적재하는 방법으로 가상 메모리 시스템에서 많이 사용된다. 요구 페이징을 사용하는 가상메모리에서는 페이지들이 실행 과정에서 실제로 필요해질 때 적재 된다.
+### 가상메모리의 Demanding Paging, page fault
+프로세스가 메모리에 없는 페이지를 접근하려 할 때 페이지 부재 트랩(page falut trap)을 발생시킨다. 페이징 하드웨어는 페이지 테이블을 이용한 주소 변환 과정에 무효 비트(invalid-bit)를 발견하고 운영체제에 트랩을 걸게 된다. 이 때 비트가 유효하면 메모리에 있는 것을 의미하고 유효하지 않으면 메모리에 없거나(디스크에있거나) 해당 페이지가 유효하지 않다는 것
+을 의미한다.  
+1. 프로세스에 대한 내부 테이블(internal table)을검사해서 그 메모리 참조가 유효/무효인지를 알아 낸다.
+2. 무효한 페이지에 대한 참조라면 프로세스는 중단 된다. 유효한참조인 경우 메모리에 없으면 디스크로 부터 가져와야 한다.
+3. 빈 공간, 자유 프레임(free frame)을 찾거나 replace를 합니다. 
+4. 디스크에 새로이 할당된 프레임으로 해당 페이지를 읽어 들이도록 요청
+5. 디스크 읽기가 끝나면 이 페이지가 메모리에 있다는 것을 알리기 위해 페이지 테이블을 갱신하며프로세스가 유지하고 있는 내부 테이블을 수정 한다.
+6. 트랩에 의해 중단되었던 명령을 다시 수행하며 프로세스는 그 페이지가 항상 메모리에 있었던것처럼 간주하여 해당 페이지를 접근 할 수 있다.  
 
- 
-페이저는 어느 페이지가 디스크에만 있고 어느 페이지가 메모리에 올라와 있는지 구별할 수 있어야 한다. 이때 유효/무효(valid-invalid)비트기법을 사용하여 비트가 유효하면 메모리에 있는 것을 의미하고 유효하지 않으면 메모리에 없거나(디스크에있거나) 해당 페이지가 유효하지 않다는 것이다.
+디스크는 메모리에 비해 수십만배 ~ 백만배 느리기 때문에 page fault가 많이 발생이 되면 느려지게 됩니다.  
 
-프로세스가 메모리에 없는 페이지를 접근하려 할 때 페이지 부재 트랩(page-fault-trap)을발생 시킨다. 페이징 하드웨어는 페이지 테이블을 이용한 주소 변환 과정에 무효 비트를 발견하고 운영체제에트랩을 건다.
+자신의 주소 공간에는 존재하지만 시스템의 RAM에는 현재 없는 데이터나 코드에 접근 시도하였을 경우 발생하는 현상을 말하며 메모리 유효접근시간은 (1 - p) * 메모리 접근시간 + p(OS & HW page fault overhead, swap page, OS & HW restart overhead)이 됩니다. 
 
-1.     프로세스에 대한 내부 테이블(internal table)을검사해서 그 메모리 참조가 유효/무효인지를 알아 낸다.
+#### MMU
+메모리 관리 장치(Memory Management Unit, 줄여서 MMU)는 CPU가 메모리에 접근하는 것을 관리하는 컴퓨터 하드웨어 부품입니다. 가상 메모리 주소를 실제 메모리 주소로 변환하며, 메모리 보호, 캐시 관리, 버스 중재(버스는 컴퓨터시스템의 구성 요소들(CPU, 기억장치, I/O 장치들)을 상호 연결해주는 통로)등의 역할을 담당합니다. CPU가 MMU에게 주소할당요청을 통해 메모리가 할당되게 됩니다.  
 
-2.     무효한 페이지에 대한 참조라면 프로세스는 중단 된다. 유효한참조인 경우 메모리에 없으면 디스크로 부터 가져와야 한다.
-
-3.     빈 공간, 자유 프레임(free frame)을 찾는다.
-
-4.     디스크에 새로이 할당된 프레임으로 해당 페이지를 읽어 들이도록 요청
-
-5.     디스크 읽기가 끝나면 이 페이지가 메모리에 있다는 것을 알리기 위해 페이지 테이블을 갱신하며프로세스가 유지하고 있는 내부 테이블을 수정 한다.
-
-6.     트랩에 의해 중단되었던 명령을 다시 수행하며 프로세스는 그 페이지가 항상 메모리에 있었던것처럼 간주하여 해당 페이지를 접근 할 수 있다. 
-
- - valid, invalid bit 사용 : 사용되지 않거나 페이지가 물리적페이지에 없는 경우 invalid이며 그렇지 않다면 valid로 설정해 놓습니다. 
-
-### page fault
-자신의 주소 공간에는 존재하지만 시스템의 RAM에는 현재 없는 데이터나 코드에 접근 시도하였을 경우 발생하는 현상을 말합니다.   이때의 과정은 다음과 같습니다.
-```
-1. 잘못된 요청인가 확인
-2. 빈페이지를 가져오거나 replace를 합니다. 
-3. 해당 페이지를 disk에서  memory로 읽어 온다.
-4. 이 프로세스가 CPU를 잡고 다시 인스트럭션을 실행합니다. 
-```
-디스크는 메모리에 비해 수십만배 ~ 백만배 느리기 때문에 page fault가 많이 발생이 되면 느려지게 됩니다. 대부분의 경우는 메모리로부터 직접 주소변환이 가능하지만 꽉차 있거나 그러면 page fault가 발생하게 됩니다.
-p : page fault rate 평소에는 0.1에 가깝습니다. 거의 일어나지 않습니다.
-평균적으로 CPU가 요구할 때 메모리를 통해 읽혀지는 시간인 유효접근시간은 (1 - p) * 메모리 접근시간 + p(OS & HW page fault overhead, swap page, OS & HW restart overhead) 이 됩니다. 
-
-### MMU
-메모리 관리 장치(Memory Management Unit, 줄여서 MMU)는 CPU가 메모리에 접근하는 것을 관리하는 컴퓨터 하드웨어 부품입니다. 가상 메모리 주소를 실제 메모리 주소로 변환하며, 메모리 보호, 캐시 관리, 버스 중재(버스는 컴퓨터시스템의 구성 요소들(CPU, 기억장치, I/O 장치들)을 상호 연결해주는 통로)등의 역할을 담당합니다. CPU가 MMU에게 주소할당요청을 통해 메모리가 할당되게 됩니다. 
-
-### 메모리 할당(allocate) 및 replace 과정
- 1. 잘못된 참조요청인가 확인
- 2. 빈 empty frame에 할당하고 아니라면 replace를 합니다. 
- 3. 해당 페이지를 disk에서 memory로 읽어와서 작업재게  
-
-할당이 안되면 replace를 하게 되는데 메모리 변환 과정(replace)시 **page-fault**를 최대한 줄이는 것으로 바꿔야 합니다. 
-
-아래의 알고리즘들을 Buffer Replacement algorithm이라고 합니다. 
+그렇다면 어떤 것과 replace를 할 것인가?  아래의 알고리즘들을 Buffer Replacement algorithm이라고 합니다. 
 #### offline-algorithm, optimal 
 가장 먼 미래에 참조되는 페이지를 쫓아냅니다. 원래 있는 것 중에서 가장 먼 미래에 참조되는 페이지를 바꿉니다.사용할 수 없지만 다른 알고리즘 성능 비교에 대한 upper bound를 제공합니다. 이것보다 더 나은 방법이라는 것은 있을 수 없습니다. 
 #### FIFO
@@ -2479,7 +2367,7 @@ p : page fault rate 평소에는 0.1에 가깝습니다. 거의 일어나지 않
 
 #### LFU,Least Frequently Used
 참조횟수가 제일 적은 것을 바꾼다.가장 적은 참조를 바꾼다. 참조횟수가 같다면 오래된 참조를 바꾸는 것이 좋다.
- - HEAP을 통해 O(logn) 구현 업데이트에 logn, 바꿀 때는 O(1) 
+ - HEAP을 통해 O(logn) 구현 
 
 ### clock 알고리즘
 LRU의 근사 알고리즘으로 불린다. 최근에 사용되지 않은 프로세스를 쫓아 냅니다.
@@ -2550,6 +2438,7 @@ Generally it is implemented as a circular queue
 
 #### Thrashing 
 ![쓰레싱](https://t1.daumcdn.net/cfile/tistory/24388A4057188EAD38)
+
 프로세스가 너무 적은 page를 할당받은 경우 발생하며 page fault rate가 높아지게 됩니다.  대부분의 프로세스들이 스와핑으로 인한 많은 시간을 소비하게 되여 CPU 이용률이 낮아집니다. OS에서는 CPU이용률이 더 떨어져 다중프로그래밍 정도를 높이고 page fault가 더 자주 발생하는 악순환에 빠져 심각한 성능저하의 원인이 됩니다. 
 
 메모리에 너무 많은 프로세스가 동시에 올라가게 되면 동시에 올라가는 메모리 갯수를 조절해줘야 합니다. 이를 위한 알고리즘은 다음과 같습니다.  
@@ -2589,7 +2478,7 @@ Generally it is implemented as a circular queue
 
 ### 파일을 디스크에 저장하는 방법
  - 연속할당 : 파일들은 start와 length를 가지고 있는데 순차적으로 할당, 파일이 커질 때 반응하기가 어렵, 삭제했을 경우 빈공간이 발생, 그 공간에 들어가지 않는 현상 발생 
- - Linked Allocation : 빈위에 아무렇게나 들어가기. 포인터로 연결하지만 포인터를 위한 공간이 필요. 공간 효율성 저하
+ - Linked Allocation : 빈위치에 아무렇게나 들어가기. 포인터로 연결하지만 포인터를 위한 공간이 필요. 공간 효율성 저하
  - Indexed allocation : 파일의 크기에 따라 순차적으로 index가 주어짐. 인덱스 블록을 만듬. 작은 파일의 경우 공간을 낭비  
  
 ### Memory - Mapped I/O
@@ -2623,13 +2512,7 @@ NoSQL은 데이터의 일관성을 약간 포기한 대신 여러 대의 컴퓨�
 <p align="center">
   <img src="https://raw.githubusercontent.com/wnghdcjfe/happyKundol/master/prepare/img/2.png" width="700">
 </p>
-
-서버안에 MongoDB자체가 전체 메모리의 메모리 버퍼를 전체의 50%를 씁니다. 때문에 한 서버안에 프라이머리 / 세컨더리 두개 절대 놓지 않습니다.  
-
-메모리가 부족할 경우 `eviction`이 잘되지 않고 메모리버퍼를 아예 지우는 작업을 하고 심할 경우 데몬이 죽게 됩니다.  
- - eviction : 메모리버퍼에서 필요없는 데이타를 삭제하는 작업
- - 체크포인트 : 메모리 버퍼와 디스크사이의 데이터 불일치를 해소하기 위해 메모리에서 디스크로 data 동기화를 하는 작업
-
+ 
 여기서 중요한 부분은 스토리지엔진입니다. 이 엔진은 디스크에서 데이터를 어떻게 가져오고 어떻게 최적으로 저장할 것인지를 결정합니다. 3.2이상은 wiredTiger가 default이며 이외에도 MMAPv1, RocksDB가 있습니다.
 
 서버안에 MongoDB자체의 메모리버퍼가 전체 메모리의 50%를 쓰게 됩니다. 때문에 한 서버안에 프라이머리 / 세컨더리 두개 절대 놓지 않는 것이 중요합니다. 왜냐하면 서버의 메모리를 100% 가까이 쓰게 되면 정적파일을 클라이언트에게 제대로 못준다거나 요청을 제대로 처리하지 못하는 등의 오류들이 발생하게 되기 때문입니다.
@@ -2656,7 +2539,7 @@ MongoDB의 특징은 정말 많지만 크게 10가지만 뽑아 보았습니다.
 8. MongoDB의 ObjectId
 각 문서는 _id라는 고유한 키를 갖는게 특징입니다. 각 문서를 생성하면 _id라는 primary key가 생성됩니다. 이후 인덱스로 설정되는 키값은 secondary key로 저장됩니다.  
 이 키는 12byte로 아래로 구성이 됩니다. 
- 1. 4-byte의 초단위의 유닉스시간(1970년 1월 1일 00:00:00부터의 초단위)
+ 1. 4-byte의 초단위의 유닉스시간(1970년 1월 1일부터의 초단위)
  2. 5-byte의 랜덤value
  3. 3-byte의 random value로 부터 순차적인 값 
 9. 도큐먼트에서 _id 라는 필드가 자동으로 그 도큐먼트의 프라이머리 키로 선정됩니다. 나머지의 인덱스는 세컨더리 키로 선정됩니다
@@ -2781,12 +2664,13 @@ JIT 컴파일러는 두 가지의 방식을 혼합한 방식으로 생각할 수
  - vector : 디자인 및 요소별을 커스터마이징, 다양한 해상도 중요
 
 다른 라이브러리와 비교
-| 라이브러리 | 용량(min기준) | 러닝커브 | 표현방법
-|:--------|:--------| 
+
+| 라이브러리 | 용량(min기준) | 러닝커브 | 인터페이스 | 표현방법
+|:--------|:--------| --------| --------| --------| 
 | chart.js	| 153kb | 쉬움 | 보통 | bitmap
 | echarts.js | 729kb | 매우쉬움 | 보통 | bitmap
 | D3.js	| 237kb | 보통 | 매우높음 | vector Or bitmap
-| C3.js	| 237kb | 보통 | 매우높음 | vector
+| C3.js	|  | 보통 | 매우높음 | vector
 
 ## nginx 
 오버플로우 방지를 위해 nginx를 proxy서버 앞단에 두는 것이 좋다. 싱글 프로세스 스레드. 논블로킹
@@ -2885,9 +2769,13 @@ Promise는 3가지의 상태를 가집니다.
 퓨처모나드, 비동기를 처리하거나 null값이 발생할 수 있는 로직에 대해서 어떠한 값의 결과가 불확실하게 2가지형태 이상으로 나타날 수 있습니다. 이럴 때 컨테이너로 래핑하여 하나의 값으로 안전하게 연산을 할 수 있습니다. 또한 함수형프로그래밍의 특징을 지키기 위해서도 존재합니다. 함수형프로그래밍에서는 반드시 참조투명성, 입력과 출력이 동일하게 1 : 1 매칭이 되어야 하기 때문에 불완전하게 2가지형태이상으로 나타나게 되면 이 특성이 성립하지 않게 되죠 이를 위해 안전하게 보호하기 위해 래핑하는 것입니다.   
 
 ### 모나드
-1. 타입을 인자로 받아 모나드화 된 타입을 반환할 수 있어야 한다.  예를 들어 number를 받아 Monad<number> 타입을 반환해야 합니다.
-2. unit 함수가 있어야 합니다. 타입의 값을 순수하게 끄집어낼 수 있어야 합니다.
-3. bind 함수가 있어야 합니다. 감싸진 타입을 꺼낼 수 있는 방법이 있어야 합니다. 설령 모나드가 중복되어 감싸지더라도 감싸진 타입을 꺼낼 수 있어야 합니다. flatmap이라고도 불리거나 여러가지 이름으로 불리지만 하는 역할이 같다면 그건 bind함수라고 볼 수 있습니다.  참고로 Promise의 then으로 받는 인자는 resolved된 인자이며 이는 flatten되었다라고 할 수 있기 때문에 then은 bind함수라고 볼 수 있습니다. 
+모나드는 Context를 값 레벨로 끌어들인 다음, 이 Context를 가진 값들을 기존의 값들과 별 차이 없이 다루기 위한 방법이자 안전한 함수 합성에 주로 쓰입니다. 
+
+다음 세가지 조건을 만족해야 한다.
+ 
+1. 타입생성자 - 타입을 인자로 받아 모나드화 된 타입을 반환할 수 있어야 한다.  예를 들어 number를 받아 Monad<number> 타입을 반환해야 합니다.
+2. unit 함수 - 기초타입의 값을 감싸 모나드에 넣어야 할 수 있어야 함.  
+3. bind 함수 - 모나드로 동작을 실행할 수 있는 함수이자 감싸진 타입을 꺼낼 수 있는 방법이 있어야 합니다. 설령 모나드가 중복되어 감싸지더라도 감싸진 타입을 꺼낼 수 있어야 합니다. flatmap이라고도 불리거나 여러가지 이름으로 불리지만 하는 역할이 같다면 그건 bind함수라고 볼 수 있습니다.  참고로 Promise의 then으로 받는 인자는 resolved된 인자이며 이는 flatten되었다라고 할 수 있기 때문에 then은 bind함수라고 볼 수 있습니다. 
 ```js
 const identity_monad = () =>{
     return unit = (value) => {
@@ -2906,10 +2794,7 @@ console.log(a)
  - NP 문제(Non-deterministic Polynomial problem) : 비 결정론적 튜링머신으로 다항시간 내에 풀 수 있는 문제, 운에 기대면 현실적인 비용으로 풀 수 있다는 것이 무슨 뜻인가? 미로찾기 문제를 생각하자. 입구에서 출구로 이어지는 길을 찾아야 한다. 갈림길마다 선택을 한다. 잘못 선택하면 시간을 낭비한다. 답이 아닌 곳으로 빠져 한참을 헤매게 된다. 하지만 선택의 갈림길마다 운 좋게 늘 옳은 답을 선택했다면? 시간 낭비 없이 출구를 찾게 된다. 그런 운 좋은 선택을 현실적인 횟수만큼 해서 탈출로를 찾을 수 잇다면 ‘운에 기대면 현실적인 비용으로 해결할 수 있는’ 문제인 거다.
  - 튜링머신 : 정해진 명령표에 따라 원하는 일을 수행하는 가상의 기계 
  - 비결정론적 튜링 머신 : 튜링 머신에서 특정 상태에서 움직일 수 있는 상태의 개수가 하나로 정해져 있지 않은 경우를 말한다.
-
-## DP 다이나믹 프로그래밍  
-DP의 특성으로 optimal substructure와 overlapping subproblem이 있습니다. optimal substructure는 부분 문제들의 최적해들을 전체 문제의 최적해가 포함하고 있는 것을 말합니다. overlapping subproblem은 divide-and-conquer와 차이나는 부분으로 
-overlapping subproblem은 부분 문제들 간에 상관 관계가 있는 경우를 말합니다. divide-and-conquer는 부분 문제들 간에 상관 관계가 없는 경우에 활용해야 하는 반면 DP는 부분 문제들의 결과를 저장, 캐싱해놨다가 재사용하기 때문에 overlapping subproblem을 해결할 때 장점을 갖게 됩니다.  
+ 
 ## CSMA/CD 
 LAN의 통신 프로토콜의 종류중 하나이며, 이더넷 환경에서 충돌이 일어날경우 좀 기다렸다가 다시 데이타를 보내는 방식 15번충돌하면 통신을 끊습니다.  
 
@@ -2974,7 +2859,7 @@ L1캐시 : CPU칩안에 저장되어 데이터 사용/참조에 가장 먼저 �
 
 ## VM
 컴퓨터 안에 또 다른 컴퓨터를 동작 시키는 것이다. 컴퓨터 시스템을 에뮬레이션 한다고 말한다. 
-![이렇게너를](https://postfiles.pstatic.net/MjAxOTAzMTdfMjQw/MDAxNTUyODI2MjQzNjI1.u6ivNeSLEU5nvy3_OvD0li6n-A85iuzB1p9VepCLoG8g.Uw7woVB7TK29JWbLriAaP3UApKW7EAxUI6M7zkYtDFMg.PNG.jhc9639/1.PNG?type=w966) 
+![가상머신](https://postfiles.pstatic.net/MjAxOTAzMTdfMjQw/MDAxNTUyODI2MjQzNjI1.u6ivNeSLEU5nvy3_OvD0li6n-A85iuzB1p9VepCLoG8g.Uw7woVB7TK29JWbLriAaP3UApKW7EAxUI6M7zkYtDFMg.PNG.jhc9639/1.PNG?type=w966) 
 
 ## 멀티 코어 프로그래밍
 공유 자원이란 시스템 안에서 각 프로세스, 스레드끼리 함께 접근을 할 수 있는, 모니터, 프린터, 메모리, 파일, 네트워크등의 자원을 말한다. 공유자원은 프로세스에서 접근하여 수정할 수 있기 때문에 A라는 프로세스에서 B라는 파일을 수정하고 있을 때, C라는 프로세스가 B파일을 읽는다면 C프로세스가 읽는 B파일 데이터에 오류가 생길 수 있으며, A프로세스와 C프로세스가 B파일을 동시에 수정하려 할 때는 충돌이 일어날 수 있다.
@@ -3063,7 +2948,8 @@ IoC 컨테이너이자 MVC 프레임워크
  - 컨테이너 : 인스턴스의 생명주기를 관리, 생성된 인스턴스에게 추가적인 기능을 제공, Servlet을 실행해주는 WAS는 Servlet 컨테이너를 가지고 있다고 말합니다 
  - IOC : 컨테이너가 코드 대신 오브젝트의 제어권을 갖고 있어 IoC(제어의 역전)이라 합니다.예를 들어, 서블릿 클래스는 개발자가 만들지만, 그 서블릿의 메소드를 알맞게 호출하는 것은 WAS입니다.이렇게 개발자가 만든 어떤 클래스나 메소드를 다른 프로그램이 대신 실행해주는 것을 제어의 역전이라고 합니다.
  - DI : 의존성 주입이란 뜻을 가지고 있으며, 클래스 사이의 의존 관계를 빈(Bean) 설정 정보를 바탕으로 컨테이너가 자동으로 연결해주는 것을 말합니다.
- ```java
+
+```java
 @Component
 class 엔진 {
 
@@ -3074,7 +2960,7 @@ class 자동차 {
      @Autowired
      엔진 v5;
 }
- ``` 
+``` 
 
 ### 스프링 디스패처 서블릿
 Servlet Container에서 HTTP프로토콜을 통해 들어오는 모든 요청을 프레젠테이션 계층의 제일앞에 둬서 중앙집중식으로 처리해주는 프론트 컨트롤러(Front Controller) 
@@ -3120,7 +3006,8 @@ class Queue{
 Queue가 꽉찼을때의 삽입 시도 / Queue가 비어있을때의 추출 시도를 막는 BlockingQueue를 의미합니다. PriorityQueue와 같은 정렬방식을 지니는 용량제한이 없는 Queue. 하지만 Element 추출에 대해 Block기능을 제공하는 PriorityBlockingQueue 등이 있습니다.   
   
 ## 그리디
-![내가뭐!그리디냐](https://blogfiles.pstatic.net/20160729_112/kks227_1469801131614AVkyB_PNG/300px-Greedy_Glouton.svg.png?type=w3)
+![그리디](https://blogfiles.pstatic.net/20160729_112/kks227_1469801131614AVkyB_PNG/300px-Greedy_Glouton.svg.png?type=w3)
+
 그리디 알고리즘은 local optimum을 찾으면서 global optimum에 도달하는 방식이기 때문에 global optimum에 도달하지 못하고 local optimum에 빠져 버릴 수가 있습니다. 
 
 ## 오토마타 
@@ -3133,40 +3020,31 @@ Queue가 꽉찼을때의 삽입 시도 / Queue가 비어있을때의 추출 시�
 Memory Hierarchy는 CPU부터 보조기억장치에 이르는 각각의 메모리 장치 간의 관계를 계층적으로 설명한 것입니다. CPU에 가까울 수록 비용이 비싸고, 저장 장치가 작지만 빠르다는 특징이 있습니다. 아까 설명했던 Cache의 개념이 전체적으로 통용됩니다. 예를 들어 RAM 또한 CPU와 보조기억장치의 Cache라고 볼 수 있습니다.
 
 ## 파이프라이닝
-명령어를 처리할 때 명령어를 하나씩 순차적으로 처리하는 것보다, 명령어를 여러 단계로 나누어서 병렬적으로 처리하면 더 빠르게 데이터를 처리할 수 있기 때문에 파이프라이닝 기법을 사용합니다. 명령어는 Fetch, Decode, Execute, Memory, Write Back 등으로 나눌 수 있습니다. 그래서 이론적으로 4~5단계 파이프라이닝 기법을 이용하는 경우, 프로그램 실행 속도가 4~5배 정도 빨라집니다.
-시에 처리 가능한 일들을 동시에 처리함으로써 처리량 을 올리는 것이 파이프라이닝의 핵심
+명령어를 처리할 때 명령어를 하나씩 순차적으로 처리하는 것보다, 명령어를 여러 단계로 나누어서 병렬적으로 처리하면 더 빠르게 데이터를 처리할 수 있기 때문에 파이프라이닝 기법을 사용합니다. 명령어는 Fetch, Decode, Execute, Memory, Write Back 등으로 나눌 수 있습니다.  
 
 파이프라이닝 해저드는 각 상황에서의 한계점 때문에, 파이프라이닝 속도를 저해하는 요소입니다. Hazard의 종류는 세 가지입니다. 
  - 구조적 해저드. 구성요소, 장롱에 개어진 세탁물을 넣어줄 친구가 없다던지 등
  - 데이터 해저드, 명령어들이 종속성을 가질 때 
  - 제어 해저드, 다른 명령어들이 한 명령어 결과값에 기반을 둔 결정을 내려야 할 때  
  
-해결방법으로 지연, 예측이 있습니다. 
-
-## CPU 스케줄링
-다중 프로그래밍을 하기 위해서는 여러 프로세스 혹은 쓰레드가 동시에 실행되어야 합니다. 이 때 프로세스나 쓰레드의 실행 순서를 결정해주어야 하는데요. CPU 스케줄링은 그러한 과정을 의미합니다. 프로세스가 CPU를 할당 받았다는 것은 프로세스 생명 주기에서 Running 상태에 존재한다는 것입니다 
-
-## 인터럽트
-현재하고 있는 일과 비교해서 우선순위처리를 판단하게 된다.
-이 때 인터럽트의 할 일이 인터럽트 서비스 루틴(ISR : Interrupt Service Routine) 이다.  
-이 인터럽트의 활용은 마이크로컨트롤러의 수행능력을 극대화하는데 꼭 필요한 기능 이다.  이와는 반대로 폴링이 있다. 
-1. 폴링 : 사용자가 명령어를 사용, 입력핀의 값을 계속 읽어서 변화를 알아내는 방식(계속 체크)
-2. 인터럽트 : MCU 자체가 하드웨어적으로 그 변화를 체크하여 변화시에만 일정한 동작을 하는 방식
-
+해결방법으로 지연, 예측이 있습니다.  
+ 
 ## 컴파일러
 프로그래머가 이해하는 언어를 프로세서가 쓰는 기계어로 멋지게 번역해준다. 컴파일러의 실행단계는 다음과 같다. 
-1) 구문분석 : 소스코드를 읽어 연산자, 괄호 등 문법요소 단위로 자른 후, 이 문법 요소들을 해석하여 "추상구문 트리"를 생성한다. 이 때 문법에 맞지 맞지 않는다면  사용자에게 알려준다. 
-2) 최적화 : "추상 구문 트리"를 분석하여 최적화를 수행한다. 상수표현식을 미리 계산, 루프 풀기 등의 최적화가 이루어 진다. 
-3) 코드생성 : 최적화된 구문트리로부터 목적코드를 생성한다. 목표언어가 기계어일 경우, 레지스터 할당, 연산 순서 바꾸기 등 하드웨어에 맞는 최적화가 이루어진다. 
-4) 링킹 : 목적 코드가 기계어일 경우, 여러 라이브러리 목적 코드로 묶어 하나의 실행 파일을 생성하게 된다. 
+1. 구문분석 : 소스코드를 읽어 연산자, 괄호 등 문법요소 단위로 자른 후, 이 문법 요소들을 해석하여 "추상구문 트리"를 생성한다. 이 때 문법에 맞지 맞지 않는다면  사용자에게 알려준다. 
+2. 최적화 : "추상 구문 트리"를 분석하여 최적화를 수행한다. 상수표현식을 미리 계산, 루프 풀기 등의 최적화가 이루어 진다. 
+3. 코드생성 : 최적화된 구문트리로부터 목적코드를 생성한다. 목표언어가 기계어일 경우, 레지스터 할당, 연산 순서 바꾸기 등 하드웨어에 맞는 최적화가 이루어진다. 
+4. 링킹 : 목적 코드가 기계어일 경우, 여러 라이브러리 목적 코드로 묶어 하나의 실행 파일을 생성하게 된다. 
 이 과정은 "링커"에 의해 실행된다. 
 
-*추상구문트리 : 프로그래밍 언어로 작성된 소스코드의 추상구문 구조의 트리, 이 트리의 각 노드는 소스코드에서 발생되는 구조체를 나타낸다. 
+> 추상구문트리 : 프로그래밍 언어로 작성된 소스코드의 추상구문 구조의 트리, 이 트리의 각 노드는 소스코드에서 발생되는 구조체를 나타낸다. 
 
 ## 레지스터
 컴퓨터가 계산을 하기 위해 필수적으로 필요한, 작은 용량이지만 매우 빠른 임시 기억 장치를 가리킨다.
 메모리로 연산의 결과를 보내고 영구적으로 저장할 데이터를 하드디스크에 저장해야 하는 등의 명령을 처리하기 위해서는 이들의 주소와 명령의 종류를 저장할 수 있는 기억공간이 필요하며, 이 공간은 "메모리"보다 빨라야 한다. 이 역할을 하는 것이 바로 레지스터이다.  이것은 CPU와 직접연결되어있으므로 연산속도가 메모리보다 실제 수십 배에서 수백 배까지 빠르다. 그리고 CPU는 자체적으로 데이터를 저장할 방법이 없기 때문에 메모리로 직접 데이터를 전송할 수 없다. 때문에 연산을 위해서 반드시 레지스터를 거쳐야 하며, 이를 위해 레지스터는 메모리의 특정주소를 가리키거나 값을 읽어올 수 있다.
+
 ![레지스터](https://postfiles.pstatic.net/MjAxNzEwMjNfMTA0/MDAxNTA4NzA5MjA5ODIz.RW5Uwe9_y5gyMb4GvcZp4sAkl021oJnfJGALirQYHfog.bhasSm3Y3dGZb0LiyHC9DIsr2nPMKY3P4iSFEoqhxaAg.PNG.jhc9639/CPU%EB%82%B4%EB%B6%80%EA%B5%AC%EC%A1%B0.png?type=w966) 
+
 ## 시스크(CISC)와 리스크(RISC)
 프로세서는 시스크(Complex Instruction Set Computer)방식과 RISC(Reduced Instruction Set Computer)방식으로 구분할 수 있다. 
 ### 시스크
@@ -3194,7 +3072,7 @@ x86같은 시스크 프로세서에서 사용된 복잡한 멀티사이클 명�
 
 ## 경험
 ### 자기소개
-안녕하세요. 코드하나하나 고민하며 짜는 개발자 주홍철입니다. 저는 대학교 커뮤니티를 개발하고 이 후 공군에 들어가서 2년동안 AMOS라는 프로젝트의 팀장으로 일했습니다. 요새는 오픈소스 컨트리뷰터가 되고 싶어서 Mocha.js 분석 및 PR을 하면서 지내고 있습니다. 
+안녕하세요. 코드하나하나 고민하고 프로젝트에 아이디어를 많이 내며 꾸준히 노력하는 것을 즐기는 개발자 주홍철입니다. 저는 대학재학시절 독학으로 대학교 커뮤니티를 개발하고 이 후 공군에 들어가서 2년동안 MEVN스텍의 AMOS라는 프로젝트를 팀장으로써 운영했습니다.  잘 다루는 언어는 Javascript이며  C++을 사용해 알고리즘 푸는 것을 즐기고 있습니다. 지금은 오픈소스 컨트리뷰터가 되고 싶어서 Mocha.js에 PR을 하면서 지내고 있습니다. 잘부탁드립니다.
 
 ### 애러 해결 사례
 1. CPU사용량 및 메모리 상태확인 (결과 : CPU이상무 그러나 메모리 97%사용 - MongoDB로 50%를 사용한다하더라도 47%는 너무 많다!)
