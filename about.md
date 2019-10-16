@@ -9,7 +9,7 @@ tags: [about]
 
 ## Kundol
 - Seoul. South Korea.
-- Software Developer  
+- Front-End Developer  
 - Email : jhc9639@naver.com
 - [Github](https://github.com/wnghdcjfe)
 - [BackJoon-알고리즘사이트](https://www.acmicpc.net/user/zagabi/) 
@@ -28,19 +28,18 @@ TypeScript / JQuery / Angular.js v1 & v2
 ### Back-End
  > Strong
 
-Node.js / MongoDB / GraphQL
+Node.js / MongoDB
 
  > Knowledgeable
  
 PHP / JSP / Spring / MySQL / Tibero / Firebase
 
-### ETC
-C++(PS) / Python(ML) / FP / Kubernetes /
+### ETC 
+함수형프로그래밍 / C++(PS) / Python(ML) / Kubernetes /
 IOT(Arduino / Raspberry PI) 
 
--------
-
-## 대표PROJECT
+------- 
+## 대표 PROJECT  
 ### 2017 ~ 2019 기상정보지원체계 
 대한민국 공군 전 비행단 및 민간공항에 설치되어 전투기 및 항공기 이착륙 전 기상상황을 보기 위한 체계 
  - UI & 전반적인 아키텍처설계(모듈화 / SPA / REST API)
@@ -74,11 +73,7 @@ IOT(Arduino / Raspberry PI)
  - 2017 : 공군 기상단 보안 IT 공모전 최우수 ★ 
  - 2015 : 스타트업코리아 강원해커톤대회 1위
  - 2015 : 국립공주대학교 밀알두레대회 1위 
- - 2015 : 대한민국 프레젠테이션대회 대학부 2위 
-
-## Article
- - [기상정보지원체계시연회 / 국방일보](https://bit.lybit.ly/2JPk9Jj) 
- - [육군 포병기상제원 / 국방일보](https://bit.lybit.ly/2uxHCnI) 
+ - 2015 : 대한민국 프레젠테이션대회 대학부 2위  
 
 ## Lecture 
  - 19.02.16 [피벗알고리즘강의](https://bit.lywww.slideshare.net/hongchulju/ss-132025864) / GDG대전
