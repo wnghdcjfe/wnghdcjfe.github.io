@@ -34,13 +34,12 @@ Node.js / MongoDB
  
 PHP / JSP / Spring / MySQL / Tibero / Firebase
 
-### ETC
+### ETC 
 함수형프로그래밍 / C++(PS) / Python(ML) / Kubernetes /
 IOT(Arduino / Raspberry PI) 
 
--------
-
-## 대표 PROJECT 
+------- 
+## 대표 PROJECT  
 ### 2017 ~ 2019 기상정보지원체계 
 대한민국 공군 전 비행단 및 민간공항에 설치되어 전투기 및 항공기 이착륙 전 기상상황을 보기 위한 체계 
  - UI & 전반적인 아키텍처설계(모듈화 / SPA / REST API)
