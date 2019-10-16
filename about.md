@@ -35,12 +35,12 @@ Node.js / MongoDB / GraphQL
 PHP / JSP / Spring / MySQL / Tibero / Firebase
 
 ### ETC
-React-Native / C++(PS) / Python(ML) / FP / Kubernetes /
+C++(PS) / Python(ML) / FP / Kubernetes /
 IOT(Arduino / Raspberry PI) 
 
 -------
 
-## Project
+## 대표PROJECT
 ### 2017 ~ 2019 기상정보지원체계 
 대한민국 공군 전 비행단 및 민간공항에 설치되어 전투기 및 항공기 이착륙 전 기상상황을 보기 위한 체계 
  - UI & 전반적인 아키텍처설계(모듈화 / SPA / REST API)
@@ -55,20 +55,7 @@ IOT(Arduino / Raspberry PI)
  - 실시간 센서연동 및 표출
  - [시연회기사](https://bit.ly/2JPk9Jj)
  - 기술 : Vue.js / Vuex / D3.js / Node.js / MongoDB / Mongoose / Nginx / Express / Socket.io / request / Axios
-
-### 2018 포병기상제원 프로그램 기능개선 / 최적화
-대한민국 육군 포병작전시 활용되는 지도기반 기상데이터 표출 프로그램
- - 함수형프로그래밍화 / 불필요한 로직 개선(30%성능향상)
- - 자료증가(15배)에 따른 디렉토리구조 변경 및 관련 로직개선
- - 기술 : VanillaJS / PHP 
-
-### 2017 원격통합표출 프로그램 
-강수예측 및 분석을 위해 137개 종류의 레이다 및 위성영상 시간동기화표출 
- - UI / ProgressBar 및 이미지 바인딩
- - 이미지 리스트 추출 REST API 구축 
- - 피벗알고리즘 적용
- - 기술 : Vue.js / JSP & Node.js(두가지 서비스용 제작)
-
+ 
 ### 2014 ~ 2016 공주대학교 커뮤니티, KNUE 
 공주대학교 강의평가공유시스템 / 시간표제작, 게시판 등 편의를 위한 페이지 구축  
  - UI / 전반적인 아키텍처 설계(모듈화)
