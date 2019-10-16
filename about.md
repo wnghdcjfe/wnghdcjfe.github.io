@@ -10,14 +10,15 @@ tags: [about]
 ## Kundol
 시를 쓰고 자연을 좋아하며 식물을 키우고 있습니다. 로즈마리는 키우기 어려운 것 같습니다. 섬세하고 예민한 면이 있어서 오타를 잘 잡아내며 일의 속도를 높이기 위해 대략적인 개요를 잡고 실행해 나가는 것을 잘합니다. 싫어하는 사람과는 어울리려 하지 않지만 술한잔을 통해 친해질 수 있습니다. 조금 더 바보처럼 조금 더 단순하게 살아가는 것을 즐기며 규칙적인 생활을 즐깁니다. 
 
-지금은 창업을 준비하고 있으며 출판또한 준비하고 있습니다. 또한 모여서 알고리즘 푸는 모임인 모알푸를 운영하고 있습니다. 관심이 있으시다면 메일을 보내주시기 바랍니다. 
+지금은 창업, 출판, mocha.js, fx.js, 크로미움의 컨트리뷰터가 되려고 하고 있습니다. 또한 꾸준히 알고리즘 문제를 풀고 있으며 모여서 알고리즘 푸는 모임인 모알푸를 운영하고 있습니다.  
 
 - Seoul. South Korea.
-- Software Developer  
+- Front-End Developer  
 - Email : jhc9639@naver.com
 - [Github](https://github.com/wnghdcjfe)
 - [BackJoon-알고리즘사이트](https://www.acmicpc.net/user/zagabi/) 
 - [유투브-알고리즘강의](https://www.youtube.com/channel/UCoN1XLeAX2OazuZdQ9b8U9Q)
+- [페이스북그룹-모알푸](https://www.facebook.com/groups/moalfu/)
 
 ## Skills
 ### Front-End
