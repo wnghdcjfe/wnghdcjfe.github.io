@@ -1,4 +1,0 @@
----
-name: codeforces
-title: 'codeforces'
----

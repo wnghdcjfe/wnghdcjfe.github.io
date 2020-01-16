@@ -1,4 +1,0 @@
----
-name: ccw
-title: 'CCW'
----
