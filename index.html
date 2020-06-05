@@ -1,218 +1,130 @@
-<!--@layout(/layout/basic/layout.html)-->
-<div module="Board_ListPackage_8">
-    <!--@css(/css/module/board/listPackage_gallary.css)-->
-    <div module="board_title_8">
-        <div class="title">
-            <h2>{$board_title} {$board_adult_icon}</h2>
-            <p>{$board_info}</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./pot_assets/jquery-1.8.3.min.js"></script>
+    <script src="./pot_assets/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="./pot_assets/jquery.fullPage.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./pot_assets/jquery.fullPage.css" />
+    <link rel="stylesheet" href="./pot_assets/main.css"> 
+    <script src="./pot_assets/main.js"></script>
+</head>
+
+<body>
+    <div id="fullpage">
+        <div class="section blueBack center" id="section0">
+            <div>
+                <p class="info fade-in">개발자</p>
+                <h1 class="letter">주홍철</h1>
+            </div>
         </div>
-        <div class="path">
-            <span>현재 위치</span>
-            <ol>
-                <li><a href="/">홈</a></li>
-                <li><a href="/board/index.html">게시판</a></li>
-                <li title="현재 위치"><strong>{$board_name}</strong></li>
-            </ol>
+        <div class="section redBack" id="section1">
+            <div class="slide" id="slide1"> 
+                    <div class="blank"></div>
+                    <p class="info title">프로젝트#1 기상정보지원체계</p>
+                    <div class="content">
+                        <img src="./imgs/pot_1.JPG" alt="">
+                        <p>
+                            비행작전 전후에 사령관 등이 예보관들이 입력한 정보, 기상데이터 등을 볼 수 있는 비행작전지원체계, 총 42개의 화면으로 구성되어있으며 기상데이터 입력 및 업로드,
+                            센서장비값 및 상태 확인, HA, 차트, 풍배도 데이터시각화를 한 것이 특징입니다.
+                        </p>
+                        <p>
+                            - 메모이제이션알고리즘적용(80%성능향상)
+                        </p>
+    
+                        <p>
+                            - HA에 따른 A & B 파일 / DB 부분적 동기화
+                        </p>
+                        <p>
+                            - 관리자페이지 구축(업로드 / 입력 / 실시간자료, 로그조회)
+                        </p> 
+                </div> 
+            </div>
+            <div class="slide" id="slide2"> 
+                <div class="blank"></div>
+                <p class="info title">프로젝트#1 기상정보지원체계</p>
+                <div class="content">
+                    <img src="./imgs/pot_2.jpg" alt="">
+                    <p>기술</p>
+                    <p>
+                        Vue.js / Vue-cli / Vuex / D3.js / Node.js / MongoDB /
+                        Mongoose / Nginx / 고가용성(RedHat HA) / Express /
+                        Socket.io / request / Axios / lodash.js
+                    </p>
+                    <p>
+                        김해, 청주공항, 그리고 대한민국
+                        전비행단에 설치되는 AMOS 프로젝트
+                        의 PL 로 1 년동안 개발,
+                        1 년동안 사용자 피드백을 받으며
+                        업데이트 및 운영했습니다.
+                    </p>
+                </div> 
+            </div>
         </div>
+        
+        <div class="section redBack" id="section2"> 
+            <div class="blank"></div>
+            <p class="info title">프로젝트#2 대학교 커뮤니티</p>
+            <div class="content">
+                <img src="./imgs/pot_5.gif" alt="">
+                <p>
+                    교내 모든 강의를 평가하고 공유하며 시간표제작 등을 할 수 있는 커뮤니티입니다. 
+                </p>
+                <p>
+                    - 강의 검색 / 평가 / 랭킹 모듈 개발 
+                </p>
 
-        <p class="imgArea">{$board_top_image}</p>
-    </div>
-
-    <div class="boardSort">
-        <span module="board_category_8">{$form.board_category}</span>
-    </div>
-
-    <ul module="board_listheader_8">
-        <li><a class="{$list_type_display|display}" href="/board/gallery/list.html{$param_list}"><img
-                    src="//img.echosting.cafe24.com/skin/base_ko_KR/board/btn_type_image.gif" alt="이미지형으로 보기"></a></li>
-        <li><a class="{$list_type_display|display}" href="/board/gallery/list2.html{$param_list}"><img
-                    src="//img.echosting.cafe24.com/skin/base_ko_KR/board/btn_type_list.gif" alt="리스트형으로 보기"></a></li>
-    </ul>
-
-    <div class="notice">
-        <div module="board_notice_8">
-            <!--
-                    $login_page_url = /member/login.html
-                    $deny_access_url = /index.html
-                -->
-            <ul>
-                <li>
-                    <a href="{$link_board_detail}" class="imgLink"><img src="{$img_src}"
-                            onerror="this.src='//img.echosting.cafe24.com/thumb/198x198.gif'" alt="" /></a>
-                    <div class="description">
-                        <p class="subject">{$checkbox} {$notice_icon} {$category_name} <a href="{$link_board_detail}">
-                                {$subject} {$icon_new} {$comment_count}</a></p>
-                        <strong>작성자 : {$member_icon}{$writer}</strong>
-                        <em class="{$date_display|display}">작성일 : {$write_date|date:Y-m-d}</em>
-                    </div>
-                </li>
-                <li>
-                    <a href="{$link_board_detail}" class="imgLink"><img src="{$img_src}"
-                            onerror="this.src='//img.echosting.cafe24.com/thumb/198x198.gif'" alt="" /></a>
-                    <div class="description">
-                        <p class="subject">{$checkbox} {$notice_icon} {$category_name} <a href="{$link_board_detail}">
-                                {$subject} {$icon_new} {$comment_count}</a></p>
-                        <strong>작성자 : {$member_icon}{$writer}</strong>
-                        <em class="{$date_display|display}">작성일 : {$write_date|date:Y-m-d}</em>
-                    </div>
-                </li>
-            </ul>
+                <p>
+                    - 웹스크래핑 모듈 개발
+                </p>
+                <p>
+                    - 로그인 / 회원가입 모듈 개발
+                </p> 
+                
+                <p>
+                    - 사용자별 시간표제작 모듈 개발
+                </p> 
+            </div>   
         </div>
-        <div module="board_fixed_8">
-            <!--
-                    $login_page_url = /member/login.html
-                    $deny_access_url = /index.html
-                -->
-            <ul>
-                <li>
-                    <a href="{$link_board_detail}" class="imgLink"><img src="{$img_src}"
-                            onerror="this.src='//img.echosting.cafe24.com/thumb/198x198.gif'" alt="" /></a>
-                    <div class="description">
-                        <p class="subject">{$checkbox} {$fixed_icon} {$category_name} <a href="{$link_board_detail}">
-                                {$subject} {$icon_new} {$comment_count}</a></p>
-                        <strong>작성자 : {$member_icon}{$writer}</strong>
-                        <em class="{$date_display|display}">작성일 : {$write_date|date:Y-m-d}</em>
-                    </div>
-                </li>
-                <li>
-                    <a href="{$link_board_detail}" class="imgLink"><img src="{$img_src}"
-                            onerror="this.src='//img.echosting.cafe24.com/thumb/198x198.gif'" alt="" /></a>
-                    <div class="description">
-                        <p class="subject">{$checkbox} {$fixed_icon} {$category_name} <a href="{$link_board_detail}">
-                                {$subject} {$icon_new} {$comment_count}</a></p>
-                        <strong>작성자 : {$member_icon}{$writer}</strong>
-                        <em class="{$date_display|display}">작성일 : {$write_date|date:Y-m-d}</em>
-                    </div>
-                </li>
-            </ul>
+        <div class="section yellowBack" id="section2"> 
+                <div>
+                    <div class="blank"></div>
+                    <p class="info title">다루는 기술들</p>
+                    <div class="content">
+                        <img src="./imgs/pot_3.png" alt="">
+                        <p class="bold">Strong</p>
+                        <p>
+                            JS(ES5+) / Vue.js/ Vuex / React.js / Redux / D3.js / TypeScript / GraphQL / HTML5 / CSS / Webpack / Node.js / Express.js / Request.js / Cheerio.js / Nightmare.js / Mocha.js / C++(PS) / Functional Programming / MongoDB / Nginx    
+                        
+                        </p>  
+                        <p class="bold">Knowledgeable
+                        </p>
+                        <p>
+                            JQuery / Angular.js / PHP / Python / TensorFlow / Pytorch / DL(LSTM, CNN) / matplotlib / Numpy / Pandas / BS4 / Selenium / Spring / Java / JSP / MySQL / Tibero / FirebaseDB
+                        </p>
+                    </div> 
+                </div>  
+        </div>
+        <div class="section yellowBack" id="section3"> 
+            <div class="blank"></div>
+            <p class="info title">오픈소스활동</p>
+            <div class="content centerTop">
+                <div class="left">
+                    <img src="./imgs/pot_4.svg" alt="">
+                </div> 
+                <div class="right">
+                    <p>
+                        꾸준히 Mocha.js의 이슈체크, 버그수정, 성능최적화 관련에 대한 PR을 수행했으며 mocha-example의 PR merged 6회, mocha.js로는 PR merged 1회 - 8.0.0 릴리스에 반영이라는 성과를 거두고 지금도 꾸준히 하고 있습니다. 
+                    </p>  
+                </div> 
+            </div>  
+            <h1>감사합니다.</h1>
         </div>
     </div>
+</body>
 
-            <!--
-                            $count = 12
-                            $login_page_url = /member/login.html
-                            $deny_access_url = /index.html
-                        -->
-    <div class="kundol_temp2">
-        <div module="board_list_8" class="kundol_gallery">  
-                <a href="{$link_board_detail}" class="imgLink zoom_tle">
-                    <img src="{$img_src}" onerror="this.src='//img.echosting.cafe24.com/thumb/198x198.gif'" alt="" class="zoom" />
-                    {$checkbox}
-                </a>
-                 
-                <div class="commentWrap">
-                    <p>[{$no}] {$subject} {$comment_count}</p>
-                    <p>작성자 : {$member_icon}{$writer}</p>
-                    <p class="{$date_display|display}">작성일 : {$write_date|date:Y-m-d}</p>
-                </div>
-                <!-- <a href="{$link_board_detail}" class="imgLink zoom_tle"><img src="{$img_src}" onerror="this.src='//img.echosting.cafe24.com/thumb/198x198.gif'" alt="" class="zoom" /></a>
-                        {$checkbox}
-                        <a href="{$link_board_detail}" class="imgLink">[{$no}] {$subject} {$comment_count}</a>
-                        <span>
-                            <strong>작성자 : {$member_icon}{$writer} </strong>
-                            <em class="{$date_display|display}">작성일 : {$write_date|date:Y-m-d}</em>
-                        </span>  --> 
-
-            <!--  <ul><li>
-                                <a href="{$link_board_detail}" class="imgLink zoom_tle"><img src="{$img_src}" onerror="this.src='//img.echosting.cafe24.com/thumb/198x198.gif'" alt="" class="zoom" /></a>
-                                {$checkbox}
-                                <a href="{$link_board_detail}" class="imgLink">[{$no}] {$subject} {$comment_count}</a>
-                                <span>
-                                    <strong>작성자 : {$member_icon}{$writer} </strong>
-                                    <em class="{$date_display|display}">작성일 : {$write_date|date:Y-m-d}</em>
-                                </span>
-                            </li> -->
-            <!-- <li>
-                                <a href="{$link_board_detail}" class="imgLink zoom_tle"><img src="{$img_src}" onerror="this.src='//img.echosting.cafe24.com/thumb/198x198.gif'" alt="" class="zoom" /></a>
-                                {$checkbox}
-                                <a href="{$link_board_detail}" class="imgLink">[{$no}] {$subject} {$comment_count}</a>
-                                <span>
-                                    <strong>작성자 : {$member_icon}{$writer} </strong>
-                                    <em class="{$date_display|display}">작성일 : {$write_date|date:Y-m-d}</em>
-                                </span>
-                            </li> </ul> --> 
-        </div> 
-        <div style="clear:both;"></div>
-    </div>
-
-    <div class="boardListEmpty {$empty_display|display}" module="board_empty_8">
-        <p>{$empty_message}</p>
-    </div>
-
-    <div module="board_ButtonList_8" class="{$write_display|display} ec-base-button typeBG">
-        <span class="gRight">
-            <a href="/board/gallery/write.html{$param_write}"
-                class="{$write_display|display} Button button-rounded button-normal black">글쓰기</a>
-        </span>
-    </div>
-</div>
-
-<div module="board_paging_8" class="ec-base-paginate">
-    <a href="{$param_prev}"><img src="/web/upload/weskin22/kr/layout/btn_page_prev.gif" alt="이전 페이지" /></a>
-    <ol>
-        <li><a href="{$param_num}" class="{$param_class}">{$page_num}</a></li>
-        <li><a href="{$param_num}" class="{$param_class}">{$page_num}</a></li>
-    </ol>
-    <a href="{$param_next}"><img src="/web/upload/weskin22/kr/layout/btn_page_next.gif" alt="다음 페이지" /></a>
-</div>
-
-<div module="board_search_8">
-    <!--@css(/css/module/board/search.css)-->
-    <fieldset class="boardSearch">
-        <legend>게시물 검색</legend>
-        <p>{$form.search_date} {$form.search_key} {$form.search} <a href="#none" onclick="{$action_search}"
-                class="Button button-rounded button-small" style="height:25px; line-height:22px;">찾기</a></p>
-    </fieldset>
-</div>
-
-<!-- 관리자 전용 메뉴 -->
-<div module="board_catemove_8">
-    <!--@css(/css/module/board/catemove.css)-->
-    <p>
-        해당 글을 {$form.board_category_move} 카테고리로
-        <a href="#none" onclick="{$action_category_move}"><img
-                src="//img.echosting.cafe24.com/skin/base_ko_KR/board/btn_move.gif" alt="글 이동" /></a>
-    </p>
-</div>
-
-<div module="board_function_8">
-    <!--@css(/css/module/board/function.css)-->
-    <p>
-        해당 글 이동 {$form.boardGroup} 으로
-        <a href="#none" onclick="{$action_article_move}"><img
-                src="//img.echosting.cafe24.com/skin/base_ko_KR/board/btn_move.gif" alt="글 이동" /></a>
-        <a href="#none" onclick="{$action_article_copy}"><img
-                src="//img.echosting.cafe24.com/skin/base_ko_KR/board/btn_copy.gif" alt="글 복사" /></a>
-        * 댓글포함, 답변 불포함
-    </p>
-</div>
-<!-- //관리자 전용 메뉴 -->
-<style>
-    .kundol_gallery {
-        width: 300px;
-        border: 1px solid #aaa; 
-        float: left;
-        clear: initial !important;
-        overflow: initial !important;
-        margin:10px;  
-    }
-
-    .kundol_gallery a {
-        display: block;
-    }
-
-    .kundol_gallery img {
-        width: 100%;
-        height:400px;
-    }
-
-    .commentWrap {
-        border-top: 1px solid #aaa;
-        padding:10px;
-    } 
-    .kundol_temp2 {
-        margin: 0 auto;
-        width: 89%;
-        min-width: 1140px;
-    }
-</style>
+</html>
