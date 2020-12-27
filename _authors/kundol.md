@@ -1,5 +1,5 @@
 ---
 name: kundol
-title: 주홍철
+title: 큰돌
 image: /files/authors/kundol.jpg
 ---
