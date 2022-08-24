@@ -101,6 +101,44 @@
             text-align: center;
             margin: 0 auto;
         }
+
+        .tile {
+            height: 400px;
+            margin-top: 40px; 
+            -webkit-transform: translateY(50px) rotate(-5deg) translateZ(0);
+            transform: translateY(50px) rotate(-5deg) translateZ(0);
+            -webkit-transition-delay: .3s;
+            -o-transition-delay: .3s;
+            transition-delay: .3s;
+            -webkit-transition: .4s;
+            -o-transition: .4s;
+            transition: .4s;
+            opacity: 0;
+            -webkit-filter: grayscale(1);
+            filter: grayscale(1);
+        }
+
+        .bottom-right.inView {
+            opacity: 1;
+            -webkit-transform: translateY(0px) rotate(0deg) translateZ(0);
+            transform: translateY(0px) rotate(0deg) translateZ(0);
+        }
+
+        .inView {
+            opacity: 1;
+            -webkit-transform: translateY(0px) rotate(0deg) translateZ(0);
+            transform: translateY(0px) rotate(0deg) translateZ(0);
+        }
+
+        section {
+            padding: 20px;
+        }
+        .imgrap{
+            text-align: center;
+        }
+        .imgrap img{
+            width: 300px;
+        }
     </style>
 </head>
 
@@ -120,62 +158,83 @@
                 </div>
             </article>
             <article class="wrap_outer">
-                <h3>제공하는 서비스</h3>
-                <p>
-                    1. AI투자분석서비스 및 모니터링 서비스, 어비스
-                </p>
+                <div class="tile">
+                    <h3>제공하는 서비스</h3>
+                    <p>
+                        인공지능 기반으로 주식, 원자재, 가상화폐 종목에 대한 모니터링과 추천 그리고 분석서비스를 제공합니다.   
+                        어비스의 기준을 기반으로 안전하면서도 유동성이 확보된 종목들을 대상을 제공해 보다 리스크를 낮추고 수익성을 증가시킬 수 있는 방법을 제안합니다.  
+                    </p> 
+                    <p class="imgrap">
+                        <img src="./net-monitor-animation_mobile03.gif" alt="">
+                    </p>
+                </div> 
 
-                <h3>문화</h3>
-                <p>
-                    1. 님으로된 호칭을 가집니다.
-                </p>
-
-                <p>
-                    2. 매일 한번 어떤 일을 할지 의논하고 잡담을 나누는 시간을 갖습니다.
-                </p>
-
-                <p>
-                    3. 한달에 한번 다수결로 맛집을 정하고 맛집탐방합니다.
-                </p>
-
-                <p>
-                    4. 여름, 강원도 고성으로 가 1주일동안 하고 싶은 공부를 하거나 자유로이 수영을 하고 놉니다.
-                </p>
-                <p>
-                    5. S급 코드와 S급 인재를 지향합니다.
-                </p>
-                <p>
-                    6. 한달에 한 번 하고 싶은 발표를 합니다.
-                </p>
-                <p>
-                    7. 신뢰하고 충돌합니다.
-                </p>
-                <p>
-                    8. 좋은 아이디어를 제시하거나, 버그를 찾아낼때마다 기프티콘을 줍니다.
-                </p>
-                <h3>혜택</h3>
-                <p>
-                    1. 원하는 도서와 논문, 강의비 지원 / 점심비과 석식비 지원(식대비 2만원)
-                </p>
-                <p>
-                    2. 자유로운 휴가(연 30일) / 유연한 출퇴근
-                </p>
-                <p>
-                    3. 시디즈의자 및 최고급 개인 장비 지급
-                </p>
-                <p>
-                    4. 지분 및 스톡옵션
-                </p>
-
-                <h3>오시는 길</h3>
-                <p>
-                    <a href="http://naver.me/5Amf43n3" target="_blank"> [서울시 강동구 해냄센터 7호]</a>
-                </p>
-
-                <h5>사업자 등록번호 : 161-27-01242 [응용 소프트웨어 개발 및 공급업]</h5>
-                <h5><a href="https://blog.naver.com/jhc9639/222633934401" target="_blank">[대표 프로필]</a></h5>
+                <div class="tile">
+                    <h3>문화</h3>
+                    <p>
+                        1. 님으로된 호칭을 가집니다.
+                    </p>
+                    <p>
+                        2. 매일 한번, 토론하고 잡담을 나누는 시간을 갖습니다.
+                    </p>
+                    <p>
+                        3. 한달에 한번 친목을 위한 맛집탐방합니다.
+                    </p> 
+                    <p>
+                        4. S급 코드를 지향합니다.
+                    </p>
+                    <p>
+                        5. 일주일에 한 번 개발관련 세미나를 합니다.
+                    </p>
+                    <p>
+                        6. 여름이면 고성으로, 겨울이면 무주로 놀러갑니다.
+                    </p> 
+                </div>  
+                
+                <div class="tile">
+                    <h3>혜택</h3>
+                    <p>
+                        1. 원하는 도서와 논문, 강의비 지원 / 점심비과 석식비 지원(식대비 2만원)
+                    </p>
+                    <p>
+                        2. 자유로운 휴가(연 30일) / 유연한 출퇴근
+                    </p>
+                    <p>
+                        3. 시디즈의자 및 최고급 개인 장비 지급
+                    </p>
+                    <p>
+                        4. 지분 및 스톡옵션
+                    </p> 
+                </div> 
+                
+                 
+                    <h5> 161-27-01242 / 업태 : 정보통신업 / 종목 : 응용 소프트웨어 개발 및 공급업</h5> 
+                    <h5><a href="https://blog.naver.com/jhc9639/222633934401" target="_blank">[대표 프로필]</a></h5> 
+ 
+ 
             </article>
         </div>
 </body>
+
+<script>
+    window.onload = () => {
+
+        let elementsArray = document.querySelectorAll(".tile"); 
+        window.addEventListener('scroll', fadeIn);
+
+        function fadeIn() {
+            for(let elem of elementsArray){
+                const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
+                if (distInView < 0) {
+                    elem.classList.add("inView");
+                } else {
+                    elem.classList.remove("inView");
+                }
+
+            } 
+        }
+        fadeIn();
+    }
+</script>
 
 </html>
