@@ -9,6 +9,7 @@
     <div align="center">
         <input type="text" id="wordInput" placeholder="Enter a word" onkeypress="checkKey(event)">
     </div>
+    <main class="yang"></main>
     <div id="circles"></div>
 </body>
 <style>
@@ -23,11 +24,32 @@
         padding: 10px;
         font-size: 1.3rem;
         color: white;
+        border-radius: 16px;
+    }
 
+    main p {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 10px;
+        margin: 10px;
+        color: white;
+        border-radius: 10px;
     }
 </style>
 <script>
     let words = {};
+    const hexToRgbA = (hex) => {
+        let c;
+        if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+            c = hex.substring(1).split('');
+            if (c.length == 3) {
+                c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+            }
+            c = '0x' + c.join('');
+            return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',0.2)';
+        }
+        throw new Error('Bad Hex');
+    }
 
     function checkKey(event) {
         if (event.key === "Enter") {
@@ -42,7 +64,15 @@
                 c.style.width = diameter + "px";
                 c.style.height = diameter + "px";
             } else {
+                const aa = document.getElementsByTagName("main")[0];
+                const p = document.createElement("p");
                 let color = getRandomColor();
+                console.log(color)
+                p.style.backgroundColor = hexToRgbA(color);
+                console.log(aa)
+                p.innerHTML = word;
+                aa.appendChild(p);
+
                 let x = Math.random() * (window.innerWidth - diameter);
                 let y = Math.random() * (window.innerHeight - diameter);
 
@@ -96,7 +126,6 @@
 
         circle.style.left = x + "px";
         circle.style.top = y + "px";
-
         setTimeout(() => moveCircle(circle, xSpeed, ySpeed), 50);
     }
 
