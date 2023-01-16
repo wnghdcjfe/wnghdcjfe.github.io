@@ -350,9 +350,7 @@ demo = {
     };
 
     var ctx = document.getElementById("chartLinePurple").getContext("2d");
-
     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
     gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
     gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
@@ -548,7 +546,7 @@ demo = {
         datasets: [{
           label: "My First dataset",
           fill: true,
-          backgroundColor: gradientStroke,
+          backgroundColor: "#aaa",
           borderColor: '#d346b1',
           borderWidth: 2,
           borderDash: [],
