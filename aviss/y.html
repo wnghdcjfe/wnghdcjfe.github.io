@@ -12,15 +12,19 @@
     <div id="circles"></div>
 </body>
 <style>
-    input{
-    background-color: transparent;
-    border: none;
-    border: 1px solid #aaa;
-    padding: 10px;
-    font-size: 1.3rem;
-    color: white;
+    body {
+        overflow: hidden;
+    }
 
-    } 
+    input {
+        background-color: transparent;
+        border: none;
+        border: 1px solid #aaa;
+        padding: 10px;
+        font-size: 1.3rem;
+        color: white;
+
+    }
 </style>
 <script>
     let words = {};
@@ -34,41 +38,45 @@
             let diameter = 5;
             if (words[word]) {
                 diameter = words[word].diameter + 1;
+                const c = document.getElementById(word);
+                c.style.width = diameter + "px";
+                c.style.height = diameter + "px";
+            } else {
+                let color = getRandomColor();
+                let x = Math.random() * (window.innerWidth - diameter);
+                let y = Math.random() * (window.innerHeight - diameter);
+
+                let circle = document.createElement("div");
+                circle.setAttribute("id", word);
+                circle.style.backgroundColor = color;
+                circle.style.width = diameter + "px";
+                circle.style.height = diameter + "px";
+                circle.style.borderRadius = "50%";
+                circle.style.position = "absolute";
+                circle.style.left = x + "px";
+                circle.style.top = y + "px";
+
+                let xSpeed = (Math.random() - 0.5) * 5;
+                let ySpeed = (Math.random() - 0.5) * 5;
+
+                circle.onmouseover = () => {
+                    circle.style.cursor = "pointer";
+                };
+
+                circle.onmouseout = () => {
+                    circle.style.cursor = "default";
+                };
+
+                circle.onclick = () => {
+                    circle.parentNode.removeChild(circle);
+                };
+
+                document.getElementById("circles").appendChild(circle);
+                moveCircle(circle, xSpeed, ySpeed);
             }
             words[word] = {
                 diameter: diameter
             };
-
-            let color = getRandomColor();
-            let x = Math.random() * (window.innerWidth - diameter);
-            let y = Math.random() * (window.innerHeight - diameter);
-
-            let circle = document.createElement("div");
-            circle.style.backgroundColor = color;
-            circle.style.width = diameter + "px";
-            circle.style.height = diameter + "px";
-            circle.style.borderRadius = "50%";
-            circle.style.position = "absolute";
-            circle.style.left = x + "px";
-            circle.style.top = y + "px";
-
-            let xSpeed = (Math.random() - 0.5) * 5;
-            let ySpeed = (Math.random() - 0.5) * 5;
-
-            circle.onmouseover = () => {
-                circle.style.cursor = "pointer";
-            };
-
-            circle.onmouseout = () => {
-                circle.style.cursor = "default";
-            };
-
-            circle.onclick = () => {
-                circle.parentNode.removeChild(circle);
-            };
-
-            document.getElementById("circles").appendChild(circle);
-            moveCircle(circle, xSpeed, ySpeed);
         }
     }
 
