@@ -1,2 +1,0 @@
-# team-qtumus
-team-qtumus

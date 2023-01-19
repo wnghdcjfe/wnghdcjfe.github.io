@@ -1,15 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="./favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVISS</title>
-    <script type="module" crossorigin src="./assets/index-553345b8.js"></script>
-    <link rel="stylesheet" href="./assets/index-a1609611.css">
-  </head>
-  <body>
-    <div id="app"></div>
-    
-  </body>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="어비스">
+  <meta name="description" content="어비스는 AI 핀테크회사로서 투자자들의 더 나은 투자환경을 위해 끊임없는 혁신을 추구합니다">
+  <meta name="keywords" content="team quantumuse">
+  <meta name="Resource-type" content="Document">
+  <meta name="robots" content="ALL">
+  <link rel="icon" href="./favicon.ico" />
+  <link rel="shortcut icon" href="./favicon.ico" />
+  <title>어비스를 소개합니다.</title>
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:image" content="https://wnghdcjfe.github.io/aviss/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="어비스">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'GmarketSansMedium';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    * {
+      font-family: 'GmarketSansMedium', sans-serif;
+      word-wrap: break-word;
+    }
+
+    article {
+      width: 100%;
+      margin: 0 auto;
+      background-color: rgba(18, 18, 18, 0.8);
+      color: white;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .title {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5vw;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: #FFC93C;
+    }
+
+    .title p {
+      margin: 0;
+      font-weight: lighter;
+      margin-bottom: 7vw;
+    }
+
+    video {
+      z-index: -1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100vh;
+      width: auto;
+      height: auto;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 2rem;
+    }
+
+    .logo {
+      width: 100px;
+    }
+
+    .notice {
+      background-color: rgba(0, 51, 124, 0.9);
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .info {
+      font-size: 10px;
+      font-weight: lighter;
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto;
+      padding:2vw;
+    }
+
+    .info img {
+      width: 90px;
+      border-radius: 50%;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .info p {
+      margin: 3px;
+      font-size: 16px;
+    }
+
+    .info h3 {
+      margin: 0 auto;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .bt {
+      font-size: 10px;
+      font-weight: lighter;
+      position: fixed;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <video id="mobile_video" playsinline="" autoplay="autoplay" loop="loop" muted="muted">
+      <source src="https://s3.ap-northeast-2.amazonaws.com/alphasquare-s3/media/AP_640_360.mp4" type="video/mp4">
+    </video>
+    <article>
+      <div class="title">
+        <img src="./logo-white.png" alt="" class="logo">
+        <h2>똑똑한 인공지능 비서, AVISS</h2>
+        <p>어비스 필터링알고리즘을 기반으로 산출된 종목을 대상으로 이슈가 발생했을 때 가장 빠르게 분석리포트를 제공해주는 서비스를 개발 중입니다.</p>
+
+
+        <a href="https://forms.gle/fAKqbwJVhC1gcHfM8" target="_blank" class="notice">알림신청</a>
+      </div>
+      <div class="info">
+        <img src="./assets/프로필.png" alt="">
+        <h3>대표 : 주홍철</h3>
+        <p> - 전직 네이버 개발자</p>
+        <p> - 오픈소스 Mocha.js contributor</p>
+        <p> - 필터링 알고리즘 2개 특허 출원</p>
+        <p> - IT 베스트셀러 2권의 저자 :
+          <a href="http://www.yes24.com/Product/Goods/108887922" target="_blank">CS지식노트</a>
+          <a href="http://www.yes24.com/Product/Goods/104208010" target="_blank">MEVN</a>
+        </p>
+        <p> - 기술유투버 
+          <a href="https://www.youtube.com/@kundol" target="_blank">큰돌의 터전</a> </p>
+
+      </div>
+      <p class="bt"> 161-27-01242 / 업태 : 정보통신업 / 종목 : 응용 소프트웨어 개발 및 공급업</p>
+    </article>
+</body>
+
+<script>
+</script>
+
 </html>
