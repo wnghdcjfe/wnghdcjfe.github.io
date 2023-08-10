@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="어비스">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
   <link href="https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" rel="stylesheet">
   <!-- color: #FFC93C; -->
@@ -34,36 +34,48 @@
       font-style: normal;
     }
 
+    h1,
+    h2,
+    h3 {
+      font-weight: normal;
+    }
+
     * {
       font-family: 'GmarketSansMedium', sans-serif;
       word-wrap: break-word;
       scroll-behavior: smooth;
-      margin:0 auto;
+      margin: 0 auto;
       word-break: break-word;
-    } 
-    article { 
-    margin-top: 200px; 
-    width:900px;
     }
-    article > div{
-      padding-top:80px;
-      margin-bottom: 100px; 
+
+    article {
+      margin-top: 200px;
+      width: 900px;
     }
-    a{
+
+    article>div {
+      padding-top: 80px;
+      margin-bottom: 100px;
+    }
+
+    a {
       text-decoration: none;
       color: white;
     }
-    ul li{ 
+
+    ul li {
       list-style: none;
       display: inline-block;
-      padding: 30px; 
+      padding: 30px;
     }
-    nav{
+
+    nav {
       position: absolute;
       top: -11px;
       right: 24px;
     }
-    header{
+
+    header {
       background-color: rgba(0, 51, 124, 0.9);
     }
 
@@ -71,7 +83,7 @@
       background-color: rgba(0, 51, 124, 0.9);
       border: none;
       color: white;
-      padding: 15px 32px; 
+      padding: 15px 32px;
       text-decoration: none;
       display: inline-block;
       font-size: 16px;
@@ -81,65 +93,86 @@
     header {
       position: fixed;
       top: 0;
-      width: 100%; 
+      width: 100%;
       z-index: 100;
-    } 
-    .logo{
-      height: 30px;
-      padding:10px; 
     }
-    .culture > div{
+
+    .logo {
+      height: 30px;
+      padding: 10px;
+    }
+
+    .culture>div {
       border-radius: 1.875rem;
       border: 1px solid #aaa;
-      
+
     }
-    p{
+
+    p {
       font-size: 1rem;
       color: rgba(0, 51, 124, 1);
-      margin-bottom:20px;
+      margin-bottom: 20px;
     }
-    .notice{
+
+    .notice {
       display: block;
-      width:200px; 
-    text-align: center;
-    }
-    .repre{
-      border-radius: 50%;
-      width:200px;
-    display: block;
-    }
-    .name{
-      text-align: center; 
-    }
-    footer > p{
+      width: 200px;
       text-align: center;
-      color:#aaa;
+    }
+
+    .repre {
+      border-radius: 50%;
+      width: 200px;
+      display: block;
+    }
+
+    .name {
+      text-align: center;
+    }
+
+    footer>p {
+      text-align: center;
+      color: #aaa;
       font-size: 10px;
     }
-    #repre img{
-    border: 1px solid rgba(0, 51, 124, 1);;
-    margin-bottom: 10px;
+
+    #repre img {
+      border: 1px solid rgba(0, 51, 124, 1);
+      ;
+      margin-bottom: 10px;
     }
-    img.ani_img{
-      width:200px;
+
+    img.ani_img {
+      width: 200px;
       display: block;
     }
+
     @media only screen and (max-width: 900px) {
       article {
-        width: 100%;    
+        width: 100%;
       }
-      .logo{
+
+      .logo {
         height: 20px;
       }
-      nav{
-        top: 6px;  
+
+      nav {
+        top: 6px;
       }
+
       ul li {
         padding: 7px;
       }
-      a{
 
-    font-size: 0.7rem;
+      a {
+
+        font-size: 0.7rem;
+      }
+
+      article {
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
       }
     }
   </style>
@@ -150,43 +183,43 @@
     <div>
       <img src="./logo-white.png" alt="" class="logo">
     </div>
-    <nav> 
+    <nav>
       <ul>
         <li><a href="#company">회사소개</a></li>
-        <li><a href="#culture">문화</a></li> 
-        <li><a href="#repre">대표</a></li> 
-        <li><a href="#service">신청</a></li> 
+        <li><a href="#culture">문화</a></li>
+        <li><a href="#repre">대표</a></li>
+        <li><a href="#service">신청</a></li>
       </ul>
     </nav>
   </header>
   <article>
-    <div id="company"> 
-      <img src="./assets/document.gif" class="ani_img" >  
+    <div id="company">
+      <img src="./assets/document.gif" class="ani_img">
       <h1>투자를 더 쉽게</h1>
-      <h1>빠르고 좋은 정보를.</h1>  
+      <h1>빠르고 좋은 정보를.</h1>
       <p>
-        어비스는 쉬운 투자를 꿈꿉니다.  
-        이슈가 발생했을 때 지금 내 관심종목을 팔아야 할지, 사야 할지를 알려주며 이슈에 대해 가장 빠르고 가장 정확하게 알려주는 AI리포트를 제공합니다.  
+        어비스는 쉬운 투자를 꿈꿉니다.
+        이슈가 발생했을 때 지금 내 관심종목을 팔아야 할지, 사야 할지를 알려주며 이슈에 대해 가장 빠르고 가장 정확하게 알려주는 AI리포트를 제공합니다.
       </p>
       <p>
-        어비스는 특허출원한 필터링 알고리즘을 기반으로 우수한 종목들을 고릅니다. 
-        이러한 우수한 종목들을 기반으로 모니터링시스템과 분석시스템을 통해 어떠한 이슈가 발생했을 때 5분안에 이슈 관련, 종목관련 리포트를 빠르게 제공해서 
-        투자자가 빠른 대응을 할 수 있게 만듭니다.  
+        어비스는 특허출원한 필터링 알고리즘을 기반으로 우수한 종목들을 고릅니다.
+        이러한 우수한 종목들을 기반으로 모니터링시스템과 분석시스템을 통해 어떠한 이슈가 발생했을 때 5분안에 이슈 관련, 종목관련 리포트를 빠르게 제공해서
+        투자자가 빠른 대응을 할 수 있게 만듭니다.
       </p>
       <p>
-        어비스는 2022년 회사 설립 이후로 특허출원 2개, 상표권 등록 2개, 예비창업패키지 최우수기업선정, 수익률 40% 달성 등 많은 도전과 성과를 이뤄내고 있습니다.  
-      </p> 
+        어비스는 2022년 회사 설립 이후로 특허출원 2개, 상표권 등록 2개, 예비창업패키지 최우수기업선정, 수익률 40% 달성 등 많은 성과를 이뤄내고 있습니다.
+      </p>
     </div>
     <div id="culture">
-      <img src="./assets/social-media.gif" class="ani_img" >   
-      <h1>도전하고 도전하며.</h1>   
+      <img src="./assets/social-media.gif" class="ani_img">
+      <h1>도전하고 도전하며.</h1>
       <div>
         <h3>빠르고 냉정하게</h3>
         <p>POC를 해야 할일이 있다면 최대한 빠르게 진행을 하고 들인 노력과는 상관없이 냉정하고 합리적으로 최고의 아키텍처 및 피쳐에 대해 고민합니다.</p>
       </div>
       <div>
         <h3>신뢰하고 솔직하게</h3>
-        <p>서로를 신뢰하고 잘못이 있거나 모르는게 있다면 솔직하게 말하는 문화를 가집니다. 모르는 것을 두려워 하지 않고 솔직하지 않은 것을 두려워 합니다. 
+        <p>서로를 신뢰하고 잘못이 있거나 모르는게 있다면 솔직하게 말하는 문화를 가집니다. 모르는 것을 두려워 하지 않고 솔직하지 않은 것을 두려워 합니다.
         </p>
       </div>
       <div>
@@ -194,45 +227,39 @@
         <p>자신이 맡은 일에 대해 책임감있게 일하되 자유롭게 의견을 제시하고 자유롭게 휴가를 가며 자신이 원하는 시간에 근무를 합니다. 100% 재택근무는 당연합니다.(필요시 오프라인)
         </p>
       </div>
-      
+
       <div>
-        <h3>지원하고 지원하는</h3> 
+        <h3>지원하고 지원하는</h3>
         <p>
-          국내1위 의자인 시디즈의자와 개발에 필요한 맥북, 개발에 필요한 도서, 온라인 강의교육비까지 개발에 필요한 전부를 제공합니다. 
+          국내1위 의자인 시디즈의자와 개발에 필요한 맥북, 개발에 필요한 도서, 온라인 강의교육비까지 개발에 필요한 전부를 제공합니다.
         </p>
       </div>
 
       <div>
-        <h3>이익을 공유하는</h3> 
+        <h3>이익을 공유하는</h3>
         <p>
-          매출의 일부를 인센티브로 제공하며 성과에 따라 스톡옵션 또한 제공합니다.  
+          매출의 일부를 인센티브로 제공하며 성과에 따라 스톡옵션 또한 제공합니다.
         </p>
       </div>
     </div>
-    <div id="repre"> 
-      <h1>대표, 주홍철</h1>  
-      <img src="./assets/프로필.png" alt="" class="repre"> 
-      <h3>네이버출신이자 오픈소스개발자이자 알고리즘상위 0.1%</h3> 
+    <div id="repre">
+      <h1>대표, 주홍철</h1>
+      <img src="./assets/프로필.png" alt="" class="repre">
+      <h3>상위1%의 개발자</h3>
       <p>
-        저의 경험과 능력을 바탕으로 사용자경험을 가장 중요시 여기는 서비스를 만들고자 노력하겠습니다. 서비스 안과 밖이 모두 아름답고 단단한 완벽한 서비스를 만들겠습니다. 
-      </p>
-
-      <h3>국내 1위 베스트셀러저자, 국내 1위 알고리즘강사 </h3> 
-      <p>
-        "면접을 위한 CS전공지식노트"를 집필했으며 인프런에서 "10주완성 C++ 코딩테스트" 강의를 하고 있습니다. 이 수익을 바탕으로 안정적으로 어비스를 개발하고 있습니다.
-      </p> 
-
-      <h3>구독자 1.3만명의 채널 운영자</h3> 
-      <p>
-        구독자 1.3만명의 "큰돌의 터전"이란 IT유투브를 운영하고 있으며 이를 통해 자체 홍보력을 가집니다. 
-      </p> 
+        전)네이버 개발자이자 오픈소스개발자(Mocha), 국내 알고리즘 상위 0.1%, 여러 개발대회 수상을 했으며 
+         국내IT베스트셀러 "면접을 위한 CS전공지식노트"를 집필하기도 했습니다. 
+      </p>   
+      <p> 
+        이러한 저의 실력을 바탕으로 완벽한 사용자경험을 보여주는 서비스를 만들어 나가겠습니다.  
+      </p>   
     </div>
-     
+
     <div id="service">
-      <img src="./assets/idea.gif" class="ani_img" >  
-      <h1>가장 먼저 어비스를.</h1>   
-      <div> 
-        <p>어비스는 주식, 가상화폐 등 이슈 모니터링 및 AI 분석리포트를 5분이내에 받을 수 있는 서비스입니다. 알림 신청을 통해 어비스가 나올 때 가장 먼저 어비스를 체험해보세요. </p> 
+      <img src="./assets/idea.gif" class="ani_img">
+      <h1>가장 먼저 어비스를.</h1>
+      <div>
+        <p>어비스는 2023년 하반기에 출시될 예정입니다. 알림설정을 통해 가장 먼저 어비스를 체험해보세요. </p>
         <a href="https://forms.gle/fAKqbwJVhC1gcHfM8" target="_blank" class="notice">알림 신청</a>
       </div>
     </div>
