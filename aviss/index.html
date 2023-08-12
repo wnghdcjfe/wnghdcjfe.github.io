@@ -19,14 +19,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-  <link href="https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" rel="stylesheet"> 
-  <style>  
+  <link href="https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" rel="stylesheet">
+  <style>
     @font-face {
       font-family: 'GmarketSansMedium';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
       font-weight: normal;
       font-style: normal;
-    } 
+    }
+
     h1,
     h2,
     h3 {
@@ -168,7 +169,39 @@
         box-sizing: border-box;
       }
     }
+
+    article>div {
+      opacity: 0;
+      transition: all 1s;
+      transform: translate(0, 5vh);
+    }
+
+    .inView {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    section {
+      padding: 20px;
+    }
   </style>
+  <script>
+    window.onload = () => {
+      let elementsArray = document.querySelectorAll("article > div");
+      const fadeIn = () => {
+        for (const elem of elementsArray) {
+          const distInView = elem.getBoundingClientRect().top - window.innerHeight + 300;
+          if (distInView < 0) {
+            elem.classList.add("inView");
+          } else {
+            elem.classList.remove("inView");
+          }
+        }
+      }
+      window.addEventListener('scroll', fadeIn);
+      fadeIn();
+    }
+  </script>
 </head>
 
 <body>
@@ -217,9 +250,9 @@
       </div>
       <div>
         <h3>책임감있고 자유롭게</h3>
-        <p>자신이 맡은 일에 대해 책임감있게 일하며 자유롭게 원하는 환경에서 일합니다. 6 - 12에서 선택적으로 출근시간을 정할 수 있으며 이에 따라 15 - 21 사이에서 선택적으로 퇴근 시간을 
-          정할 수 있으며 매주 금요일에는 4시간만 일하면 됩니다. 또한 100% 재택근무로 원하는 환경에서 근무할 수 있습니다. 다만 필요시에는 오프라인 근무를 하게 됩니다.  
-        </p> 
+        <p>자신이 맡은 일에 대해 책임감있게 일하며 자유롭게 원하는 환경에서 일합니다. 6 - 12에서 선택적으로 출근시간을 정할 수 있으며 이에 따라 15 - 21 사이에서 선택적으로 퇴근 시간을
+          정할 수 있으며 매주 금요일에는 4시간만 일하면 됩니다. 또한 100% 재택근무로 원하는 환경에서 근무할 수 있습니다. 다만 필요시에는 오프라인 근무를 하게 됩니다.
+        </p>
       </div>
 
       <div>
@@ -241,12 +274,12 @@
       <img src="./assets/프로필.png" alt="" class="repre">
       <h3>상위1%의 개발자</h3>
       <p>
-        전)네이버 개발자이자 오픈소스개발자(Mocha), 국내 알고리즘 상위 0.1% 등 여러 개발대회 수상을 했으며 
-         국내IT베스트셀러 "면접을 위한 CS전공지식노트"를 집필하기도 했습니다. 
-      </p>   
-      <p> 
-        이러한 저의 실력과 경험을 바탕으로 완벽한 서비스를 만들어 나가겠습니다.  
-      </p>   
+        전)네이버 개발자이자 오픈소스개발자(Mocha), 국내 알고리즘 상위 0.1% 등 여러 개발대회 수상을 했으며
+        국내IT베스트셀러 "면접을 위한 CS전공지식노트"를 집필하기도 했습니다.
+      </p>
+      <p>
+        이러한 저의 실력과 경험을 바탕으로 완벽한 서비스를 만들어 나가겠습니다.
+      </p>
     </div>
 
     <div id="service">
