@@ -142,6 +142,9 @@
     }
 
     @media only screen and (max-width: 900px) {
+      #milestone ul{
+        --row-gap: 4rem !important;
+      }
       article {
         width: 100%;
       }
@@ -191,7 +194,7 @@
 
     #milestone ul {
       --col-gap: 2rem;
-      --row-gap: 9rem;
+      --row-gap: 12rem;
       --line-w: 0.25rem;
       display: grid;
       grid-template-columns: var(--line-w) 1fr;
@@ -213,8 +216,12 @@
 
     /* columns*/
 
-    /* row gaps */
+    /* 
     #milestone ul li:not(:last-child) {
+      margin-bottom: var(--row-gap);
+    }
+    */
+    #milestone ul li{
       margin-bottom: var(--row-gap);
     }
 
@@ -328,6 +335,7 @@
 
       #milestone ul::before {
         grid-column: 2;
+        margin-bottom: var(--row-gap);
       }
 
       #milestone ul li:nth-child(odd) {
@@ -479,8 +487,8 @@
         <li style="--accent-color:#00337C">
           <div class="date">2023.01</div>
           <div class="title">상표권 및 특허 출원</div>
-          <div class="descr">어비스 서비스에 관한 상표권 2개, 종목선정 알고리즘에 대한 특허 2개 출원했습니다.</div>
-        </li>
+          <div class="descr">어비스 서비스에 관한 상표권 2개, 종목선정 알고리즘에 대한 특허 2개 출원했으며 최신모델을 기반으로 수익률 50% 등의 성과를 달성하고 있습니다.</div>
+        </li> 
       </ul>
     </div>
     <div id="culture">
