@@ -57,7 +57,7 @@
       color: white;
     }
 
-    ul li {
+    nav ul li {
       list-style: none;
       display: inline-block;
       padding: 30px;
@@ -184,15 +184,197 @@
     section {
       padding: 20px;
     }
+
+    /*
+    마일스톤
+    */ 
+
+    #milestone ul {
+      --col-gap: 2rem;
+      --row-gap: 9rem;
+      --line-w: 0.25rem;
+      display: grid;
+      grid-template-columns: var(--line-w) 1fr;
+      grid-auto-columns: max-content;
+      column-gap: var(--col-gap);
+      list-style: none;
+      width: min(60rem, 90%);
+      margin-inline: auto; 
+    }
+
+    /* line */
+    #milestone ul::before {
+      content: "";
+      grid-column: 1;
+      grid-row: 1 / span 20;
+      background: rgb(225, 225, 225);
+      border-radius: calc(var(--line-w) / 2);
+    }
+
+    /* columns*/
+
+    /* row gaps */
+    #milestone ul li:not(:last-child) {
+      margin-bottom: var(--row-gap);
+    }
+
+    /* card */
+    #milestone ul li {
+      grid-column: 2;
+      --inlineP: 1.5rem;
+      margin-inline: var(--inlineP);
+      grid-row: span 2;
+      display: grid;
+      grid-template-rows: min-content min-content min-content; 
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px; 
+    }
+
+    /* date */
+    #milestone ul li .date {
+      --dateH: 3rem;
+      height: var(--dateH);
+      margin-inline: calc(var(--inlineP) * -1);
+
+      text-align: center;
+      background-color: var(--accent-color);
+
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 700;
+
+      display: grid;
+      place-content: center;
+      position: relative;
+
+      border-radius: calc(var(--dateH) / 2) 0 0 calc(var(--dateH) / 2);
+    }
+
+    /* date flap */
+    #milestone ul li .date::before {
+      content: "";
+      width: var(--inlineP);
+      aspect-ratio: 1;
+      background: var(--accent-color);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.2) 100%, transparent);
+      position: absolute;
+      top: 100%;
+
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+      right: 0;
+    }
+
+    /* circle */
+    #milestone ul li .date::after {
+      content: "";
+      position: absolute;
+      width: 2rem;
+      aspect-ratio: 1;
+      background: var(--bgColor);
+      border: 0.3rem solid var(--accent-color);
+      border-radius: 50%;
+      top: 50%;
+      background: white; 
+      transform: translate(50%, -50%);
+      right: calc(100% + var(--col-gap) + var(--line-w) / 2);
+    }
+
+    /* title descr */
+    #milestone ul li .title,
+    #milestone ul li .descr {
+      background: var(--bgColor);
+      position: relative;
+      padding-inline: 1.5rem;
+    }
+
+    #milestone ul li .title {
+      overflow: hidden;
+      padding-block-start: 1.5rem;
+      padding-block-end: 1rem;
+      font-weight: 500;
+    }
+
+    #milestone ul li .descr {
+      padding-block-end: 1.5rem;
+      font-weight: 300;
+    }
+
+    /* shadows  
+    #milestone ul li .title::before,
+    #milestone ul li .descr::before {
+      content: "";
+      position: absolute;
+      width: 90%;
+      height: 0.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      left: 50%;
+      border-radius: 50%;
+      filter: blur(1px);
+      transform: translate(-50%, 50%);
+    }
+*/ 
+    #milestone ul li .title::before {
+      bottom: calc(100% + 0.125rem);
+    }
+
+    #milestone ul li .descr::before {
+      z-index: -1;
+      bottom: 0.25rem;
+    }
+
+    @media (min-width: 40rem) {
+      #milestone ul {
+        grid-template-columns: 1fr var(--line-w) 1fr;
+      }
+
+      #milestone ul::before {
+        grid-column: 2;
+      }
+
+      #milestone ul li:nth-child(odd) {
+        grid-column: 1;
+      }
+
+      #milestone ul li:nth-child(even) {
+        grid-column: 3;
+      }
+
+      /* start second card */
+      #milestone ul li:nth-child(2) {
+        grid-row: 2/4;
+      }
+
+      #milestone ul li:nth-child(odd) .date::before {
+        clip-path: polygon(0 0, 100% 0, 100% 100%);
+        left: 0;
+      }
+
+      #milestone ul li:nth-child(odd) .date::after {
+        transform: translate(-50%, -50%);
+        left: calc(100% + var(--col-gap) + var(--line-w) / 2);
+      }
+
+      #milestone ul li:nth-child(odd) .date {
+        border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
+      }
+    }
+
+    .credits {
+      margin-top: 1rem;
+      text-align: right;
+    }
+
+    .credits a {
+      color: var(--color);
+    }
   </style>
-  <script>
+  <script> 
     window.onload = () => {
       let elementsArray = document.querySelectorAll("article > div");
       const fadeIn = () => {
         for (const elem of elementsArray) {
           const distInView = elem.getBoundingClientRect().top - window.innerHeight + 300;
           if (distInView < 0) {
-            elem.classList.add("inView");
+            elem.classList.add("inView");  
           } else {
             elem.classList.remove("inView");
           }
@@ -211,30 +393,50 @@
     </div>
     <nav>
       <ul>
-        <li><a href="#company">회사소개</a></li>
-        <li><a href="#culture">문화</a></li>
+        <li><a href="#company">소개</a></li>
+        <li><a href="#milestone">마일스톤</a></li>
+        <li><a href="#culture">문화</a></li> 
         <li><a href="#repre">대표</a></li>
-        <li><a href="#service">신청</a></li>
       </ul>
     </nav>
   </header>
   <article>
     <div id="company">
       <img src="./assets/document.gif" class="ani_img">
-      <h1>투자를 더 쉽게</h1>
-      <h1>빠르고 좋은 정보를.</h1>
+      <h1>투자를 똑똑하게.</h1>
       <p>
-        어비스는 쉬운 투자를 꿈꿉니다.
-        이슈가 발생했을 때 지금 내 관심종목을 팔아야 할지, 사야 할지를 알려주는 가장 빠른 AI분석리포트를 제공합니다.
+        어비스는 인공지능과 투자자가 함께 성과를 내는 하이브리드모델 투자를 지향합니다.
+        어떠한 이슈가 발생했을 때 관심종목에 대해 빠른 대처를 할 수 있도록 AI분석리포트를 제공하며 시장위험지표, 종목시그널 등을 제공해서 투자자의 경제적관점과 더불어 최고의 성과를 낼 수 있게 해주는
+        똑똑한 인공지능 비서와 같은 역할을 합니다.
       </p>
+      <p>어비스는 2023년 12월에 공식 출시될 예정입니다. 알림설정을 통해 가장 먼저 어비스를 경험해보세요. </p>
+      <div>
+        <a href="https://forms.gle/fAKqbwJVhC1gcHfM8" target="_blank" class="notice">알림 신청</a>
+      </div>
+    </div>
+
+    <div id="milestone">
+      <h1>꾸준하게. 위대하게.</h1>
       <p>
-        어비스는 먼저 특허출원한 필터링 알고리즘을 기반으로 우수한 종목들을 고릅니다.
-        이러한 우수한 종목들을 기반으로 모니터링시스템과 분석시스템을 통해 어떠한 이슈가 발생했을 때 5분안에 이슈, 종목관련 리포트를 빠르게 제공해서
-        투자자가 빠른 대응을 할 수 있게 만듭니다.
+        2024년 시리즈A 투자를 목표로 꾸준하게 활동을 이어가고 있습니다. 
       </p>
-      <p>
-        어비스는 2022년 회사 설립 이후로 특허출원 2개, 상표권 등록 2개, 예비창업패키지 최우수기업선정, 하락장일 때 3달 내 수익률 40% 달성 등 많은 성과를 이뤄내고 있습니다.
-      </p>
+      <ul>
+        <li style="--accent-color:#00337C">
+          <div class="date">2022.03</div>
+          <div class="title">회사설립</div>
+          <div class="descr">대표, 주홍철이 자본금 2000만원으로 회사를 설립했습니다.</div>
+        </li>
+        <li style="--accent-color:#00337C">
+          <div class="date">2022.11</div>
+          <div class="title">최우수기업선정</div>
+          <div class="descr">2022 예비창업패키지 - 핀테크 최우수기업으로 선정되었습니다.</div>
+        </li>
+        <li style="--accent-color:#00337C">
+          <div class="date">2023.01</div>
+          <div class="title">상표권 및 특허 출원</div>
+          <div class="descr">어비스 서비스에 관한 상표권 2개과 종목선정 알고리즘에 대한 특허를 2개 출원했습니다.</div>
+        </li> 
+      </ul>
     </div>
     <div id="culture">
       <img src="./assets/social-media.gif" class="ani_img">
@@ -258,7 +460,7 @@
       <div>
         <h3>지원하고 지원하는</h3>
         <p>
-          국내1위 의자인 시디즈의자와 개발에 필요한 맥북, 개발에 필요한 도서, 온라인 강의교육비까지 개발에 필요한 전부를 제공하며 점심 식대비로 2만5천원을 지원합니다.
+          국내1위 의자인 시디즈의자와 개발에 필요한 맥북, 도서, 교육까지 개발에 필요한 전부를 제공하며 식대비 2만5천원을 지원합니다.
         </p>
       </div>
 
@@ -272,24 +474,16 @@
     <div id="repre">
       <h1>대표, 주홍철</h1>
       <img src="./assets/프로필.png" alt="" class="repre">
-      <h3>상위1%의 개발자</h3>
+      <h3>상위 0.1% 의 개발자</h3>
       <p>
-        전)네이버 개발자이자 오픈소스개발자(Mocha), 국내 알고리즘 상위 0.1%, 개발관련 대회 1위를 달성한 경험이 있으며 국내 IT 베스트셀러 "면접을 위한 CS전공지식노트"를 집필했습니다.
+        네이버 출신 개발자, 오픈소스 개발자(Mocha.js), 국내 알고리즘 상위 0.1%이자 IT 베스트셀러 "면접을 위한 CS전공지식노트"를 집필했습니다.
       </p>
-      <p> 
-        대표적으로 2년동안의 대규모프로젝트, 실시간 기상상황모니터링시스템(AMOS)를 성공적으로 개발 및 배포하여 현재 청주, 김포 공항 등 공항과 비행단에 설치되어 운영되고 있는 프로그램을 만든 경험이 있습니다.
-        이러한 저의 실력과 경험을 바탕으로 완벽한 서비스를 만들어 나가겠습니다.
-      </p> 
-    </div>
 
-    <div id="service">
-      <img src="./assets/idea.gif" class="ani_img">
-      <h1>가장 먼저 어비스를.</h1>
       <div>
-        <p>어비스는 2023년 하반기에 출시될 예정입니다. 알림설정을 통해 가장 먼저 어비스를 체험해보세요. </p>
-        <a href="https://forms.gle/fAKqbwJVhC1gcHfM8" target="_blank" class="notice">알림 신청</a>
+        <a href="https://blog.naver.com/jhc9639/222633934401" target="_blank" class="notice">프로필</a>
       </div>
     </div>
+
   </article>
   <footer>
     <p> 161-27-01242 / 업태 : 정보통신업 / 종목 : 응용 소프트웨어 개발 및 공급업</p>
