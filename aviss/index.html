@@ -48,8 +48,7 @@
     }
 
     article>div {
-      padding-top: 80px;
-      margin-bottom: 100px;
+      padding-top: 80px; 
     }
 
     a {
@@ -106,6 +105,7 @@
       font-size: 1rem;
       color: rgba(0, 51, 124, 1);
       margin-bottom: 20px;
+      font-weight: lighter;
     }
 
     .notice {
@@ -158,7 +158,7 @@
       }
 
       nav ul li {
-        padding: 7px;
+        padding: 5px;
       }
 
       a {
@@ -303,22 +303,7 @@
     #milestone ul li .descr {
       padding-block-end: 1.5rem;
       font-weight: 300;
-    }
-
-    /* shadows  
-    #milestone ul li .title::before,
-    #milestone ul li .descr::before {
-      content: "";
-      position: absolute;
-      width: 90%;
-      height: 0.5rem;
-      background: rgba(0, 0, 0, 0.5);
-      left: 50%;
-      border-radius: 50%;
-      filter: blur(1px);
-      transform: translate(-50%, 50%);
-    }
-*/
+    } 
     #milestone ul li .title::before {
       bottom: calc(100% + 0.125rem);
     }
@@ -328,6 +313,36 @@
       bottom: 0.25rem;
     }
 
+
+    .credits {
+      margin-top: 1rem;
+      text-align: right;
+    }
+
+    .credits a {
+      color: var(--color);
+    }
+
+    .typed-cursor {
+      display: none;
+    }
+
+    .typf {
+      margin-top: 50px;
+    }
+
+    .type {
+      position: absolute;
+      top: 260px;
+    }
+
+    .type2 {
+      position: absolute;
+      top: 61px;
+    }
+    #product img{
+      width:300px;
+    }
     @media (min-width: 40rem) {
       #milestone ul {
         grid-template-columns: 1fr var(--line-w) 1fr;
@@ -363,35 +378,8 @@
 
       #milestone ul li:nth-child(odd) .date {
         border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
-      }
-    }
-
-    .credits {
-      margin-top: 1rem;
-      text-align: right;
-    }
-
-    .credits a {
-      color: var(--color);
-    }
-
-    .typed-cursor {
-      display: none;
-    }
-
-    .typf {
-      margin-top: 50px;
-    }
-
-    .type {
-      position: absolute;
-      top: 260px;
-    }
-
-    .type2 {
-      position: absolute;
-      top: 61px;
-    }
+      } 
+    } 
   </style>
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 
@@ -413,14 +401,14 @@
 
 
       var typed = new Typed('#element', {
-        strings: ['투자를 똑똑하게', 'AI투자비서 어비스와 함께'],
+        strings: ['Invest Smartly'],
         typeSpeed: 90,
         startDelay: 1000,
         fadeOut: true,
         loop: true,
       });
       var typed = new Typed('#element2', {
-        strings: ['꾸준하게 위대하게'],
+        strings: ['consistently'],
         typeSpeed: 90,
         startDelay: 1000,
         fadeOut: true,
@@ -428,7 +416,7 @@
       });
 
       var typed = new Typed('#element3', {
-        strings: ['MAKE PERFECT.'],
+        strings: ['we caculate future.'],
         typeSpeed: 90,
         startDelay: 1000,
         fadeOut: true,
@@ -446,10 +434,11 @@
     </div>
     <nav>
       <ul>
-        <li><a href="#company">소개</a></li>
-        <li><a href="#milestone">마일스톤</a></li>
-        <li><a href="#culture">문화</a></li>
-        <li><a href="#repre">대표</a></li>
+        <li><a href="#company">Intro</a></li>
+        <li><a href="#milestone">Milestone</a></li>
+        <li><a href="#culture">Culture</a></li>
+        <li><a href="#repre">Repre</a></li>
+        <li><a href="#product">Product</a></li>
       </ul>
     </nav>
   </header>
@@ -458,53 +447,52 @@
       <img src="./assets/document.gif" class="ani_img">
       <h1 id="element" class="type"> </h1>
       <p class="typf">
-        어비스는 인공지능과 투자자의 경제적관점과 함께 성과를 내는 하이브리드모델 투자를 지향합니다.
-        어떠한 이슈가 발생했을 때 관심종목에 대해 빠른 대처를 할 수 있도록 AI분석리포트를 제공하며 어비스가 선정한 종목에 대한 분석리포트, 추천알림을 제공합니다.  
+        AVISS aims for a hybrid model investment that combines artificial intelligence and investors' economic perspectives to achieve performance.
+        We provide AI analysis reports to quickly respond to issues of interest, and offer analysis reports and recommendation alerts for stocks selected by AVISS.
       </p>
-<<<<<<< HEAD
-      <p>알림설정을 통해 가장 먼저 어비스를 경험해보세요. </p>
-=======
-      <p>똑똑한 인공지능 비서, 어비스를 알림설정을 통해 가장 먼저 체험해보세요.</p>
->>>>>>> ebbf74a9b1c14debb5c9ca6d90a51581bff7ad99
+      <p>Experience AVISS first by setting up notifications. </p>
+      <p>Experience the smart AI assistant, AVISS, first through notification settings.</p>
       <div>
-        <a href="https://forms.gle/fAKqbwJVhC1gcHfM8" target="_blank" class="notice">알림 신청</a>
+        <a href="https://forms.gle/fAKqbwJVhC1gcHfM8" target="_blank" class="notice">Apply for Notification</a>
       </div>
     </div>
 
     <div id="milestone">
       <h1 id="element2" class="type2"></h1>
       <p class="typf">
-        2024년 시리즈A 투자를 목표로 꾸준하게 활동을 이어가고 있습니다.
+        We are consistently working towards a Series A investment in 2024.
       </p>
       <ul>
         <li style="--accent-color:#00337C">
-          <div class="date">2022.03</div>
-          <div class="title">회사설립</div>
-          <div class="descr">자본금 2000만원, 열정, 실력에 대한 자신감 하나로 회사를 설립했습니다.</div>
+          <div class="date">March 2022</div>
+          <div class="title">Company Established</div>
+          <div class="descr">Founded the company with 20 million KRW in capital, passion, and confidence in our skills <a href="https://www.kised.or.kr/menu.es?mid=a10205010000" target="_blank" rel="noopener noreferrer">link</a></div>
         </li>
         <li style="--accent-color:#00337C">
-          <div class="date">2022.11</div>
-          <div class="title">최우수기업선정</div>
-          <div class="descr">경쟁률 10 : 1, 2022 예비창업패키지 핀테크부문 최우수기업으로 선정되었습니다.</div>
+          <div class="date">November 2022</div>
+          <div class="title">Selected as Excellent Company</div>
+          <div class="descr">Selected as the best company in the Fintech sector of the 2022 Startup Package with a 10:1 competition rate.</div>
         </li>
         <li style="--accent-color:#00337C">
-          <div class="date">2023.01</div>
-          <div class="title">상표권 및 특허 출원</div>
-<<<<<<< HEAD
-          <div class="descr">어비스 서비스에 관한 상표권 2개 등록, 종목선정 알고리즘에 대한 특허 2개 출원을 했습니다. </div>
-        </li> 
-        <li style="--accent-color:#00337C">
-          <div class="date">2023.02</div>
-          <div class="title">수익률 POC</div>
-          <div class="descr">특정기간 내 S&P500 대비 어비스 기반 투자한 수익률이 24% 더 발생했습니다.이후 안정성과 수익성에 대한 업데이트를 꾸준히 진행하고 있습니다. </div>
-=======
-          <div class="descr">내부적으로 필요한 상표권2개 등록, 특허 2개 출원을 완료했습니다. </div>
+          <div class="date">January 2023</div>
+          <div class="title">Trademark and Patent Application</div>
+          <div class="descr">Completed registration of 2 necessary trademarks and applied for 2 patents internally.</div>
         </li>  
         <li style="--accent-color:#00337C">
-          <div class="date">~2023.12</div>
-          <div class="title">수익률 - POC</div>
-          <div class="descr">실제 투자에 어비스를 활용하며 S&P500 대비 24% 이상의 수익률을 만드는 등 안정적이고 수익성 높은 모델을 만들고 있습니다. </div>
->>>>>>> ebbf74a9b1c14debb5c9ca6d90a51581bff7ad99
+          <div class="date">December 2023</div>
+          <div class="title">Profitability</div>
+          <div class="descr">Utilizing AVISS for actual investment, we are creating stable and profitable models with returns over 24% compared to the S&P500.</div>
+        </li> 
+        
+        <li style="--accent-color:#00337C">
+          <div class="date">March 2024</div>
+          <div class="title">Early start-up package</div>
+          <div class="descr">My company was selected for the initial start-up package and the youth start-up package.<a href="https://www.kised.or.kr/menu.es?mid=a10205020000" target="_blank" rel="noopener noreferrer">link</a></div>
+        </li> 
+        <li style="--accent-color:#00337C">
+          <div class="date">July 2024</div>
+          <div class="title">Profitability</div>
+          <div class="descr">With our products, we achieved the top 13% in the actual investment competition of Toss Securities and achieved the top 5% of the total return on Toss Securities in July.<a href="https://www.kised.or.kr/menu.es?mid=a10205020000" target="_blank" rel="noopener noreferrer">link</a></div>
         </li> 
       </ul>
     </div>
@@ -512,37 +500,54 @@
       <img src="./assets/social-media.gif" class="ani_img">
       <h1 id="element3" class="type"> </h1>
       <div class="typf">
-        <h3>빠르고 완벽하게</h3>
-        <p>어비스의 POC를 해야 할일이 있다면 최대한 빠르게 진행을 하고 들인 노력과는 상관없이 냉정하고 합리적으로 최고의 아키텍처 및 피쳐에 대해 고민합니다.</p>
+        <h3>Fast and Perfect</h3>
+        <p>If there is a task to be done for AVISS's POC, we proceed as quickly as possible and, regardless of the effort put in, we coolly and rationally consider the best architecture and features.</p>
       </div>
       <div>
-        <h3>신뢰하고 솔직하게</h3>
-        <p>서로를 신뢰하고 잘못이 있거나 모르는게 있다면 솔직하게 말하는 문화를 가집니다. 모르는 것을 두려워 하지 않고 솔직하지 않은 것을 두려워 합니다.
-        </p>
+        <h3>Trust and Honesty</h3>
+        <p>We have a culture of trusting each other and speaking honestly if there are mistakes or unknowns. We are not afraid of not knowing, but we are afraid of not being honest.</p>
       </div>
       <div>
-        <h3>책임감있고 자유롭게</h3>
-        <p>자신이 맡은 일에 대해 책임감있게 일하며 자유롭게 원하는 환경에서 일합니다. 6 - 12에서 선택적으로 출근시간을 정할 수 있으며 이에 따라 15 - 21 사이에서 선택적으로 퇴근 시간을
-          정할 수 있으며 매주 금요일에는 4시간만 일하면 됩니다. 또한 100% 재택근무로 원하는 환경에서 근무할 수 있습니다. 다만 필요시에는 오프라인 근무를 하게 됩니다.
-        </p>
+        <h3>Responsible and Free</h3>
+        <p>We work responsibly on our assigned tasks and freely in our desired environment. You can choose your start time between 6 and 12 and accordingly set your end time between 15 and 21, and you only work 4 hours on Fridays. Additionally, you can work 100% remotely in your preferred environment, but offline work may be required when necessary.</p>
       </div> 
     </div>
     <div id="repre">
-      <h1>대표, 주홍철</h1>
-      <img src="./assets/프로필.png" alt="" class="repre">
-      <h3>상위 0.1% 의 개발자</h3>
+      <h1>Representative, Hongcheol Joo</h1>
+      <img src="./assets/profile.png" alt="" class="repre">
+      <h3>Top 0.1% Developer</h3>
       <p>
-        네이버 출신 개발자, 오픈소스 개발자(Mocha.js), 국내 알고리즘 상위 0.1%이자 IT 베스트셀러 "면접을 위한 CS전공지식노트"를 집필했습니다.
+        Former Naver developer, open-source developer (Mocha.js), top 0.1% in domestic algorithms, and author of the IT bestseller "CS Knowledge Note for Interviews."
       </p>
-
-      <div>
-        <a href="https://blog.naver.com/jhc9639/222633934401" target="_blank" class="notice">프로필</a>
-      </div>
-    </div>
-
+      <p> - Before) NAVER Developer</p>
+      <p> - JavaScript Test Framework Mocha.js Contributor</p>
+      <p> - Baekjun Algorithm Top 0.1%</p>
+      <p> - 1st in the IT field, author of "CS Major Knowledge Note for Interviews" <a href="https://www.yes24.com/Product/Goods/108887922" target="_blank">link</a></p>
+      <p> - 63rd in the IT field, author of "MEVN, which creates and conquers real-time monitoring systems."</p>
+      
+      <p> - infrean: '10 Week Completion C++ Coding Test' and 'CS Essence of Knowledge' Instructor <a href="https://www.inflearn.com/users/70342/courses" target="_blank" rel="noopener noreferrer">link</a></p>
+      <p> - YouTube: Running the Big Stone Home Channel <a href="https://www.youtube.com/@kundol" target="_blank" rel="noopener noreferrer">link</a></p> 
+      <p> - 6th place in Kakao's Front End Challenge</p>  
+      <p> - Air Force Chief of Staff Award (related to military SW development)</p>
+      <p> - Army Missile Command Commander Award (related to military SW development)</p>  
+    </div> 
+    <div id="product">
+      <h1>product : AVISS report</h1>
+      <img src="./assets/1.png" alt="">  
+      <p>Graph Artificial Intelligence Model-based Investment Analysis Report for individual investors' quick response to issues allows individual investors to receive AI investment analysis reports within 5 minutes, which allows them to quickly identify appropriate countermeasures.</p>
+      <h1>product : AVISS signal</h1>
+      <img src="./assets/2.png" alt="">
+      <p>
+        Abyss Signal, which informs when to buy or sell based on patented algorithms
+      </p>
+      <h1>product : AVISS macroreport</h1>
+      <img src="./assets/3.png" alt="">
+      <p>A macroeconomic report that analyzes only the necessary macroeconomics.</p> 
+    </div> 
   </article>
   <footer>
-    <p> 161-27-01242 / 업태 : 정보통신업 / 종목 : 응용 소프트웨어 개발 및 공급업</p>
+    <p> 161-27-01242 / Industry: Information and Communication / Item: Application Software Development and Supply</p>
+    <p> It is a product that has been released since January 2024 and is currently testing beta.</p>
   </footer>
 </body>
 
