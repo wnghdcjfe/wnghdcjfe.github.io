@@ -398,7 +398,20 @@
       }
     }
   </style>
-  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script> 
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'ko,en',  // 포함할 언어 목록 ('ko'는 한국어, 'en'은 영어)
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
   <script>
     window.onload = () => {
@@ -444,7 +457,7 @@
 
 </head>
 
-<body>
+<body id="google_translate_element">
   <header>
     <div>
       <img src="./logo-white.png" alt="" class="logo">
