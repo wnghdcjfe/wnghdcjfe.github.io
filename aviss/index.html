@@ -18,22 +18,24 @@
   <meta property="og:site_name" content="어비스">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-  <link href="https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"> 
   <style>
     @font-face {
       font-family: 'GmarketSansMedium';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
       font-weight: normal;
       font-style: normal;
-    }
-
+    } 
     h1,
     h2,
     h3 {
       font-weight: normal;
     }
 
+    section p {
+      font-size: 1.5rem;
+      line-height: 2;
+    }
     * {
       font-family: 'GmarketSansMedium', sans-serif;
       word-wrap: break-word;
@@ -102,7 +104,7 @@
     }
 
     p {
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: rgba(0, 51, 124, 1);
       margin-bottom: 20px;
       font-weight: lighter;
@@ -187,18 +189,48 @@
 
     section {
       display: flex;
-      justify-content: center; 
+      justify-content: center;
       align-items: center;
-      gap: 50px; 
-      margin-bottom : 100px;
+      gap: 50px;
+      margin-bottom: 100px;
+      text-align: center;
     }
-    section div img{
-      width:50px !important;
+
+    @media (max-width: 768px) {
+      section{ 
+        margin-bottom: 0; 
+      } 
+      section div img{
+        text-align: left;
+      }
+      section p {
+        font-size: .9rem;
+        line-height: 1.5;
+        text-align: left;
+      }
+      article{
+        margin-top:0;
+      }
+      p {
+        font-size:1rem;
+      }
+      h1{
+        font-size: 1.3em; 
+      }
+      section {
+        display: block; 
+        gap: 0; /* 간격 제거 */
+      }
+      
+      section > * {
+        margin-bottom: 20px; /* 요소들 사이의 간격 추가 */
+      }
     }
-    section p {
-      font-size: 1.5rem;
-    line-height: 2;
+    section div img {
+      width: 50px !important;
     }
+ 
+
     /*
     마일스톤
     */
@@ -341,6 +373,7 @@
       background: #00337c;
       border-radius: 5px;
       color: white;
+      font-size:.8rem;
     }
 
     article li a {
@@ -408,21 +441,7 @@
         border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
       }
     }
-  </style>
-  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'ko,en', // 포함할 언어 목록 ('ko'는 한국어, 'en'은 영어)
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-    }
-  </script>
-
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-  </script>
+  </style> 
 
 
   <script>
@@ -455,15 +474,7 @@
         startDelay: 1000,
         fadeOut: true,
         loop: true,
-      });
-
-      var typed = new Typed('#element3', {
-        strings: ['we caculate future.'],
-        typeSpeed: 90,
-        startDelay: 1000,
-        fadeOut: true,
-        loop: true,
-      });
+      }); 
     }
   </script>
 
@@ -573,36 +584,67 @@
       <p> - Army Missile Command Commander Award (related to military SW development)</p>
     </div>
     <div id="product">
+
       <h1>Economic Issues Report to be Published in 5 Minutes</h1>
       <section>
         <img src="./assets/1.png" alt="">
         <div>
           <img src="./assets/quote.png" alt="">
           <p>
-            Graph Artificial Intelligence Model-based Investment Analysis Report for individual investors' quick response
-          to issues allows individual investors to receive AI investment analysis reports within 5 minutes, which allows
-          them to quickly identify appropriate countermeasures. 
+            Graph Artificial Intelligence Model-based Investment Analysis Report for individual investors' quick
+            response
+            to issues allows individual investors to receive AI investment analysis reports within 5 minutes, which
+            allows
+            them to quickly identify appropriate countermeasures.
           </p>
-        </div> 
+        </div>
       </section>
 
-      <h1>Patent-Applied Algorithm-Based Market Timing Signal</h1>
+      <h1>Corporate analysis</h1>
+      <section>
+        <img src="./assets/aviss1.png" alt="">
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            AVISS translates and summarizes Korean and English news about companies and analyzes whether they are
+            positive or negative.
+            It also provides analysis reports based on major indicators such as corporate EPS and financial statements.
+          </p>
+        </div>
+      </section>
+
+      <h1>Keyword Analysis</h1>
 
       <section>
-        <img src="./assets/2.png" alt="">
+        <img src="./assets/aviss2.png" alt="">
         <div>
           <img src="./assets/quote.png" alt="">
           <p>
 
-          Abyss Signal, which informs when to buy or sell based on patented algorithms. The picture above shows that the
-          pre-trash sell recommendation and the buy recommendation after the crash in 2024.07
+
+            AVISS analyzes keywords that investors are interested in and have a large volume of transactions and
+            expresses them in bubble charts.
 
           </p>
-        </div>  
+        </div>
       </section>
+      <h1>Economic calendar</h1>
+      <section>
+        <img src="./assets/aviss3.png" alt="">
+
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            On the day of the announcement of important economic indicators such as CPI announcement and FOMC
+            announcement, the volatility of almost all stocks increases. On the latest CPI announcement day, the S&P 500
+            fell by 6%. AVISS filters important schedules and informs you of essential schedules.
+          </p>
+        </div>
+      </section>
+
       <h1>A report that analyzes the macroeconomy</h1>
       <section>
-        <img src="./assets/3.png" alt="">
+        <img src="./assets/aviss4.png" alt="">
 
         <div>
           <img src="./assets/quote.png" alt="">
@@ -610,8 +652,21 @@
             Macroeconomic analysis is essential when judging buying or selling stocks. We provide a report that analyzes
             important macroeconomic indicators determined by our company with our model.
           </p>
-        </div>  
+        </div>
+      </section>
 
+      <h1>Market Timing Signal</h1>
+      <section>
+        <img src="./assets/aviss5.png" alt="">
+
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            Based on the patented algorithm, AVISS tells you when to buy or sell a stock. Recently, SK Hynix and Tesla
+            have almost accurately timed their purchase and sale, and they also recorded the top 13% in the actual Toss
+            Securities investment competition.
+          </p>
+        </div>
       </section>
     </div>
   </article>
@@ -621,4 +676,20 @@
   </footer>
 </body>
 
+<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'ko,en', // 포함할 언어 목록 ('ko'는 한국어, 'en'은 영어)
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
 </html>
+ 
