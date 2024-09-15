@@ -186,9 +186,19 @@
     }
 
     section {
-      padding: 20px;
+      display: flex;
+      justify-content: center; 
+      align-items: center;
+      gap: 50px; 
+      margin-bottom : 100px;
     }
-
+    section div img{
+      width:50px !important;
+    }
+    section p {
+      font-size: 1.5rem;
+    line-height: 2;
+    }
     /*
     마일스톤
     */
@@ -330,12 +340,13 @@
       padding: 5px;
       background: #00337c;
       border-radius: 5px;
-      color: white; 
+      color: white;
     }
-    article li a{
-    position: absolute; 
-    bottom: 7px;
-    right: 10px;
+
+    article li a {
+      position: absolute;
+      bottom: 7px;
+      right: 10px;
     }
 
     .typed-cursor {
@@ -398,19 +409,20 @@
       }
     }
   </style>
-  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script> 
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 
-<script type="text/javascript">
+  <script type="text/javascript">
     function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'en',
-            includedLanguages: 'ko,en',  // 포함할 언어 목록 ('ko'는 한국어, 'en'은 영어)
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ko,en', // 포함할 언어 목록 ('ko'는 한국어, 'en'은 영어)
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
     }
-</script>
+  </script>
 
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
 
 
   <script>
@@ -466,7 +478,6 @@
       <ul>
         <li><a href="#company">Intro</a></li>
         <li><a href="#milestone">Milestone</a></li>
-        <li><a href="#culture">Culture</a></li>
         <li><a href="#repre">Repre</a></li>
         <li><a href="#product">Product</a></li>
       </ul>
@@ -499,14 +510,14 @@
           <div class="date">March 2022</div>
           <div class="title">Company Established</div>
           <div class="descr">Founded the company with 20 million KRW in capital, passion, and confidence in our skills
-            </div>
+          </div>
         </li>
         <li style="--accent-color:#00337C">
           <div class="date">November 2022</div>
           <div class="title">Selected as Excellent Company(예창패)</div>
           <div class="descr">Selected as the best company in the Fintech sector of the 2022 Startup Package with a 10:1
             competition rate. <a href="https://www.kised.or.kr/menu.es?mid=a10205010000" target="_blank"
-            rel="noopener noreferrer">link</a></div>
+              rel="noopener noreferrer">link</a></div>
         </li>
         <li style="--accent-color:#00337C">
           <div class="date">January 2023</div>
@@ -524,8 +535,9 @@
         <li style="--accent-color:#00337C">
           <div class="date">March 2024</div>
           <div class="title">Early start-up package</div>
-          <div class="descr">My company was selected for the initial start-up package and the youth start-up package.(초창패)<a
-              href="https://www.kised.or.kr/menu.es?mid=a10205020000" target="_blank" rel="noopener noreferrer">link</a>
+          <div class="descr">My company was selected for the initial start-up package and the youth start-up
+            package.(초창패)<a href="https://www.kised.or.kr/menu.es?mid=a10205020000" target="_blank"
+              rel="noopener noreferrer">link</a>
           </div>
         </li>
         <li style="--accent-color:#00337C">
@@ -536,27 +548,6 @@
           </div>
         </li>
       </ul>
-    </div>
-    <div id="culture">
-      <img src="./assets/social-media.gif" class="ani_img">
-      <h1 id="element3" class="type"> </h1>
-      <div class="typf">
-        <h3>Fast and Perfect</h3>
-        <p>If there is a task to be done for AVISS's POC, we proceed as quickly as possible and, regardless of the
-          effort put in, we coolly and rationally consider the best architecture and features.</p>
-      </div>
-      <div>
-        <h3>Trust and Honesty</h3>
-        <p>We have a culture of trusting each other and speaking honestly if there are mistakes or unknowns. We are not
-          afraid of not knowing, but we are afraid of not being honest.</p>
-      </div>
-      <div>
-        <h3>Responsible and Free</h3>
-        <p>We work responsibly on our assigned tasks and freely in our desired environment. You can choose your start
-          time between 6 and 12 and accordingly set your end time between 15 and 21, and you only work 4 hours on
-          Fridays. Additionally, you can work 100% remotely in your preferred environment, but offline work may be
-          required when necessary.</p>
-      </div>
     </div>
     <div id="repre">
       <h1>Representative, Hongcheol Joo</h1>
@@ -582,19 +573,46 @@
       <p> - Army Missile Command Commander Award (related to military SW development)</p>
     </div>
     <div id="product">
-      <h1>Issue report</h1>
-      <img src="./assets/1.png" alt="">
-      <p>Graph Artificial Intelligence Model-based Investment Analysis Report for individual investors' quick response
-        to issues allows individual investors to receive AI investment analysis reports within 5 minutes, which allows
-        them to quickly identify appropriate countermeasures.</p>
-      <h1>market signal</h1>
-      <img src="./assets/2.png" alt="">
-      <p>
-        Abyss Signal, which informs when to buy or sell based on patented algorithms. The picture above shows that the pre-trash sell recommendation and the buy recommendation after the crash in 2024.07
-      </p>
-      <h1>Macro report</h1>
-      <img src="./assets/3.png" alt="">
-      <p>Macroeconomic analysis is essential when judging buying or selling stocks. We provide a report that analyzes important macroeconomic indicators determined by our company with our model.</p>
+      <h1>Economic Issues Report to be Published in 5 Minutes</h1>
+      <section>
+        <img src="./assets/1.png" alt="">
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            Graph Artificial Intelligence Model-based Investment Analysis Report for individual investors' quick response
+          to issues allows individual investors to receive AI investment analysis reports within 5 minutes, which allows
+          them to quickly identify appropriate countermeasures. 
+          </p>
+        </div> 
+      </section>
+
+      <h1>Patent-Applied Algorithm-Based Market Timing Signal</h1>
+
+      <section>
+        <img src="./assets/2.png" alt="">
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+
+          Abyss Signal, which informs when to buy or sell based on patented algorithms. The picture above shows that the
+          pre-trash sell recommendation and the buy recommendation after the crash in 2024.07
+
+          </p>
+        </div>  
+      </section>
+      <h1>A report that analyzes the macroeconomy</h1>
+      <section>
+        <img src="./assets/3.png" alt="">
+
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            Macroeconomic analysis is essential when judging buying or selling stocks. We provide a report that analyzes
+            important macroeconomic indicators determined by our company with our model.
+          </p>
+        </div>  
+
+      </section>
     </div>
   </article>
   <footer>
