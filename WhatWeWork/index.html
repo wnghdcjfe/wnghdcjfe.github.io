@@ -50,6 +50,8 @@
     <script src="js/index-1e3bf7305186004e.js" defer=""></script>
     <script src="js/_buildManifest.js" defer=""></script>
     <script src="js/_ssgManifest.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
         h1 {
 
@@ -80,11 +82,16 @@
         .flex-1{
             overflow-y: hidden;
         }
+        #background {  
+    position: fixed; 
+    z-index: 1;
+        }
     </style>
 </head>
 
 <body>
-    <div id="__next">
+    <div id="background"></div> 
+    <div id="__next"> 
         <div class="flex w-full flex-row">
             <div class="flex-1 overflow-y-auto">
                 <div class="fadein relative bg-black">
@@ -207,6 +214,7 @@
             </div>
         </div>
     </div>
+ 
 </body>
 <script> 
 document.addEventListener("DOMContentLoaded", function () {
@@ -226,6 +234,62 @@ document.addEventListener("DOMContentLoaded", function () {
     fadeInElements.forEach(element => observer.observe(element));
 });
 
+</script>
+<script>
+    let scene, camera, renderer, particles, particleArray = [];
+
+    function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 50;
+
+        renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('background').appendChild(renderer.domElement);
+
+        // 입자 생성
+        particles = new THREE.BufferGeometry();
+        const particleCount = 1000;
+        const positions = new Float32Array(particleCount * 3);
+        
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 200; // x
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 200; // y
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 200; // z
+        }
+        
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
+        particleArray = new THREE.Points(particles, particleMaterial);
+        scene.add(particleArray);
+
+        // 마우스 이벤트
+        document.addEventListener('mousemove', onMouseMove);
+
+        animate();
+    }
+
+    // 마우스 움직임에 따른 입자 위치 변경
+    function onMouseMove(event) {
+        const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        particleArray.rotation.x = mouseY * 0.1;
+        particleArray.rotation.y = mouseX * 0.1;
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+
+    // 화면 크기 변경 시 리사이즈 처리
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    });
+
+    init();
 </script>
 
 </html>
