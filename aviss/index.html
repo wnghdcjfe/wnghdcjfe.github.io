@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -9,31 +9,34 @@
   <meta name="keywords" content="team quantumuse">
   <meta name="Resource-type" content="Document">
   <meta name="robots" content="ALL">
+  <meta http-equiv="Content-Language" content="en"> 
   <link rel="icon" href="./favicon.ico" />
   <link rel="shortcut icon" href="./favicon.ico" />
-  <title>어비스를 소개합니다.</title>
+  <title>Introduce AVISS</title>
   <meta property="og:locale" content="ko_KR">
   <meta property="og:image" content="https://wnghdcjfe.github.io/aviss/og-image.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="어비스">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-  <link href="https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"> 
   <style>
     @font-face {
       font-family: 'GmarketSansMedium';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
       font-weight: normal;
       font-style: normal;
-    }
-
+    } 
     h1,
     h2,
     h3 {
       font-weight: normal;
     }
 
+    section p {
+      font-size: 1.5rem;
+      line-height: 2;
+    }
     * {
       font-family: 'GmarketSansMedium', sans-serif;
       word-wrap: break-word;
@@ -48,7 +51,11 @@
     }
 
     article>div {
+<<<<<<< HEAD
       padding-top: 80px; 
+=======
+      padding-top: 80px;
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
     }
 
     a {
@@ -102,7 +109,7 @@
     }
 
     p {
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: rgba(0, 51, 124, 1);
       margin-bottom: 20px;
       font-weight: lighter;
@@ -142,9 +149,10 @@
     }
 
     @media only screen and (max-width: 900px) {
-      #milestone ul{
+      #milestone ul {
         --row-gap: 4rem !important;
       }
+
       article {
         width: 100%;
       }
@@ -185,8 +193,48 @@
     }
 
     section {
-      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      margin-bottom: 100px;
+      text-align: center;
     }
+
+    @media (max-width: 768px) {
+      section{ 
+        margin-bottom: 0; 
+      } 
+      section div img{
+        text-align: left;
+      }
+      section p {
+        font-size: .9rem;
+        line-height: 1.5;
+        text-align: left;
+      }
+      article{
+        margin-top:0;
+      }
+      p {
+        font-size:1rem;
+      }
+      h1{
+        font-size: 1.3em; 
+      }
+      section {
+        display: block; 
+        gap: 0; /* 간격 제거 */
+      }
+      
+      section > * {
+        margin-bottom: 20px; /* 요소들 사이의 간격 추가 */
+      }
+    }
+    section div img {
+      width: 50px !important;
+    }
+ 
 
     /*
     마일스톤
@@ -221,7 +269,7 @@
       margin-bottom: var(--row-gap);
     }
     */
-    #milestone ul li{
+    #milestone ul li {
       margin-bottom: var(--row-gap);
     }
 
@@ -303,7 +351,12 @@
     #milestone ul li .descr {
       padding-block-end: 1.5rem;
       font-weight: 300;
+<<<<<<< HEAD
     } 
+=======
+    }
+
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
     #milestone ul li .title::before {
       bottom: calc(100% + 0.125rem);
     }
@@ -323,6 +376,24 @@
       color: var(--color);
     }
 
+<<<<<<< HEAD
+=======
+    article li a,
+    #repre a {
+      padding: 5px;
+      background: #00337c;
+      border-radius: 5px;
+      color: white;
+      font-size:.8rem;
+    }
+
+    article li a {
+      position: absolute;
+      bottom: 7px;
+      right: 10px;
+    }
+
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
     .typed-cursor {
       display: none;
     }
@@ -340,9 +411,17 @@
       position: absolute;
       top: 61px;
     }
+<<<<<<< HEAD
     #product img{
       width:300px;
     }
+=======
+
+    #product img {
+      width: 300px;
+    }
+
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
     @media (min-width: 40rem) {
       #milestone ul {
         grid-template-columns: 1fr var(--line-w) 1fr;
@@ -378,10 +457,17 @@
 
       #milestone ul li:nth-child(odd) .date {
         border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
+<<<<<<< HEAD
       } 
     } 
   </style>
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+=======
+      }
+    }
+  </style> 
+
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
 
   <script>
     window.onload = () => {
@@ -400,19 +486,29 @@
       fadeIn();
 
 
+<<<<<<< HEAD
       var typed = new Typed('#element', {
+=======
+      new Typed('#element', {
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
         strings: ['Invest Smartly'],
         typeSpeed: 90,
         startDelay: 1000,
         fadeOut: true,
         loop: true,
       });
+<<<<<<< HEAD
       var typed = new Typed('#element2', {
         strings: ['consistently'],
+=======
+      new Typed('#element2', {
+        strings: ['Consistently and Great'],
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
         typeSpeed: 90,
         startDelay: 1000,
         fadeOut: true,
         loop: true,
+<<<<<<< HEAD
       });
 
       var typed = new Typed('#element3', {
@@ -422,12 +518,15 @@
         fadeOut: true,
         loop: true,
       });
+=======
+      }); 
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
     }
   </script>
 
 </head>
 
-<body>
+<body id="google_translate_element">
   <header>
     <div>
       <img src="./logo-white.png" alt="" class="logo">
@@ -436,7 +535,10 @@
       <ul>
         <li><a href="#company">Intro</a></li>
         <li><a href="#milestone">Milestone</a></li>
+<<<<<<< HEAD
         <li><a href="#culture">Culture</a></li>
+=======
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
         <li><a href="#repre">Repre</a></li>
         <li><a href="#product">Product</a></li>
       </ul>
@@ -447,10 +549,18 @@
       <img src="./assets/document.gif" class="ani_img">
       <h1 id="element" class="type"> </h1>
       <p class="typf">
+<<<<<<< HEAD
         AVISS aims for a hybrid model investment that combines artificial intelligence and investors' economic perspectives to achieve performance.
         We provide AI analysis reports to quickly respond to issues of interest, and offer analysis reports and recommendation alerts for stocks selected by AVISS.
       </p>
       <p>Experience AVISS first by setting up notifications. </p>
+=======
+        AVISS aims for a hybrid model investment that combines artificial intelligence and investors' economic
+        perspectives to achieve performance.
+        We provide AI analysis reports to quickly respond to issues of interest, and offer analysis reports and
+        recommendation alerts for stocks selected by AVISS.
+      </p> 
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
       <p>Experience the smart AI assistant, AVISS, first through notification settings.</p>
       <div>
         <a href="https://forms.gle/fAKqbwJVhC1gcHfM8" target="_blank" class="notice">Apply for Notification</a>
@@ -466,16 +576,29 @@
         <li style="--accent-color:#00337C">
           <div class="date">March 2022</div>
           <div class="title">Company Established</div>
+<<<<<<< HEAD
           <div class="descr">Founded the company with 20 million KRW in capital, passion, and confidence in our skills <a href="https://www.kised.or.kr/menu.es?mid=a10205010000" target="_blank" rel="noopener noreferrer">link</a></div>
         </li>
         <li style="--accent-color:#00337C">
           <div class="date">November 2022</div>
           <div class="title">Selected as Excellent Company</div>
           <div class="descr">Selected as the best company in the Fintech sector of the 2022 Startup Package with a 10:1 competition rate.</div>
+=======
+          <div class="descr">Founded the company with 20 million KRW in capital, passion, and confidence in our skills
+          </div>
+        </li>
+        <li style="--accent-color:#00337C">
+          <div class="date">November 2022</div>
+          <div class="title">Selected as Excellent Company(예창패)</div>
+          <div class="descr">Selected as the best company in the Fintech sector of the 2022 Startup Package with a 10:1
+            competition rate. <a href="https://www.kised.or.kr/menu.es?mid=a10205010000" target="_blank"
+              rel="noopener noreferrer">link</a></div>
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
         </li>
         <li style="--accent-color:#00337C">
           <div class="date">January 2023</div>
           <div class="title">Trademark and Patent Application</div>
+<<<<<<< HEAD
           <div class="descr">Completed registration of 2 necessary trademarks and applied for 2 patents internally.</div>
         </li>  
         <li style="--accent-color:#00337C">
@@ -512,16 +635,51 @@
         <p>We work responsibly on our assigned tasks and freely in our desired environment. You can choose your start time between 6 and 12 and accordingly set your end time between 15 and 21, and you only work 4 hours on Fridays. Additionally, you can work 100% remotely in your preferred environment, but offline work may be required when necessary.</p>
       </div> 
     </div>
+=======
+          <div class="descr">Completed registration of 2 necessary trademarks and applied for 2 patents internally.
+          </div>
+        </li>
+        <li style="--accent-color:#00337C">
+          <div class="date">December 2023</div>
+          <div class="title">Profitability</div>
+          <div class="descr">Utilizing AVISS for actual investment, we are creating stable and profitable models with
+            returns over 24% compared to the S&P500.</div>
+        </li>
+
+        <li style="--accent-color:#00337C">
+          <div class="date">March 2024</div>
+          <div class="title">Early start-up package</div>
+          <div class="descr">My company was selected for the initial start-up package and the youth start-up
+            package.(초창패)<a href="https://www.kised.or.kr/menu.es?mid=a10205020000" target="_blank"
+              rel="noopener noreferrer">link</a>
+          </div>
+        </li>
+        <li style="--accent-color:#00337C">
+          <div class="date">July 2024</div>
+          <div class="title">Profitability</div>
+          <div class="descr">With our products, we achieved the top 13% in the actual investment competition of Toss
+            Securities and achieved the top 5% of the total return on Toss Securities in July.(토스증권 수익 상위 5%)
+          </div>
+        </li>
+      </ul>
+    </div>
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
     <div id="repre">
       <h1>Representative, Hongcheol Joo</h1>
       <img src="./assets/profile.png" alt="" class="repre">
       <h3>Top 0.1% Developer</h3>
       <p>
+<<<<<<< HEAD
         Former Naver developer, open-source developer (Mocha.js), top 0.1% in domestic algorithms, and author of the IT bestseller "CS Knowledge Note for Interviews."
+=======
+        Former Naver developer, open-source developer (Mocha.js), top 0.1% in domestic algorithms, and author of the IT
+        bestseller "CS Knowledge Note for Interviews."
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
       </p>
       <p> - Before) NAVER Developer</p>
       <p> - JavaScript Test Framework Mocha.js Contributor</p>
       <p> - Baekjun Algorithm Top 0.1%</p>
+<<<<<<< HEAD
       <p> - 1st in the IT field, author of "CS Major Knowledge Note for Interviews" <a href="https://www.yes24.com/Product/Goods/108887922" target="_blank">link</a></p>
       <p> - 63rd in the IT field, author of "MEVN, which creates and conquers real-time monitoring systems."</p>
       
@@ -544,6 +702,106 @@
       <img src="./assets/3.png" alt="">
       <p>A macroeconomic report that analyzes only the necessary macroeconomics.</p> 
     </div> 
+=======
+      <p> - 1st in the IT field, author of "CS Major Knowledge Note for Interviews" <a
+          href="https://www.yes24.com/Product/Goods/108887922" target="_blank">link</a></p>
+      <p> - 63rd in the IT field, author of "MEVN, which creates and conquers real-time monitoring systems."</p>
+
+      <p> - infrean: '10 Week Completion C++ Coding Test' and 'CS Essence of Knowledge' Instructor <a
+          href="https://www.inflearn.com/users/70342/courses" target="_blank" rel="noopener noreferrer">link</a></p>
+      <p> - YouTube: Running the Big Stone Home Channel <a href="https://www.youtube.com/@kundol" target="_blank"
+          rel="noopener noreferrer">link</a></p>
+      <p> - 6th place in Kakao's Front End Challenge</p>
+      <p> - Air Force Chief of Staff Award (related to military SW development)</p>
+      <p> - Army Missile Command Commander Award (related to military SW development)</p>
+    </div>
+    <div id="product">
+
+      <h1>Economic Issues Report</h1>
+      <section>
+        <img src="./assets/1.png" alt="">
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            Graph Artificial Intelligence Model-based Investment Analysis Report for individual investors' quick
+            response
+            to issues allows individual investors to receive AI investment analysis reports within 5 minutes, which
+            allows
+            them to quickly identify appropriate countermeasures.
+          </p>
+        </div>
+      </section>
+
+      <h1>Corporate analysis</h1>
+      <section>
+        <img src="./assets/aviss2.png" alt="">
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            AVISS translates and summarizes Korean and English news about companies and analyzes whether they are
+            positive or negative.
+            It also provides analysis reports based on major indicators such as corporate EPS and financial statements.
+          </p>
+        </div>
+      </section>
+
+      <h1>Keyword Analysis</h1>
+
+      <section>
+        <img src="./assets/aviss3.png" alt="">
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+
+
+            AVISS analyzes keywords that investors are interested in and have a large volume of transactions and
+            expresses them in bubble charts.
+
+          </p>
+        </div>
+      </section>
+      <h1>Economic calendar</h1>
+      <section>
+        <img src="./assets/aviss4.png" alt="">
+
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            On the day of the announcement of important economic indicators such as CPI announcement and FOMC
+            announcement, the volatility of almost all stocks increases. On the latest CPI announcement day, the S&P 500
+            fell by 6%. AVISS filters important schedules and informs you of essential schedules.
+          </p>
+        </div>
+      </section>
+
+      <h1>A report that analyzes the macroeconomy</h1>
+      <section>
+        <img src="./assets/aviss5.png" alt="">
+
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            Macroeconomic analysis is essential when judging buying or selling stocks. We provide a report that analyzes
+            important macroeconomic indicators determined by our company with our model.
+          </p>
+        </div>
+      </section>
+
+      <h1>Market Timing Signal</h1>
+      <section>
+        <img src="./assets/aviss1.png" alt="">
+
+        <div>
+          <img src="./assets/quote.png" alt="">
+          <p>
+            Based on the patented algorithm, AVISS tells you when to buy or sell a stock. Recently, SK Hynix and Tesla
+            have almost accurately timed their purchase and sale, and they also recorded the top 13% in the actual Toss
+            Securities investment competition.
+          </p>
+        </div>
+      </section>
+    </div>
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
   </article>
   <footer>
     <p> 161-27-01242 / Industry: Information and Communication / Item: Application Software Development and Supply</p>
@@ -551,4 +809,24 @@
   </footer>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'ko,en', // 포함할 언어 목록 ('ko'는 한국어, 'en'은 영어)
+      layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+    }, 'google_translate_element');
+  }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+</html>
+ 
+>>>>>>> 37ba37370ce0c092ad10290c0dc5927d316a9377
