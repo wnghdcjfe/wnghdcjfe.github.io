@@ -66,6 +66,20 @@
                 font-size: 2rem;
             }
         }
+
+        .fadein {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fadein.show {
+            opacity: 1;
+            transform: translateY(0);
+        } 
+        .flex-1{
+            overflow-y: hidden;
+        }
     </style>
 </head>
 
@@ -73,7 +87,7 @@
     <div id="__next">
         <div class="flex w-full flex-row">
             <div class="flex-1 overflow-y-auto">
-                <div class="relative bg-black">
+                <div class="fadein relative bg-black">
                     <div class="absolute bottom-0 z-20 h-24 w-full bg-gradient-to-b from-transparent to-black"></div>
                     <div class="relative z-20 h-screen h-[100svh] bg-transparent text-white">
                         <div class="absolute h-full w-full bg-black opacity-60"></div>
@@ -91,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="grid place-content-center gap-12 bg-black px-5 py-16 text-white sm:gap-16">
+                <div class="fadein grid place-content-center gap-12 bg-black px-5 py-16 text-white sm:gap-16">
                     <div class="grid gap-4 sm:gap-5">
                         <div
                             class="react-reveal grid h-16 w-16 place-content-center place-self-center rounded-full bg-[#FFFFFF1a] sm:h-20 sm:w-20">
@@ -110,7 +124,7 @@
                             주홍철
 
                         </h2>
-                        <p>현) 핀테크 스타트업, 어비스 대표</p> 
+                        <p>핀테크 스타트업, 어비스 대표</p>
                         <p>베스트셀러, 면접을 위한 CS전공지식노트 저자</p>
                     </div>
 
@@ -133,10 +147,9 @@
                             김인범
 
                         </h2>
-                        <p>현) 스타트업 데이터엔지니어</p>
-                        <p>현) MongoDB Korea 운영진</p>
-                        <p>전) SK C&C 데이터엔지니어</p>
-                    </div> 
+                        <p>스타트업 데이터엔지니어</p>
+                        <p>MongoDB Korea 운영진</p>
+                    </div>
                     <div>
                         <h1>
                             KT 챗봇 온 듀티
@@ -180,13 +193,13 @@
                             정지용
                         </h2>
                         <p>취준생</p>
-                    </div> 
+                    </div>
                     <div>
                         <h1>
                             사노바로 살아남기
                         </h1>
                         <h2>
-                            김지훈 
+                            김지훈
                         </h2>
                         <p>캐치테이블 백엔드 개발자</p>
                     </div>
@@ -195,5 +208,24 @@
         </div>
     </div>
 </body>
+<script> 
+document.addEventListener("DOMContentLoaded", function () {
+    const fadeInElements = document.querySelectorAll('.fadein');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');  // 뷰포트에 들어올 때 'show' 클래스 추가
+                observer.unobserve(entry.target);    // 이미 보여진 요소는 다시 관찰하지 않음
+            }
+        });
+    }, {
+        threshold: 0.1  // 요소가 10% 보일 때 애니메이션 시작
+    });
+
+    fadeInElements.forEach(element => observer.observe(element));
+});
+
+</script>
 
 </html>
