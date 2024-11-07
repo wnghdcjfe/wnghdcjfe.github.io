@@ -53,12 +53,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
-        .logobook{
-            width:100px;
-            display: inline-block;
-            margin-right: 20px;
+        .logobook {
+            width: 100px;
+            height: 100px;
             border-radius: 15px;
         }
+
+        .huwon {
+            display: flex;
+            justify-content: space-around;
+            width: 400px;
+        }
+
         h1 {
 
             font-size: 1.2rem;
@@ -84,20 +90,22 @@
         .fadein.show {
             opacity: 1;
             transform: translateY(0);
-        } 
-        .flex-1{
+        }
+
+        .flex-1 {
             overflow-y: hidden;
         }
-        #background {  
-    position: fixed; 
-    z-index: 1;
+
+        #background {
+            position: fixed;
+            z-index: 1;
         }
     </style>
 </head>
 
 <body>
-    <div id="background"></div> 
-    <div id="__next"> 
+    <div id="background"></div>
+    <div id="__next">
         <div class="flex w-full flex-row">
             <div class="flex-1 overflow-y-auto">
                 <div class="fadein relative bg-black">
@@ -150,6 +158,7 @@
 
                         </h2>
                         <p>카카오 SW엔지니어</p>
+                        <p>나만의 대화 - 개발자</p>
                     </div>
 
                     <div>
@@ -161,7 +170,7 @@
 
                         </h2>
                         <p>RSQUARE 데이터엔지니어</p>
-                        <p>MongoDB Korea 운영진</p>
+                        <p>MongoDB Korea 운영진 / 몽고DB 완벽 가이드 번역자</p>
                     </div>
 
 
@@ -174,7 +183,7 @@
                             최재송
 
                         </h2>
-                        <p>프리랜서 백엔드 개발자</p>
+                        <p>프리랜서 백엔드 2년차 개발자</p>
                     </div>
 
                     <div>
@@ -185,21 +194,10 @@
                             황진성
 
                         </h2>
-                        <p>컬리 백엔드 개발자</p>
-                    </div> 
-
-                    <div>
-                        <h1>
-                            KT 챗봇 온 듀티
-
-                        </h1>
-                        <h2>
-                            조영래
-
-                        </h2>
-                        <p>KT SW 엔지니어</p>
+                        <p>컬리 백엔드 개발자 / JSCode 멘토</p>
+                        <p>Spring Boot, Batch contributor</p>
                     </div>
-  
+
                     <div>
                         <h1>
                             사노비로 살아남기
@@ -207,7 +205,8 @@
                         <h2>
                             김지훈
                         </h2>
-                        <p>캐치테이블 백엔드 개발자</p>
+                        <p>캐치테이블 백엔드 4년차 개발자</p>
+                        <p>전) MakinaRocks </p>
                     </div>
 
                     <div>
@@ -219,6 +218,7 @@
                             정지용
                         </h2>
                         <p>취준생</p>
+                        <p>2024 제 11회 SW 개발보안대회 최우수상</p>
                     </div>
                 </div>
 
@@ -232,36 +232,36 @@
                         </div>
                         <h2 class="react-reveal text-center text-lg font-bold sm:text-2xl">후원사</h2>
                     </div>
-                    <div>
-                        <img src="./imgs/1.jpg" alt="" class="logobook"> 
-                        <img src="./imgs/2.jpg" alt="" class="logobook"> 
+                    <div class="huwon">
+                        <img src="./imgs/1.jpg" alt="" class="logobook">
+                        <img src="./imgs/2.jpg" alt="" class="logobook">
 
-                        <img src="./imgs/3.png" alt="" class="logobook"> 
-                    </div>  
+                        <img src="./imgs/3.png" alt="" class="logobook">
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
- 
+
 </body>
-<script> 
-document.addEventListener("DOMContentLoaded", function () {
-    const fadeInElements = document.querySelectorAll('.fadein');
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const fadeInElements = document.querySelectorAll('.fadein');
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');  // 뷰포트에 들어올 때 'show' 클래스 추가
-                observer.unobserve(entry.target);    // 이미 보여진 요소는 다시 관찰하지 않음
-            }
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');  // 뷰포트에 들어올 때 'show' 클래스 추가
+                    observer.unobserve(entry.target);    // 이미 보여진 요소는 다시 관찰하지 않음
+                }
+            });
+        }, {
+            threshold: 0.1  // 요소가 10% 보일 때 애니메이션 시작
         });
-    }, {
-        threshold: 0.1  // 요소가 10% 보일 때 애니메이션 시작
-    });
 
-    fadeInElements.forEach(element => observer.observe(element));
-});
+        fadeInElements.forEach(element => observer.observe(element));
+    });
 
 </script>
 <script>
@@ -280,13 +280,13 @@ document.addEventListener("DOMContentLoaded", function () {
         particles = new THREE.BufferGeometry();
         const particleCount = 1000;
         const positions = new Float32Array(particleCount * 3);
-        
+
         for (let i = 0; i < particleCount; i++) {
             positions[i * 3] = (Math.random() - 0.5) * 200; // x
             positions[i * 3 + 1] = (Math.random() - 0.5) * 200; // y
             positions[i * 3 + 2] = (Math.random() - 0.5) * 200; // z
         }
-        
+
         particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         const particleMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
         particleArray = new THREE.Points(particles, particleMaterial);
