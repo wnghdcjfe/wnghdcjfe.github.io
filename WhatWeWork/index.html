@@ -146,7 +146,7 @@
 
                         </h2>
                         <p>핀테크 스타트업, 어비스 대표</p>
-                        <p>베스트셀러, 면접을 위한 CS전공지식노트 저자</p>
+                        <p>전) 네이버개발자 / 면접을 위한 CS전공지식노트 저자</p>
                     </div>
 
                     <div>
@@ -157,8 +157,7 @@
                             조영상
 
                         </h2>
-                        <p>카카오 SW엔지니어</p>
-                        <p>나만의 대화 - 개발자</p>
+                        <p>카카오 SW엔지니어</p> 
                     </div>
 
                     <div>
@@ -270,7 +269,7 @@
     function init() {
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 50;
+        camera.position.z = 100;
 
         renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -278,23 +277,38 @@
 
         // 입자 생성
         particles = new THREE.BufferGeometry();
-        const particleCount = 1000;
+        const particleCount = 1500;
         const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
 
         for (let i = 0; i < particleCount; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 200; // x
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 200; // y
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 200; // z
+            positions[i * 3] = (Math.random() - 0.5) * 400; // x
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 400; // y
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 400; // z
+
+            // const colorIntensity = Math.random();
+            // colors[i * 3] = colorIntensity; // R
+            // colors[i * 3 + 1] = colorIntensity * 0.6; // G
+            // colors[i * 3 + 2] = colorIntensity * 0.8; // B
+            colors[i * 3] = Math.random(); // R
+            colors[i * 3 + 1] = Math.random(); // G
+            colors[i * 3 + 2] = Math.random(); // B
         }
 
         particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particleMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
+        particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.6,  // 크기를 조정
+            vertexColors: true,  // 색상에 따라 입자의 색상 적용
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending  // 블렌딩으로 입자가 겹쳐졌을 때 부드럽게 보이도록
+        });
         particleArray = new THREE.Points(particles, particleMaterial);
         scene.add(particleArray);
 
         // 마우스 이벤트
         document.addEventListener('mousemove', onMouseMove);
-
         animate();
     }
 
@@ -302,12 +316,15 @@
     function onMouseMove(event) {
         const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
         const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        particleArray.rotation.x = mouseY * 0.1;
-        particleArray.rotation.y = mouseX * 0.1;
+
+        // 마우스 움직임에 따라 입자가 부드럽게 회전하도록 애니메이션 추가
+        particleArray.rotation.x += (mouseY * 0.1 - particleArray.rotation.x) * 0.05;
+        particleArray.rotation.y += (mouseX * 0.1 - particleArray.rotation.y) * 0.05;
     }
 
     function animate() {
         requestAnimationFrame(animate);
+        particleArray.rotation.z += 0.0001; // 지속적인 부드러운 회전 효과 추가
         renderer.render(scene, camera);
     }
 
