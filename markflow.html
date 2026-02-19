@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MARKFLOW — 마케팅 자동화</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --surface: #111111;
+        --card: #161616;
+        --accent: #e8ff47;
+        --accent2: #ff4757;
+        --muted: #3a3a3a;
+        --text: #f0f0f0;
+        --text-dim: #777;
+        --border: #222;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Noto Sans KR", sans-serif;
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      /* Custom cursor */
+      .cursor {
+        width: 12px;
+        height: 12px;
+        background: var(--accent);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s;
+        mix-blend-mode: difference;
+      }
+      .cursor-trail {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--accent);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        opacity: 0.4;
+        transition: all 0.15s ease;
+        mix-blend-mode: difference;
+      }
+
+      /* Noise texture overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9997;
+        opacity: 0.3;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 48px;
+        z-index: 100;
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(20px);
+        background: rgba(10, 10, 10, 0.8);
+      }
+      .logo {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        letter-spacing: 4px;
+        color: var(--accent);
+      }
+      .logo span {
+        color: var(--text-dim);
+      }
+      .nav-links {
+        display: flex;
+        gap: 36px;
+        align-items: center;
+      }
+      .nav-links a {
+        font-family: "Space Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: var(--text-dim);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+      .nav-cta {
+        background: var(--accent);
+        color: var(--bg) !important;
+        padding: 8px 20px;
+        font-weight: 700 !important;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 120px 48px 80px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-grid-bg {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(232, 255, 71, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(232, 255, 71, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        animation: grid-shift 20s linear infinite;
+      }
+      @keyframes grid-shift {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(60px);
+        }
+      }
+      .hero-tag {
+        font-family: "Space Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        opacity: 0;
+        animation: fade-up 0.8s 0.2s forwards;
+      }
+      .hero-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(72px, 12vw, 180px);
+        line-height: 0.9;
+        letter-spacing: -2px;
+        margin-bottom: 32px;
+        opacity: 0;
+        animation: fade-up 0.8s 0.4s forwards;
+      }
+      .hero-title em {
+        font-style: normal;
+        color: var(--accent);
+        display: block;
+      }
+      .hero-title .outline {
+        -webkit-text-stroke: 1px rgba(232, 255, 71, 0.3);
+        color: transparent;
+      }
+      .hero-desc {
+        max-width: 560px;
+        font-size: 16px;
+        line-height: 1.8;
+        color: var(--text-dim);
+        margin-bottom: 48px;
+        opacity: 0;
+        animation: fade-up 0.8s 0.6s forwards;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        opacity: 0;
+        animation: fade-up 0.8s 0.8s forwards;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: var(--bg);
+        border: none;
+        padding: 16px 36px;
+        font-family: "Space Mono", monospace;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: none;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s;
+      }
+      .btn-primary:hover {
+        transform: translate(-2px, -2px);
+      }
+      .btn-primary::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+        width: 100%;
+        height: 100%;
+        border: 2px solid var(--accent);
+        z-index: -1;
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid var(--muted);
+        color: var(--text-dim);
+        padding: 16px 36px;
+        font-family: "Space Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: none;
+        transition: all 0.2s;
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* Floating stat cards */
+      .hero-stats {
+        position: absolute;
+        right: 48px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        opacity: 0;
+        animation: fade-left 0.8s 1s forwards;
+      }
+      .stat-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 20px 28px;
+        min-width: 200px;
+        position: relative;
+      }
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--accent);
+      }
+      .stat-val {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 48px;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 11px;
+        color: var(--text-dim);
+        letter-spacing: 1px;
+        margin-top: 4px;
+      }
+
+      @keyframes fade-up {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fade-left {
+        from {
+          opacity: 0;
+          transform: translate(30px, -50%);
+        }
+        to {
+          opacity: 1;
+          transform: translate(0, -50%);
+        }
+      }
+
+      /* TICKER */
+      .ticker {
+        background: var(--accent);
+        padding: 12px 0;
+        overflow: hidden;
+        position: relative;
+      }
+      .ticker-inner {
+        display: flex;
+        white-space: nowrap;
+        animation: ticker 20s linear infinite;
+      }
+      .ticker-item {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 18px;
+        letter-spacing: 4px;
+        color: var(--bg);
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .ticker-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--bg);
+        border-radius: 50%;
+      }
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* FEATURES */
+      .section {
+        padding: 120px 48px;
+      }
+      .section-label {
+        font-family: "Space Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+      .section-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(48px, 6vw, 80px);
+        line-height: 1;
+        margin-bottom: 64px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+      .feature-card {
+        background: var(--card);
+        padding: 48px 36px;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.3s;
+      }
+      .feature-card:hover {
+        background: #1c1c1c;
+      }
+      .feature-card:hover .feature-icon {
+        color: var(--accent);
+      }
+      .feature-icon {
+        font-size: 32px;
+        margin-bottom: 24px;
+        transition: color 0.3s;
+        display: block;
+      }
+      .feature-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 80px;
+        color: var(--border);
+        position: absolute;
+        right: 20px;
+        bottom: 10px;
+        line-height: 1;
+        pointer-events: none;
+        transition: color 0.3s;
+      }
+      .feature-card:hover .feature-num {
+        color: var(--muted);
+      }
+      .feature-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+        color: var(--text);
+      }
+      .feature-desc {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--text-dim);
+      }
+      .feature-tag {
+        display: inline-block;
+        margin-top: 20px;
+        background: rgba(232, 255, 71, 0.1);
+        color: var(--accent);
+        font-family: "Space Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 2px;
+        padding: 4px 12px;
+        text-transform: uppercase;
+      }
+
+      /* WORKFLOW */
+      .workflow-section {
+        background: var(--surface);
+      }
+      .workflow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        position: relative;
+        margin-top: 64px;
+      }
+      .workflow::before {
+        content: "";
+        position: absolute;
+        top: 36px;
+        left: 10%;
+        right: 10%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+      }
+      .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 16px;
+        text-align: center;
+      }
+      .step-circle {
+        width: 72px;
+        height: 72px;
+        border: 1px solid var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        color: var(--accent);
+        background: var(--surface);
+        position: relative;
+        margin-bottom: 24px;
+        transition: all 0.3s;
+        z-index: 1;
+      }
+      .step:hover .step-circle {
+        background: var(--accent);
+        color: var(--bg);
+        transform: scale(1.1);
+      }
+      .step-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 18px;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+      .step-desc {
+        font-size: 12px;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+
+      /* DEMO / MOCKUP */
+      .demo-section {
+        background: var(--bg);
+      }
+      .demo-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .demo-left {
+      }
+      .terminal {
+        background: #0d1117;
+        border: 1px solid var(--border);
+        border-radius: 0;
+        overflow: hidden;
+        font-family: "Space Mono", monospace;
+      }
+      .terminal-bar {
+        background: #1a1a1a;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .dot.red {
+        background: #ff5f57;
+      }
+      .dot.yellow {
+        background: #febc2e;
+      }
+      .dot.green {
+        background: #28c840;
+      }
+      .terminal-title {
+        font-size: 11px;
+        color: var(--text-dim);
+        margin-left: 8px;
+        letter-spacing: 1px;
+      }
+      .terminal-body {
+        padding: 24px;
+        min-height: 320px;
+      }
+      .term-line {
+        font-size: 13px;
+        line-height: 2;
+      }
+      .term-prompt {
+        color: var(--accent);
+      }
+      .term-cmd {
+        color: #79c0ff;
+      }
+      .term-out {
+        color: #56d364;
+      }
+      .term-dim {
+        color: var(--text-dim);
+      }
+      .term-acc {
+        color: var(--accent);
+      }
+      .cursor-blink {
+        display: inline-block;
+        width: 8px;
+        height: 14px;
+        background: var(--accent);
+        animation: blink 1s step-end infinite;
+        vertical-align: middle;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .demo-right {
+      }
+      .preview-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 0;
+        overflow: hidden;
+      }
+      .preview-header {
+        padding: 16px 24px;
+        background: #1a1a1a;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .preview-title {
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .preview-badge {
+        background: rgba(86, 211, 100, 0.15);
+        color: #56d364;
+        font-family: "Space Mono", monospace;
+        font-size: 10px;
+        padding: 3px 10px;
+        letter-spacing: 1px;
+      }
+      .preview-body {
+        padding: 28px;
+      }
+      .blog-post-preview {
+      }
+      .post-meta {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .post-tag-chip {
+        background: rgba(232, 255, 71, 0.1);
+        color: var(--accent);
+        font-family: "Space Mono", monospace;
+        font-size: 10px;
+        padding: 3px 10px;
+        letter-spacing: 1px;
+      }
+      .post-h1 {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.4;
+        margin-bottom: 12px;
+      }
+      .post-excerpt {
+        font-size: 13px;
+        color: var(--text-dim);
+        line-height: 1.8;
+        margin-bottom: 20px;
+      }
+      .post-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        border-top: 1px solid var(--border);
+        padding-top: 20px;
+      }
+      .metric {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 4px;
+        text-align: center;
+        min-width: 0;
+      }
+      .metric-val {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        line-height: 1;
+        color: var(--accent);
+      }
+      .metric-name {
+        font-size: 10px;
+        color: var(--text-dim);
+        letter-spacing: 1px;
+        line-height: 1.4;
+        min-height: 2.8em;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      /* PRICING */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 64px;
+      }
+      .price-card {
+        border: 1px solid var(--border);
+        padding: 48px 36px;
+        position: relative;
+        transition:
+          transform 0.3s,
+          border-color 0.3s;
+      }
+      .price-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+      }
+      .price-card.featured {
+        border-color: var(--accent);
+        background: rgba(232, 255, 71, 0.03);
+      }
+      .price-card.featured::before {
+        content: "POPULAR";
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent);
+        color: var(--bg);
+        font-family: "Space Mono", monospace;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 4px 16px;
+        letter-spacing: 2px;
+      }
+      .price-plan {
+        font-family: "Space Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+      .price-amount {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 72px;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .price-amount span {
+        font-size: 28px;
+      }
+      .price-period {
+        font-size: 13px;
+        color: var(--text-dim);
+        margin-bottom: 36px;
+      }
+      .price-features {
+        list-style: none;
+        margin-bottom: 36px;
+      }
+      .price-features li {
+        font-size: 14px;
+        color: var(--text-dim);
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .price-features li::before {
+        content: "→";
+        color: var(--accent);
+        font-family: "Space Mono", monospace;
+        font-size: 12px;
+      }
+
+      /* CTA SECTION */
+      .cta-section {
+        background: var(--accent);
+        padding: 120px 48px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-section::before {
+        content: "MARKFLOW";
+        position: absolute;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 300px;
+        color: rgba(0, 0, 0, 0.07);
+        white-space: nowrap;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        letter-spacing: -10px;
+      }
+      .cta-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(48px, 8vw, 100px);
+        color: var(--bg);
+        line-height: 1;
+        margin-bottom: 24px;
+        position: relative;
+      }
+      .cta-sub {
+        font-size: 18px;
+        color: rgba(10, 10, 10, 0.7);
+        max-width: 500px;
+        margin: 0 auto 48px;
+        line-height: 1.7;
+        position: relative;
+      }
+      .btn-dark {
+        background: var(--bg);
+        color: var(--accent);
+        border: none;
+        padding: 18px 48px;
+        font-family: "Space Mono", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        cursor: none;
+        position: relative;
+        transition: transform 0.2s;
+      }
+      .btn-dark:hover {
+        transform: scale(1.02);
+      }
+
+      /* FOOTER */
+      footer {
+        padding: 48px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-logo {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 24px;
+        letter-spacing: 4px;
+        color: var(--accent);
+      }
+      .footer-copy {
+        font-family: "Space Mono", monospace;
+        font-size: 11px;
+        color: var(--text-dim);
+        letter-spacing: 1px;
+      }
+
+      /* Scroll animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s,
+          transform 0.8s;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1024px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .workflow {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .demo-container {
+          grid-template-columns: 1fr;
+        }
+        .hero-stats {
+          display: none;
+        }
+      }
+      @media (max-width: 768px) {
+        nav {
+          padding: 16px 24px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .section {
+          padding: 80px 24px;
+        }
+        .hero {
+          padding: 100px 24px 60px;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+        .workflow {
+          grid-template-columns: 1fr;
+        }
+        .workflow::before {
+          display: none;
+        }
+        .post-metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          row-gap: 16px;
+        }
+        .metric-name {
+          min-height: 0;
+        }
+        footer {
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- NAV -->
+    <nav>
+      <div class="logo">MARK<span>·</span>FLOW</div>
+      <div class="nav-links">
+        <a href="#">서비스</a>
+        <a href="#">워크플로</a>
+        <a href="#">사례</a>
+        <a href="#">요금</a>
+        <a href="#" class="nav-cta">무료 시작</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid-bg"></div>
+      <div class="hero-tag">AI-POWERED MARKETING AUTOMATION</div>
+      <h1 class="hero-title">
+        마케팅을<br />
+        <em>자동화</em>
+        <span class="outline">하세요</span>
+      </h1>
+      <p class="hero-desc">
+        블로그, SNS, 뉴스레터까지 — AI가 브랜드 목소리로 콘텐츠를 생성하고
+        최적의 시간에 자동 발행합니다. 팀은 전략에만 집중하세요.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary">무료로 시작하기</button>
+        <button class="btn-ghost">데모 보기 →</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-val">94%</div>
+          <div class="stat-label">콘텐츠 제작 시간 절감</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">3.2×</div>
+          <div class="stat-label">유기적 트래픽 증가</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">12K+</div>
+          <div class="stat-label">활성 팀 수</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker">
+      <div class="ticker-inner">
+        <div class="ticker-item">
+          블로그 자동화 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          SNS 스케줄링 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          SEO 최적화 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          뉴스레터 발행 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          성과 분석 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          키워드 리서치 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          A/B 테스팅 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          브랜드 보이스 학습 <span class="ticker-dot"></span>
+        </div>
+        <!-- repeat for seamless loop -->
+        <div class="ticker-item">
+          블로그 자동화 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          SNS 스케줄링 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          SEO 최적화 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          뉴스레터 발행 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          성과 분석 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          키워드 리서치 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          A/B 테스팅 <span class="ticker-dot"></span>
+        </div>
+        <div class="ticker-item">
+          브랜드 보이스 학습 <span class="ticker-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section class="section">
+      <div class="section-label">CORE FEATURES</div>
+      <h2 class="section-title reveal">모든 채널.<br />단 하나의 플랫폼.</h2>
+      <div class="features-grid reveal">
+        <div class="feature-card">
+          <span class="feature-icon">✍️</span>
+          <div class="feature-num">01</div>
+          <h3 class="feature-title">AI 블로그 작성</h3>
+          <p class="feature-desc">
+            키워드만 입력하면 SEO 최적화된 장문 블로그 포스트를 자동 생성합니다.
+            브랜드 톤앤매너를 학습해 일관된 목소리를 유지합니다.
+          </p>
+          <span class="feature-tag">GPT-5.X AI-POWERED</span>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📱</span>
+          <div class="feature-num">02</div>
+          <h3 class="feature-title">SNS 자동 포스팅</h3>
+          <p class="feature-desc">
+            인스타그램, 트위터, 링크드인, 페이스북까지 — 채널별 최적 형식으로
+            변환하고 최적의 시간에 자동 발행합니다.
+          </p>
+          <span class="feature-tag">멀티채널</span>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📧</span>
+          <div class="feature-num">03</div>
+          <h3 class="feature-title">뉴스레터 캠페인</h3>
+          <p class="feature-desc">
+            구독자 세그먼트별 맞춤 뉴스레터를 자동 생성하고 발송합니다. 오픈율,
+            클릭률을 실시간 추적합니다.
+          </p>
+          <span class="feature-tag">개인화</span>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔍</span>
+          <div class="feature-num">04</div>
+          <h3 class="feature-title">SEO 키워드 분석</h3>
+          <p class="feature-desc">
+            경쟁사 분석과 트렌드 데이터를 기반으로 고가치 키워드를 발굴하고
+            콘텐츠 전략을 자동으로 추천합니다.
+          </p>
+          <span class="feature-tag">데이터 기반</span>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📊</span>
+          <div class="feature-num">05</div>
+          <h3 class="feature-title">성과 대시보드</h3>
+          <p class="feature-desc">
+            모든 채널의 성과를 한눈에 확인하고 AI가 다음 단계 액션 플랜을
+            자동으로 제안합니다.
+          </p>
+          <span class="feature-tag">실시간</span>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🤖</span>
+          <div class="feature-num">06</div>
+          <h3 class="feature-title">브랜드 AI 학습</h3>
+          <p class="feature-desc">
+            기존 콘텐츠를 학습해 브랜드 고유의 목소리와 스타일을 완벽하게
+            재현합니다. 시간이 지날수록 더 정교해집니다.
+          </p>
+          <span class="feature-tag">FINE-TUNED</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKFLOW -->
+    <section class="section workflow-section">
+      <div class="section-label">HOW IT WORKS</div>
+      <h2 class="section-title reveal">5단계로 시작하는<br />완전 자동화</h2>
+      <div class="workflow reveal">
+        <div class="step">
+          <div class="step-circle">01</div>
+          <div class="step-title">브랜드 설정</div>
+          <p class="step-desc">
+            브랜드 정보와 기존 콘텐츠를 업로드해 AI를 훈련시킵니다
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-circle">02</div>
+          <div class="step-title">목표 입력</div>
+          <p class="step-desc">타겟 키워드와 발행 주기, 채널을 설정합니다</p>
+        </div>
+        <div class="step">
+          <div class="step-circle">03</div>
+          <div class="step-title">AI 생성</div>
+          <p class="step-desc">AI가 콘텐츠를 자동 기획하고 초안을 작성합니다</p>
+        </div>
+        <div class="step">
+          <div class="step-circle">04</div>
+          <div class="step-title">검토/승인</div>
+          <p class="step-desc">
+            팀이 확인 후 원클릭으로 승인하거나 자동 승인 설정
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-circle">05</div>
+          <div class="step-title">자동 발행</div>
+          <p class="step-desc">
+            최적 시간에 모든 채널에 동시 발행되고 성과를 추적합니다
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="section demo-section">
+      <div class="section-label">LIVE DEMO</div>
+      <h2 class="section-title reveal">실제로 보세요</h2>
+      <div class="demo-container reveal">
+        <div class="demo-left">
+          <div class="terminal">
+            <div class="terminal-bar">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+              <span class="terminal-title">MARKFLOW — CONTENT ENGINE</span>
+            </div>
+            <div class="terminal-body">
+              <div class="term-line">
+                <span class="term-prompt">→ </span
+                ><span class="term-cmd">MARKFLOW generate</span>
+              </div>
+              <div class="term-line">
+                <span class="term-dim"> 키워드: </span
+                ><span class="term-acc">스타트업 마케팅 전략 2025</span>
+              </div>
+              <div class="term-line">
+                <span class="term-dim"> 채널: </span
+                ><span class="term-acc">블로그, 인스타그램, 뉴스레터</span>
+              </div>
+              <div class="term-line">
+                <span class="term-dim"> 톤: </span
+                ><span class="term-acc">전문적, 친근함</span>
+              </div>
+              <br />
+              <div class="term-line">
+                <span class="term-out">✓ </span
+                ><span class="term-dim">브랜드 보이스 로딩...</span>
+              </div>
+              <div class="term-line">
+                <span class="term-out">✓ </span
+                ><span class="term-dim">SEO 키워드 분석 완료</span>
+              </div>
+              <div class="term-line">
+                <span class="term-out">✓ </span
+                ><span class="term-dim">콘텐츠 구조 최적화...</span>
+              </div>
+              <div class="term-line">
+                <span class="term-out">✓ </span
+                ><span class="term-dim">2,400자 블로그 포스트 생성</span>
+              </div>
+              <div class="term-line">
+                <span class="term-out">✓ </span
+                ><span class="term-dim">SNS 3종 변환 완료</span>
+              </div>
+              <div class="term-line">
+                <span class="term-out">✓ </span
+                ><span class="term-dim">발행 스케줄 등록 완료</span>
+              </div>
+              <br />
+              <div class="term-line">
+                <span class="term-prompt">→ </span
+                ><span class="term-dim">예상 도달: </span
+                ><span class="term-acc">4,200명</span>
+              </div>
+              <div class="term-line">
+                <span class="term-prompt">→ </span
+                ><span class="term-dim">발행 시간: </span
+                ><span class="term-acc">내일 오전 09:00</span
+                ><span class="cursor-blink"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-right">
+          <div class="preview-card">
+            <div class="preview-header">
+              <span class="preview-title">생성된 블로그 포스트 미리보기</span>
+              <span class="preview-badge">AI GENERATED</span>
+            </div>
+            <div class="preview-body">
+              <div class="blog-post-preview">
+                <div class="post-meta">
+                  <span class="post-tag-chip">마케팅</span>
+                  <span class="post-tag-chip">스타트업</span>
+                  <span class="post-tag-chip">2025</span>
+                </div>
+                <h2 class="post-h1">
+                  2025년 스타트업이 반드시 알아야 할 마케팅 전략 7가지
+                </h2>
+                <p class="post-excerpt">
+                  제한된 예산으로 최대의 성과를 내야 하는 스타트업에게 마케팅은
+                  언제나 도전입니다. 콘텐츠 마케팅부터 그로스해킹까지, 실제로
+                  효과가 검증된 전략들을 지금 공개합니다. 이 가이드를 따라하면
+                  6개월 안에 유기적 트래픽을 3배 늘릴 수 있습니다...
+                </p>
+                <div class="post-metrics">
+                  <div class="metric">
+                    <div class="metric-val">87</div>
+                    <div class="metric-name">SEO 점수</div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-val">2.4K</div>
+                    <div class="metric-name">글자 수</div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-val">8분</div>
+                    <div class="metric-name">평균 읽기</div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-val">12</div>
+                    <div class="metric-name">생성 시간(초)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" style="background: var(--surface)">
+      <div class="section-label">PRICING</div>
+      <h2 class="section-title reveal">규모에 맞는<br />요금제</h2>
+      <div class="pricing-grid reveal">
+        <div class="price-card">
+          <div class="price-plan">Starter</div>
+          <div class="price-amount"><span>₩</span>49,000</div>
+          <div class="price-period">/ 월, 연 결제 시</div>
+          <ul class="price-features">
+            <li>월 블로그 포스트 20개</li>
+            <li>SNS 채널 3개</li>
+            <li>기본 SEO 분석</li>
+            <li>이메일 지원</li>
+          </ul>
+          <button class="btn-ghost" style="width: 100%">시작하기</button>
+        </div>
+        <div class="price-card featured">
+          <div class="price-plan">Growth</div>
+          <div class="price-amount"><span>₩</span>149,000</div>
+          <div class="price-period">/ 월, 연 결제 시</div>
+          <ul class="price-features">
+            <li>월 블로그 포스트 100개</li>
+            <li>SNS 채널 무제한</li>
+            <li>고급 SEO + 경쟁사 분석</li>
+            <li>뉴스레터 발송 5,000건</li>
+            <li>브랜드 AI 커스터마이징</li>
+            <li>우선 지원</li>
+          </ul>
+          <button class="btn-primary" style="width: 100%; padding: 16px">
+            시작하기
+          </button>
+        </div>
+        <div class="price-card">
+          <div class="price-plan">Enterprise</div>
+          <div class="price-amount" style="font-size: 48px">문의</div>
+          <div class="price-period">맞춤 견적</div>
+          <ul class="price-features">
+            <li>무제한 콘텐츠 생성</li>
+            <li>전용 AI 모델 파인튜닝</li>
+            <li>API 연동</li>
+            <li>전담 CSM</li>
+            <li>SLA 보장</li>
+          </ul>
+          <button class="btn-ghost" style="width: 100%">상담 신청</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2 class="cta-title">지금 바로 시작하세요</h2>
+      <p class="cta-sub">14일 무료 체험. 신용카드 불필요. 언제든 취소 가능.</p>
+      <button class="btn-dark">무료로 시작하기 →</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">MARKFLOW</div>
+      <div class="footer-copy">© 2025 MARKFLOW INC. — MADE WITH AI</div>
+    </footer>
+
+    <script>
+      // Custom cursor
+      const cursor = document.getElementById("cursor");
+      const trail = document.getElementById("cursorTrail");
+      let mx = 0,
+        my = 0,
+        tx = 0,
+        ty = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        cursor.style.left = mx - 6 + "px";
+        cursor.style.top = my - 6 + "px";
+      });
+      function animTrail() {
+        tx += (mx - tx) * 0.12;
+        ty += (my - ty) * 0.12;
+        trail.style.left = tx - 18 + "px";
+        trail.style.top = ty - 18 + "px";
+        requestAnimationFrame(animTrail);
+      }
+      animTrail();
+
+      // Scroll reveal
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      reveals.forEach((r) => observer.observe(r));
+
+      // Animated terminal typing effect
+      const termLines = document.querySelectorAll(".term-line");
+      termLines.forEach((line, i) => {
+        line.style.opacity = "0";
+        line.style.animation = `fade-up 0.4s ${1.5 + i * 0.2}s forwards`;
+      });
+    </script>
+  </body>
+</html>
