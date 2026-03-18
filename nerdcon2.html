@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>개발자 취업 특강 포스터 – NERD_CON</title>
+    <style>
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-1Thin.woff2")
+          format("woff2");
+        font-weight: 100;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-2ExtraLight.woff2")
+          format("woff2");
+        font-weight: 200;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-3Light.woff2")
+          format("woff2");
+        font-weight: 300;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-4Regular.woff2")
+          format("woff2");
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-5Medium.woff2")
+          format("woff2");
+        font-weight: 500;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-6SemiBold.woff2")
+          format("woff2");
+        font-weight: 600;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-7Bold.woff2")
+          format("woff2");
+        font-weight: 700;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-8ExtraBold.woff2")
+          format("woff2");
+        font-weight: 800;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "A2z";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-9Black.woff2")
+          format("woff2");
+        font-weight: 900;
+        font-display: swap;
+      }
+
+      :root {
+        --black: #0a0a0a;
+        --white: #f5f0e8;
+        --yellow: #ffe033;
+        --red: #ff3333;
+        --blue: #7ec8e3;
+        --gray: #1a1a1a;
+        --mid: #2e2e2e;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding: 40px 20px;
+        font-family: "A2z", sans-serif;
+      }
+
+      .poster {
+        width: 680px;
+        background: var(--black);
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* ── TOP BAND ── */
+      .top-band {
+        background: var(--yellow);
+        padding: 11px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .top-band-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .top-band span {
+        font-family: "A2z", sans-serif;
+        font-weight: 700;
+        color: var(--black);
+        font-size: 13px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+      .top-band .dot {
+        width: 7px;
+        height: 7px;
+        background: var(--black);
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .nerdcon-logo {
+        height: 22px;
+        display: block;
+        filter: brightness(0);
+      }
+
+      /* ── HERO ── */
+      .hero {
+        padding: 40px 40px 0;
+        position: relative;
+      }
+      .hero-inner {
+        display: flex;
+        align-items: center;
+        gap: 0;
+      }
+      .hero-text {
+        flex: 1;
+      }
+
+      .hero-tag {
+        display: inline-block;
+        border: 1.5px solid var(--yellow);
+        color: var(--yellow);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        padding: 4px 12px;
+        margin-bottom: 18px;
+      }
+      .hero-title {
+        font-family: "A2z", sans-serif;
+        font-weight: 900;
+        font-size: 54px;
+        line-height: 1.05;
+        color: var(--white);
+      }
+      .hero-title .accent {
+        color: var(--yellow);
+        display: block;
+      }
+      .hero-sub {
+        font-size: 13.5px;
+        font-weight: 400;
+        color: #aaa;
+        margin-top: 14px;
+        line-height: 1.75;
+        max-width: 340px;
+      }
+
+      .hero-mascot {
+        flex-shrink: 0;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        padding-bottom: 10px;
+      }
+      .mascot-img {
+        width: 160px;
+        height: 160px;
+        object-fit: contain;
+        mix-blend-mode: screen;
+        filter: drop-shadow(0 0 20px rgba(126, 200, 227, 0.4));
+        animation: float 3.5s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .mascot-bubble {
+        background: var(--yellow);
+        color: var(--black);
+        font-family: "A2z", sans-serif;
+        font-weight: 700;
+        font-size: 11px;
+        padding: 5px 14px;
+        border-radius: 20px;
+        letter-spacing: 0.5px;
+        position: relative;
+      }
+      .mascot-bubble::after {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid transparent;
+        border-bottom-color: var(--yellow);
+      }
+
+      .deco-number {
+        position: absolute;
+        right: 200px;
+        top: 20px;
+        font-family: "A2z", sans-serif;
+        font-weight: 900;
+        font-size: 150px;
+        color: rgba(255, 224, 51, 0.05);
+        line-height: 1;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      /* ── DIVIDER ── */
+      .divider {
+        height: 1px;
+        background: var(--mid);
+        margin: 32px 40px;
+      }
+
+      /* ── SECTIONS ── */
+      .section {
+        padding: 0 40px;
+        margin-bottom: 32px;
+      }
+      .section-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        color: #666;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+
+      /* ── SCHEDULE ── */
+      .schedule-block {
+        padding: 0 40px;
+        margin-bottom: 32px;
+      }
+
+      .sched-header {
+        background: var(--yellow);
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        padding: 10px 16px;
+        margin-bottom: 2px;
+      }
+      .sched-header span {
+        font-family: "A2z", sans-serif;
+        font-weight: 700;
+        font-size: 11px;
+        color: var(--black);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .sched-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        align-items: center;
+        padding: 13px 16px;
+        background: var(--gray);
+        margin-bottom: 2px;
+        border-left: 3px solid transparent;
+      }
+      .sched-row.main-session {
+        background: #1e1e10;
+        border-left: 3px solid var(--yellow);
+      }
+      .sched-row.mentor-session {
+        background: #1a1018;
+        border-left: 3px solid var(--red);
+      }
+      .sched-row.light-session {
+        background: #141414;
+        border-left: 3px solid #444;
+      }
+
+      .sched-break-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 16px;
+        margin-bottom: 2px;
+      }
+      .sched-break-row .break-line {
+        flex: 1;
+        height: 1px;
+        background: #2a2a2a;
+      }
+      .sched-break-row .break-label {
+        font-size: 9px;
+        font-weight: 600;
+        color: #444;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+
+      .sched-time-col {
+        font-size: 11.5px;
+        font-weight: 400;
+        color: #888;
+        font-variant-numeric: tabular-nums;
+      }
+      .sched-row.main-session .sched-time-col {
+        color: #bba800;
+      }
+      .sched-row.mentor-session .sched-time-col {
+        color: #cc5555;
+      }
+
+      .sched-content-col {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .sched-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--white);
+      }
+      .sched-row.main-session .sched-title {
+        font-weight: 800;
+        font-size: 15px;
+        color: var(--white);
+      }
+      .sched-row.mentor-session .sched-title {
+        font-size: 13px;
+        color: #ddd;
+      }
+      .sched-row.light-session .sched-title {
+        font-size: 13px;
+        color: #888;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 3px 9px;
+        letter-spacing: 0.3px;
+        border-radius: 2px;
+      }
+      .badge-yellow {
+        background: var(--yellow);
+        color: var(--black);
+      }
+      .badge-red {
+        background: var(--red);
+        color: white;
+      }
+      .badge-blue {
+        background: #1a3a5c;
+        color: var(--blue);
+        border: 1px solid var(--blue);
+      }
+
+      /* ── CTA ── */
+      .cta-block {
+        background: var(--yellow);
+        margin: 0 40px 36px;
+        padding: 26px 28px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .cta-mascot {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+        flex-shrink: 0;
+        mix-blend-mode: multiply;
+      }
+      .cta-content {
+        flex: 1;
+      }
+      .cta-main {
+        font-family: "A2z", sans-serif;
+        font-weight: 900;
+        font-size: 28px;
+        color: var(--black);
+        line-height: 1.15;
+        margin-bottom: 10px;
+      }
+      .cta-sub {
+        font-size: 11.5px;
+        font-weight: 400;
+        color: #333;
+        line-height: 1.7;
+        margin-bottom: 16px;
+      }
+      .cta-link {
+        display: inline-block;
+        background: var(--black);
+        color: var(--yellow);
+        font-family: "A2z", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        padding: 11px 22px;
+        letter-spacing: 1px;
+        text-decoration: none;
+      }
+
+      /* ── TARGET BANNER ── */
+      .target-bar {
+        background: var(--red);
+        padding: 10px 40px;
+        font-size: 12px;
+        font-weight: 700;
+        color: white;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* ── BOTTOM ── */
+      .bottom-bar {
+        background: var(--mid);
+        padding: 14px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .info-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .info-pill .label {
+        font-size: 10px;
+        font-weight: 600;
+        color: #888;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+      .info-pill .value {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .info-sep {
+        width: 1px;
+        height: 18px;
+        background: #444;
+      }
+
+      .nerdcon-footer {
+        background: #050505;
+        padding: 12px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .nerdcon-footer-logo {
+        height: 18px;
+        opacity: 0.45;
+        filter: invert(1);
+      }
+      img{
+        width:200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="poster">
+      <!-- TOP BAND -->
+      <div class="top-band">
+        <div class="top-band-left">
+          <div class="dot"></div>
+          <span>너드콘 2화</span>
+          <div class="dot"></div>
+          <span>Offline</span>
+          <div class="dot"></div>
+          <span>천안아산</span>
+        </div> 
+      </div>
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="deco-number">4.3</div>
+        <div class="hero-inner">
+          <div class="hero-text">
+            <div class="hero-tag">현직 개발자가 직접 알려주는</div>
+            <h1 class="hero-title">
+              현직 개발자
+              <span class="accent">멘토링</span>
+무료 콘서트
+            </h1>
+            <p class="hero-sub">
+              고용노동부 | 나사렛대학교 | 어비스 주관
+            </p>
+          </div>
+          <div class="hero-mascot">
+            <img src="./Symbol_파랑.png" alt=""> 
+            <div class="mascot-bubble">이거 들으면 취업... 가능해요?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- SCHEDULE -->
+      <div class="schedule-block">
+        <div class="section-label">세션 일정</div>
+
+        <div class="sched-header">
+          <span>시간</span>
+          <span>내용</span>
+        </div>
+
+        <div class="sched-row light-session">
+          <div class="sched-time-col">2:00 – 2:30</div>
+          <div class="sched-content-col">
+            <span class="sched-title">등록 및 입장</span>
+          </div>
+        </div>
+
+        <div class="sched-row main-session">
+          <div class="sched-time-col">2:30 – 3:30</div>
+          <div class="sched-content-col">
+            <span class="sched-title">이력서 · 코딩테스트 · 면접 전략</span>
+            <span class="badge badge-yellow">큰돌</span>
+          </div>
+        </div>
+
+        <div class="sched-break-row">
+          <div class="break-line"></div>
+          <div class="break-label">Break</div>
+          <div class="break-line"></div>
+        </div>
+
+        <div class="sched-row mentor-session">
+          <div class="sched-time-col">3:40 – 4:20</div>
+          <div class="sched-content-col">
+            <span class="sched-title">현업 멘토링</span>
+            <span class="badge badge-red">카카오뱅크 개발자</span>
+          </div>
+        </div>
+
+        <div class="sched-break-row">
+          <div class="break-line"></div>
+          <div class="break-label">Break</div>
+          <div class="break-line"></div>
+        </div>
+
+        <div class="sched-row mentor-session">
+          <div class="sched-time-col">4:30 – 5:10</div>
+          <div class="sched-content-col">
+            <span class="sched-title">현업 멘토링</span>
+            <span class="badge badge-blue">KT 개발자</span>
+          </div>
+        </div>
+
+        <div class="sched-row light-session">
+          <div class="sched-time-col">5:10 – 5:30</div>
+          <div class="sched-content-col">
+            <span class="sched-title">Q&amp;A</span>
+          </div>
+        </div>
+
+        <div class="sched-row light-session">
+          <div class="sched-time-col">5:30 – 6:00</div>
+          <div class="sched-content-col">
+            <span class="sched-title">네트워킹</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-block">
+        <img src="Symbol_파랑.png" alt=""> 
+        <div class="cta-content">
+          <div class="cta-main">4월 3일 금요일 14시<br />한 번에 끝내자.</div>
+          <p class="cta-sub">
+            오프라인 진행 · 4시간 · 천안아산역 근처<br />
+            대상: 4학년 및 졸업생 (만 34세 이하)
+          </p>
+          <a
+            class="cta-link"
+            href="https://forms.gle/8LwiL3wZRzn7AzGt7"
+            target="_blank"
+          >
+            👉 지금 바로 신청하기
+          </a>
+        </div>
+      </div>
+
+      <!-- TARGET BANNER -->
+      <div class="target-bar">
+        <span>▶</span>
+        <span>대상: 4학년 · 졸업생 (만 34세 이하) 만 신청해주세요</span>
+      </div>
+
+      <!-- BOTTOM INFO BAR -->
+      <div class="bottom-bar">
+        <div class="info-pill">
+          <span class="label">DATE</span>
+          <span class="value">2025. 04. 03 (금)</span>
+        </div>
+        <div class="info-sep"></div>
+        <div class="info-pill">
+          <span class="label">TIME</span>
+          <span class="value">14:00 – 18:00</span>
+        </div>
+        <div class="info-sep"></div>
+        <div class="info-pill">
+          <span class="label">VENUE</span>
+          <span class="value">천안아산역 인근</span>
+        </div> 
+      </div>
+ 
+    </div>
+  </body>
+</html>
