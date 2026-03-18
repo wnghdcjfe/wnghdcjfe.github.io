@@ -190,6 +190,29 @@
         line-height: 1.75;
         max-width: 340px;
       }
+      .sponsor-logos {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+      }
+      .sponsor-logos img {
+        height: 22px;
+        object-fit: contain;
+        opacity: 0.75;
+      }
+      .sponsor-logos img.logo-nazarene {
+        height: 17px;
+      }
+      .sponsor-logos img.logo-abyss {
+        height: 15px;
+      }
+      .sponsor-sep {
+        width: 1px;
+        height: 14px;
+        background: #ccc;
+      }
 
       .hero-mascot {
         flex-shrink: 0;
@@ -607,7 +630,13 @@
               <span class="accent">멘토링</span>
               취업 콘서트
             </h1>
-            <p class="hero-sub">고용노동부 | 나사렛대학교 | 어비스 주관</p>
+            <div class="sponsor-logos">
+              <img src="./고용노동부.webp" alt="고용노동부" />
+              <div class="sponsor-sep"></div>
+              <img class="logo-nazarene" src="./나사렛대학교.png" alt="나사렛대학교" />
+              <div class="sponsor-sep"></div>
+              <img class="logo-abyss" src="./어비스로고.svg" alt="어비스" />
+            </div>
           </div>
           <div class="hero-mascot">
             <img class="mascot-img" src="./Symbol_파랑.png" alt="" />
@@ -692,7 +721,9 @@
           <div class="cta-main">4월 3일 금요일 14시<br />한 번에 끝내자.</div>
           <p class="cta-sub">
             오프라인 진행 · 4시간 · 천안아산역 근처<br />
-            대상: 4학년 및 졸업생 (만 34세 이하)
+            대상: 4학년 및 졸업생 (만 34세 이하) 
+            <br/>
+            이 콘서트는 "무료"입니다.
           </p>
           <a
             class="cta-link"
