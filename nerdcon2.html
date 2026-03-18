@@ -105,7 +105,7 @@
         color: var(--text);
         position: relative;
         overflow: hidden;
-        box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
       }
 
       /* ── TOP BAND ── */
@@ -208,8 +208,13 @@
         animation: float 3.5s ease-in-out infinite;
       }
       @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50%       { transform: translateY(-8px); }
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
       }
       .mascot-bubble {
         background: var(--black);
@@ -600,14 +605,12 @@
             <h1 class="hero-title">
               현직 개발자
               <span class="accent">멘토링</span>
-무료 콘서트
+              취업 콘서트
             </h1>
-            <p class="hero-sub">
-              고용노동부 | 나사렛대학교 | 어비스 주관
-            </p>
+            <p class="hero-sub">고용노동부 | 나사렛대학교 | 어비스 주관</p>
           </div>
           <div class="hero-mascot">
-            <img class="mascot-img" src="./Symbol_파랑.png" alt="">
+            <img class="mascot-img" src="./Symbol_파랑.png" alt="" />
             <div class="mascot-bubble">이거 들으면 취업... 가능해요?</div>
           </div>
         </div>
@@ -684,7 +687,7 @@
 
       <!-- CTA -->
       <div class="cta-block">
-        <img class="cta-mascot" src="Symbol_파랑.png" alt="">
+        <img class="cta-mascot" src="Symbol_파랑.png" alt="" />
         <div class="cta-content">
           <div class="cta-main">4월 3일 금요일 14시<br />한 번에 끝내자.</div>
           <p class="cta-sub">
@@ -724,7 +727,6 @@
           <span class="value">천안아산역 인근</span>
         </div>
       </div>
-
     </div>
   </body>
 </html>
