@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고층일기도 분석기법(2) — 기상예보사 교육교재</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --b900:#020f1e;
+  --b800:#042C53;
+  --b700:#0C447C;
+  --b600:#185FA5;
+  --b500:#378ADD;
+  --b400:#6BAAE8;
+  --b200:#B5D4F4;
+  --b100:#D6E9FA;
+  --b50:#EEF5FD;
+  --accent:#4FC3F7;
+  --gold:#F0C04A;
+  --white:#FFFFFF;
+  --font-ko:'Noto Sans KR',sans-serif;
+}
+
+html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:var(--font-ko)}
+
+/* ── Slideshow wrapper ── */
+.deck{
+  position:relative;
+  width:100vw;height:100vh;
+  overflow:hidden;
+}
+
+/* ── Every slide ── */
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;
+  transition:opacity .55s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1);
+  transform:translateX(60px);
+}
+.slide.active{
+  opacity:1;pointer-events:all;transform:translateX(0);
+}
+.slide.out{
+  opacity:0;transform:translateX(-60px);
+}
+
+/* ── Navigation ── */
+.nav-bar{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:12px;
+  background:rgba(2,15,30,.75);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:40px;padding:10px 20px;z-index:100;
+}
+.nav-btn{
+  width:36px;height:36px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.08);color:#fff;cursor:pointer;
+  font-size:20px;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.nav-btn:hover{background:rgba(255,255,255,.2)}
+.nav-dots{display:flex;gap:6px;align-items:center}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.25);cursor:pointer;transition:all .2s;
+}
+.dot.active{width:20px;border-radius:3px;background:var(--accent)}
+.slide-counter{font-size:20px;color:rgba(255,255,255,.5);min-width:44px;text-align:center}
+
+/* ── Common elements ── */
+.slide-label{
+  font-size:20px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;opacity:.65;
+}
+.judgment-box{
+  margin-top:22px;padding:18px 22px;border-radius:14px;
+  background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.18);
+}
+.judgment-box .jl{
+  font-size:20px;font-weight:700;letter-spacing:.04em;color:var(--accent);margin-bottom:8px;
+}
+.judgment-box .jt{
+  font-size:22px;line-height:1.65;color:rgba(255,255,255,.86);
+}
+.callout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.callout-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:20px;
+}
+.callout-card h3{font-size:22px;color:#fff;margin-bottom:10px}
+.callout-card p,.callout-card li{font-size:20px;color:rgba(255,255,255,.72);line-height:1.65}
+.callout-card ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.callout-card li::before{content:'• ';color:var(--accent)}
+.slide-num{
+  font-size:20px;font-weight:700;letter-spacing:.06em;
+  opacity:.4;
+}
+.tag{
+  display:inline-flex;align-items:center;
+  border-radius:20px;padding:4px 12px;
+  font-size:20px;font-weight:500;letter-spacing:.04em;
+}
+
+/* ──────────────────────────────────────────
+   SLIDE 01 — COVER
+────────────────────────────────────────── */
+#s01{
+  background:var(--b900);
+  justify-content:center;align-items:flex-start;
+}
+#s01::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 70% at 90% 50%, rgba(55,138,221,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(4,44,83,.6) 0%, transparent 70%);
+}
+#s01 .grid-lines{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(55,138,221,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(55,138,221,.06) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+#s01 .content{
+  position:relative;z-index:2;
+  padding:80px 100px;max-width:700px;
+}
+#s01 .kmi-logo{
+  font-size:20px;letter-spacing:.15em;color:var(--b400);font-weight:500;
+  margin-bottom:60px;opacity:.8;
+}
+#s01 h1{
+  font-size:58px;font-weight:900;line-height:1.08;
+  color:var(--white);margin-bottom:16px;
+  letter-spacing:-.02em;
+}
+#s01 h1 span{color:var(--accent)}
+#s01 .sub{
+  font-size:20px;color:var(--b300,#9DC8EE);font-weight:300;
+  margin-bottom:48px;
+}
+#s01 .kw-row{display:flex;gap:8px;flex-wrap:wrap}
+#s01 .kw{
+  background:rgba(55,138,221,.15);
+  border:1px solid rgba(55,138,221,.3);
+  color:var(--b200);
+  border-radius:20px;padding:5px 14px;font-size:20px;
+}
+#s01 .chapter-list{
+  position:absolute;right:100px;top:50%;transform:translateY(-50%);
+  z-index:2;
+}
+#s01 .ch-item{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 20px;margin-bottom:8px;
+  border-radius:10px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.03);
+  transition:all .2s;color:rgba(255,255,255,.5);font-size:20px;
+}
+#s01 .ch-item:hover{background:rgba(55,138,221,.15);color:#fff;border-color:rgba(55,138,221,.4)}
+#s01 .ch-num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--b700);color:var(--b200);
+  font-size:20px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ──────────────────────────────────────────
+   SLIDE 02 — 분석자료 종류
+────────────────────────────────────────── */
+#s02{background:var(--b800)}
+#s02::after{
+  content:'';position:absolute;
+  right:0;top:0;bottom:0;width:38%;
+  background:linear-gradient(135deg,var(--b700) 0%,var(--b900) 100%);
+  clip-path:polygon(18% 0,100% 0,100% 100%,0 100%);
+}
+#s02 .content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:64px 80px}
+#s02 .header{margin-bottom:44px}
+#s02 h2{font-size:38px;font-weight:700;color:#fff;line-height:1.2;margin-top:8px}
+#s02 h2 em{color:var(--accent);font-style:normal}
+#s02 .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px}
+#s02 .data-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:24px;
+}
+#s02 .data-card .icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--b600);margin-bottom:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+}
+#s02 .data-card h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+#s02 .data-card p{font-size:20px;color:rgba(255,255,255,.6);line-height:1.65}
+#s02 .acc-badge{
+  display:inline-block;margin-top:10px;
+  font-size:20px;font-weight:700;letter-spacing:.06em;
+  padding:3px 8px;border-radius:10px;
+}
+#s02 .acc-high{background:rgba(79,195,247,.15);color:var(--accent)}
+#s02 .acc-mid{background:rgba(240,192,74,.15);color:var(--gold)}
+#s02 .acc-low{background:rgba(255,100,100,.12);color:#ff9090}
+/* 우측 장식 텍스트 */
+#s02 .right-deco{
+  position:absolute;right:0;top:0;bottom:0;width:38%;
+  z-index:3;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;
+}
+#s02 .deco-item{color:rgba(255,255,255,.35);font-size:20px;text-align:center;line-height:2}
+
+/* ──────────────────────────────────────────
+   SLIDE 03 — 기입 모형
+────────────────────────────────────────── */
+#s03{background:var(--b900);align-items:center;justify-content:center}
+#s03::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(24,95,165,.15) 0%,transparent 70%);
+}
+#s03 .content{position:relative;z-index:2;width:100%;max-width:1000px;padding:60px 80px;display:flex;gap:80px;align-items:center}
+#s03 .left{flex:1}
+#s03 .left .slide-label{color:var(--b400);margin-bottom:10px}
+#s03 .left h2{font-size:34px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:24px}
+#s03 .field-list{display:flex;flex-direction:column;gap:10px}
+#s03 .field{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:12px 16px;
+}
+#s03 .field-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+#s03 .field-name{font-size:20px;font-weight:500;color:#fff}
+#s03 .field-desc{font-size:20px;color:rgba(255,255,255,.45);margin-top:2px}
+#s03 .right{width:360px;flex-shrink:0}
+/* 기입 모형 도식 */
+.obs-model{
+  width:100%;background:rgba(255,255,255,.04);
+  border:1px solid rgba(55,138,221,.25);
+  border-radius:16px;padding:32px;position:relative;
+}
+.obs-center{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--b500);position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  box-shadow:0 0 0 6px rgba(55,138,221,.2),0 0 0 12px rgba(55,138,221,.08);
+}
+.obs-label{
+  position:absolute;font-family:var(--font-ko);
+}
+.obs-val{font-size:22px;font-weight:700;color:var(--accent)}
+.obs-key{font-size:20px;color:rgba(255,255,255,.4);margin-top:2px}
+/* Wind barb SVG */
+.obs-svg{width:100%;height:220px}
+
+/* ──────────────────────────────────────────
+   SLIDE 04 — 분석 순서
+────────────────────────────────────────── */
+#s04{background:var(--b900)}
+#s04::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(to bottom,var(--accent),var(--b600));
+}
+#s04 .content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:64px 80px}
+#s04 h2{font-size:36px;font-weight:700;color:#fff;margin:8px 0 44px}
+#s04 .steps{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;align-items:start}
+#s04 .step{display:flex;gap:16px;align-items:flex-start}
+#s04 .sn{
+  min-width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:900;flex-shrink:0;
+}
+#s04 .step-body h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
+#s04 .step-body p{font-size:20px;color:rgba(255,255,255,.55);line-height:1.6}
+#s04 .connector{
+  position:absolute;left:80px;top:160px;
+  width:2px;bottom:80px;
+  background:linear-gradient(to bottom,var(--accent) 0%,transparent 100%);
+  opacity:.15;
+}
+
+/* ──────────────────────────────────────────
+   SLIDE 05 — 등고선 개요
+────────────────────────────────────────── */
+#s05{background:var(--b800)}
+#s05 .bg-number{
+  position:absolute;right:-20px;bottom:-40px;
+  font-size:320px;font-weight:900;color:rgba(255,255,255,.025);
+  line-height:1;pointer-events:none;letter-spacing:-.04em;
+  font-family:var(--font-ko);
+}
+#s05 .content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:64px 80px}
+#s05 h2{font-size:36px;font-weight:700;color:#fff;margin:8px 0 36px}
+#s05 .interval-row{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+#s05 .icard{
+  flex:1;border-radius:14px;padding:20px;
+  border:1px solid transparent;
+}
+#s05 .icard.low{background:rgba(79,195,247,.1);border-color:rgba(79,195,247,.25)}
+#s05 .icard.mid{background:rgba(55,138,221,.1);border-color:rgba(55,138,221,.25)}
+#s05 .icard.high{background:rgba(12,68,124,.3);border-color:rgba(12,68,124,.5)}
+#s05 .icard .layer{font-size:20px;font-weight:700;letter-spacing:.08em;margin-bottom:8px}
+#s05 .icard.low .layer{color:var(--accent)}
+#s05 .icard.mid .layer{color:var(--b400)}
+#s05 .icard.high .layer{color:var(--b300,#8fbfe0)}
+#s05 .icard .hpa{font-size:22px;font-weight:700;color:#fff}
+#s05 .icard .gpm{font-size:20px;color:rgba(255,255,255,.5);margin-top:4px}
+#s05 .icard .base{font-size:20px;color:rgba(255,255,255,.35);margin-top:6px}
+#s05 .rule-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+#s05 .rule{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:14px 16px;
+}
+#s05 .rule .ri{font-size:20px;margin-bottom:8px}
+#s05 .rule h4{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
+#s05 .rule p{font-size:20px;color:rgba(255,255,255,.5);line-height:1.55}
+
+/* ──────────────────────────────────────────
+   SLIDE 06 — 등고선 분석 요령 (시각화)
+────────────────────────────────────────── */
+#s06{background:var(--b900);align-items:center;justify-content:flex-start}
+#s06 .content{position:relative;z-index:2;width:100%;max-width:1180px;padding:24px 64px 44px;display:flex;flex-direction:column;gap:16px}
+#s06 .head{max-width:760px}
+#s06 .head .slide-label{color:var(--b400);margin-bottom:10px}
+#s06 .head h2{font-size:32px;font-weight:700;color:#fff;margin-bottom:10px}
+#s06 .head p{font-size:20px;color:rgba(255,255,255,.68);line-height:1.55}
+#s06 .main{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+#s06 .rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#s06 .rule-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:16px 16px 18px;min-height:136px;
+}
+#s06 .rule-card .rule-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+#s06 .rule-card .rule-num{
+  width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(79,195,247,.12);border:1px solid rgba(79,195,247,.2);color:var(--accent);font-size:20px;font-weight:800;
+}
+#s06 .rule-card h3{font-size:20px;color:#fff}
+#s06 .rule-card p{font-size:20px;color:rgba(255,255,255,.72);line-height:1.5}
+#s06 .visual-panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px;
+}
+#s06 .visual-panel .vp-title{font-size:20px;font-weight:700;color:var(--accent);margin-bottom:12px}
+#s06 .mini-notes{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+#s06 .mini-note{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;padding:12px;
+}
+#s06 .mini-note strong{display:block;font-size:20px;color:#fff;margin-bottom:4px}
+#s06 .mini-note span{font-size:20px;color:rgba(255,255,255,.68);line-height:1.6}
+#s06 .bottom-note{margin-top:2px}
+/* 등고선 도식 SVG */
+.contour-svg{width:100%;height:230px}
+
+/* ──────────────────────────────────────────
+   SLIDE 07 — 등온선 묘화
+────────────────────────────────────────── */
+#s07{background:var(--b800)}
+#s07 .content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:64px 80px}
+#s07 h2{font-size:36px;font-weight:700;color:#fff;margin:8px 0 36px}
+#s07 .main-row{display:flex;gap:40px;align-items:flex-start}
+#s07 .left{flex:1}
+#s07 .spec-box{
+  background:rgba(255,255,255,.06);border:1px solid rgba(55,138,221,.25);
+  border-radius:14px;padding:24px;margin-bottom:20px;
+}
+#s07 .spec-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+#s07 .spec-row:last-child{margin-bottom:0}
+#s07 .spec-label{font-size:20px;color:rgba(255,255,255,.45);width:70px;flex-shrink:0}
+#s07 .spec-val{font-size:20px;font-weight:500;color:#fff}
+#s07 .tips{display:flex;flex-direction:column;gap:8px}
+#s07 .tip{
+  display:flex;gap:10px;align-items:flex-start;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  border-radius:8px;padding:10px 12px;
+}
+#s07 .tip-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+#s07 .tip p{font-size:20px;color:rgba(255,255,255,.6);line-height:1.6}
+#s07 .tip strong{color:#fff}
+#s07 .right{width:340px;flex-shrink:0}
+.isotherm-svg{width:100%;height:300px}
+
+/* ──────────────────────────────────────────
+   SLIDE 08 — 등풍속선
+────────────────────────────────────────── */
+#s08{background:var(--b900)}
+#s08::after{
+  content:'';position:absolute;
+  top:0;right:0;bottom:0;width:42%;
+  background:linear-gradient(180deg,rgba(4,44,83,.8),rgba(2,15,30,1));
+  clip-path:polygon(20% 0,100% 0,100% 100%,0% 100%);
+}
+#s08 .content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:64px 80px;max-width:62%}
+#s08 h2{font-size:36px;font-weight:700;color:#fff;margin:8px 0 36px}
+#s08 .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+#s08 .sg{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:18px;
+}
+#s08 .sg .sl{font-size:20px;color:rgba(255,255,255,.4);margin-bottom:6px;letter-spacing:.06em}
+#s08 .sg .sv{font-size:20px;font-weight:700;color:#fff}
+#s08 .sg .ss{font-size:20px;color:rgba(255,255,255,.45);margin-top:4px}
+#s08 .rules{display:flex;flex-direction:column;gap:10px}
+#s08 .jr{display:flex;gap:12px;align-items:flex-start}
+#s08 .jr-dot{
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(79,195,247,.15);border:1px solid rgba(79,195,247,.3);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:700;color:var(--accent);
+}
+#s08 .jr p{font-size:20px;color:rgba(255,255,255,.65);line-height:1.6}
+#s08 .jr strong{color:#fff}
+/* 우측 jet SVG */
+#s08 .right-deco{
+  position:absolute;right:0;top:0;bottom:0;width:42%;
+  z-index:3;display:flex;align-items:center;justify-content:center;
+}
+.jet-svg{width:100%;height:400px}
+
+/* ──────────────────────────────────────────
+   SLIDE 09 — 기압면별 실무 해석
+────────────────────────────────────────── */
+#s09{background:radial-gradient(ellipse at top left,rgba(79,195,247,.07),transparent 40%),var(--b800);align-items:center;justify-content:flex-start}
+#s09 .content{position:relative;z-index:2;width:100%;max-width:1180px;padding:24px 64px 32px}
+#s09 h2{font-size:32px;font-weight:700;color:#fff;margin:6px 0 10px}
+#s09 .top-note{font-size:20px;color:rgba(255,255,255,.78);line-height:1.55;margin-bottom:12px}
+#s09 .top-note strong{color:#fff}
+#s09 .matrix{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#s09 .plane{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;display:grid;grid-template-columns:.78fr 1.22fr;min-height:170px}
+#s09 .plane-head{padding:16px;display:flex;flex-direction:column;justify-content:space-between}
+#s09 .plane-head .phpa{font-size:30px;font-weight:900;color:#fff}
+#s09 .plane-head .palt{font-size:20px;color:rgba(255,255,255,.64);margin-top:4px}
+#s09 .plane-head .tag{margin-top:10px;align-self:flex-start;background:rgba(255,255,255,.14);color:#fff;border:none;padding:6px 10px}
+#s09 .plane-body{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+#s09 .plane-body .focus{font-size:21px;font-weight:800;color:#fff;line-height:1.32}
+#s09 .plane-body .sub{font-size:20px;color:rgba(255,255,255,.72);line-height:1.42}
+#s09 .plane-body .check{font-size:20px;color:rgba(255,255,255,.82);line-height:1.45;padding-top:6px;border-top:1px solid rgba(255,255,255,.08)}
+#s09 .summary{margin-top:12px;padding:12px 16px;border-radius:16px;background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.16);font-size:20px;color:#fff;line-height:1.5}
+#s09 .summary strong{color:var(--accent)}
+#s09 .p850 .plane-head{background:linear-gradient(160deg,#1c67b4,#0c447c)}
+#s09 .p700 .plane-head{background:linear-gradient(160deg,#15765f,#0b5645)}
+#s09 .p500 .plane-head{background:linear-gradient(160deg,#8e680f,#6f4f09)}
+#s09 .p300 .plane-head{background:linear-gradient(160deg,#6549d3,#4b35a0)}
+
+/* ──────────────────────────────────────────
+   SLIDE 10 — 사례 1
+────────────────────────────────────────── */
+#s10{background:var(--b900);align-items:center;justify-content:center}
+#s10 .content{position:relative;z-index:2;width:100%;max-width:1140px;padding:42px 72px 72px}
+#s10 h2{font-size:34px;font-weight:700;color:#fff;margin:8px 0 24px}
+#s10 .case-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+#s10 .case-main,#s10 .case-side{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px}
+#s10 .timeline{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+#s10 .pill{font-size:20px;padding:6px 14px;border-radius:999px;background:rgba(79,195,247,.12);border:1px solid rgba(79,195,247,.18);color:var(--b200)}
+#s10 .stack{display:flex;flex-direction:column;gap:10px}
+#s10 .layer-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
+#s10 .layer-box h3{font-size:22px;color:#fff;margin-bottom:8px}
+#s10 .layer-box p,#s10 .case-side p,#s10 .case-side li{font-size:20px;color:rgba(255,255,255,.72);line-height:1.65}
+#s10 .case-side h3{font-size:22px;color:#fff;margin-bottom:10px}
+#s10 .case-side ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:12px}
+#s10 .case-side li::before{content:'• ';color:var(--accent)}
+
+/* ──────────────────────────────────────────
+   SLIDE 11 — 사례 2
+────────────────────────────────────────── */
+#s11{background:var(--b800);align-items:center;justify-content:center}
+#s11 .content{position:relative;z-index:2;width:100%;max-width:1140px;padding:42px 72px 72px}
+#s11 h2{font-size:34px;font-weight:700;color:#fff;margin:8px 0 24px}
+#s11 .case-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+#s11 .case-main,#s11 .case-side{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px}
+#s11 .timeline{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+#s11 .pill{font-size:20px;padding:6px 14px;border-radius:999px;background:rgba(175,169,236,.14);border:1px solid rgba(175,169,236,.22);color:#d8d5ff}
+#s11 .stack{display:flex;flex-direction:column;gap:10px}
+#s11 .layer-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
+#s11 .layer-box h3{font-size:22px;color:#fff;margin-bottom:8px}
+#s11 .layer-box p,#s11 .case-side p,#s11 .case-side li{font-size:20px;color:rgba(255,255,255,.72);line-height:1.65}
+#s11 .case-side h3{font-size:22px;color:#fff;margin-bottom:10px}
+#s11 .case-side ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:12px}
+#s11 .case-side li::before{content:'• ';color:var(--accent)}
+
+/* ──────────────────────────────────────────
+   SLIDE 12 — 오판 방지
+────────────────────────────────────────── */
+#s12{background:var(--b900);align-items:center;justify-content:center}
+#s12::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 50% at 20% 50%,rgba(24,95,165,.12) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 50%,rgba(79,195,247,.08) 0%,transparent 70%);
+}
+#s12 .content{position:relative;z-index:2;width:100%;max-width:1120px;padding:60px 80px}
+#s12 h2{font-size:34px;font-weight:700;color:#fff;margin:8px 0 28px}
+#s12 .mistakes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#s12 .mistake{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px}
+#s12 .mistake .bad{font-size:22px;font-weight:700;color:#ff9d9d;margin-bottom:10px}
+#s12 .mistake .good{font-size:20px;line-height:1.65;color:rgba(255,255,255,.78)}
+
+/* ──────────────────────────────────────────
+   SLIDE 13 — 체크리스트
+────────────────────────────────────────── */
+#s13{background:linear-gradient(135deg,var(--b900),#031a31);align-items:center;justify-content:center}
+#s13 .content{position:relative;z-index:2;width:100%;max-width:1120px;padding:60px 80px}
+#s13 h2{font-size:36px;font-weight:700;color:#fff;margin:8px 0 24px}
+#s13 .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:24px 0 26px}
+#s13 .flow-step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;min-height:170px}
+#s13 .flow-step .num{width:40px;height:40px;border-radius:50%;background:rgba(79,195,247,.15);border:1px solid rgba(79,195,247,.22);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--accent);margin-bottom:12px}
+#s13 .flow-step h3{font-size:22px;color:#fff;margin-bottom:8px}
+#s13 .flow-step p{font-size:20px;color:rgba(255,255,255,.72);line-height:1.65}
+#s13 .close-box{margin-top:18px;padding:22px;border-radius:18px;background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.18)}
+#s13 .close-box p{font-size:22px;line-height:1.7;color:#fff}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- ═══════════════════════════════════════
+     SLIDE 01 — COVER
+════════════════════════════════════════ -->
+<div class="slide active" id="s01">
+  <div class="grid-lines"></div>
+  <div class="content">
+    <div class="kmi-logo">기상청 · 한국기상산업기술원 KMI</div>
+    <div class="slide-label" style="color:var(--accent)">기상예보사 교육교재 · 3차시</div>
+    <h1>일기도<br><span>분석기법</span></h1>
+    <p class="sub">고층일기도 분석 및 묘화</p>
+    <div class="kw-row">
+      <span class="kw">고층일기도</span>
+      <span class="kw">등고선</span>
+      <span class="kw">등온선</span>
+      <span class="kw">등풍속선</span>
+      <span class="kw">제트기류</span>
+      <span class="kw">지위고도</span>
+    </div>
+  </div>
+  <div class="chapter-list">
+    <div style="font-size:20px;letter-spacing:.12em;color:rgba(255,255,255,.35);margin-bottom:12px;padding-left:8px">목차</div>
+    <div class="ch-item"><div class="ch-num">1</div> 개요와 관측 해석</div>
+    <div class="ch-item"><div class="ch-num">2</div> 분석 순서와 묘화 원칙</div>
+    <div class="ch-item"><div class="ch-num">3</div> 등온선·제트 실무 포인트</div>
+    <div class="ch-item"><div class="ch-num">4</div> 기압면별 예보 해석</div>
+    <div class="ch-item"><div class="ch-num">5</div> 현업 사례 2선</div>
+    <div class="ch-item"><div class="ch-num">6</div> 오판 방지와 체크리스트</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 02 — 분석 자료 종류
+════════════════════════════════════════ -->
+<div class="slide" id="s02">
+  <div class="content">
+    <div class="header">
+      <div class="slide-label" style="color:var(--accent)">1. 고층일기도 분석 개요</div>
+      <h2>분석에 사용되는<br><em>자료의 종류</em></h2>
+    </div>
+    <div class="cards">
+      <div class="data-card">
+        <div class="icon">🌬</div>
+        <h3>상층 바람</h3>
+        <p>라디오존데 상승 궤적(GPS 추적)으로 풍향·풍속 산출. 해양·오지에서는 위성·항공기 자료로 보완.</p>
+        <div class="acc-badge acc-high">정확도 ★★★</div>
+      </div>
+      <div class="data-card">
+        <div class="icon">📡</div>
+        <h3>위성 바람 (AMV)</h3>
+        <p>구름 이동 벡터(AMV)에서 추출. 천리안 2A 도입 이후 중·상층 정확도 개선. 라디오존데 대비 상대적으로 낮으며 특히 하층에서 불확실성 큼.</p>
+        <div class="acc-badge acc-mid">정확도 ★★☆</div>
+      </div>
+      <div class="data-card">
+        <div class="icon">📏</div>
+        <h3>지위고도</h3>
+        <p>라디오존데의 온도·기압으로 <strong style="color:#fff">간접 계산</strong>. 바람보다 정확도 낮은 편.</p>
+        <div class="acc-badge acc-mid">정확도 ★★☆</div>
+      </div>
+      <div class="data-card">
+        <div class="icon">🌡</div>
+        <h3>상층 온도·습도</h3>
+        <p>라디오존데 센서 직접 측정. 고도 높을수록 오차 크고 습도는 미보고 多.</p>
+        <div class="acc-badge acc-mid">정확도 ★★☆</div>
+      </div>
+    </div>
+    <div class="judgment-box">
+      <div class="jl">예보 판단 포인트</div>
+      <div class="jt">자료 정확도와 공간 공백을 먼저 구분해야 합니다. 해양·오지에서는 위성바람을 보조로 쓰되, 강수·강풍 판단의 최종 축은 라디오존데와 수증기장 교차검증입니다.</div>
+    </div>
+  </div>
+  <div class="right-deco">
+    <div class="deco-item" style="font-size:20px;color:rgba(255,255,255,.5)">
+      <div style="font-size:22px;font-weight:700;color:var(--accent)">층후</div>
+      <div>두 기압면 사이의</div>
+      <div>지위고도 차이</div>
+      <div style="margin-top:12px;font-size:20px;opacity:.5">대표: 1000–500hPa</div>
+      <div style="font-size:20px;opacity:.5">1000–850hPa</div>
+    </div>
+    <div style="width:1px;height:40px;background:rgba(255,255,255,.1)"></div>
+    <div class="deco-item" style="font-size:20px;color:rgba(255,255,255,.5)">
+      <div style="font-size:22px;font-weight:700;color:var(--b400)">온도풍</div>
+      <div>상·하층 지균풍</div>
+      <div>벡터의 차이</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 03 — 기입 모형
+════════════════════════════════════════ -->
+<div class="slide" id="s03">
+  <div class="content">
+    <div class="left">
+      <div class="slide-label" style="color:var(--accent)">1. 고층일기도 분석 개요</div>
+      <h2 style="font-size:32px;font-weight:700;color:#fff;margin:8px 0 28px">관측값 <br>기입 모형</h2>
+      <div class="field-list">
+        <div class="field">
+          <div class="field-dot" style="background:var(--accent)"></div>
+          <div>
+            <div class="field-name">온도 (℃)</div>
+            <div class="field-desc">관측소 기호 좌상단 · 보통 음수</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-dot" style="background:var(--gold)"></div>
+          <div>
+            <div class="field-name">지위고도 (gpm)</div>
+            <div class="field-desc">관측소 기호 우상단 · 실무 축약: dam(decameter)</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-dot" style="background:#5DCAA5"></div>
+          <div>
+            <div class="field-name">온도 – 노점온도 차</div>
+            <div class="field-desc">관측소 기호 하단 중앙</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-dot" style="background:#E24B4A"></div>
+          <div>
+            <div class="field-name">바람 (풍향 · 풍속)</div>
+            <div class="field-desc">깃대 방향 = 풍향 · 깃 수 = 풍속</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="obs-model">
+        <svg class="obs-svg" viewBox="0 0 340 220">
+          <!-- center station dot -->
+          <circle cx="170" cy="110" r="10" fill="#378ADD"/>
+          <circle cx="170" cy="110" r="16" fill="none" stroke="#378ADD" stroke-width="1" opacity=".3"/>
+          <circle cx="170" cy="110" r="24" fill="none" stroke="#378ADD" stroke-width="0.5" opacity=".15"/>
+          <!-- 온도 top-left -->
+          <text x="80" y="55" fill="#4FC3F7" font-size="30" font-weight="700" text-anchor="middle" font-family="Noto Sans KR,sans-serif">-8</text>
+          <line x1="115" y1="68" x2="158" y2="103" stroke="rgba(79,195,247,.3)" stroke-width="1"/>
+          <text x="80" y="77" fill="rgba(255,255,255,.35)" font-size="20" text-anchor="middle" font-family="Noto Sans KR,sans-serif">온도 (℃)</text>
+          <!-- 지위고도 top-right -->
+          <text x="258" y="55" fill="#F0C04A" font-size="30" font-weight="700" text-anchor="middle" font-family="Noto Sans KR,sans-serif">5460</text>
+          <line x1="222" y1="68" x2="183" y2="103" stroke="rgba(240,192,74,.3)" stroke-width="1"/>
+          <text x="258" y="77" fill="rgba(255,255,255,.35)" font-size="20" text-anchor="middle" font-family="Noto Sans KR,sans-serif">지위고도 (gpm)</text>
+          <!-- T-Td 하단 중앙 -->
+          <text x="210" y="130" fill="#5DCAA5" font-size="20" font-weight="700" font-family="Noto Sans KR,sans-serif">+12</text>
+          <text x="245" y="148" fill="rgba(255,255,255,.35)" font-size="20" text-anchor="middle" font-family="Noto Sans KR,sans-serif">T–Td (건조)</text>
+          <text x="245" y="165" fill="rgba(93,202,165,.5)" font-size="16" text-anchor="middle" font-family="Noto Sans KR,sans-serif">≤3℃=습윤</text>
+          <!-- Wind barb (풍향 NW, ~25kt) -->
+          <line x1="90" y1="155" x2="162" y2="113" stroke="rgba(255,255,255,.8)" stroke-width="2.5"/>
+          <line x1="90" y1="155" x2="82" y2="143" stroke="rgba(255,255,255,.8)" stroke-width="2"/>
+          <line x1="100" y1="149" x2="92" y2="137" stroke="rgba(255,255,255,.8)" stroke-width="2"/>
+          <line x1="110" y1="143" x2="102" y2="131" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+          <text x="60" y="185" fill="rgba(255,255,255,.35)" font-size="20" text-anchor="middle" font-family="Noto Sans KR,sans-serif">바람</text>
+        </svg>
+        <div style="text-align:center;font-size:20px;color:rgba(255,255,255,.3);margin-top:-8px">육지 관측소 기입 모형 (예시)</div>
+      </div>
+      <div class="judgment-box">
+        <div class="jl">예보 판단 포인트</div>
+        <div class="jt">기입 모형은 숫자 읽기가 아니라 습윤·바람·온도 경도 위치를 한 번에 보는 훈련입니다. T–Td가 좁고 바람이 수렴하는 구역은 강수 지속 가능성을 먼저 의심합니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 04 — 분석 순서
+════════════════════════════════════════ -->
+<div class="slide" id="s04">
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">2. 등고선 분석과 묘화</div>
+    <h2>고층 등압면 <br>분석 순서</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="sn" style="background:rgba(79,195,247,.15);border:1px solid rgba(79,195,247,.3);color:var(--accent)">1</div>
+        <div class="step-body">
+          <h3>등고선</h3>
+          <p>기압 배치의 기본 골격 파악. 가장 먼저 분석.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn" style="background:rgba(55,138,221,.15);border:1px solid rgba(55,138,221,.3);color:var(--b400)">2</div>
+        <div class="step-body">
+          <h3>등온선</h3>
+          <p>온도 분포 파악 및 전선 위치 추정.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn" style="background:rgba(240,192,74,.1);border:1px solid rgba(240,192,74,.25);color:var(--gold)">3</div>
+        <div class="step-body">
+          <h3>상층 전선</h3>
+          <p>특히 850hPa면. 등온선 조밀은 1차 단서이며 풍향 시어·습도 경계와 함께 판단.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn" style="background:rgba(93,202,165,.1);border:1px solid rgba(93,202,165,.25);color:#5DCAA5">4</div>
+        <div class="step-body">
+          <h3>고·저기압 / 기압골·능</h3>
+          <p>중심 위치 및 기압계 형태 확정.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn" style="background:rgba(141,191,224,.1);border:1px solid rgba(141,191,224,.25);color:#8fc7e8">5</div>
+        <div class="step-body">
+          <h3>습윤구역</h3>
+          <p>이슬점 편차 T–Td ≤ 3℃ 이하. 녹색 빗금 표시.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn" style="background:rgba(175,169,236,.1);border:1px solid rgba(175,169,236,.25);color:#AFA9EC">6</div>
+        <div class="step-body">
+          <h3>등풍속선·제트류</h3>
+          <p>보통 300·200hPa. 하층 제트는 850hPa.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn" style="background:rgba(226,75,74,.1);border:1px solid rgba(226,75,74,.2);color:#ff9090">7</div>
+        <div class="step-body">
+          <h3>기압계 경로</h3>
+          <p>이동 방향, 발달·쇠약 여부 분석.</p>
+        </div>
+      </div>
+    </div>
+    <div class="judgment-box">
+      <div class="jl">예보 판단 포인트</div>
+      <div class="jt">500hPa 골·능을 먼저 잡고, 그 다음 300hPa 제트와 850hPa 습윤/온도이류를 겹쳐야 실제 위험기상과 연결됩니다. 분석 순서가 곧 예보 우선순위입니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 05 — 등고선 개요
+════════════════════════════════════════ -->
+<div class="slide" id="s05">
+  <div class="bg-number">等</div>
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">3. 등고선의 묘화 방법</div>
+    <h2>등고선 개요 및<br>묘화 간격</h2>
+    <div class="interval-row">
+      <div class="icard low">
+        <div class="layer">하층 ①</div>
+        <div class="hpa">925 hPa</div>
+        <div class="gpm">30 gpm 간격</div>
+        <div class="base">기준: 810 gpm</div>
+      </div>
+      <div class="icard low" style="border-color:rgba(79,195,247,.18)">
+        <div class="layer">하층 ②</div>
+        <div class="hpa">850 hPa</div>
+        <div class="gpm">60 gpm 간격</div>
+        <div class="base">기준: 1,500 gpm</div>
+      </div>
+      <div class="icard mid">
+        <div class="layer">중층</div>
+        <div class="hpa">700 · 500 hPa</div>
+        <div class="gpm">60 gpm 간격</div>
+        <div class="base">기준: 3,000 / 5,580 gpm</div>
+      </div>
+      <div class="icard high">
+        <div class="layer">상층</div>
+        <div class="hpa">300 · 200 · 100 hPa</div>
+        <div class="gpm">120 gpm 간격</div>
+        <div class="base">기준: 9,180 / 11,760 / 16,200 gpm</div>
+      </div>
+    </div>
+    <div class="rule-row">
+      <div class="rule">
+        <div class="ri">✦</div>
+        <h4>폐곡선 또는 연변 종료</h4>
+        <p>도중에 끊기지 않으며 반드시 폐곡선이 되거나 일기도 연변에서 끝남</p>
+      </div>
+      <div class="rule">
+        <div class="ri">✕</div>
+        <h4>교차·분기 금지</h4>
+        <p>등고선은 서로 교차하거나 두 갈래로 갈라지지 않음</p>
+      </div>
+      <div class="rule">
+        <div class="ri">≈</div>
+        <h4>바람 방향 ≈ 등고선</h4>
+        <p>상층에서는 지균풍에 가까워 등고선과 거의 평행하게 나타남</p>
+      </div>
+    </div>
+    <div class="judgment-box" style="max-width:980px;margin:26px auto 0">
+      <div class="jl">예보 판단 포인트</div>
+      <div class="jt">등고선이 조밀해지는 곳은 상층 강풍대와 단파 접근 가능성</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 06 — 등고선 분석 요령
+════════════════════════════════════════ -->
+<div class="slide" id="s06">
+  <div class="content">
+    <div class="head">
+      <div class="slide-label" style="color:var(--accent)">3. 등고선의 묘화 방법</div>
+      <h2>등고선 분석 요령</h2>
+      <p>핵심은 <strong style="color:#fff">조밀한 구역과 곡률 변화가 어디서 위험기상으로 이어지는지</strong> 읽는 것</p>
+    </div>
+    <div class="main">
+      <div class="rule-grid">
+        <div class="rule-card">
+          <div class="rule-top"><div class="rule-num">1</div><h3>풍속과 간격</h3></div>
+          <p>등고선이 조밀한 구역은 압력경도력이 커 상층 강풍대일 가능성이 높습니다. 조밀 = 강풍의 결과로 해석합니다.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-top"><div class="rule-num">2</div><h3>대칭 기압계</h3></div>
+          <p>두 고·저기압 사이에서는 같은 값이 마주 보더라도 흐름 방향은 반대로 읽습니다.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-top"><div class="rule-num">3</div><h3>키 큰 기압계</h3></div>
+          <p>한랭저기압·온난고기압은 고도가 높아질수록 특성이 강화됩니다.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-top"><div class="rule-num">4</div><h3>키 작은 기압계</h3></div>
+          <p>온난저기압·한랭고기압은 상층으로 갈수록 약해질 수 있습니다.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-top"><div class="rule-num">5</div><h3>지형 효과</h3></div>
+          <p>대산맥 부근에서는 Z자 굴절이 나타나 지형성 변화를 함께 봐야 합니다.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-top"><div class="rule-num">6</div><h3>상승·하강 판단</h3></div>
+          <p>상승·하강 구역 판단은 와도이류, 발산장, 제트 입출구 구조를 종합적으로 고려합니다.</p>
+        </div>
+      </div>
+      <div class="visual-panel">
+        <div class="vp-title">도식으로 읽는 핵심</div>
+        <svg class="contour-svg" viewBox="0 0 360 300">
+          <rect width="360" height="300" fill="rgba(255,255,255,.03)" rx="16"/>
+          <ellipse cx="180" cy="148" rx="145" ry="92" fill="none" stroke="#378ADD" stroke-width="1.2" opacity=".35"/>
+          <ellipse cx="180" cy="148" rx="108" ry="66" fill="none" stroke="#378ADD" stroke-width="1.4" opacity=".5"/>
+          <ellipse cx="180" cy="148" rx="72" ry="42" fill="none" stroke="#378ADD" stroke-width="1.5" opacity=".7"/>
+          <ellipse cx="180" cy="148" rx="36" ry="20" fill="none" stroke="#378ADD" stroke-width="1.7" opacity=".9"/>
+          <text x="180" y="154" text-anchor="middle" fill="#4FC3F7" font-size="24" font-weight="800" font-family="Noto Sans KR,sans-serif">H</text>
+          <text x="284" y="132" fill="rgba(55,138,221,.8)" font-size="20" font-family="Noto Sans KR,sans-serif">5820</text>
+          <text x="252" y="122" fill="rgba(55,138,221,.8)" font-size="20" font-family="Noto Sans KR,sans-serif">5760</text>
+          <text x="220" y="115" fill="rgba(55,138,221,.9)" font-size="20" font-family="Noto Sans KR,sans-serif">5700</text>
+          <defs>
+            <marker id="wa2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+              <path d="M1 1L9 5L1 9" fill="none" stroke="#5DCAA5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+          <path d="M82 92 A108 66 0 0 1 278 92" fill="none" stroke="#5DCAA5" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#wa2)" opacity=".8"/>
+          <text x="180" y="72" text-anchor="middle" fill="rgba(93,202,165,.85)" font-size="20" font-family="Noto Sans KR,sans-serif">반시계 회전 + 조밀한 간격 = 상층 강풍대 가능</text>
+          <line x1="28" y1="255" x2="62" y2="255" stroke="#378ADD" stroke-width="1.6"/>
+          <text x="72" y="260" fill="rgba(255,255,255,.58)" font-size="20" font-family="Noto Sans KR,sans-serif">등고선</text>
+          <line x1="170" y1="255" x2="204" y2="255" stroke="#5DCAA5" stroke-width="1.6" stroke-dasharray="5 3"/>
+          <text x="214" y="260" fill="rgba(255,255,255,.58)" font-size="20" font-family="Noto Sans KR,sans-serif">지균풍 방향</text>
+        </svg>
+        <div class="mini-notes">
+          <div class="mini-note"><strong>현업 해석</strong><span>조밀 구역은 단파 접근과 강풍대 가능성을 먼저 의심해야 합니다. 300hPa 제트와 겹쳐 보면 상승·하강 구역을 더 빠르게 좁힐 수 있습니다.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 07 — 등온선 묘화
+════════════════════════════════════════ -->
+<div class="slide" id="s07">
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">4. 등온선의 묘화 방법</div>
+    <h2>등온선 묘화</h2>
+    <div class="main-row">
+      <div class="left">
+        <div class="spec-box">
+          <div class="spec-row">
+            <div class="spec-label">기준</div>
+            <div class="spec-val">0℃</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">간격</div>
+            <div class="spec-val">5℃ (기상청 현업 기준) · 국제 일부 6℃</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">선 종류</div>
+            <div class="spec-val" style="color:#ff9090">적색 점선</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">한랭</div>
+            <div class="spec-val" style="color:#6BAAE8">청색 빗금 · "C"</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">온난</div>
+            <div class="spec-val" style="color:#ff9090">적색 빗금 · "W"</div>
+          </div>
+        </div>
+        <div class="tips">
+          <div class="tip">
+            <div class="tip-icon">📌</div>
+            <p><strong>전선 위치</strong> — 등온선 조밀은 전선대의 1차 단서. 풍향 시어·습도 경계와 함께 판단해야 전선 위치를 확정할 수 있음.</p>
+          </div>
+          <div class="tip">
+            <div class="tip-icon">💨</div>
+            <p><strong>풍향과 온도</strong> — 북풍 지역 → 온도골, 남풍 지역 → 온도능이 나타나는 경향. 곡률과 배경장에 따라 달라질 수 있음.</p>
+          </div>
+          <div class="tip">
+            <div class="tip-icon">⬆</div>
+            <p><strong>상층 제트 발달</strong> — 강한 수평 온도경도와 연직 시어가 있는 구역에서 제트가 강화. 최대풍속 고도는 대류권계면 구조에 따라 달라짐.</p>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <svg class="isotherm-svg" viewBox="0 0 320 300">
+          <rect width="320" height="300" fill="rgba(255,255,255,.03)" rx="12"/>
+          <!-- 한랭 영역 배경 -->
+          <rect x="0" y="0" width="320" height="300" fill="rgba(12,68,124,.2)" rx="12"/>
+          <rect x="160" y="0" width="160" height="300" fill="rgba(180,50,50,.1)" rx="12"/>
+          <!-- 전선대 -->
+          <rect x="138" y="0" width="44" height="300" fill="rgba(240,192,74,.08)" rx="4"/>
+          <text x="160" y="154" text-anchor="middle" fill="rgba(240,192,74,.6)" font-size="20" font-family="Noto Sans KR,sans-serif">전선대</text>
+          <!-- 등온선 (적색 점선) -->
+          <path d="M0 60 Q100 52 160 55 Q220 58 320 50" fill="none" stroke="rgba(255,100,100,.6)" stroke-width="1.2" stroke-dasharray="5 3"/>
+          <path d="M0 90 Q100 80 160 85 Q220 90 320 80" fill="none" stroke="rgba(255,100,100,.7)" stroke-width="1.2" stroke-dasharray="5 3"/>
+          <path d="M0 118 Q100 105 160 112 Q220 120 320 110" fill="none" stroke="rgba(255,100,100,.8)" stroke-width="1.2" stroke-dasharray="5 3"/>
+          <path d="M0 144 Q100 130 160 138 Q220 148 320 138" fill="none" stroke="rgba(255,100,100,.8)" stroke-width="1.2" stroke-dasharray="5 3"/>
+          <path d="M0 168 Q100 152 160 162 Q220 174 320 164" fill="none" stroke="rgba(255,100,100,.7)" stroke-width="1.2" stroke-dasharray="5 3"/>
+          <path d="M0 190 Q100 172 160 184 Q220 198 320 188" fill="none" stroke="rgba(255,100,100,.6)" stroke-width="1.2" stroke-dasharray="5 3"/>
+          <!-- C 라벨 -->
+          <text x="70" y="175" text-anchor="middle" fill="rgba(107,170,232,.9)" font-size="32" font-weight="900" font-family="Noto Sans KR,sans-serif">C</text>
+          <text x="70" y="200" text-anchor="middle" fill="rgba(107,170,232,.5)" font-size="20" font-family="Noto Sans KR,sans-serif">한랭 · 청색 빗금</text>
+          <!-- W 라벨 -->
+          <text x="250" y="175" text-anchor="middle" fill="rgba(255,150,150,.9)" font-size="32" font-weight="900" font-family="Noto Sans KR,sans-serif">W</text>
+          <text x="250" y="200" text-anchor="middle" fill="rgba(255,150,150,.5)" font-size="20" font-family="Noto Sans KR,sans-serif">온난 · 적색 빗금</text>
+          <!-- 북풍 화살표 -->
+          <defs>
+            <marker id="na" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+              <path d="M1 1L9 5L1 9" fill="none" stroke="#8fc7e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+          <line x1="70" y1="256" x2="70" y2="224" stroke="#8fc7e8" stroke-width="1.5" marker-end="url(#na)" opacity=".6"/>
+          <text x="70" y="275" text-anchor="middle" fill="rgba(255,255,255,.35)" font-size="20" font-family="Noto Sans KR,sans-serif">북풍→온도골</text>
+        </svg>
+      </div>
+    </div>
+    <div class="judgment-box" style="max-width:980px;margin:26px auto 0">
+      <div class="jl">예보 판단 포인트</div>
+      <div class="jt">온도골·온도능은 전선 위치만 보여주는 것이 아니라 대류 강화와 강수형태 변화를 예고합니다. 특히 850hPa 온도·습도 구조와 반드시 연결해 읽어야 합니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 08 — 등풍속선
+════════════════════════════════════════ -->
+<div class="slide" id="s08">
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">5. 등풍속선의 묘화 방법</div>
+    <h2>등풍속선 &<br>제트기류</h2>
+    <div class="spec-grid">
+      <div class="sg">
+        <div class="sl">적용 고도</div>
+        <div class="sv">500hPa 이상</div>
+        <div class="ss">하층 제트 → 850hPa</div>
+      </div>
+      <div class="sg">
+        <div class="sl">선 사양</div>
+        <div class="sv" style="color:#5DCAA5">녹색 파선</div>
+        <div class="ss">제트기류 부근에만 표시</div>
+      </div>
+      <div class="sg">
+        <div class="sl">300hPa 기준</div>
+        <div class="sv">약 20kt 간격</div>
+        <div class="ss">분석 체계에 따라 다름</div>
+      </div>
+      <div class="sg">
+        <div class="sl">100kts 이상</div>
+        <div class="sv">50kts 간격</div>
+      </div>
+    </div>
+    <div class="rules">
+      <div class="jr">
+        <div class="jr-dot">①</div>
+        <p><strong>제트 북쪽</strong> — 바람 시어 크므로 등풍속선 간격이 남쪽보다 조밀하게 묘화</p>
+      </div>
+      <div class="jr">
+        <div class="jr-dot">②</div>
+        <p><strong>제트 축 표시</strong> — 등풍속선(녹색 파선) 위에 제트기류 축을 별도 실선으로 표시. 풍하측에 화살표 부기</p>
+      </div>
+      <div class="jr">
+        <div class="jr-dot">③</div>
+        <p><strong>제트 입구/출구</strong> — 직선 제트 기준: <strong>우입구·좌출구 → 발산(상승)</strong>, <strong>좌입구·우출구 → 수렴</strong>. 곡률 제트에서는 해석이 달라짐</p>
+      </div>
+      <div class="jr">
+        <div class="jr-dot">④</div>
+        <p><strong>제트핵 위치</strong> — 강한 수평 온도경도와 연관되며 주로 <strong>대류권계면 부근</strong>에서 강화. 특정 면에 고정 불가</p>
+      </div>
+    </div>
+    <div class="judgment-box" style="max-width:760px;margin-top:24px">
+      <div class="jl">예보 판단 포인트</div>
+      <div class="jt">제트 축 위치만 보지 말고 입·출구역과 북쪽 조밀 영역을 함께 읽어야 합니다. 제트 남북 비대칭은 강수 강화 구역과 강풍 위험 구역을 가르는 핵심 신호입니다.</div>
+    </div>
+  </div>
+  <div class="right-deco">
+    <svg class="jet-svg" viewBox="0 0 300 400">
+      <!-- 등풍속선 남쪽 (넓음) -->
+      <path d="M10 330 Q150 315 290 325" fill="none" stroke="#5DCAA5" stroke-width="1" stroke-dasharray="8 4" opacity=".45"/>
+      <path d="M10 300 Q150 282 290 292" fill="none" stroke="#5DCAA5" stroke-width="1" stroke-dasharray="8 4" opacity=".55"/>
+      <!-- 제트 축 -->
+      <path d="M10 240 Q150 220 290 232" fill="none" stroke="#E24B4A" stroke-width="10" opacity=".25"/>
+      <path d="M10 240 Q150 220 290 232" fill="none" stroke="#E24B4A" stroke-width="2.5"/>
+      <!-- 화살표 -->
+      <defs>
+        <marker id="ja" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M1 1L11 6L1 11" fill="none" stroke="#E24B4A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <path d="M250 228 L285 230" stroke="#E24B4A" stroke-width="2.5" marker-end="url(#ja)"/>
+      <!-- 등풍속선 북쪽 (조밀) -->
+      <path d="M10 182 Q150 162 290 174" fill="none" stroke="#5DCAA5" stroke-width="1" stroke-dasharray="8 4" opacity=".65"/>
+      <path d="M10 152 Q150 132 290 144" fill="none" stroke="#5DCAA5" stroke-width="1" stroke-dasharray="8 4" opacity=".75"/>
+      <path d="M10 124 Q150 104 290 116" fill="none" stroke="#5DCAA5" stroke-width="1" stroke-dasharray="8 4" opacity=".8"/>
+      <path d="M10 98  Q150 78  290 90"  fill="none" stroke="#5DCAA5" stroke-width="1" stroke-dasharray="8 4" opacity=".7"/>
+      <path d="M10 74  Q150 54  290 66"  fill="none" stroke="#5DCAA5" stroke-width="1.2" stroke-dasharray="8 4" opacity=".6"/>
+      <!-- 라벨들 -->
+      <text x="148" y="210" text-anchor="middle" fill="rgba(226,75,74,.9)" font-size="20" font-weight="700" font-family="Noto Sans KR,sans-serif">제트 축</text>
+      <text x="5" y="68" fill="rgba(93,202,165,.8)" font-size="20" font-family="Noto Sans KR,sans-serif">100kt</text>
+      <text x="5" y="298" fill="rgba(93,202,165,.6)" font-size="20" font-family="Noto Sans KR,sans-serif">50kt</text>
+      <!-- 북/남 라벨 -->
+      <rect x="220" y="90" width="68" height="24" rx="6" fill="rgba(79,195,247,.12)" stroke="rgba(79,195,247,.25)" stroke-width=".5"/>
+      <text x="254" y="106" text-anchor="middle" fill="rgba(79,195,247,.85)" font-size="20" font-family="Noto Sans KR,sans-serif">북쪽 조밀</text>
+      <rect x="220" y="290" width="68" height="24" rx="6" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.1)" stroke-width=".5"/>
+      <text x="254" y="306" text-anchor="middle" fill="rgba(255,255,255,.5)" font-size="20" font-family="Noto Sans KR,sans-serif">남쪽 넓음</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 09 — 기압면별 실무 해석
+════════════════════════════════════════ -->
+<div class="slide" id="s09">
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">6. 기압면별 실무 해석</div>
+    <h2>기압면별로 <br>무엇을 먼저 볼 것인가</h2>
+    <div class="top-note"><strong>기억법:</strong> 500hPa로 배경장을 잡고, 300hPa로 강제력을 확인한 뒤, 850hPa에서 현상화를 결정하고 700hPa로 수분 공급과 지속성을 보완합니다. 각 면의 역할은 대표적 경향이며 실제 해석에서는 서로 중첩됩니다.</div>
+    <div class="matrix">
+      <div class="plane p850">
+        <div class="plane-head">
+          <div>
+            <div class="phpa">850 hPa</div>
+            <div class="palt">1.5 km · 저층 구조</div>
+          </div>
+          <span class="tag">현상화</span>
+        </div>
+        <div class="plane-body">
+          <div class="focus">강수형태 · 수증기 · 한기이류</div>
+          <div class="sub">실제 현상화를 가장 빨리 답해주는 면</div>
+          <div class="check">체크: 온도이류 + 습도 + 하층 제트</div>
+        </div>
+      </div>
+      <div class="plane p700">
+        <div class="plane-head">
+          <div>
+            <div class="phpa">700 hPa</div>
+            <div class="palt">3 km · 중층 습윤</div>
+          </div>
+          <span class="tag">지속성</span>
+        </div>
+        <div class="plane-body">
+          <div class="focus">상승역 · 수분 공급 경로 · 건조층</div>
+          <div class="sub">강수 지속 여부와 수분 공급 통로를 확인하는 보조 면</div>
+          <div class="check">체크: 중층 습윤역 + 건조층 침투 + 수증기 이류</div>
+        </div>
+      </div>
+      <div class="plane p500">
+        <div class="plane-head">
+          <div>
+            <div class="phpa">500 hPa</div>
+            <div class="palt">5–6 km · 대기 대표</div>
+          </div>
+          <span class="tag">배경장</span>
+        </div>
+        <div class="plane-body">
+          <div class="focus">단파골 · 와도이류 · 상승장</div>
+          <div class="sub">운동장 변화와 예보 시간축을 정하는 출발점</div>
+          <div class="check">체크: 골·능 + 단파 위치 + 한기이류 + 와도이류 방향</div>
+        </div>
+      </div>
+      <div class="plane p300">
+        <div class="plane-head">
+          <div>
+            <div class="phpa">300 hPa</div>
+            <div class="palt">10 km · 상층 제트</div>
+          </div>
+          <span class="tag">강제력</span>
+        </div>
+        <div class="plane-body">
+          <div class="focus">발산역 · 제트 축 · 강제력</div>
+          <div class="sub">상승이 더 붙을지 확인하는 가속 페달</div>
+          <div class="check">체크: 제트 출구역 + 발산역 + 혼합 가능 구역</div>
+        </div>
+      </div>
+    </div>
+    <div class="summary"><strong>실무 포인트:</strong> 네 면을 고정 역할로 외우지 말고, "배경장 → 강제력 → 현상화 → 수분/지속성" 순서로 묶되 각 면이 서로 보완하며 중첩됨을 염두에 두고 해석합니다.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 10 — 사례 1
+════════════════════════════════════════ -->
+<div class="slide" id="s10">
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">7. 개념 사례 (실제 적용 시 날짜·자료 출처 확인 필요)</div>
+    <h2>사례 1 · 집중호우 / 장마전선 강화</h2>
+    <div class="case-grid">
+      <div class="case-main">
+        <div class="timeline">
+          <span class="pill">분석 시각 06UTC</span>
+          <span class="pill">관심 현상 남부지방 집중호우</span>
+          <span class="pill">핵심 질문 강수 강화 시점</span>
+        </div>
+        <div class="stack">
+          <div class="layer-box">
+            <h3>850 hPa</h3>
+            <p>남서풍 하층 제트와 고상당온위 공기가 남부지방에 집중. 지형 상승이 겹치면 강수 급강화 가능.</p>
+          </div>
+          <div class="layer-box">
+            <h3>500 hPa</h3>
+            <p>중국 동부 단파골 접근과 한기이류가 상층 불안정을 보강. 골 전면 상승역이 장마전선과 겹칩니다.</p>
+          </div>
+          <div class="layer-box">
+            <h3>300 hPa</h3>
+            <p>제트 출구역이 남부에 놓이며 상층 발산 강화. 강수대 정체 시 누적 위험이 급증합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="case-side">
+        <h3>예보 판단</h3>
+        <p>핵심은 <strong style="color:#fff">강수 강화 시간대와 정체 가능성</strong>입니다. 850hPa 수증기 공급이 유지되고 300hPa 발산이 겹치면 호우 위험도를 빠르게 상향합니다.</p>
+        <h3 style="margin-top:18px">사후 해석</h3>
+        <ul>
+          <li>저층 제트가 오래 지속될수록 누적 강수량 오차가 커집니다.</li>
+          <li>500hPa 골 통과 전후 3~6시간이 피크 시간대가 되기 쉽습니다.</li>
+          <li>위성·레이더로 대류 재생성 위치를 계속 교차검증해야 합니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 11 — 사례 2
+════════════════════════════════════════ -->
+<div class="slide" id="s11">
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">7. 개념 사례 (실제 적용 시 날짜·자료 출처 확인 필요)</div>
+    <h2>사례 2 · 강풍 / 한파 상황 해석</h2>
+    <div class="case-grid">
+      <div class="case-main">
+        <div class="timeline">
+          <span class="pill">분석 시각 00UTC</span>
+          <span class="pill">관심 현상 해안 강풍 + 체감온도 급락</span>
+          <span class="pill">핵심 질문 바람 최대 구역</span>
+        </div>
+        <div class="stack">
+          <div class="layer-box">
+            <h3>850 hPa</h3>
+            <p>강한 한기이류와 촘촘한 온도 경도가 동반. 혼합이 활발하면 상층 운동량이 지상으로 내려옵니다.</p>
+          </div>
+          <div class="layer-box">
+            <h3>500 hPa</h3>
+            <p>깊은 장파골 후면 한랭 중심이 전층 혼합을 지지. 해기차가 커지면 서해안 눈구름 발달 가능성이 큽니다.</p>
+          </div>
+          <div class="layer-box">
+            <h3>300 hPa</h3>
+            <p>강한 제트 축 남하로 상층 강풍대 형성. 하강 혼합 가능 구역이 지상 강풍 집중 지역과 연결될 수 있습니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="case-side">
+        <h3>예보 판단</h3>
+        <p><strong style="color:#fff">혼합 가능층·하층 안정도·지형 채널링</strong>을 함께 봐야 합니다. 같은 상층 강풍이라도 혼합이 안 되면 지상 강풍은 약할 수 있습니다.</p>
+        <h3 style="margin-top:18px">사후 해석</h3>
+        <ul>
+          <li>850hPa 바람과 지상 바람의 차이는 안정층 유무가 좌우합니다.</li>
+          <li>한기이류가 강하면 강설 전환과 체감온도 하락이 동시에 문제 됩니다.</li>
+          <li>해안·산지·동해안은 국지 증폭 요소를 반드시 별도 판단해야 합니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 12 — 오판 방지
+════════════════════════════════════════ -->
+<div class="slide" id="s12">
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">8. 오판 방지</div>
+    <h2>현업에서 자주 나오는 오판</h2>
+    <div class="mistakes">
+      <div class="mistake">
+        <div class="bad">① 등고선 간격만 보고 강풍을 단정</div>
+        <div class="good">교정: 850hPa 바람, 안정도, 혼합 가능층, 지형 채널링을 함께 확인합니다.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">② 500hPa 골만 보고 저층 수증기 조건을 생략</div>
+        <div class="good">교정: 강수 예보는 500hPa 강제력과 850hPa 수증기 공급이 동시에 충족되는지 봅니다.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">③ 제트 축 위치만 보고 발산역을 잘못 해석</div>
+        <div class="good">교정: 입구/출구역, 곡률, 단파 위치까지 같이 읽어 상층 발산 구역을 잡습니다.</div>
+      </div>
+      <div class="mistake">
+        <div class="bad">④ 850hPa 온도만 보고 비·눈 전환을 단순 판단</div>
+        <div class="good">교정: 지상층 두께, 습구효과, 강수강도, 경계층 냉각까지 종합 판단해야 합니다.</div>
+      </div>
+    </div>
+    <div class="judgment-box" style="margin-top:24px">
+      <div class="jl">실무 메모</div>
+      <div class="jt">오판의 대부분은 한 장의 일기도만 보고 결론을 내릴 때 발생합니다. 최소한 500hPa·300hPa·850hPa와 지상/위성/레이더를 함께 보면서 결론을 내립니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 13 — 체크리스트
+════════════════════════════════════════ -->
+<div class="slide" id="s13">
+  <div class="content">
+    <div class="slide-label" style="color:var(--accent)">9. 현업 적용 체크리스트</div>
+    <h2>예보 전 마지막 5단계 점검</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="num">1</div>
+        <h3>500 hPa</h3>
+        <p>골·능, 단파, 한기이류 위치를 먼저 확인해 큰 배경장을 잡습니다.</p>
+      </div>
+      <div class="flow-step">
+        <div class="num">2</div>
+        <h3>300 hPa</h3>
+        <p>제트 축과 발산역을 확인해 상승/하강 강제력을 더합니다.</p>
+      </div>
+      <div class="flow-step">
+        <div class="num">3</div>
+        <h3>850 hPa</h3>
+        <p>온도·습도·하층 제트로 실제 현상화 가능 구역을 좁힙니다.</p>
+      </div>
+      <div class="flow-step">
+        <div class="num">4</div>
+        <h3>위험기상 연결</h3>
+        <p>강수·강풍·대류·한파 중 어떤 요소가 가장 먼저 현실화될지 결정합니다.</p>
+      </div>
+      <div class="flow-step">
+        <div class="num">5</div>
+        <h3>교차검증</h3>
+        <p>지상 일기도, 위성, 레이더, 수치모델과 비교해 시각과 위치를 미세 조정합니다.</p>
+      </div>
+    </div>
+    <div class="close-box">
+      <p><strong>마무리 한 줄:</strong> 고층일기도는 설명용 도식이 아니라 <span style="color:var(--accent)">예보문 작성 직전의 판단 프레임</span>입니다. 500hPa에서 배경을 읽고, 300hPa에서 강제력을 확인하고, 850hPa에서 현상화 가능성을 결정하면 현업 적용력이 가장 빠르게 올라갑니다.<br><span style="font-size:19px;color:rgba(255,255,255,.45);margin-top:8px;display:block">※ 700hPa는 수분 공급 경로·중층 건조층 침투 확인 시 보조적으로 병행합니다.</span></p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- Navigation -->
+<div class="nav-bar">
+  <button class="nav-btn" onclick="prevSlide()">←</button>
+  <div class="nav-dots" id="dots"></div>
+  <button class="nav-btn" onclick="nextSlide()">→</button>
+  <div class="slide-counter" id="counter">1 / 13</div>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('dots');
+const counterEl=document.getElementById('counter');
+let cur=0;
+
+/* build dots */
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(n){
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('out');
+  setTimeout(()=>slides[cur].classList.remove('out'),550);
+  cur=n;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
+  counterEl.textContent=`${cur+1} / ${slides.length}`;
+}
+function nextSlide(){if(cur<slides.length-1)goTo(cur+1)}
+function prevSlide(){if(cur>0)goTo(cur-1)}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') nextSlide();
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') prevSlide();
+});
+
+/* touch swipe */
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=tx-e.changedTouches[0].clientX;
+  if(dx>50)nextSlide();else if(dx<-50)prevSlide();
+},{passive:true});
+</script>
+</body>
+</html>
