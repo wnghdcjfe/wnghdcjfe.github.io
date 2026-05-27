@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>채용연계가 아니라면, 커리큘럼이 좋은 부트캠프가 답이다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  /* ============================================
+     Starbucks-Inspired Lecture Slide Design
+     Canvas: 1920×1080 fixed, scaled via JS
+     ============================================ */
+
+  :root {
+    /* Greens (4-tier) */
+    --starbucks-green: #006241;
+    --green-accent: #00754A;
+    --house-green: #1E3932;
+    --green-uplift: #2b5148;
+    --green-light: #d4e9e2;
+
+    /* Gold */
+    --gold: #cba258;
+    --gold-light: #dfc49d;
+    --gold-lightest: #faf6ee;
+
+    /* Surfaces */
+    --white: #ffffff;
+    --neutral-warm: #f2f0eb;
+    --ceramic: #edebe9;
+
+    /* Text */
+    --text-black: rgba(0,0,0,0.87);
+    --text-black-soft: rgba(0,0,0,0.58);
+    --text-white: #ffffff;
+    --text-white-soft: rgba(255,255,255,0.70);
+
+    /* Semantic */
+    --red: #c82014;
+    --yellow: #fbbc05;
+
+    /* Fonts: all Pretendard */
+    --font-korean: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+    --font-display: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+    --font-mono: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+    --font-serif: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+
+    /* Shadow */
+    --shadow-card: 0 0 0.5px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.10);
+    --shadow-lifted: 0 8px 24px rgba(0,0,0,0.12);
+    --shadow-floating: 0 16px 40px rgba(0,0,0,0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--house-green);
+    color: var(--text-black);
+    font-family: var(--font-korean);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Stage holds the 1920x1080 deck and centers it */
+  .stage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+  }
+
+  .deck {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    transform-origin: center center;
+    background: var(--neutral-warm);
+    overflow: hidden;
+    box-shadow: 0 30px 100px rgba(0,0,0,0.5);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    overflow: hidden;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ===== Footer (page indicator + brand) ===== */
+  .slide-footer {
+    position: absolute;
+    left: 80px;
+    right: 80px;
+    bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 22px;
+    color: var(--text-black-soft);
+    z-index: 5;
+  }
+  .slide-footer .brand-text {
+    font-family: var(--font-korean);
+    font-size: 22px;
+    letter-spacing: 0.01em;
+  }
+  .slide-footer .page-num {
+    font-variant-numeric: tabular-nums;
+  }
+  .slide.dark .slide-footer { color: var(--text-white-soft); }
+
+  /* ===== Slide Title common ===== */
+  .slide-title {
+    font-family: var(--font-korean);
+    font-size: 75px;        /* 56pt */
+    font-weight: 700;
+    color: var(--starbucks-green);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .slide-title-underline {
+    width: 60px;
+    height: 4px;
+    background: var(--green-accent);
+    margin-bottom: 40px;
+  }
+  .slide-subtitle {
+    font-family: var(--font-korean);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--text-black);
+    line-height: 1.5;
+    margin-bottom: 48px;
+    max-width: 1400px;
+  }
+
+  /* ===== Chapter label (Gold) ===== */
+  .chapter-label {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  /* ============================================
+     SLIDE 1: TITLE (표지) — full-bleed image + centered text
+     ============================================ */
+  .slide--title {
+    background: #0a0a0a;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Full-bleed background image */
+  .title-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .title-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+  /* Dark overlay to ensure text legibility */
+  .title-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.65) 100%),
+      radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+  }
+  /* Foreground content centered */
+  .title-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 120px;
+    max-width: 1700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .title-gold-bar {
+    width: 200px;
+    height: 8px;
+    background: var(--gold);
+    margin: 0 auto 32px;
+  }
+  .title-chapter {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+    text-align: center;
+  }
+  .title-main {
+    font-family: var(--font-korean);
+    font-size: 116px;
+    font-weight: 700;
+    color: var(--text-white);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.6);
+  }
+  .title-main em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .title-sub {
+    font-family: var(--font-korean);
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--text-white-soft);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    margin-top: 24px;
+    text-align: center;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  }
+  .title-meta {
+    position: absolute;
+    left: 120px;
+    right: 120px;
+    bottom: 80px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-korean);
+    font-size: 22px;
+    color: var(--text-white-soft);
+    z-index: 2;
+  }
+  .title-meta strong {
+    color: var(--text-white);
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  /* ============================================
+     SLIDE 2: WHY CURRICULUM (manifesto body)
+     ============================================ */
+  .why-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    margin-top: 16px;
+    flex: 1;
+    align-items: start;
+  }
+  .why-text p {
+    font-family: var(--font-korean);
+    font-size: 32px;
+    line-height: 1.55;
+    color: var(--text-black);
+    margin-bottom: 36px;
+  }
+  .why-text p strong {
+    color: var(--starbucks-green);
+    font-weight: 700;
+  }
+  .why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .why-item {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px 36px;
+    box-shadow: var(--shadow-card);
+    border-left: 6px solid var(--green-accent);
+  }
+  .why-item .num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .why-item h4 {
+    font-family: var(--font-korean);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-black);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .why-item p {
+    font-family: var(--font-korean);
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--text-black-soft);
+  }
+
+  /* ============================================
+     SECTION DIVIDER (House Green 풀블리드)
+     ============================================ */
+  .slide--divider {
+    background: linear-gradient(180deg, var(--house-green) 0%, var(--green-uplift) 100%);
+    padding: 120px;
+    justify-content: center;
+  }
+  .divider-num {
+    font-family: var(--font-display);
+    font-size: 280px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 32px;
+  }
+  .divider-title {
+    font-family: var(--font-korean);
+    font-size: 110px;
+    font-weight: 700;
+    color: var(--text-white);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+  }
+  .divider-subtitle {
+    font-family: var(--font-korean);
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--text-white-soft);
+    line-height: 1.4;
+    margin-bottom: 48px;
+  }
+  .divider-tags {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .divider-tag {
+    padding: 14px 28px;
+    border-radius: 50px;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: var(--text-white);
+    font-family: var(--font-korean);
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .divider-tag.gold {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--house-green);
+  }
+
+  /* ============================================
+     COURSE HERO (overview)
+     ============================================ */
+  .course-hero-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1300px;
+  }
+  .course-hero h1 {
+    font-family: var(--font-korean);
+    font-size: 96px;
+    font-weight: 700;
+    color: var(--starbucks-green);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    margin-bottom: 40px;
+  }
+  .course-hero h1 em {
+    font-style: normal;
+    color: var(--green-accent);
+  }
+  .course-hero .lead {
+    font-family: var(--font-korean);
+    font-size: 32px;
+    line-height: 1.55;
+    color: var(--text-black);
+    margin-bottom: 48px;
+    max-width: 1200px;
+  }
+  .course-hero .lead strong {
+    color: var(--starbucks-green);
+    font-weight: 700;
+  }
+  .course-hero .meta-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0,0,0,0.12);
+    max-width: 1400px;
+  }
+  .course-hero .meta-item .label {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-black-soft);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .course-hero .meta-item .value {
+    font-family: var(--font-korean);
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-black);
+    line-height: 1.2;
+  }
+  .course-hero .meta-item .value small {
+    display: block;
+    font-size: 20px;
+    color: var(--text-black-soft);
+    font-weight: 400;
+    margin-top: 6px;
+  }
+
+  /* Side art (Gold seal) */
+  .course-hero-deco {
+    position: absolute;
+    right: 120px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: var(--gold-lightest);
+    border: 2px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lifted);
+  }
+  .course-hero-deco .seal-eyebrow {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .course-hero-deco .seal-main {
+    font-family: var(--font-display);
+    font-size: 140px;
+    font-weight: 700;
+    color: var(--starbucks-green);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+  .course-hero-deco .seal-unit {
+    font-family: var(--font-korean);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--text-black);
+    margin-top: 8px;
+  }
+
+  /* ============================================
+     CURRICULUM SLIDE (STEP cards)
+     ============================================ */
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    flex: 1;
+    align-items: stretch;
+  }
+  .step-grid.five { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .step-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px 22px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    border-top: 4px solid var(--green-accent);
+  }
+  .step-card .step-meta {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-black-soft);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ceramic);
+  }
+  .step-card .step-meta em {
+    font-style: normal;
+    color: var(--starbucks-green);
+    font-weight: 700;
+  }
+  .step-card h4 {
+    font-family: var(--font-korean);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-black);
+    line-height: 1.3;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .step-card ul {
+    list-style: none;
+    /* no margin-top:auto — items sit right under the title */
+  }
+  .step-card ul li {
+    font-family: var(--font-korean);
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--text-black);
+    padding: 5px 0 5px 14px;
+    position: relative;
+    letter-spacing: -0.01em;
+  }
+  .step-card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 6px;
+    height: 2px;
+    background: var(--green-accent);
+  }
+
+  /* ============================================
+     PROJECT + STACK LAYOUT
+     ============================================ */
+  .project-stack-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    flex: 1;
+  }
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .project-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 32px;
+    align-items: start;
+    border-left: 6px solid var(--green-accent);
+  }
+  .project-card .num {
+    font-family: var(--font-display);
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 0.9;
+  }
+  .project-card h4 {
+    font-family: var(--font-korean);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-black);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+  .project-card p {
+    font-family: var(--font-korean);
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--text-black);
+    margin-bottom: 18px;
+  }
+  .project-card .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    background: var(--neutral-warm);
+    color: var(--text-black);
+    border: 1px solid var(--ceramic);
+  }
+  .pill.accent {
+    background: var(--green-accent);
+    color: var(--white);
+    border-color: var(--green-accent);
+  }
+  .pill.gold {
+    background: var(--gold);
+    color: var(--house-green);
+    border-color: var(--gold);
+  }
+
+  .stack-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: var(--shadow-card);
+  }
+  .stack-card .stack-title {
+    font-family: var(--font-korean);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--starbucks-green);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--green-light);
+  }
+  .stack-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--ceramic);
+  }
+  .stack-row:last-child { border-bottom: none; }
+  .stack-row .cat {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--starbucks-green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+  .stack-row .items {
+    font-family: var(--font-korean);
+    font-size: 22px;
+    color: var(--text-black);
+    line-height: 1.45;
+  }
+
+  /* === Compact variant for 3-project layout (slide 11) === */
+  .project-stack-grid.compact { gap: 32px; }
+  .project-stack-grid.compact .project-list { gap: 16px; }
+  .project-stack-grid.compact .project-card {
+    padding: 22px 26px;
+    gap: 22px;
+    border-radius: 14px;
+  }
+  .project-stack-grid.compact .project-card .num { font-size: 50px; }
+  .project-stack-grid.compact .project-card h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .project-stack-grid.compact .project-card p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .project-stack-grid.compact .pill {
+    font-size: 15px;
+    padding: 4px 12px;
+  }
+  .project-stack-grid.compact .stack-card {
+    padding: 24px 26px;
+    border-radius: 14px;
+  }
+  .project-stack-grid.compact .stack-card .stack-title {
+    font-size: 20px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .project-stack-grid.compact .stack-row {
+    grid-template-columns: 100px 1fr;
+    padding: 9px 0;
+    gap: 12px;
+  }
+  .project-stack-grid.compact .stack-row .cat {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    padding-top: 3px;
+  }
+  .project-stack-grid.compact .stack-row .items {
+    font-size: 17px;
+    line-height: 1.4;
+  }
+
+  /* ============================================
+     BENEFITS GRID
+     ============================================ */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    flex: 1;
+    align-content: start;
+  }
+  .benefit-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: var(--shadow-card);
+    border-left: 6px solid var(--green-accent);
+  }
+  .benefit-card.gold { border-left-color: var(--gold); }
+  .benefit-card .icon-num {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .benefit-card h4 {
+    font-family: var(--font-korean);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-black);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+  .benefit-card p {
+    font-family: var(--font-korean);
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--text-black);
+  }
+
+  /* ============================================
+     CLOSING (House Green - espresso bookend)
+     ============================================ */
+  .slide--closing {
+    background: linear-gradient(180deg, var(--house-green) 0%, var(--green-uplift) 100%);
+    padding: 120px;
+    justify-content: center;
+  }
+  .closing-quote-mark {
+    font-family: var(--font-serif);
+    font-size: 240px;
+    line-height: 0.6;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+  .closing-quote {
+    font-family: var(--font-serif);
+    font-size: 88px;
+    font-weight: 500;
+    color: var(--text-white);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin-bottom: 60px;
+    max-width: 1500px;
+  }
+  .closing-quote em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .closing-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1400px;
+  }
+  .closing-link {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+  }
+  .closing-link:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--gold);
+  }
+  .closing-link .badge {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--house-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .closing-link .info { flex: 1; }
+  .closing-link .info .name {
+    font-family: var(--font-korean);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 6px;
+  }
+  .closing-link .info .url {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    color: var(--text-white-soft);
+  }
+  .closing-link .arrow {
+    color: var(--gold);
+    font-size: 32px;
+  }
+
+  /* ============================================
+     NAVIGATION (outside the deck)
+     ============================================ */
+  .nav {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+    background: rgba(30, 57, 50, 0.92);
+    backdrop-filter: blur(20px);
+    padding: 10px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav button {
+    background: transparent;
+    border: none;
+    color: var(--text-white);
+    cursor: pointer;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+  .nav button:hover { background: rgba(255,255,255,0.1); }
+  .nav .dots { display: flex; gap: 6px; padding: 0 8px; }
+  .nav .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .nav .dot.active {
+    background: var(--gold);
+    width: 20px;
+    border-radius: 4px;
+  }
+  .nav .counter {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-white-soft);
+    padding: 0 8px;
+    min-width: 54px;
+    text-align: center;
+  }
+
+  .kbd-hint {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    z-index: 100;
+  }
+  .kbd-hint kbd {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 2px 7px;
+    margin: 0 2px;
+  }
+
+  /* ============================================
+     ANIMATIONS
+     ============================================ */
+  .slide.active .anim {
+    animation: slideUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .slide.active .anim:nth-child(1) { animation-delay: 0.1s; }
+  .slide.active .anim:nth-child(2) { animation-delay: 0.2s; }
+  .slide.active .anim:nth-child(3) { animation-delay: 0.3s; }
+  .slide.active .anim:nth-child(4) { animation-delay: 0.4s; }
+  .slide.active .anim:nth-child(5) { animation-delay: 0.5s; }
+  .slide.active .step-card { animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .slide.active .step-card:nth-child(1) { animation-delay: 0.15s; }
+  .slide.active .step-card:nth-child(2) { animation-delay: 0.25s; }
+  .slide.active .step-card:nth-child(3) { animation-delay: 0.35s; }
+  .slide.active .step-card:nth-child(4) { animation-delay: 0.45s; }
+  .slide.active .step-card:nth-child(5) { animation-delay: 0.55s; }
+  .slide.active .project-card { animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .slide.active .project-card:nth-child(1) { animation-delay: 0.2s; }
+  .slide.active .project-card:nth-child(2) { animation-delay: 0.3s; }
+  .slide.active .project-card:nth-child(3) { animation-delay: 0.4s; }
+  .slide.active .benefit-card { animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .slide.active .benefit-card:nth-child(1) { animation-delay: 0.15s; }
+  .slide.active .benefit-card:nth-child(2) { animation-delay: 0.22s; }
+  .slide.active .benefit-card:nth-child(3) { animation-delay: 0.29s; }
+  .slide.active .benefit-card:nth-child(4) { animation-delay: 0.36s; }
+  .slide.active .benefit-card:nth-child(5) { animation-delay: 0.43s; }
+  .slide.active .benefit-card:nth-child(6) { animation-delay: 0.5s; }
+  .slide.active .why-item { animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .slide.active .why-item:nth-child(1) { animation-delay: 0.2s; }
+  .slide.active .why-item:nth-child(2) { animation-delay: 0.3s; }
+  .slide.active .why-item:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+<div class="deck" id="deck">
+
+  <!-- ============================================
+       SLIDE 1: TITLE COVER — full-bleed image + centered text
+       ============================================ -->
+  <section class="slide slide--title active">
+    <div class="title-bg">
+      <img src="assets/aibe-hero-blur.jpg" alt="" />
+    </div>
+    <div class="title-content">
+      <div class="title-gold-bar"></div>
+      <div class="title-chapter">Bootcamp Selection Guide · 부트캠프 선택 가이드</div>
+      <h1 class="title-main">
+        채용연계가 아니라면,<br>
+        <em>커리큘럼</em>이 좋은<br>
+        부트캠프가 답이다.
+      </h1>
+      <div class="title-sub">프로그래머스 백엔드 데브코스 7기 · 8기 안내</div>
+    </div>
+    <div class="title-meta">
+      <div><strong>큰돌의 터전</strong> 주홍철</div>
+      <div>Programmers DevCourse · 2026</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 3: SECTION DIVIDER 01
+       ============================================ -->
+  <section class="slide slide--divider dark">
+    <div class="divider-num">01</div>
+    <div class="divider-title">백엔드<br>단기심화</div>
+    <div class="divider-subtitle">Spring AI · MSA를 활용한 9주 집중 부트캠프</div>
+    <div class="divider-tags">
+      <div class="divider-tag gold">9주 집중</div>
+      <div class="divider-tag">K-Digital Training 7기</div>
+      <div class="divider-tag">Spring 경험자 대상</div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 01 · 백엔드 단기심화 데브코스</div>
+      <div class="page-num">02 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 4: 7기 HERO
+       ============================================ -->
+  <section class="slide">
+    <div class="course-hero">
+      <div class="course-hero-main">
+        <div class="chapter-label anim">Course 01 · Deep Backend</div>
+        <h1 class="anim">
+          9주 후, 포트폴리오로<br>
+          증명하는 <em>백엔드 단기심화</em>
+        </h1>
+        <p class="lead anim">
+          K-Digital Training 7기 · (심화) Spring AI와 MSA를 활용한 백엔드 개발.<br>
+          Spring 기초가 끝난 사람이 <strong>MSA · Kafka · K8s · Spring AI · RAG</strong>까지
+          9주에 끌어올리는 집중 부트캠프입니다.
+        </p>
+        <div class="meta-row anim">
+          <div class="meta-item">
+            <div class="label">Period</div>
+            <div class="value">9주<small>2026.6.30 → 9.1</small></div>
+          </div>
+          <div class="meta-item">
+            <div class="label">Apply by</div>
+            <div class="value">6/23<small>(화)까지</small></div>
+          </div>
+          <div class="meta-item">
+            <div class="label">Allowance</div>
+            <div class="value">최대 41만 원<small>KDT 국비지원</small></div>
+          </div>
+          <div class="meta-item">
+            <div class="label">For Whom</div>
+            <div class="value">Spring 경험자<small>API · 팀프로젝트 보유</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="course-hero-deco">
+        <div class="seal-eyebrow">Duration</div>
+        <div class="seal-main">9w</div>
+        <div class="seal-unit">집중 부트캠프</div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 01 · Overview</div>
+      <div class="page-num">03 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 5: 7기 CURRICULUM
+       ============================================ -->
+  <section class="slide">
+    <div class="chapter-label anim">— Course 01 · Curriculum</div>
+    <h2 class="slide-title anim">2번의 프로젝트로 완성되는 <span style="color:var(--green-accent);">4단계</span> 학습 로드맵</h2>
+    <div class="slide-title-underline anim"></div>
+    <p class="slide-subtitle anim">온라인 이론 학습과 오프라인 프로젝트를 번갈아 진행. 단순한 강의 시청이 아닌, 실제로 만들면서 배우는 구조입니다.</p>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-meta">STEP <em>01</em> · ONLINE</div>
+        <h4>MSA · CI/CD 학습</h4>
+        <ul>
+          <li>DDD 기반 도메인 설계</li>
+          <li>PG 결제 연동, Spring Batch</li>
+          <li>Kafka · Spring Event 메시징</li>
+          <li>API Gateway · 서비스 디스커버리</li>
+          <li>K8s 무중단 배포, Prometheus</li>
+          <li>ElasticSearch 마이크로서비스</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-meta">STEP <em>02</em> · OFFLINE</div>
+        <h4>세미 프로젝트</h4>
+        <ul>
+          <li>이커머스 주문·결제 시스템</li>
+          <li>PG사 연동 및 결제 프로세스</li>
+          <li>정산 시스템·대용량 처리</li>
+          <li>ES 기반 검색 기능</li>
+          <li>CI/CD 및 운영환경 구축</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-meta">STEP <em>03</em> · ONLINE</div>
+        <h4>Spring AI · LLM 활용</h4>
+        <ul>
+          <li>WebFlux 스트리밍 응답</li>
+          <li>Spring AI 기반 LLM 호출</li>
+          <li>벡터 DB 기반 RAG 구현</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-meta">STEP <em>04</em> · OFFLINE</div>
+        <h4>최종 프로젝트</h4>
+        <ul>
+          <li>기획 → 배포 전 과정</li>
+          <li>현업 툴 활용 협업</li>
+          <li>최종 발표·회고</li>
+          <li>이력서·포트폴리오 컨설팅</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 01 · Curriculum</div>
+      <div class="page-num">04 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 6: 7기 PROJECTS + STACK
+       ============================================ -->
+  <section class="slide">
+    <div class="chapter-label anim">— Course 01 · Projects & Stack</div>
+    <h2 class="slide-title anim">면접에서 통하는 <span style="color:var(--green-accent);">2개의 팀 프로젝트</span></h2>
+    <div class="slide-title-underline anim"></div>
+    <div class="project-stack-grid">
+      <div class="project-list">
+        <div class="project-card">
+          <div class="num">01</div>
+          <div>
+            <h4>주문 · 결제 플랫폼 구현</h4>
+            <p>이커머스 주문·결제 시스템 구현. PG 결제 연동 및 트랜잭션 관리, MSA 아키텍처 설계, K8s 무중단 배포로 대규모 트랜잭션 운영 역량을 확보합니다.</p>
+            <div class="pills">
+              <span class="pill accent">팀 프로젝트</span>
+              <span class="pill">Spring Boot</span>
+              <span class="pill">Kafka</span>
+              <span class="pill">Kubernetes</span>
+              <span class="pill">Spring Batch</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="num">02</div>
+          <div>
+            <h4>개인 맞춤형 추천 플랫폼</h4>
+            <p>AI 기반 개인 맞춤형 추천 플랫폼 구현. Spring AI + RAG 기반 시스템 구축으로 백엔드 환경 확장을 이해하고, 벡터 DB를 RAG 검색 성능 개선 핵심으로 활용합니다.</p>
+            <div class="pills">
+              <span class="pill accent">팀 프로젝트</span>
+              <span class="pill gold">Spring AI</span>
+              <span class="pill">RAG</span>
+              <span class="pill">Vector DB</span>
+              <span class="pill">WebFlux</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-title">다루는 기술 스택</div>
+        <div class="stack-row"><div class="cat">Language</div><div class="items">Java · Kotlin</div></div>
+        <div class="stack-row"><div class="cat">Framework</div><div class="items">Spring Boot · Spring Cloud · WebFlux · Spring AI</div></div>
+        <div class="stack-row"><div class="cat">Messaging</div><div class="items">Kafka · Spring Event</div></div>
+        <div class="stack-row"><div class="cat">Search</div><div class="items">ElasticSearch · Vector DB</div></div>
+        <div class="stack-row"><div class="cat">Infra</div><div class="items">Docker · Kubernetes · GitHub Actions</div></div>
+        <div class="stack-row"><div class="cat">Monitor</div><div class="items">Prometheus · Grafana</div></div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 01 · Projects &amp; Stack</div>
+      <div class="page-num">05 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 7: 7기 LEARNING ENVIRONMENT
+       ============================================ -->
+  <section class="slide">
+    <div class="chapter-label anim">— Course 01 · Environment</div>
+    <h2 class="slide-title anim">학습 환경과 <span style="color:var(--green-accent);">지원 혜택</span></h2>
+    <div class="slide-title-underline anim"></div>
+    <p class="slide-subtitle anim">단순 강의가 아니라, 현업 개발자와 함께 코드를 다듬어가는 9주.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card gold">
+        <div class="icon-num">Benefit · 01</div>
+        <h4>현직 개발자 1:1 코드 리뷰</h4>
+        <p>제출 코드에 대한 개별 피드백. 단순 오답 정정이 아닌, 실무 관점의 설계 리뷰가 핵심입니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Benefit · 02</div>
+        <h4>기술·실무 특강</h4>
+        <p>실전 프로젝트 구조 설계, RAG 활용 서비스 사례 등 — 커리큘럼 외 인사이트 특강을 제공합니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Benefit · 03</div>
+        <h4>스터디 도서 지원</h4>
+        <p>학습에 필요한 도서를 별도 지원. 09:00–18:00 학습 이후 자율 학습 시간이 함께 운영됩니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Benefit · 04</div>
+        <h4>오프라인 강의장</h4>
+        <p>프로젝트 단계는 프로그래머스 서초 강의장에서 진행. 몰입형 학습 환경을 제공합니다.</p>
+      </div>
+      <div class="benefit-card gold">
+        <div class="icon-num">Benefit · 05</div>
+        <h4>훈련 장려금 최대 41만 원</h4>
+        <p>KDT 기반 국비지원. 2026년부터 약 10% 자부담금이 발생합니다 (상세는 고용24 확인).</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Benefit · 06</div>
+        <h4>학습 시작과 동시 취업 지원</h4>
+        <p>데브패스 취업 특강, 1:1 무제한 이력서·면접 컨설팅이 수료 후 6개월까지 이어집니다.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 01 · Environment</div>
+      <div class="page-num">06 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 8: SECTION DIVIDER 02
+       ============================================ -->
+  <section class="slide slide--divider dark">
+    <div class="divider-num">02</div>
+    <div class="divider-title">생성형 AI<br>활용 백엔드</div>
+    <div class="divider-subtitle">비전공자도 완주 가능한 6개월 입문 부트캠프</div>
+    <div class="divider-tags">
+      <div class="divider-tag gold">6개월 장기</div>
+      <div class="divider-tag">K-Digital Training 8기</div>
+      <div class="divider-tag">비전공자 OK</div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 02 · 생성형 AI 활용 백엔드 데브코스</div>
+      <div class="page-num">07 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 9: 8기 HERO
+       ============================================ -->
+  <section class="slide">
+    <div class="course-hero">
+      <div class="course-hero-main">
+        <div class="chapter-label anim">Course 02 · AI Backend</div>
+        <h1 class="anim">
+          비전공자도 완주 가능한<br>
+          <em>AI 활용 백엔드</em> 데브코스
+        </h1>
+        <p class="lead anim">
+          K-Digital Training 8기 · 생성형 AI 활용 백엔드 개발.<br>
+          ChatGPT를 페어 프로그래머처럼 활용하며 <strong>Java · Spring · DB · 배포</strong>까지
+          6개월에 걸쳐 계단식으로 쌓는 입문자 친화 부트캠프입니다.
+        </p>
+        <div class="meta-row anim">
+          <div class="meta-item">
+            <div class="label">Period</div>
+            <div class="value">6개월<small>2026.7.7 → 2027.1.7</small></div>
+          </div>
+          <div class="meta-item">
+            <div class="label">Apply by</div>
+            <div class="value">7/1<small>(수)까지</small></div>
+          </div>
+          <div class="meta-item">
+            <div class="label">Allowance</div>
+            <div class="value">최대 170만 원<small>KDT 국비지원</small></div>
+          </div>
+          <div class="meta-item">
+            <div class="label">For Whom</div>
+            <div class="value">비전공자 OK<small>전공·경력 무관</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="course-hero-deco">
+        <div class="seal-eyebrow">Duration</div>
+        <div class="seal-main">6m</div>
+        <div class="seal-unit">장기 부트캠프</div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 02 · Overview</div>
+      <div class="page-num">08 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 10: 8기 CURRICULUM
+       ============================================ -->
+  <section class="slide">
+    <div class="chapter-label anim">— Course 02 · Curriculum</div>
+    <h2 class="slide-title anim">천천히, 그러나 끝까지 — <span style="color:var(--green-accent);">계단식</span> 학습 로드맵</h2>
+    <div class="slide-title-underline anim"></div>
+    <p class="slide-subtitle anim">프론트엔드 → 백엔드 → DB → 배포 → 풀스택. 입문자도 막히지 않게 한 단계씩 쌓아갑니다.</p>
+    <div class="step-grid five">
+      <div class="step-card">
+        <div class="step-meta">STEP <em>01</em></div>
+        <h4>AI 활용 프론트엔드</h4>
+        <ul>
+          <li>HTML / CSS / JS 기초</li>
+          <li>Git 버전 관리</li>
+          <li>ChatGPT 원리·구조</li>
+          <li>프롬프트 엔지니어링</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-meta">STEP <em>02</em></div>
+        <h4>Java · Spring 백엔드</h4>
+        <ul>
+          <li>Java 문법 기초·심화</li>
+          <li>OOP · 캡슐화·상속</li>
+          <li>Spring IoC · DI · AOP</li>
+          <li>알고리즘 기초</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-meta">STEP <em>03</em></div>
+        <h4>DB 연동 백엔드</h4>
+        <ul>
+          <li>SQL & 데이터베이스</li>
+          <li>Statement / MyBatis</li>
+          <li>JPA · ORM 매핑</li>
+          <li>JDBC 데이터 연동</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-meta">STEP <em>04</em></div>
+        <h4>클라우드 배포</h4>
+        <ul>
+          <li>Spring Boot · MVC</li>
+          <li>REST API · Security</li>
+          <li>Docker · CI/CD</li>
+          <li>클라우드 서버 운영</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-meta">STEP <em>FINAL</em></div>
+        <h4>동료와 최종 프로젝트</h4>
+        <ul>
+          <li>기획 → 배포 전 과정</li>
+          <li>현업 툴 활용</li>
+          <li>최종 발표·회고</li>
+          <li>이력서 컨설팅</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 02 · Curriculum</div>
+      <div class="page-num">09 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 11: 8기 PROJECTS + STACK
+       ============================================ -->
+  <section class="slide">
+    <div class="chapter-label anim">— Course 02 · Projects & Stack</div>
+    <h2 class="slide-title anim" style="font-size:62px;">팀 기반으로 완성하는 <span style="color:var(--green-accent);">3개의 프로젝트</span></h2>
+    <div class="slide-title-underline anim"></div>
+    <div class="project-stack-grid compact">
+      <div class="project-list">
+        <div class="project-card">
+          <div class="num">01</div>
+          <div>
+            <h4>생성형 AI 활용 프론트엔드</h4>
+            <p>여행 계획·추천 플랫폼을 개발하며 JavaScript 기반 프론트엔드 역량을 강화. WBS 활용과 코드 수집·검토로 개발 사이클을 경험합니다.</p>
+            <div class="pills">
+              <span class="pill accent">팀 프로젝트</span>
+              <span class="pill gold">AI</span>
+              <span class="pill">JavaScript</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="num">02</div>
+          <div>
+            <h4>생성형 AI 활용 백엔드</h4>
+            <p>전문가 매칭 플랫폼을 Java · Spring으로 구현. DB 입출력·검색·예외 처리에 더해 CI/CD 환경 구축으로 운영 지식까지 함양합니다.</p>
+            <div class="pills">
+              <span class="pill accent">팀 프로젝트</span>
+              <span class="pill">Java</span>
+              <span class="pill">Spring</span>
+              <span class="pill">CI/CD</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="num">03</div>
+          <div>
+            <h4>생성형 AI 활용 풀스택</h4>
+            <p>프론트와 백엔드를 통합한 풀스택 프로젝트. AI로 효율적 환경 구축, 최적화 기술 스택 설계. 기획부터 테스트까지 실무 협업을 경험합니다.</p>
+            <div class="pills">
+              <span class="pill accent">팀 프로젝트</span>
+              <span class="pill">Kotlin</span>
+              <span class="pill">Fullstack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-title">다루는 기술 스택</div>
+        <div class="stack-row"><div class="cat">Frontend</div><div class="items">HTML · CSS · JavaScript</div></div>
+        <div class="stack-row"><div class="cat">Language</div><div class="items">Java · Kotlin</div></div>
+        <div class="stack-row"><div class="cat">Framework</div><div class="items">Spring Boot · MVC · Security</div></div>
+        <div class="stack-row"><div class="cat">DB</div><div class="items">MySQL · JPA · MyBatis · JDBC</div></div>
+        <div class="stack-row"><div class="cat">AI Tools</div><div class="items">ChatGPT · Prompt Engineering</div></div>
+        <div class="stack-row"><div class="cat">DevOps</div><div class="items">Docker · CI/CD · Cloud Deploy</div></div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 02 · Projects &amp; Stack</div>
+      <div class="page-num">10 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 12: 8기 LEARNING ENVIRONMENT
+       ============================================ -->
+  <section class="slide">
+    <div class="chapter-label anim">— Course 02 · Environment</div>
+    <h2 class="slide-title anim">학습 환경과 <span style="color:var(--green-accent);">지원 혜택</span></h2>
+    <div class="slide-title-underline anim"></div>
+    <p class="slide-subtitle anim">100% 온라인 운영. 강사·퍼실리테이터가 상주하며 비전공자도 막히지 않게 끝까지 끌고 갑니다.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card gold">
+        <div class="icon-num">Benefit · 01</div>
+        <h4>강의 만족도 97점</h4>
+        <p>비전공자에게도 잘 이해되는 강의력. 현업 강사진이 책임지는 강의 퀄리티가 후기에서 증명됩니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Benefit · 02</div>
+        <h4>실시간 Q&A · 코드 리뷰</h4>
+        <p>9 to 6 관리 시스템. 개인별 코딩 스타일과 실력에 맞춘 세심한 피드백을 제공합니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Benefit · 03</div>
+        <h4>5가지 실무 특강</h4>
+        <p>클린코딩·리팩토링, 개발자 글쓰기, LLM 기술 소개, AI 에이전트 사례, 취업역량 강화 특강.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Benefit · 04</div>
+        <h4>역량 진단 평가</h4>
+        <p>스프린트마다 실제 채용 평가 기반 진단으로 성장을 데이터로 확인합니다.</p>
+      </div>
+      <div class="benefit-card gold">
+        <div class="icon-num">Benefit · 05</div>
+        <h4>훈련 장려금 최대 170만 원</h4>
+        <p>6개월 장기 KDT 과정에 맞춘 큰 규모의 장려금. 학습에 집중할 수 있는 환경을 만듭니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Benefit · 06</div>
+        <h4>입문자용 사전 학습 제공</h4>
+        <p>합격만 해도 기업 제공 유료 강의를 사전 학습으로 무료 제공. 시작 전 기본기를 다질 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">COURSE 02 · Environment</div>
+      <div class="page-num">11 / 12</div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 13: COMMON BENEFITS
+       ============================================ -->
+  <section class="slide">
+    <div class="chapter-label anim">— Shared Benefits</div>
+    <h2 class="slide-title anim">두 부트캠프 모두에 적용되는 <span style="color:var(--green-accent);">공통 지원</span></h2>
+    <div class="slide-title-underline anim"></div>
+    <p class="slide-subtitle anim">학습이 끝이 아닙니다. 데브코스의 진가는 수료 이후에도 이어지는 취업 지원과 커뮤니티에 있습니다.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="icon-num">Shared · 01</div>
+        <h4>데브패스 취업 지원</h4>
+        <p>취업 특강, 현직자 직무 인터뷰, 채용 설명회, 1:1 무제한 이력서·면접 컨설팅 (수료 후 6개월).</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Shared · 02</div>
+        <h4>인턴십 · 글로벌 연계</h4>
+        <p>우수 수료생 대상 국내외 인턴십. 영문 이력서·면접 컨설팅, 단기 어학, J1 비자 발급까지 지원합니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Shared · 03</div>
+        <h4>창업 지원</h4>
+        <p>아이디어를 실제 서비스로. 지원사업 탐색, 제안서 작성, PT 스킬까지 멘토링과 함께 준비합니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Shared · 04</div>
+        <h4>수료생 커뮤니티</h4>
+        <p>채용 정보 공유, 특강 참여, 실무 인사이트 교류. 현재 가입자 1,741명의 네트워크에 합류합니다.</p>
+      </div>
+      <div class="benefit-card gold">
+        <div class="icon-num">Shared · 05</div>
+        <h4>역량인증자격증 지원</h4>
+        <p>개발자 역량 평가 1위 프로그래머스 자격증 취득 지원. 수료 후에도 실력을 객관적으로 증명합니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-num">Shared · 06</div>
+        <h4>국비 KDT 지원</h4>
+        <p>국민내일배움카드 기반. 2026년부터 약 10% 자부담금 발생 (최대 60만 원). 상세는 고용24 확인.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="brand-text">두 코스 공통 혜택</div>
+      <div class="page-num">12 / 12</div>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button id="prev" aria-label="Previous">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="dots" id="dots"></div>
+  <div class="counter" id="counter">01 / 14</div>
+  <button id="next" aria-label="Next">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<div class="kbd-hint">
+  <kbd>←</kbd> <kbd>→</kbd> · <kbd>Space</kbd> · <kbd>F</kbd> fullscreen
+</div>
+
+<script>
+  // ===== Fit 1920x1080 to viewport =====
+  function fitDeck() {
+    const deck = document.getElementById('deck');
+    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080) * 0.97;
+    deck.style.transform = `scale(${scale})`;
+  }
+  fitDeck();
+  window.addEventListener('resize', fitDeck);
+
+  // ===== Slide navigation =====
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const dotsContainer = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[current].classList.remove('active');
+    document.querySelectorAll('.dot')[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    document.querySelectorAll('.dot')[current].classList.add('active');
+    counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  }
+
+  document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'Home') goTo(0);
+    if (e.key === 'End') goTo(total - 1);
+    if (e.key.toLowerCase() === 'f') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 60) goTo(current + (dx < 0 ? 1 : -1));
+  });
+</script>
+</body>
+</html>
