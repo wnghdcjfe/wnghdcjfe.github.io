@@ -1,6 +1,13 @@
-_site
-.sass-cache
-.jekyll-metadata
-
-.ruby-version
+# OS
 .DS_Store
+
+# Logs / Env
+*.log
+.env
+.env.local
+
+# Common build/deps
+node_modules/
+dist/
+build/
+__pycache__/
