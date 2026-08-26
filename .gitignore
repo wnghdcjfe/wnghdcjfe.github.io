@@ -11,3 +11,6 @@ node_modules/
 dist/
 build/
 __pycache__/
+
+# OMC (oh-my-claudecode) runtime state
+.omc/
